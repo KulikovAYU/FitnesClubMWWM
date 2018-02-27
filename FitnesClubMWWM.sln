@@ -3,9 +3,40 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{3B0031B5-0346-4102-84F0-43EA4545C5E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{5252BA9C-19D9-4824-945D-DEBCD8E452AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".shared", ".shared", "{039A3E18-AA63-42EB-BD6D-72A31FFC1A6C}"
+	ProjectSection(SolutionItems) = preProject
+		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ui.Desktop", "UI\Ui.Desktop\Ui.Desktop.csproj", "{8CE6C57A-55CA-48F6-BC6E-79882D9BE877}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.Ui", "Logic\Logic.Ui\Logic.Ui.csproj", "{267AE534-1BA4-4FD7-993F-8A878FA0DD9A}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CE6C57A-55CA-48F6-BC6E-79882D9BE877}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CE6C57A-55CA-48F6-BC6E-79882D9BE877}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CE6C57A-55CA-48F6-BC6E-79882D9BE877}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CE6C57A-55CA-48F6-BC6E-79882D9BE877}.Release|Any CPU.Build.0 = Release|Any CPU
+		{267AE534-1BA4-4FD7-993F-8A878FA0DD9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{267AE534-1BA4-4FD7-993F-8A878FA0DD9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{267AE534-1BA4-4FD7-993F-8A878FA0DD9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{267AE534-1BA4-4FD7-993F-8A878FA0DD9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8CE6C57A-55CA-48F6-BC6E-79882D9BE877} = {3B0031B5-0346-4102-84F0-43EA4545C5E6}
+		{267AE534-1BA4-4FD7-993F-8A878FA0DD9A} = {5252BA9C-19D9-4824-945D-DEBCD8E452AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3207F049-54C9-4877-9F4A-03ADCD79BB3C}
