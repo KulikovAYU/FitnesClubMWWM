@@ -7,7 +7,10 @@
     Title="{Binding WindowTitle, Mode=OneWay}"
     Width="525"
     Height="350"
+    AllowsTransparency="True"
     DataContext="{Binding Main, Source={StaticResource Locator}}"
+    Icon="Images/Logo/red_gym_icon.ico"
+    WindowStyle="None"
     mc:Ignorable="d">
 
     <Grid />
