@@ -143,17 +143,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="Fonts\TitilliumWeb-Black.ttf" />
-    <Resource Include="Fonts\TitilliumWeb-Bold.ttf" />
-    <Resource Include="Fonts\TitilliumWeb-BoldItalic.ttf" />
-    <Resource Include="Fonts\TitilliumWeb-ExtraLight.ttf" />
-    <Resource Include="Fonts\TitilliumWeb-ExtraLightItalic.ttf" />
-    <Resource Include="Fonts\TitilliumWeb-Italic.ttf" />
-    <Resource Include="Fonts\TitilliumWeb-Light.ttf" />
-    <Resource Include="Fonts\TitilliumWeb-LightItalic.ttf" />
-    <Resource Include="Fonts\TitilliumWeb-Regular.ttf" />
-    <Resource Include="Fonts\TitilliumWeb-SemiBold.ttf" />
-    <Resource Include="Fonts\TitilliumWeb-SemiBoldItalic.ttf" />
+    <Resource Include="Fonts\Titillium\TitilliumWeb-Black.ttf" />
+    <Resource Include="Fonts\Titillium\TitilliumWeb-Bold.ttf" />
+    <Resource Include="Fonts\Titillium\TitilliumWeb-BoldItalic.ttf" />
+    <Resource Include="Fonts\Titillium\TitilliumWeb-ExtraLight.ttf" />
+    <Resource Include="Fonts\Titillium\TitilliumWeb-ExtraLightItalic.ttf" />
+    <Resource Include="Fonts\Titillium\TitilliumWeb-Italic.ttf" />
+    <Resource Include="Fonts\Titillium\TitilliumWeb-Light.ttf" />
+    <Resource Include="Fonts\Titillium\TitilliumWeb-LightItalic.ttf" />
+    <Resource Include="Fonts\Titillium\TitilliumWeb-Regular.ttf" />
+    <Resource Include="Fonts\Titillium\TitilliumWeb-SemiBold.ttf" />
+    <Resource Include="Fonts\Titillium\TitilliumWeb-SemiBoldItalic.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

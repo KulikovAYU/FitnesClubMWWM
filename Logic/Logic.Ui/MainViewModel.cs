@@ -1,9 +1,90 @@
+using System;
+using System.ComponentModel;
+using System.Windows;
+using CommonServiceLocator;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
 
 namespace FitnessClubMWWM.Logic.Ui
 {
     public class MainViewModel : ViewModelBase
     {
+
+        #region Private Member
+
+       
+        /// <summary>
+        /// The marging around the window to allow drop shadow
+        /// </summary>
+        private int mOutermarginSize = 10;
+
+        /// <summary>
+        /// The radius adges of the window
+        /// </summary>
+        private int mWindowRadius = 0;
+
+       #endregion
+
+        #region Public Properties
+
+        public string WindowTitle { get; private set; }
+
+        /// <summary>
+        /// The size of tre resize border around the window
+        /// </summary>
+        public int ResizeBorder { get; set; } = 6;
+       
+        /// <summary>
+        /// The size of tre resize border around the window, taking into account the outer marging
+        /// </summary>
+        public Thickness ResizeBorderThickness => new Thickness(ResizeBorder + OutermarginSize);
+
+        /// <summary>
+        /// The marging around the window to allow drop shadow
+        /// </summary>
+        public int OutermarginSize
+        {
+            get => mWindowState == WindowState.Maximized ? 0 : mOutermarginSize;
+            set => mOutermarginSize = value;
+        }
+
+        /// <summary>
+        /// The marging around the window to allow drop shadow
+        /// </summary>
+        public Thickness OutermarginSizeThickness => new Thickness(OutermarginSize);
+
+        /// <summary>
+        /// The radius adges of the window
+        /// </summary>
+        public int WindowRadius
+        {
+            get => mWindowState == WindowState.Maximized ? 0 : mWindowRadius;
+            set => mWindowRadius = value;
+        }
+
+        /// <summary>
+        /// Get the state of the window
+        /// </summary>
+        public WindowState mWindowState { get; set; }
+
+        /// <summary>
+        /// The radius edges of the window
+        /// </summary>
+        public CornerRadius WindowCornerRadius =>new CornerRadius(WindowRadius);
+      
+
+        public EventHandler OnStateChanged { get; set; }
+
+        /// <summary>
+        /// The height of the title bar / caption of the window
+        /// </summary>
+        public int TitleHeight { get; set; } = 42;
+      
+
+        #endregion
+
+
+        #region Constructor
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -11,16 +92,34 @@ namespace FitnessClubMWWM.Logic.Ui
         {
             if (IsInDesignMode)
             {
-                WindowTitle = "MvvmSample (Design)";
+                WindowTitle = "Информационная система фитнес-клуб (Design)";
                 // Code runs in Blend --> create design time data.
             }
             else
             {
-                WindowTitle = "MvvmSample";
+                WindowTitle = "Информационная система фитнес-клуб";
                 // Code runs "for real"
             }
+
+
+            // listen out for the window resizing
+            if (Application.Current.MainWindow != null)
+                Application.Current.MainWindow.StateChanged +=(sender, e)=>
+            {
+                //Fire off events for all properties thet are affected by a resize
+                RaisePropertyChanged(nameof(ResizeBorderThickness));
+                RaisePropertyChanged(nameof(OutermarginSize));
+                RaisePropertyChanged(nameof(OutermarginSizeThickness));
+                RaisePropertyChanged(nameof(WindowRadius));
+                RaisePropertyChanged(nameof(WindowCornerRadius));
+            };
+       
         }
 
-        public string WindowTitle { get; private set; }
+        #endregion
+
+       
+
+
     }
 }

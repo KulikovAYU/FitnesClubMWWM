@@ -1,3 +1,4 @@
+using System.Windows;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -25,6 +26,7 @@ namespace FitnessClubMWWM.Logic.Ui
             {
                 // Create run time view services and models
             }
+
 
             SimpleIoc.Default.Register<MainViewModel>();
         }

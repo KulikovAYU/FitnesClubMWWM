@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace FitnessClubMWWM.Ui.Desktop
 {
@@ -11,5 +12,8 @@ namespace FitnessClubMWWM.Ui.Desktop
         {
             InitializeComponent();
         }
+
     }
+
+
 }
