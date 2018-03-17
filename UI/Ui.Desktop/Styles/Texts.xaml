@@ -1,4 +1,63 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop" />
+    xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop">
+
+    <Style
+        x:Key="HeaderText"
+        BasedOn="{StaticResource BaseTextBlockStyle}"
+        TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="{StaticResource BackgroundForegroundMainBrush}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,8" />
+
+    </Style>
+    <ControlTemplate x:Key="TextBoxAutorization" TargetType="{x:Type TextBoxBase}">
+        <Border x:Name="border" BorderThickness="2 2 2 2" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" BorderBrush="#FFABADB3" >
+                      <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" VerticalAlignment="Center" Margin="10 0 0 0"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource BackgroundTextBoksBlue}"/>
+                <Setter Property="BorderThickness" TargetName="border" Value="6 2 2 2"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource BackgroundTextBoksBlue}"/>
+                <Setter Property="BorderThickness" TargetName="border" Value="6 2 2 2"/>
+               
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <ControlTemplate x:Key="PasswordBoxAutorization" TargetType="{x:Type PasswordBox}">
+        <Border x:Name="border" BorderThickness="2 2 2 2" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" BorderBrush="#FFABADB3" >
+            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" VerticalAlignment="Center" Margin="10 0 0 0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource BackgroundTextBoksBlue}"/>
+                <Setter Property="BorderThickness" TargetName="border" Value="6 2 2 2"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource BackgroundTextBoksBlue}"/>
+                <Setter Property="BorderThickness" TargetName="border" Value="6 2 2 2"/>
+
+            </Trigger>
+
+
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+</ResourceDictionary>

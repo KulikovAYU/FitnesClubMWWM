@@ -2,8 +2,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop">
-    <FontFamily x:Key="TitilliumWebRegular">pack://application;,,,/Fonts/Titillium/#Titillium Web</FontFamily>
-    <FontFamily x:Key="TitilliumWebLight">pack://application;,,,/Fonts/Titillium/#Titillium WebLight</FontFamily>
+    <FontFamily x:Key="TitilliumWebRegular">pack://application;,,,/Fonts/OpenSans/#Open Sans</FontFamily>
+    <FontFamily x:Key="TitilliumWebLight">pack://application;,,,/Fonts/Titillium/#Open Sans</FontFamily>
 
     <Style x:Key="BaseStyle" TargetType="{x:Type Control}">
         <Setter Property="FontFamily" Value="{StaticResource TitilliumWebRegular}" />

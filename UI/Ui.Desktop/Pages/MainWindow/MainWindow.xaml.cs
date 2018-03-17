@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
-namespace FitnessClubMWWM.Ui.Desktop
+namespace FitnessClubMWWM.Ui.Desktop.Pages.MainWindow
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
@@ -12,8 +11,5 @@ namespace FitnessClubMWWM.Ui.Desktop
         {
             InitializeComponent();
         }
-
     }
-
-
 }

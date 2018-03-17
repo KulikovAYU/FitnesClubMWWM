@@ -1,9 +1,9 @@
-using System;
-using System.ComponentModel;
 using System.Windows;
-using CommonServiceLocator;
+using System.Windows.Controls;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
+using System.Windows.Media.Imaging;
+using System.Collections.Generic;
+using System;
 
 namespace FitnessClubMWWM.Logic.Ui
 {
@@ -29,57 +29,68 @@ namespace FitnessClubMWWM.Logic.Ui
 
         public string WindowTitle { get; private set; }
 
+      
         /// <summary>
         /// The size of tre resize border around the window
         /// </summary>
-        public int ResizeBorder { get; set; } = 6;
-       
+        // public int ResizeBorder { get; set; } = 6;
+
         /// <summary>
         /// The size of tre resize border around the window, taking into account the outer marging
         /// </summary>
-        public Thickness ResizeBorderThickness => new Thickness(ResizeBorder + OutermarginSize);
+        // public Thickness ResizeBorderThickness => new Thickness(ResizeBorder /*+ OutermarginSize*/);
 
         /// <summary>
         /// The marging around the window to allow drop shadow
         /// </summary>
-        public int OutermarginSize
-        {
-            get => mWindowState == WindowState.Maximized ? 0 : mOutermarginSize;
-            set => mOutermarginSize = value;
-        }
+        //public int OutermarginSize
+        //{
+        //    get => mWindowState == WindowState.Maximized ? 0 : mOutermarginSize;
+        //    set => mOutermarginSize = value;
+        //}
 
-        /// <summary>
-        /// The marging around the window to allow drop shadow
-        /// </summary>
-        public Thickness OutermarginSizeThickness => new Thickness(OutermarginSize);
+        ///// <summary>
+        ///// The marging around the window to allow drop shadow
+        ///// </summary>
+        //public Thickness OutermarginSizeThickness => new Thickness(OutermarginSize);
 
-        /// <summary>
-        /// The radius adges of the window
-        /// </summary>
-        public int WindowRadius
-        {
-            get => mWindowState == WindowState.Maximized ? 0 : mWindowRadius;
-            set => mWindowRadius = value;
-        }
+        ///// <summary>
+        ///// The radius adges of the window
+        ///// </summary>
+        //public int WindowRadius
+        //{
+        //    get => mWindowState == WindowState.Maximized ? 0 : mWindowRadius;
+        //    set => mWindowRadius = value;
+        //}
 
-        /// <summary>
-        /// Get the state of the window
-        /// </summary>
-        public WindowState mWindowState { get; set; }
+        ///// <summary>
+        ///// Get the state of the window
+        ///// </summary>
+        //public WindowState mWindowState { get; set; }
 
-        /// <summary>
-        /// The radius edges of the window
-        /// </summary>
-        public CornerRadius WindowCornerRadius =>new CornerRadius(WindowRadius);
-      
+        ///// <summary>
+        ///// The radius edges of the window
+        ///// </summary>
+        //public CornerRadius WindowCornerRadius =>new CornerRadius(WindowRadius);
 
-        public EventHandler OnStateChanged { get; set; }
 
-        /// <summary>
-        /// The height of the title bar / caption of the window
-        /// </summary>
-        public int TitleHeight { get; set; } = 42;
-      
+        //public EventHandler OnStateChanged { get; set; }
+
+        ///// <summary>
+        ///// The height of the title bar / caption of the window
+        ///// </summary>
+        //public int TitleHeight { get; set; } = 42;
+
+        ///// <summary>
+        ///// The height of the title bar / caption of the window
+        ///// </summary>
+        //public GridLength TitleHeightGridLength => new GridLength(TitleHeight + ResizeBorder);
+
+
+        // <summary>
+        // Текущая страница приложения
+        // </summary>
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.AutorizationError; // ApplicationPage.Login;
 
         #endregion
 
@@ -100,25 +111,30 @@ namespace FitnessClubMWWM.Logic.Ui
                 WindowTitle = "Информационная система фитнес-клуб";
                 // Code runs "for real"
             }
+          
 
-
+            //Application.Current.MainWindow.Initialized += (sender, e) =>
+            //  {
+            //      FrameWND.NavigationService.Navigate(new Uri("AutorizationPage.xaml", UriKind.Relative));
+            //  };
             // listen out for the window resizing
-            if (Application.Current.MainWindow != null)
-                Application.Current.MainWindow.StateChanged +=(sender, e)=>
-            {
-                //Fire off events for all properties thet are affected by a resize
-                RaisePropertyChanged(nameof(ResizeBorderThickness));
-                RaisePropertyChanged(nameof(OutermarginSize));
-                RaisePropertyChanged(nameof(OutermarginSizeThickness));
-                RaisePropertyChanged(nameof(WindowRadius));
-                RaisePropertyChanged(nameof(WindowCornerRadius));
-            };
-       
+            //if (Application.Current.MainWindow != null)
+            //    Application.Current.MainWindow.StateChanged +=(sender, e)=>
+            //{
+            //    //Fire off events for all properties thet are affected by a resize
+            //    RaisePropertyChanged(nameof(ResizeBorderThickness));
+            //    RaisePropertyChanged(nameof(OutermarginSize));
+            //    RaisePropertyChanged(nameof(OutermarginSizeThickness));
+            //    RaisePropertyChanged(nameof(WindowRadius));
+            //    RaisePropertyChanged(nameof(WindowCornerRadius));
+            //};
+
         }
 
         #endregion
 
        
+        Frame FrameWND { get; set; }
 
 
     }
