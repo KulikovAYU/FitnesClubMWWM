@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace FitnessClubMWWM.Ui.Desktop.Pages.MainWindow
 {
@@ -12,4 +14,5 @@ namespace FitnessClubMWWM.Ui.Desktop.Pages.MainWindow
             InitializeComponent();
         }
     }
+
 }

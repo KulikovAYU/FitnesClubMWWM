@@ -14,45 +14,69 @@
 
     </Style>
     <ControlTemplate x:Key="TextBoxAutorization" TargetType="{x:Type TextBoxBase}">
-        <Border x:Name="border" BorderThickness="2 2 2 2" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" BorderBrush="#FFABADB3" >
-                      <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" VerticalAlignment="Center" Margin="10 0 0 0"/>
+        <Border
+            x:Name="border"
+            Background="{TemplateBinding Background}"
+            BorderBrush="#FFABADB3"
+            BorderThickness="2,2,2,2"
+            SnapsToDevicePixels="True">
+            <ScrollViewer
+                x:Name="PART_ContentHost"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                Focusable="False"
+                HorizontalScrollBarVisibility="Hidden"
+                VerticalScrollBarVisibility="Hidden" />
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                <Setter TargetName="border" Property="Opacity" Value="0.56" />
 
             </Trigger>
 
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource BackgroundTextBoksBlue}"/>
-                <Setter Property="BorderThickness" TargetName="border" Value="6 2 2 2"/>
+                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BackgroundTextBoksBlue}" />
+                <Setter TargetName="border" Property="BorderThickness" Value="6,2,2,2" />
             </Trigger>
             <Trigger Property="IsKeyboardFocused" Value="True">
-                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource BackgroundTextBoksBlue}"/>
-                <Setter Property="BorderThickness" TargetName="border" Value="6 2 2 2"/>
-               
+                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BackgroundTextBoksBlue}" />
+                <Setter TargetName="border" Property="BorderThickness" Value="6,2,2,2" />
+
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
 
     <ControlTemplate x:Key="PasswordBoxAutorization" TargetType="{x:Type PasswordBox}">
-        <Border x:Name="border" BorderThickness="2 2 2 2" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" BorderBrush="#FFABADB3" >
-            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" VerticalAlignment="Center" Margin="10 0 0 0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"/>
+        <Border
+            x:Name="border"
+            Background="{TemplateBinding Background}"
+            BorderBrush="#FFABADB3"
+            BorderThickness="2,2,2,2"
+            SnapsToDevicePixels="True">
+            <ScrollViewer
+                x:Name="PART_ContentHost"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Left"
+                Focusable="False"
+                HorizontalScrollBarVisibility="Hidden"
+                VerticalScrollBarVisibility="Hidden" />
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                <Setter TargetName="border" Property="Opacity" Value="0.56" />
 
             </Trigger>
 
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource BackgroundTextBoksBlue}"/>
-                <Setter Property="BorderThickness" TargetName="border" Value="6 2 2 2"/>
+                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BackgroundTextBoksBlue}" />
+                <Setter TargetName="border" Property="BorderThickness" Value="6,2,2,2" />
             </Trigger>
             <Trigger Property="IsKeyboardFocused" Value="True">
-                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource BackgroundTextBoksBlue}"/>
-                <Setter Property="BorderThickness" TargetName="border" Value="6 2 2 2"/>
+                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BackgroundTextBoksBlue}" />
+                <Setter TargetName="border" Property="BorderThickness" Value="6,2,2,2" />
 
             </Trigger>
 

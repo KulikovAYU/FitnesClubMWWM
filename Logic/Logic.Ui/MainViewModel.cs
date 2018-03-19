@@ -1,9 +1,5 @@
-using System.Windows;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight;
-using System.Windows.Media.Imaging;
-using System.Collections.Generic;
-using System;
 
 namespace FitnessClubMWWM.Logic.Ui
 {
@@ -90,7 +86,7 @@ namespace FitnessClubMWWM.Logic.Ui
         // <summary>
         // Текущая страница приложения
         // </summary>
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.AutorizationError; // ApplicationPage.Login;
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.MainPage; // ApplicationPage.Login;
 
         #endregion
 

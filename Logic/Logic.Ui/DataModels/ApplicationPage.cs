@@ -15,5 +15,11 @@
         /// Ошибка авторизации
         /// </summary>
          AutorizationError = 1,
+
+        /// <summary>
+        /// Главная страница
+        /// </summary>
+        MainPage = 2,
+
     }
 }

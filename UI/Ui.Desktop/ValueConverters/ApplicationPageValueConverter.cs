@@ -2,8 +2,9 @@
 using System.Diagnostics;
 using System.Globalization;
 using FitnessClubMWWM.Logic.Ui;
-using FitnessClubMWWM.Ui.Desktop.Pages.AutorizationWindow;
-using FitnessClubMWWM.Ui.Desktop.Pages.ErrorsPages.ErrAutorization;
+using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AutorizationPage;
+using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.BeginPanel;
+using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.ErrorsPages.ErrAutorization;
 
 namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
 {
@@ -22,6 +23,9 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
 
                 case ApplicationPage.AutorizationError:
                     return new ErrAutorizationPage();
+
+                case ApplicationPage.MainPage:
+                    return new BeginPanelPage();
 
                 default: Debugger.Break();
                         return null;
