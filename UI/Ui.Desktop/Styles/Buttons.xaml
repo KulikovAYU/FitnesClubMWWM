@@ -73,15 +73,13 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-
     <!--  Шаблон для кнопки на рабочем столе  -->
-    <ControlTemplate x:Key="StartBtnControlTemplate" TargetType="{x:Type ButtonBase}">
+    <ControlTemplate x:Key="StartBtnControlTemplate" TargetType="{x:Type userControls:StartButton}">
 
-        <ControlTemplate.Resources >
-            <userControls:StartButton x:Key="DataItem" GeomPicture="F1 M 441.29,-2.28882e-005C 568.504,-2.28882e-005 672,103.507 671.999,230.729C 671.999,357.955 568.501,461.461 441.287,461.461C 412.995,461.461 385.508,456.429 359.405,446.497L 305.915,499.992C 302.76,503.145 298.485,504.917 294.026,504.917L 257.848,504.917L 257.848,541.099C 257.848,550.385 250.32,557.913 241.035,557.913L 224.555,557.913L 224.555,574.393C 224.555,583.68 217.028,591.208 207.742,591.208L 166.629,591.208L 166.629,632.376C 166.629,636.84 164.855,641.121 161.695,644.276L 128.171,677.752C 125.018,680.9 120.747,682.667 116.293,682.667L 16.8132,682.667C 7.52729,682.667 0,675.139 0,665.852L 0,545.127C 0,540.668 1.7718,536.392 4.92484,533.237L 225.524,312.603C 215.603,286.501 210.578,259.016 210.578,230.732C 210.578,103.507 314.075,-2.28882e-005 441.29,-2.28882e-005 Z M 441.29,427.832C 549.96,427.832 638.374,339.413 638.376,230.733C 638.376,122.049 549.967,33.6307 441.294,33.6307C 332.62,33.6307 244.208,122.051 244.208,230.733C 244.208,258.247 249.76,284.864 260.713,309.84C 263.548,316.304 261.983,323.577 257.34,328.336L 257.204,328.483L 33.629,552.093L 33.629,582.472L 217.73,398.353C 223.645,392.441 233.222,392.444 239.132,398.353C 245.043,404.263 245.043,413.844 239.132,419.755L 33.629,625.275L 33.629,649.036L 109.336,649.036L 133.004,625.403L 133.004,574.393C 133.004,565.107 140.533,557.579 149.818,557.579L 190.931,557.579L 190.931,541.099C 190.931,531.812 198.46,524.284 207.745,524.284L 224.224,524.284L 224.224,488.103C 224.224,478.816 231.752,471.288 241.038,471.288L 287.064,471.288L 343.531,414.816L 343.685,414.675C 348.447,410.033 355.72,408.473 362.178,411.308C 387.153,422.273 413.769,427.832 441.29,427.832 Z M 511.502,97.5253C 546.23,97.5253 574.479,125.779 574.479,160.508C 574.479,195.237 546.228,223.491 511.502,223.491C 476.776,223.491 448.525,195.237 448.525,160.508C 448.525,125.779 476.776,97.5253 511.502,97.5253 Z M 511.502,189.861C 527.686,189.861 540.853,176.693 540.853,160.508C 540.853,144.323 527.686,131.155 511.502,131.155C 495.318,131.155 482.151,144.323 482.151,160.508C 482.151,176.693 495.318,189.861 511.502,189.861 Z "/>
+        <!--<ControlTemplate.Resources >
+            <userControls:StartButton x:Key="DataItem" GeomPicture=""/>
             <userControls:StartButton x:Key="Str" ButtonComment=""/>
-        </ControlTemplate.Resources>
-
+        </ControlTemplate.Resources>-->
         <Border
             x:Name="border"
             Background="{TemplateBinding Background}"
@@ -89,7 +87,17 @@
             BorderThickness="{TemplateBinding BorderThickness}"
             SnapsToDevicePixels="True">
 
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140">
+                <!--Векторная картинка-->
+                <Path
+                    Width="{Binding GeomPictureWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                    Height="{Binding GeomPictureHeight, RelativeSource={RelativeSource TemplatedParent}}"
+                    Data="{Binding GeomPicture, RelativeSource={RelativeSource TemplatedParent}}"
+                    Fill="{Binding GeomPictureFill, RelativeSource={RelativeSource TemplatedParent}}"
+                    Stretch="Fill"
+                    Margin="{Binding GeomPictureMargin, RelativeSource={RelativeSource TemplatedParent}}"
+                />
+
                 <ContentPresenter
                     x:Name="contentPresenter"
                     Margin="{TemplateBinding Padding}"
@@ -102,19 +110,14 @@
                     RecognizesAccessKey="True"
                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                <ContentPresenter
-                    x:Name="contentPresenterComment"
-                    Margin="{TemplateBinding Padding}"
-                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                    Content="{Binding ButtonComment, RelativeSource={RelativeSource TemplatedParent}}"
-                    ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                    ContentTemplate="{TemplateBinding ContentTemplate}"
-                    Focusable="False"
-                    RecognizesAccessKey="True"
-                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                <Path Data="{Binding GeomPicture, RelativeSource={RelativeSource TemplatedParent}}" Stretch="Fill"  Width="80" Fill="#FF000000"
-                      Height="80"/>
+                <TextBlock
+                    FontFamily="{Binding ButtonCommentFontFamily, RelativeSource={RelativeSource TemplatedParent}}"
+                    Foreground="{Binding ButtonCommentBrush, RelativeSource={RelativeSource TemplatedParent}}"
+                    TextAlignment="Center" 
+                    TextWrapping="{Binding ButtonCommentWrapping, RelativeSource={RelativeSource TemplatedParent}}" 
+                    FontSize="{Binding ButtonCommentFontSize, RelativeSource={RelativeSource TemplatedParent}}" 
+                    Text="{Binding ButtonComment, RelativeSource={RelativeSource TemplatedParent}}" 
+                    />
             </StackPanel>
         </Border>
 
@@ -123,12 +126,14 @@
                 <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="border" Property="Background" Value="#FFBEE6FD" />
-                <Setter TargetName="border" Property="BorderBrush" Value="#FF3C7FB1" />
+                <!--<Setter TargetName="border" Property="Background" Value="#FFBEE6FD" />-->
+                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BackgroundThiknessGrey}" />
+                <Setter TargetName="border" Property="BorderThickness" Value="2"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter TargetName="border" Property="Background" Value="#FFC4E5F6" />
-                <Setter TargetName="border" Property="BorderBrush" Value="#FF2C628B" />
+                <!--<Setter TargetName="border" Property="Background" Value="#FFC4E5F6" />
+                <Setter TargetName="border" Property="BorderBrush" Value="#FF2C628B" />-->
+              
             </Trigger>
             <Trigger Property="ToggleButton.IsChecked" Value="True">
                 <Setter TargetName="border" Property="Background" Value="#FFBCDDEE" />
