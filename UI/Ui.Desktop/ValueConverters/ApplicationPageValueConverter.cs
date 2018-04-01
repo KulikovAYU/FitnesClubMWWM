@@ -37,4 +37,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
             throw new NotImplementedException();
         }
     }
+
+
+   
+
 }

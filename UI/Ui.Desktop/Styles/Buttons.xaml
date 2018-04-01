@@ -75,7 +75,23 @@
 
     <!--  Шаблон для кнопки на рабочем столе  -->
     <ControlTemplate x:Key="StartBtnControlTemplate" TargetType="{x:Type userControls:StartButton}">
+        <ControlTemplate.Resources>
+            <Storyboard x:Key="StoryboardMouseEnterBtnLostFocus">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0.97" />
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1" />
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0.97" />
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1" />
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+        </ControlTemplate.Resources>
 
+        <!--<ControlTemplate.Resources >
+            <userControls:StartButton x:Key="DataItem" GeomPicture=""/>
+            <userControls:StartButton x:Key="Str" ButtonComment=""/>
+        </ControlTemplate.Resources>-->
         <!--<ControlTemplate.Resources >
             <userControls:StartButton x:Key="DataItem" GeomPicture=""/>
             <userControls:StartButton x:Key="Str" ButtonComment=""/>
@@ -85,18 +101,30 @@
             Background="{TemplateBinding Background}"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
+            RenderTransformOrigin="0.5,0.5"
             SnapsToDevicePixels="True">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
+                </TransformGroup>
+            </Border.RenderTransform>
 
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="140">
-                <!--Векторная картинка-->
+            <StackPanel
+                Width="140"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Vertical">
+                <!--  Векторная картинка  -->
                 <Path
                     Width="{Binding GeomPictureWidth, RelativeSource={RelativeSource TemplatedParent}}"
                     Height="{Binding GeomPictureHeight, RelativeSource={RelativeSource TemplatedParent}}"
+                    Margin="{Binding GeomPictureMargin, RelativeSource={RelativeSource TemplatedParent}}"
                     Data="{Binding GeomPicture, RelativeSource={RelativeSource TemplatedParent}}"
                     Fill="{Binding GeomPictureFill, RelativeSource={RelativeSource TemplatedParent}}"
-                    Stretch="Fill"
-                    Margin="{Binding GeomPictureMargin, RelativeSource={RelativeSource TemplatedParent}}"
-                />
+                    Stretch="Fill" />
 
                 <ContentPresenter
                     x:Name="contentPresenter"
@@ -112,28 +140,92 @@
 
                 <TextBlock
                     FontFamily="{Binding ButtonCommentFontFamily, RelativeSource={RelativeSource TemplatedParent}}"
+                    FontSize="{Binding ButtonCommentFontSize, RelativeSource={RelativeSource TemplatedParent}}"
                     Foreground="{Binding ButtonCommentBrush, RelativeSource={RelativeSource TemplatedParent}}"
-                    TextAlignment="Center" 
-                    TextWrapping="{Binding ButtonCommentWrapping, RelativeSource={RelativeSource TemplatedParent}}" 
-                    FontSize="{Binding ButtonCommentFontSize, RelativeSource={RelativeSource TemplatedParent}}" 
-                    Text="{Binding ButtonComment, RelativeSource={RelativeSource TemplatedParent}}" 
-                    />
+                    Text="{Binding ButtonComment, RelativeSource={RelativeSource TemplatedParent}}"
+                    TextAlignment="Center"
+                    TextWrapping="{Binding ButtonCommentWrapping, RelativeSource={RelativeSource TemplatedParent}}" />
             </StackPanel>
         </Border>
 
         <ControlTemplate.Triggers>
-            <Trigger Property="Button.IsDefaulted" Value="True">
+            <Trigger Property="IsDefaulted" Value="True">
                 <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <!--<Setter TargetName="border" Property="Background" Value="#FFBEE6FD" />-->
                 <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BackgroundThiknessGrey}" />
-                <Setter TargetName="border" Property="BorderThickness" Value="2"/>
+                <Setter TargetName="border" Property="BorderThickness" Value="2" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="border" Property="RenderTransform">
+                    <Setter.Value>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.97" ScaleY="0.97" />
+                            <SkewTransform />
+                            <RotateTransform />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="border" Property="Effect">
+                    <Setter.Value>
+                        <BlurEffect Radius="0.5" />
+                    </Setter.Value>
+                </Setter>
                 <!--<Setter TargetName="border" Property="Background" Value="#FFC4E5F6" />
                 <Setter TargetName="border" Property="BorderBrush" Value="#FF2C628B" />-->
-              
+
+            </Trigger>
+
+            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                <Setter TargetName="border" Property="Background" Value="#FFBCDDEE" />
+                <Setter TargetName="border" Property="BorderBrush" Value="#FF245A83" />
+                <!--<Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BackgroundForegroundVeryDarkBrush}" />
+                <Setter TargetName="border" Property="BorderThickness" Value="2" />-->
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="border" Property="Background" Value="#FFF4F4F4" />
+                <Setter TargetName="border" Property="BorderBrush" Value="#FFADB2B5" />
+                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="#FF838383" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <ControlTemplate x:Key="ButtonClear" TargetType="{x:Type ButtonBase}">
+        <Border
+            x:Name="border"
+            Background="Transparent"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            SnapsToDevicePixels="True">
+            <ContentPresenter
+                x:Name="contentPresenter"
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                Content="{TemplateBinding Content}"
+                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                ContentTemplate="{TemplateBinding ContentTemplate}"
+                Focusable="False"
+                RecognizesAccessKey="True"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsDefaulted" Value="True">
+                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+            </Trigger>
+            <!--<Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="border" Property="Background" Value="#FFBEE6FD" />
+                <Setter TargetName="border" Property="BorderBrush" Value="#FF3C7FB1" />
+
+            </Trigger>-->
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="border" Property="Background" Value="{StaticResource BackgroundTextBoksBlue}" />
+                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BackgroundTextBoksBlue}" />
+                <Setter TargetName="border" Property="Background" Value="{StaticResource BackgroundTextBoksBlue}" />
+
             </Trigger>
             <Trigger Property="ToggleButton.IsChecked" Value="True">
                 <Setter TargetName="border" Property="Background" Value="#FFBCDDEE" />
@@ -146,7 +238,6 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-
 
 
 

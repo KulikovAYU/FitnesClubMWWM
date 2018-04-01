@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -26,6 +27,7 @@ namespace FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AutorizationPage
 
             m_timer = new DispatcherTimer { Interval = new TimeSpan(0, 0, 10) };
             m_timer.Tick += TimerTick;
+            
             InitializeComponent();
         }
 
@@ -73,6 +75,21 @@ namespace FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AutorizationPage
 
            };
            AnimatedGrid.BeginAnimation(OpacityProperty, animation);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+        //    MessageBox.Show(AutorizationTextBox.InputString);
+        }
+
+        private void CustomTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CustomTextBox_FocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
         }
     }
 }

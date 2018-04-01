@@ -47,7 +47,22 @@
                 GeomPictureWidth="50"
                 RenderTransformOrigin="0.5,0.5"
                 Template="{DynamicResource StartBtnControlTemplate}" />
-            <TextBlock Margin="10" Background="Aqua" />
+            <local:StartButton
+                Background="White"
+                BorderThickness="0"
+                ButtonComment="Экран, уведомления, питание"
+                ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
+                ButtonCommentFontSize="12"
+                ButtonCommentWrapping="Wrap"
+                Content="Система"
+                FontSize="16"
+                GeomPicture="F1 M 203.466,5.10483C 206.87,8.50912 208.573,12.5996 208.573,17.3796L 208.573,149.475C 208.573,154.255 206.87,158.347 203.466,161.751C 200.062,165.154 195.971,166.855 191.193,166.855L 17.3808,166.855C 12.6008,166.855 8.51041,165.154 5.1048,161.751C 1.70107,158.347 0,154.255 0,149.475L 0,17.3796C 0,12.5996 1.70107,8.50912 5.1048,5.10483C 8.51041,1.70126 12.6008,3.05176e-005 17.3808,3.05176e-005L 191.193,3.05176e-005C 195.971,3.05176e-005 200.062,1.70126 203.466,5.10483 Z M 194.667,149.476L 194.667,83.4278L 13.9049,83.4278L 13.9049,149.475C 13.9049,150.417 14.2493,151.23 14.9368,151.92C 15.6249,152.606 16.44,152.951 17.3808,152.951L 191.193,152.951C 192.133,152.951 192.948,152.608 193.635,151.921C 194.323,151.232 194.667,150.419 194.667,149.476 Z M 194.667,41.7116L 194.667,17.3783C 194.667,16.4369 194.323,15.6238 193.635,14.9343C 192.948,14.2469 192.133,13.9037 191.193,13.9037L 17.3808,13.9037C 16.44,13.9037 15.6249,14.248 14.9368,14.9343C 14.248,15.6238 13.9049,16.4369 13.9049,17.3783L 13.9049,41.7116L 194.667,41.7116 Z M 27.8105,125.141L 55.6197,125.141L 55.6197,139.046L 27.8105,139.046L 27.8105,125.141 Z M 69.5253,125.141L 111.239,125.141L 111.239,139.046L 69.5253,139.046L 69.5253,125.141 Z  "
+                GeomPictureFill="#FF4F3FB3"
+                GeomPictureHeight="50"
+                GeomPictureMargin="5"
+                GeomPictureWidth="50"
+                RenderTransformOrigin="0.5,0.5"
+                Template="{DynamicResource StartBtnControlTemplate}" />
             <TextBlock Margin="10" Background="Red" />
             <TextBlock Margin="10" Background="Red" />
             <TextBlock Margin="10" Background="Red" />

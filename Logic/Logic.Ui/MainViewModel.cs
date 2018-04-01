@@ -12,12 +12,12 @@ namespace FitnessClubMWWM.Logic.Ui
         /// <summary>
         /// The marging around the window to allow drop shadow
         /// </summary>
-        private int mOutermarginSize = 10;
+     //   private int mOutermarginSize = 10;
 
         /// <summary>
         /// The radius adges of the window
         /// </summary>
-        private int mWindowRadius = 0;
+     //   private int mWindowRadius = 0;
 
        #endregion
 
@@ -86,7 +86,7 @@ namespace FitnessClubMWWM.Logic.Ui
         // <summary>
         // Текущая страница приложения
         // </summary>
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.MainPage; // ApplicationPage.Login;
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Login; // ApplicationPage.Login;  ApplicationPage.MainPage
 
         #endregion
 
@@ -128,9 +128,6 @@ namespace FitnessClubMWWM.Logic.Ui
         }
 
         #endregion
-
-       
-        Frame FrameWND { get; set; }
 
 
     }

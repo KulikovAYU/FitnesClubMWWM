@@ -1,87 +1,251 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop">
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
 
-    <Style
-        x:Key="HeaderText"
-        BasedOn="{StaticResource BaseTextBlockStyle}"
-        TargetType="{x:Type TextBlock}">
-        <Setter Property="Foreground" Value="{StaticResource BackgroundForegroundMainBrush}" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="0,8" />
 
+    <!-- Высота текстовых полей для авторизации  -->
+    <Style x:Key="Size">
+        <Setter Property="Control.Height" Value="50" />
     </Style>
-    <ControlTemplate x:Key="TextBoxAutorization" TargetType="{x:Type TextBoxBase}">
+
+    <!--  Начальное состояние текстбокса  -->
+    <Style x:Key="FieldForLog">
+        <Setter Property="TextBox.TextAlignment" Value="Left" />
+        <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+        <Setter Property="Control.FontSize" Value="20" />
+        <Setter Property="Control.BorderThickness" Value="2 2 2 2" />
+        <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+        <Setter Property="Control.HorizontalAlignment" Value="Left" />
+    </Style>
+
+
+    <!--  Шаблон текстового поля логина входа  -->
+    <ControlTemplate x:Key="InputTextBox" TargetType="{x:Type TextBox}">
+        <ControlTemplate.Resources>
+            <Storyboard x:Key="OnPreviewMouseLeftButtonUp1">
+
+                <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ClearButton" Storyboard.TargetProperty="(local:ClearButton.IsClear)">
+                    <DiscreteBooleanKeyFrame KeyTime="0" Value="True" />
+                    <DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="False" />
+                </BooleanAnimationUsingKeyFrames>
+
+            </Storyboard>
+        </ControlTemplate.Resources>
+
         <Border
             x:Name="border"
             Background="{TemplateBinding Background}"
-            BorderBrush="#FFABADB3"
-            BorderThickness="2,2,2,2"
-            SnapsToDevicePixels="True">
-            <ScrollViewer
-                x:Name="PART_ContentHost"
-                Margin="10,0,0,0"
-                VerticalAlignment="Center"
-                Focusable="False"
-                HorizontalScrollBarVisibility="Hidden"
-                VerticalScrollBarVisibility="Hidden" />
-        </Border>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter TargetName="border" Property="Opacity" Value="0.56" />
-
-            </Trigger>
-
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BackgroundTextBoksBlue}" />
-                <Setter TargetName="border" Property="BorderThickness" Value="6,2,2,2" />
-            </Trigger>
-            <Trigger Property="IsKeyboardFocused" Value="True">
-                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BackgroundTextBoksBlue}" />
-                <Setter TargetName="border" Property="BorderThickness" Value="6,2,2,2" />
-
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
-
-    <ControlTemplate x:Key="PasswordBoxAutorization" TargetType="{x:Type PasswordBox}">
-        <Border
-            x:Name="border"
-            Background="{TemplateBinding Background}"
-            BorderBrush="#FFABADB3"
-            BorderThickness="2,2,2,2"
-            SnapsToDevicePixels="True">
-            <ScrollViewer
-                x:Name="PART_ContentHost"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            SnapsToDevicePixels="True"
+            Style="{StaticResource Size}">
+            <Grid
                 Margin="10,0,0,0"
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Center"
-                HorizontalContentAlignment="Left"
-                Focusable="False"
-                HorizontalScrollBarVisibility="Hidden"
-                VerticalScrollBarVisibility="Hidden" />
+                VerticalAlignment="Stretch">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300*" />
+                    <ColumnDefinition Width="30*" />
+                </Grid.ColumnDefinitions>
+
+                <ScrollViewer
+                    x:Name="PART_ContentHost"
+                    Grid.Column="0"
+                    Margin="0"
+                    VerticalAlignment="Stretch"
+                    FontSize="{TemplateBinding FontSize}" />
+                <TextBlock
+                    x:Name="Hint"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    FontSize="{TemplateBinding FontSize}"
+                    Foreground="Gray"
+                    IsHitTestVisible="False"
+                    Text="{TemplateBinding Tag}"
+                    Visibility="Collapsed" />
+
+                <local:ClearButton
+                    x:Name="ClearButton"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,-2,-2,-2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Template="{DynamicResource ButtonClear}">
+                    <Border Margin="13" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Path
+                            x:Name="___CloseIcon_"
+                            Data="M 476,47.6L 428.4,0L 238,190.4L 47.6,0L 0,47.6L 190.4,238L 0,428.4L 47.6,476L 238,285.6L 428.4,476L 476,428.4L 285.6,238L 476,47.6 Z "
+                            Fill="Gray"
+                            RenderOptions.EdgeMode="Aliased"
+                            Stretch="Uniform"
+                            Stroke="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
+                            StrokeThickness="0" />
+                    </Border>
+                </local:ClearButton>
+            </Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="VisualStateGroup" />
+            </VisualStateManager.VisualStateGroups>
         </Border>
+
         <ControlTemplate.Triggers>
+            <EventTrigger RoutedEvent="UIElement.PreviewMouseLeftButtonUp" SourceName="ClearButton">
+                <BeginStoryboard Storyboard="{StaticResource OnPreviewMouseLeftButtonUp1}" />
+            </EventTrigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="Text" Value="" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Hint" Property="Visibility" Value="Visible" />
+                <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
+            </MultiTrigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter TargetName="border" Property="Opacity" Value="0.56" />
-
             </Trigger>
-
-            <Trigger Property="IsMouseOver" Value="True">
+            <Trigger SourceName="ClearButton" Property="IsMouseOver" Value="True">
+                <Setter TargetName="___CloseIcon_" Property="Fill" Value="{StaticResource BackgroundTextBoksBlue}" />
                 <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BackgroundTextBoksBlue}" />
-                <Setter TargetName="border" Property="BorderThickness" Value="6,2,2,2" />
             </Trigger>
-            <Trigger Property="IsKeyboardFocused" Value="True">
+            <Trigger x:Name="Clear" SourceName="ClearButton" Property="IsPressed" Value="True">
+                <Setter TargetName="___CloseIcon_" Property="Fill" Value="White" />
+                <Setter TargetName="ClearButton" Property="BorderThickness" Value="0" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
                 <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BackgroundTextBoksBlue}" />
-                <Setter TargetName="border" Property="BorderThickness" Value="6,2,2,2" />
-
             </Trigger>
-
-
+            <Trigger SourceName="ClearButton" Property="IsClear" Value="True">
+                <Setter Property="Text" Value="" />
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+  
+
+<!--Шаблон Password Box -->    
+    <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+    <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+    <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+
+    <Style x:Key="PasswordBoxStyle" TargetType="{x:Type PasswordBox}">
+        <Setter Property="PasswordChar" Value="●"/>
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Border x:Name="border" 
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True"
+                            Style="{StaticResource Size}">
+                        <Grid
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300*" />
+                                <ColumnDefinition Width="30*" />
+                            </Grid.ColumnDefinitions>
+
+                            <ScrollViewer
+                                x:Name="PART_ContentHost"
+                                Grid.Column="0"
+                                Margin="0"
+                                VerticalAlignment="Stretch"
+                                FontSize="{TemplateBinding FontSize}"/>
+
+                             <TextBlock
+                                x:Name="Hint"
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                FontSize="{TemplateBinding FontSize}"
+                                Foreground="Gray"
+                                IsHitTestVisible="False"
+                                Text="{TemplateBinding Tag}"
+                                Visibility="Visible" />
+
+                            <local:ShowPasswordButton
+                                x:Name="ClearButton"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="0,-2,-2,-2"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="Transparent"
+                                BorderBrush="Transparent" Template="{DynamicResource ButtonClear}"
+                                >
+                                <Border Margin="13 13 13 13" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Path
+                                        x:Name="___CloseIcon_"
+                                        Data="F1 M 598.865,151.457L 609.332,164.669L 598.866,177.88C 597.636,179.436 568.112,216.404 517.496,253.52C 449.859,303.12 376.264,329.337 304.666,329.337C 233.071,329.337 159.476,303.12 91.8359,253.52C 41.2212,216.403 11.6973,179.436 10.466,177.88L 0,164.669L 10.4647,151.457C 11.6959,149.902 41.2199,112.933 91.8345,75.8176C 159.474,26.2174 233.07,3.05176e-005 304.665,3.05176e-005C 376.262,3.05176e-005 449.858,26.2174 517.495,75.8176C 568.111,112.934 597.635,149.902 598.865,151.457 Z M 304.665,280.027C 368.392,280.027 420.239,228.278 420.239,164.669C 420.239,101.059 368.392,49.3099 304.665,49.3099C 274.176,49.3099 246.412,61.1597 225.739,80.4816L 208.037,60.5659C 171.941,73.8763 141.245,92.5524 118.078,109.443C 89.3801,130.365 67.8731,151.525 55.605,164.669C 67.8678,177.807 89.3774,198.969 118.078,219.893C 141.245,236.783 171.94,255.459 208.037,268.77C 179.995,242.819 162.412,205.758 162.412,164.669C 162.412,153.202 163.783,142.05 166.368,131.365L 192.755,135.798C 190.363,145.029 189.09,154.703 189.09,164.669C 189.09,228.278 240.937,280.027 304.665,280.027 Z M 491.251,219.893C 519.949,198.972 541.456,177.811 553.725,164.666C 541.462,151.527 519.952,130.365 491.251,109.442C 468.083,92.5511 437.39,73.875 401.291,60.5645C 429.334,86.5157 446.918,123.578 446.918,164.667C 446.918,205.757 429.334,242.819 401.291,268.77C 437.388,255.459 468.083,236.783 491.251,219.893 Z M 231.118,142.243L 289.325,152.02L 251.398,109.35C 265.219,96.0887 283.981,87.9217 304.665,87.9217C 347.13,87.9217 381.555,122.282 381.555,164.669C 381.555,207.055 347.13,241.415 304.665,241.415C 262.199,241.415 227.774,207.054 227.774,164.669C 227.774,156.865 228.949,149.338 231.118,142.243 Z "
+                                        Fill="Gray"
+                                        RenderOptions.EdgeMode="Aliased"
+                                        Stretch="Uniform"
+                                        Stroke="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
+                                        StrokeThickness="0" />
+                                </Border>
+                            </local:ShowPasswordButton>
+
+
+
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+
+                        <Trigger x:Name="Clear" SourceName="ClearButton" Property="IsPressed" Value="True">
+                            <Setter TargetName="___CloseIcon_" Property="Fill" Value="White" />
+                            <Setter TargetName="ClearButton" Property="BorderThickness" Value="0" />
+                            <Setter TargetName="___CloseIcon_" Property="Data" Value="F1 M 808.2,161.489C 818.337,171.266 818.624,187.41 808.848,197.546C 799.071,207.684 782.925,207.973 772.791,198.191C 674.417,103.28 544.859,51.0072 407.996,51C 271.134,51.0072 141.579,103.28 43.2026,198.191C 38.2559,202.964 31.8731,205.341 25.5007,205.341C 18.8198,205.341 12.1485,202.732 7.14587,197.546C -2.63336,187.41 -2.34562,171.266 7.79105,161.489C 115.717,57.3619 257.839,0.0150566 407.965,-1.90735e-005C 558.152,0.0150566 700.277,57.3646 808.2,161.489 Z M 407.978,184.604C 585.131,184.604 717.838,304.681 766.671,356.306C 775.971,366.137 775.971,381.521 766.674,391.35C 717.843,442.978 585.144,563.06 407.978,563.06C 230.822,563.06 98.1172,442.98 49.2872,391.353C 39.9871,381.521 39.9871,366.137 49.2872,356.306C 98.1218,304.681 230.834,184.604 407.978,184.604 Z M 244.599,274.51C 182.782,304.031 134.171,344.408 103.697,373.829C 133.481,402.588 180.599,441.799 240.43,471.122C 225.587,442.779 217.424,410.461 217.424,376.572C 217.424,339.588 227.213,304.521 244.599,274.51 Z M 342.575,505.79C 363.534,509.783 385.364,512.06 407.978,512.06C 426.74,512.06 444.95,510.469 462.585,507.661C 509.82,483.561 540.165,432.513 540.165,376.572C 540.165,312.697 500.29,255.665 443.074,237.45C 431.593,236.275 419.902,235.604 407.978,235.604C 392.014,235.604 376.454,236.772 361.3,238.838C 305.695,258.672 268.424,313.82 268.424,376.572C 268.424,431.518 296.775,480.764 342.575,505.79 Z M 565.234,476.01C 629.968,446.283 680.792,404.223 712.264,373.829C 680.109,342.784 627.765,299.54 561.014,269.728C 580.761,301.506 591.165,338.16 591.165,376.574C 591.165,412.197 581.863,446.397 565.234,476.01 Z M 468.946,376.574C 468.946,412.197 439.988,441.118 404.293,441.121C 368.603,441.121 339.645,412.199 339.645,376.574C 339.645,340.945 368.603,312.025 404.293,312.025C 404.293,347.651 433.259,376.574 468.946,376.574 Z " />
+                        </Trigger>
+
+
+
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                    <Condition Property="IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+
+
+
 
 </ResourceDictionary>

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 //В ЭТОМ КЛАССЕ БУДУТ ОПРЕДЕЛЯТЬСЯ ПОЛЬЗОВАТЕЛЬСКИЕ ЭЛЕМЕНТЫ УПРАВЛЕНИЯ
@@ -11,6 +12,72 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
     {
     }
 
+    class CustomTextBox : TextBox
+    {
+
+        //public static RoutedEvent ButtonClearEvent;
+
+        //static CustomTextBox()
+        //{
+        //    ButtonClearEvent = EventManager.RegisterRoutedEvent("ButtonClearClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler),
+        //        typeof(CustomTextBox));
+        //}
+
+        //public event RoutedEventHandler ButtonClearClick
+        //{
+        //    add => AddHandler(ButtonClearEvent,value);
+        //    remove => RemoveHandler(ButtonClearEvent,value);
+        //}
+
+        //protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
+        //{
+        //    base.OnMouseLeftButtonUp(e);
+        //    RoutedEventArgs args = new RoutedEventArgs(CustomTextBox.ButtonClearEvent,this);
+        //    RaiseEvent(args);
+        //}
+
+        //void Change()
+        //{
+        //    Text = null;
+        //}
+
+    }
+
+    /// <summary>
+    /// Класс кнопки, отвечающей за очистку текстового поля Textbox-a
+    /// </summary>
+    class ClearButton : Button
+    {
+        [Bindable(true)]
+        [Category("Очистить поле")]
+        public bool IsClear
+        {
+            get { return (bool)GetValue(IsClearProperty); }
+            set { SetValue(IsClearProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsClear.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsClearProperty =
+            DependencyProperty.Register("IsClear", typeof(bool), typeof(ClearButton), new PropertyMetadata(false));
+    }
+
+    /// <summary>
+    /// Класс кнопки, отвечающей за показ пароля
+    /// </summary>
+    class ShowPasswordButton : Button
+    {
+        [Bindable(true)]
+        [Category("Показать пароль")]
+        public bool IsShowingPassword
+        {
+            get { return (bool)GetValue(IsClearProperty); }
+            set { SetValue(IsClearProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsClear.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsClearProperty =
+            DependencyProperty.Register("IsShowingPassword", typeof(bool), typeof(ShowPasswordButton), new PropertyMetadata(false));
+    }
 
     /// <summary>
     /// Класс определяет кнопку на стартовой странице
@@ -27,7 +94,7 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
         }
 
         public static readonly DependencyProperty ButtonCommentProperty =
-            DependencyProperty.Register("ButtonComment", typeof(string), typeof(StartButton), new PropertyMetadata(" "));
+            DependencyProperty.Register("ButtonComment", typeof(string), typeof(StartButton), new PropertyMetadata(string.Empty));
         #endregion
 
 
@@ -147,4 +214,5 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
             DependencyProperty.Register("GeomPictureMargin", typeof(Thickness), typeof(StartButton), (PropertyMetadata)new FrameworkPropertyMetadata((object)new Thickness(), FrameworkPropertyMetadataOptions.AffectsMeasure));
         #endregion
     }
+    
 }

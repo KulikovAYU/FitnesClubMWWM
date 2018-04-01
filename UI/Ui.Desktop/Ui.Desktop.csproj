@@ -83,6 +83,7 @@
       <HintPath>..\..\packages\Scrutor.2.1.2\lib\net451\Scrutor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -103,6 +104,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>C:\Users\User\Desktop\Новая папка\Новая папка (2)\wpftoolkit-master\ExtendedWPFToolkitSolution\Src\Xceed.Wpf.Toolkit.LiveExplorer\bin\Debug\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -133,8 +137,12 @@
     <Compile Include="UserControls\UCStartPanel.xaml.cs">
       <DependentUpon>UCStartPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UserTextbox.xaml.cs">
+      <DependentUpon>UserTextbox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValueConverters\ApplicationPageValueConverter.cs" />
     <Compile Include="ValueConverters\BaseValueConverter.cs" />
+    <Compile Include="ValueConverters\WorkingValueConverters.cs" />
     <Page Include="local.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -154,6 +162,11 @@
     <Page Include="Pages\MainWindow\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Properties\DesignTimeResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
     </Page>
     <Page Include="Styles\Buttons.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -180,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCStartPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserTextbox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -223,6 +240,11 @@
     <Resource Include="Fonts\OpenSans\OpenSans-Regular.ttf" />
     <Resource Include="Fonts\OpenSans\OpenSans-Semibold.ttf" />
     <Resource Include="Fonts\OpenSans\OpenSans-SemiboldItalic.ttf" />
+    <Resource Include="Fonts\ALSEkibastuz\ALS Ekibastuz Black.otf" />
+    <Resource Include="Fonts\ALSEkibastuz\ALS Ekibastuz Bold.otf" />
+    <Resource Include="Fonts\ALSEkibastuz\ALS Ekibastuz Heavy.otf" />
+    <Resource Include="Fonts\ALSEkibastuz\ALS Ekibastuz Regular.otf" />
+    <Resource Include="Fonts\ALSEkibastuz\ALS-Ekibastuz-Regular.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
