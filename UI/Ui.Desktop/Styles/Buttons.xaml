@@ -9,14 +9,28 @@
 
     <!--  Шаблон обычной кнопки  -->
     <ControlTemplate x:Key="ButtonBaseControlTemplate" TargetType="{x:Type ButtonBase}">
+        <ControlTemplate.Resources>
+            <Storyboard x:Key="Storyboard1">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="0:0:0.3" Value="#FF008AC3" />
+                </ColorAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="Storyboard_Copy1">
+                <ColorAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="0:0:0.3" Value="{StaticResource TextBoksBlue}" />
+                </ColorAnimationUsingKeyFrames>
+            </Storyboard>
+        </ControlTemplate.Resources>
         <Border
             x:Name="border"
-            Background="{DynamicResource BackgroundTextBoksBlue}"
             BorderBrush="{DynamicResource BackgroundTextBoksBlue}"
             BorderThickness="{TemplateBinding BorderThickness}"
             CornerRadius="4"
             RenderTransformOrigin="0.5,0.5"
             SnapsToDevicePixels="True">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource TextBoksBlue}" />
+            </Border.Background>
             <Border.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -42,7 +56,14 @@
                 <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="border" Property="Background" Value="#008ac3" />
+                <Trigger.ExitActions>
+                    <ResumeStoryboard BeginStoryboardName="Storyboard1_BeginStoryboard" />
+                    <BeginStoryboard x:Name="Storyboard1_BeginStoryboard1" Storyboard="{StaticResource Storyboard_Copy1}" />
+                </Trigger.ExitActions>
+                <Trigger.EnterActions>
+                    <BeginStoryboard x:Name="Storyboard1_BeginStoryboard" Storyboard="{StaticResource Storyboard1}" />
+                </Trigger.EnterActions>
+                <!--<Setter TargetName="border" Property="Background" Value="#008ac3" />-->
                 <Setter TargetName="border" Property="BorderBrush" Value="#FF3C7FB1" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
@@ -113,7 +134,7 @@
             </Border.RenderTransform>
 
             <StackPanel
-                Width="140"
+                Width="Auto"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Orientation="Vertical">

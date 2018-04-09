@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userControls="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
     xmlns:valueConverters="clr-namespace:FitnessClubMWWM.Ui.Desktop.ValueConverters"
@@ -14,12 +15,12 @@
 
     <Page.Resources>
         <valueConverters:ApplicationPageValueConverter x:Key="ApplicationPageValueConverter" />
-        <valueConverters:IsNoneEmptyConverter x:Key="WorkingValueConverters" />
+        <userControls:PasswordHelper x:Key="PasswordHelper" PasswordString="" />
     </Page.Resources>
+
 
     <Grid>
         <Grid x:Name="AnimatedGrid" ClipToBounds="True">
-
             <Grid.Background>
                 <ImageBrush x:Name="MyImage" />
             </Grid.Background>
@@ -89,13 +90,22 @@
                             Height="100">
 
                             <PasswordBox
+                                x:Name="passwordBox"
                                 Width="600"
                                 Height="50"
                                 VerticalContentAlignment="Center"
                                 BorderThickness="2"
+                                DataContext="{StaticResource PasswordHelper}"
                                 FontSize="18"
-                                Style="{DynamicResource PasswordBoxStyle}"
-                                Tag="Пароль" />
+                                Tag="Пароль"
+                                Template="{DynamicResource PasswordTextBox}">
+                                <i:Interaction.Behaviors>
+                                    <valueConverters:DependecyPropertyBehavior
+                                        Binding="{Binding PasswordString}"
+                                        UpdateEvent="PasswordChanged"
+                                        Property="Password" />
+                                </i:Interaction.Behaviors>
+                            </PasswordBox>
                         </Border>
 
 

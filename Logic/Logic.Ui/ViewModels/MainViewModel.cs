@@ -1,5 +1,6 @@
-using System.Windows.Controls;
+using System;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace FitnessClubMWWM.Logic.Ui
 {
@@ -86,10 +87,29 @@ namespace FitnessClubMWWM.Logic.Ui
         // <summary>
         // Текущая страница приложения
         // </summary>
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Login; // ApplicationPage.Login;  ApplicationPage.MainPage
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.MainPage; // ApplicationPage.Login;  ApplicationPage.MainPage
+
+     
+
 
         #endregion
 
+        void ProcessMessage(string msg)
+        {
+            switch (msg)
+            {
+                case "LoginPage":
+                    CurrentPage = ApplicationPage.Login;
+                    RaisePropertyChanged(nameof(CurrentPage));
+                    break;
+                case "AutorizationError":
+                    CurrentPage = ApplicationPage.AutorizationError;
+                    RaisePropertyChanged(nameof(CurrentPage));
+                    break;
+
+                    
+            }
+        }
 
         #region Constructor
         /// <summary>
@@ -107,8 +127,8 @@ namespace FitnessClubMWWM.Logic.Ui
                 WindowTitle = "Информационная система фитнес-клуб";
                 // Code runs "for real"
             }
-          
 
+            Messenger.Default.Register(this, new Action<string>(ProcessMessage));
             //Application.Current.MainWindow.Initialized += (sender, e) =>
             //  {
             //      FrameWND.NavigationService.Navigate(new Uri("AutorizationPage.xaml", UriKind.Relative));

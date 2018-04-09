@@ -14,12 +14,11 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
     {
     }
 
-
-    public class IsNoneEmptyConverter : IValueConverter
+    class ConvertPasswordToString : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value as string == string.Empty ? true : false;
+          return System.Convert.ToString(value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -27,4 +26,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
             throw new NotImplementedException();
         }
     }
+
+
 }

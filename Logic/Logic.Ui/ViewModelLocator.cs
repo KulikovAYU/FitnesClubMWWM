@@ -26,12 +26,13 @@ namespace FitnessClubMWWM.Logic.Ui
                 // Create run time view services and models
             }
 
-
-            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<MainViewModel>(); //регистрация view modele-й
+            SimpleIoc.Default.Register<BeginPanelPageViewModel>();
+          
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
-
+        public BeginPanelPageViewModel BeginPanelPageViewModelMain => ServiceLocator.Current.GetInstance<BeginPanelPageViewModel>();
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

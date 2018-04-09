@@ -137,11 +137,9 @@
     <Compile Include="UserControls\UCStartPanel.xaml.cs">
       <DependentUpon>UCStartPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UserTextbox.xaml.cs">
-      <DependentUpon>UserTextbox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ValueConverters\ApplicationPageValueConverter.cs" />
     <Compile Include="ValueConverters\BaseValueConverter.cs" />
+    <Compile Include="ValueConverters\DependecyPropertyBehavior.cs" />
     <Compile Include="ValueConverters\WorkingValueConverters.cs" />
     <Page Include="local.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -193,10 +191,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCStartPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\UserTextbox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -291,6 +285,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\MainPageImages\backgroundStartPage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
