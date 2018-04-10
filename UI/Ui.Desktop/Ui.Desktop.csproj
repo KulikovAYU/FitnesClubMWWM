@@ -137,6 +137,9 @@
     <Compile Include="UserControls\UCStartPanel.xaml.cs">
       <DependentUpon>UCStartPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UserControlAboutUser.xaml.cs">
+      <DependentUpon>UserControlAboutUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValueConverters\ApplicationPageValueConverter.cs" />
     <Compile Include="ValueConverters\BaseValueConverter.cs" />
     <Compile Include="ValueConverters\DependecyPropertyBehavior.cs" />
@@ -191,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCStartPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserControlAboutUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

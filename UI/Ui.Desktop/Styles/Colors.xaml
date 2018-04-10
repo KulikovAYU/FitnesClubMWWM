@@ -17,6 +17,7 @@
     <Color x:Key="ForegroundVeryDark">#000000</Color>
     <SolidColorBrush x:Key="BackgroundForegroundVeryDarkBrush" Color="{StaticResource ForegroundVeryDark}" />
 
+    <!--  Белый  -->
     <Color x:Key="ForegroundLight">#ffffff</Color>
     <SolidColorBrush x:Key="BackgroundForegroundLightBrush" Color="{StaticResource ForegroundLight}" />
 
@@ -24,12 +25,16 @@
     <SolidColorBrush x:Key="BackgroundForegroundDarkBrush" Color="{StaticResource ForegroundDark}" />
 
     <Color x:Key="ForegroundGreen">#41cd52</Color>
-    <SolidColorBrush x:Key="BackgroundForegroundGreen}" Color="{StaticResource ForegroundGreen}" />
+    <SolidColorBrush x:Key="BackgroundForegroundGreen" Color="{StaticResource ForegroundGreen}" />
 
     <Color x:Key="TextBoksBlue">#0063B1</Color>
     <SolidColorBrush x:Key="BackgroundTextBoksBlue" Color="{StaticResource TextBoksBlue}" />
 
     <Color x:Key="ThiknessGrey">#E6E6E6</Color>
     <SolidColorBrush x:Key="BackgroundThiknessGrey" Color="{StaticResource ThiknessGrey}" />
+
+    <Color x:Key="BlueColor">#0066CC</Color>
+    <SolidColorBrush x:Key="BackgroundBlueColor" Color="{StaticResource BlueColor}" />
+
 
 </ResourceDictionary>

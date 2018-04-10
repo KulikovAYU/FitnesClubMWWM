@@ -18,7 +18,7 @@ namespace FitnessClubMWWM.Logic.Ui
         void ExecuteCommand()
         {
             MessageBox.Show("Выход из системы");
-            Messenger.Default.Send("AutorizationError");
+            Messenger.Default.Send("LoginPage");
         }
 
     }

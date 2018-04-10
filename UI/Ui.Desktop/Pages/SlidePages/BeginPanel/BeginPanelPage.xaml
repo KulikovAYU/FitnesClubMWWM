@@ -37,6 +37,11 @@
     </Page.Triggers>
 
     <Grid>
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="800*" />
+        </Grid.RowDefinitions>
         <ScrollViewer
             x:Name="scrollViewer"
             HorizontalScrollBarVisibility="Auto"
@@ -54,6 +59,7 @@
 
         <userControls:UCStartPanel
             x:Name="uCStartPanel"
+            Margin="25,138,25,162"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             RenderTransformOrigin="0.5,0.5">
@@ -67,6 +73,10 @@
             </userControls:UCStartPanel.RenderTransform>
         </userControls:UCStartPanel>
 
+        <userControls:UserControlAboutUser
+            Width="400"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Stretch" />
 
     </Grid>
 </Page>
