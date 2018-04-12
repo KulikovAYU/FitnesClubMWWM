@@ -38,6 +38,7 @@
                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}" />
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Key="ShowUserLog" />
     </UserControl.Resources>
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="aboutUserButton">
@@ -45,6 +46,9 @@
         </EventTrigger>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="CloseaboutUserButton">
             <BeginStoryboard x:Name="OnClick_Hidden_BeginStoryboard" Storyboard="{StaticResource OnClick_Hidden}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseMove" SourceName="aboutUserButton">
+            <BeginStoryboard x:Name="ShowUserLog_BeginStoryboard" Storyboard="{StaticResource ShowUserLog}" />
         </EventTrigger>
     </UserControl.Triggers>
 
@@ -70,7 +74,7 @@
                 </Style>
             </Border.Resources>
             <Border.Background>
-                <SolidColorBrush Color="{DynamicResource ForegroundLight}"/>
+                <SolidColorBrush Color="{DynamicResource ForegroundLight}" />
             </Border.Background>
             <Border.RenderTransform>
                 <TransformGroup>
@@ -163,6 +167,7 @@
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center">
                                     <TextBlock
+                                        x:Name="UserLogin"
                                         HorizontalAlignment="Right"
                                         Text="UserLogin"
                                         TextAlignment="Center" />
@@ -319,41 +324,42 @@
                 </Grid>
 
             </Grid>
-
-
-
-
-
         </Border>
-        <local:AboutUserButton
-            x:Name="aboutUserButton"
-            Width="50"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Stretch"
-            Background="White"
-            BorderBrush="{x:Null}"
-            GeomPicture="{Binding Data, Source={StaticResource AboutUser}}"
-            GeomPictureFill="Black"
-            GeomPictureHeight="20"
-            GeomPictureWidth="20"
-            Template="{DynamicResource AboutUserControlTemplate}"
-            ToolTip="Данные пользователя"
-            Visibility="Visible" />
 
-        <local:AboutUserButton
-            x:Name="CloseaboutUserButton"
-            Width="50"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Stretch"
-            Background="White"
-            BorderBrush="{x:Null}"
-            GeomPicture="{Binding Data, Source={StaticResource left_arrow}}"
-            GeomPictureFill="Black"
-            GeomPictureHeight="20"
-            GeomPictureWidth="20"
-            Template="{DynamicResource AboutUserControlTemplate}"
-            ToolTip="Назад"
-            Visibility="Hidden" />
+        <StackPanel Orientation="Horizontal">
+            <Grid>
+
+                <local:AboutUserButton
+                    x:Name="CloseaboutUserButton"
+                    Width="50"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Stretch"
+                    Background="White"
+                    BorderBrush="{x:Null}"
+                    GeomPicture="{Binding Data, Source={StaticResource left_arrow}}"
+                    GeomPictureFill="Black"
+                    GeomPictureHeight="20"
+                    GeomPictureWidth="20"
+                    Template="{DynamicResource AboutUserControlTemplate}"
+                    ToolTip="Назад"
+                    Visibility="Hidden" />
+                <local:AboutUserButton
+                    x:Name="aboutUserButton"
+                    Width="50"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Stretch"
+                    Background="White"
+                    BorderBrush="{x:Null}"
+                    GeomPicture="{Binding Data, Source={StaticResource AboutUser}}"
+                    GeomPictureFill="Black"
+                    GeomPictureHeight="20"
+                    GeomPictureWidth="20"
+                    Template="{DynamicResource AboutUserControlTemplate}"
+                    ToolTip="Данные пользователя"
+                    Visibility="Visible" />
+            </Grid>
+
+        </StackPanel>
 
 
     </Grid>

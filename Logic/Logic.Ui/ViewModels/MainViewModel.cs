@@ -87,7 +87,7 @@ namespace FitnessClubMWWM.Logic.Ui
         // <summary>
         // Текущая страница приложения
         // </summary>
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.MainPage; // ApplicationPage.Login;  ApplicationPage.MainPage
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.ConfrimExit; // ApplicationPage.Login;  ApplicationPage.MainPage
 
      
 
@@ -99,6 +99,7 @@ namespace FitnessClubMWWM.Logic.Ui
             switch (msg)
             {
                 case "LoginPage":
+                case "AgreeWithExit":
                     CurrentPage = ApplicationPage.Login;
                     RaisePropertyChanged(nameof(CurrentPage));
                     break;
@@ -106,8 +107,19 @@ namespace FitnessClubMWWM.Logic.Ui
                     CurrentPage = ApplicationPage.AutorizationError;
                     RaisePropertyChanged(nameof(CurrentPage));
                     break;
+                case "ConfrimExit":
+                    CurrentPage = ApplicationPage.ConfrimExit;
+                    RaisePropertyChanged(nameof(CurrentPage));
+                    break;
+                case "DisagreeWithExit":
+                    CurrentPage = ApplicationPage.MainPage;
+                    RaisePropertyChanged(nameof(CurrentPage));
+                    break;
+                case "AdminPage":
+                    CurrentPage = ApplicationPage.AdminPanel;
+                    RaisePropertyChanged(nameof(CurrentPage));
+                    break;
 
-                    
             }
         }
 

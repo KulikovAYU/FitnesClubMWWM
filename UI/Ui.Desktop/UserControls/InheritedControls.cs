@@ -13,15 +13,16 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
     {
     }
 
-    class PasswordHelper
+
+    public class PasswordHelper
     {
         public string PasswordString { get; set; }
     }
 
-  /// <summary>
+    /// <summary>
     /// Класс кнопки, отвечающей за очистку текстового поля Textbox-a
     /// </summary>
-    class ClearButton : Button
+    public class ClearButton : Button
     {
         [Bindable(true)]
         [Category("Очистить поле")]
@@ -39,7 +40,7 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
     /// <summary>
     /// Класс кнопки, отвечающей за показ пароля
     /// </summary>
-    class ShowPasswordButton : Button
+    public class ShowPasswordButton : Button
     {
         [Bindable(true)]
         [Category("Показать пароль")]

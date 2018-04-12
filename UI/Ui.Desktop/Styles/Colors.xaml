@@ -33,8 +33,25 @@
     <Color x:Key="ThiknessGrey">#E6E6E6</Color>
     <SolidColorBrush x:Key="BackgroundThiknessGrey" Color="{StaticResource ThiknessGrey}" />
 
+    <!--  Для кнопок рабочего стола  -->
     <Color x:Key="BlueColor">#0066CC</Color>
     <SolidColorBrush x:Key="BackgroundBlueColor" Color="{StaticResource BlueColor}" />
+
+    <LinearGradientBrush x:Key="GradientBrush" Opacity="0.895" StartPoint="0,0" EndPoint="2,0">
+        <GradientStop Offset="0.525" Color="#FF9AA6FF" />
+        <GradientStop Offset="0.866" Color="#FF0922DF" />
+        <GradientStop Offset="0.294" Color="#FF6E82ED" />
+    </LinearGradientBrush>
+
+    <Color x:Key="ThiknessAllumineGray">#BFBFBF</Color>
+    <SolidColorBrush x:Key="BackgroundThiknessAllumineGray" Color="{StaticResource ThiknessAllumineGray}" />
+
+    <Color x:Key="BlueLightColor">#009DDF</Color>
+    <SolidColorBrush x:Key="BackgroundBlueLightColor" Color="{StaticResource BlueLightColor}" />
+
+    <Color x:Key="DarkBlueColor">#008AC3</Color>
+    <SolidColorBrush x:Key="BackgroundDarkBlueColor" Color="{StaticResource DarkBlueColor}" />
+
 
 
 </ResourceDictionary>

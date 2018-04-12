@@ -21,5 +21,15 @@
         /// </summary>
         MainPage = 2,
 
+        /// <summary>
+        /// Главная страница
+        /// </summary>
+        ConfrimExit = 3,
+
+        /// <summary>
+        /// Панель администратора
+        /// </summary>
+        AdminPanel = 4,
+
     }
 }

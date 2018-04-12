@@ -28,11 +28,12 @@ namespace FitnessClubMWWM.Logic.Ui
 
             SimpleIoc.Default.Register<MainViewModel>(); //регистрация view modele-й
             SimpleIoc.Default.Register<BeginPanelPageViewModel>();
-          
+            SimpleIoc.Default.Register<AdminPageViewModel>();
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         public BeginPanelPageViewModel BeginPanelPageViewModelMain => ServiceLocator.Current.GetInstance<BeginPanelPageViewModel>();
+        public AdminPageViewModel AdminPageViewModelMain => ServiceLocator.Current.GetInstance<AdminPageViewModel>();
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

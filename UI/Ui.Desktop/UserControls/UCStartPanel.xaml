@@ -143,7 +143,7 @@
                 GeomPictureMargin="5"
                 GeomPictureWidth="50"
                 RenderTransformOrigin="0.5,0.5"
-                Template="{DynamicResource StartBtnControlTemplate}" />
+                Template="{DynamicResource StartBtnControlTemplate}" Command="{Binding AdminPanelClick}" />
             <local:StartButton
                 x:Name="Exit"
                 Background="White"
