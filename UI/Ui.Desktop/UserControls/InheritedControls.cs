@@ -323,11 +323,5 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
         #endregion
     }
 
-    /// <summary>
-    /// Класс определяет кнопку о пользователе
-    /// </summary>
-    class AboutUserButton : ButtonWithPicture
-    {
 
-    }
 }

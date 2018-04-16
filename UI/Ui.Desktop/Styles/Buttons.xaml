@@ -261,7 +261,7 @@
     </ControlTemplate>
 
     <!--  Кнопка о пользователе  -->
-    <ControlTemplate x:Key="AboutUserControlTemplate" TargetType="{x:Type userControls:AboutUserButton}">
+    <ControlTemplate x:Key="AboutUserControlTemplate" TargetType="{x:Type userControls:ButtonWithPicture}">
 
         <ControlTemplate.Resources>
             <Style x:Key="Normal">

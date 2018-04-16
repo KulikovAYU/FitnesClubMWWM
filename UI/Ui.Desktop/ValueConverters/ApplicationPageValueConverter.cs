@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using FitnessClubMWWM.Logic.Ui;
+using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AdminPanel;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AutorizationPage;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.BeginPanel;

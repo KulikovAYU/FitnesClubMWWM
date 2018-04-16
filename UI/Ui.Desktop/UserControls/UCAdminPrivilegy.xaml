@@ -1,0 +1,79 @@
+﻿<UserControl
+    x:Class="FitnessClubMWWM.Ui.Desktop.UserControls.UCAdminPrivilegy"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="800"
+    d:DesignWidth="50"
+    mc:Ignorable="d">
+
+    <UserControl.DataContext>
+        <Binding Path="AdminPageViewModel" Source="{StaticResource Locator}" />
+    </UserControl.DataContext>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <local:ButtonWithPicture
+            x:Name="GoHome"
+            Grid.Row="0"
+            Width="50"
+            Height="50"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="White"
+            BorderBrush="{x:Null}"
+            Command="{Binding GoHomeCommand, Mode=OneWay}"
+            Cursor="Hand"
+            GeomPicture="{Binding Data, Source={StaticResource GoHome}}"
+            GeomPictureFill="Black"
+            GeomPictureHeight="20"
+            GeomPictureWidth="20"
+            Template="{DynamicResource AboutUserControlTemplate}"
+            ToolTip="На главную страницу" />
+
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+
+            <local:ButtonWithPicture
+                x:Name="NewUser"
+                Width="50"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="White"
+                BorderBrush="{x:Null}"
+                Cursor="Hand"
+                GeomPicture="{Binding Data, Source={StaticResource NewUser}}"
+                GeomPictureFill="Black"
+                GeomPictureHeight="20"
+                GeomPictureWidth="25"
+                Template="{DynamicResource AboutUserControlTemplate}"
+                ToolTip="Добавить пользователя" />
+
+            <local:ButtonWithPicture
+                x:Name="SetPrivilegy"
+                Width="50"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="White"
+                BorderBrush="{x:Null}"
+                Cursor="Hand"
+                GeomPicture="{Binding Data, Source={StaticResource Tools}}"
+                GeomPictureFill="Black"
+                GeomPictureHeight="20"
+                GeomPictureWidth="20"
+                Template="{DynamicResource AboutUserControlTemplate}"
+                ToolTip="Добавить пользователя" />
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

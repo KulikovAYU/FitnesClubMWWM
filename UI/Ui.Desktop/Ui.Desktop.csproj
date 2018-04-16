@@ -101,6 +101,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="ToggleSwitch, Version=1.1.2.0, Culture=neutral, PublicKeyToken=8637099990568f75, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ToggleSwitch.1.1.2\lib\net40-client\ToggleSwitch.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -116,13 +119,19 @@
     <Compile Include="local.xaml.cs">
       <DependentUpon>local.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SlidePages\AutorizationPage\AutorizationPage.xaml.cs">
+    <Compile Include="Pages\SlidePages\AdminPanelPage.xaml.cs">
+      <DependentUpon>AdminPanelPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SlidePages\AutorizationPage.xaml.cs">
       <DependentUpon>AutorizationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SlidePages\BeginPanel\BeginPanelPage.xaml.cs">
+    <Compile Include="Pages\SlidePages\BeginPanelPage.xaml.cs">
       <DependentUpon>BeginPanelPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SlidePages\ErrorsPages\ErrAutorization\ErrAutorizationPage.xaml.cs">
+    <Compile Include="Pages\SlidePages\TheConfrimLogout.xaml.cs">
+      <DependentUpon>TheConfrimLogout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SlidePages\ErrorsPages\ErrAutorizationPage.xaml.cs">
       <DependentUpon>ErrAutorizationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainWindow\MainWindow.xaml.cs">
@@ -134,6 +143,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UserControls\InheritedControls.cs" />
+    <Compile Include="UserControls\UCAdminPrivilegy.xaml.cs">
+      <DependentUpon>UCAdminPrivilegy.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCStartPanel.xaml.cs">
       <DependentUpon>UCStartPanel.xaml</DependentUpon>
     </Compile>
@@ -148,15 +160,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\SlidePages\AutorizationPage\AutorizationPage.xaml">
+    <Page Include="Pages\SlidePages\AdminPanelPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\SlidePages\BeginPanel\BeginPanelPage.xaml">
+    <Page Include="Pages\SlidePages\AutorizationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\SlidePages\ErrorsPages\ErrAutorization\ErrAutorizationPage.xaml">
+    <Page Include="Pages\SlidePages\BeginPanelPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SlidePages\TheConfrimLogout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SlidePages\ErrorsPages\ErrAutorizationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,6 +210,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\Fonts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCAdminPrivilegy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

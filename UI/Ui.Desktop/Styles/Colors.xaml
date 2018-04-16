@@ -52,6 +52,8 @@
     <Color x:Key="DarkBlueColor">#008AC3</Color>
     <SolidColorBrush x:Key="BackgroundDarkBlueColor" Color="{StaticResource DarkBlueColor}" />
 
-
+    <!--  Серый цвет сообщений диалогов  -->
+    <Color x:Key="BackgroundGray">#FF5A5858</Color>
+    <SolidColorBrush x:Key="BackgroundGrayColor" Color="{StaticResource BackgroundGray}" />
 
 </ResourceDictionary>

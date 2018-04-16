@@ -135,6 +135,7 @@
                 ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
                 ButtonCommentFontSize="12"
                 ButtonCommentWrapping="Wrap"
+                Command="{Binding AdminPanelClick}"
                 Content="Администрирование"
                 FontSize="16"
                 GeomPicture="{Binding Data, Source={StaticResource Administration}}"
@@ -143,7 +144,7 @@
                 GeomPictureMargin="5"
                 GeomPictureWidth="50"
                 RenderTransformOrigin="0.5,0.5"
-                Template="{DynamicResource StartBtnControlTemplate}" Command="{Binding AdminPanelClick}" />
+                Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton
                 x:Name="Exit"
                 Background="White"

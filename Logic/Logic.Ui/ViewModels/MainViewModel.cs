@@ -90,7 +90,7 @@ namespace FitnessClubMWWM.Logic.Ui
         public ApplicationPage CurrentPage { get; set; } = ApplicationPage.ConfrimExit; // ApplicationPage.Login;  ApplicationPage.MainPage
 
      
-
+       
 
         #endregion
 
@@ -117,6 +117,11 @@ namespace FitnessClubMWWM.Logic.Ui
                     break;
                 case "AdminPage":
                     CurrentPage = ApplicationPage.AdminPanel;
+                    RaisePropertyChanged(nameof(CurrentPage));
+                    break;
+
+                case "MainPage":
+                    CurrentPage = ApplicationPage.MainPage;
                     RaisePropertyChanged(nameof(CurrentPage));
                     break;
 

@@ -63,6 +63,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModels\AdminPageViewModel.cs" />
     <Compile Include="ViewModels\BeginPanelPageViewModel.cs" />
     <Compile Include="DataModels\ApplicationPage.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

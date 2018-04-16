@@ -329,7 +329,7 @@
         <StackPanel Orientation="Horizontal">
             <Grid>
 
-                <local:AboutUserButton
+                <local:ButtonWithPicture
                     x:Name="CloseaboutUserButton"
                     Width="50"
                     HorizontalAlignment="Left"
@@ -343,7 +343,7 @@
                     Template="{DynamicResource AboutUserControlTemplate}"
                     ToolTip="Назад"
                     Visibility="Hidden" />
-                <local:AboutUserButton
+                <local:ButtonWithPicture
                     x:Name="aboutUserButton"
                     Width="50"
                     HorizontalAlignment="Left"

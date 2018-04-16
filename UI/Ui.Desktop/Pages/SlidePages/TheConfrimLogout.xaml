@@ -9,8 +9,33 @@
     d:DesignWidth="1000"
     DataContext="{Binding BeginPanelPageViewModelMain, Source={StaticResource Locator}}"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Storyboard x:Key="OnLoaded1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.95"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.95"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource OnLoaded1}"/>
+        </EventTrigger>
+    </Page.Triggers>
 
-    <Grid Background="White">
+    <Grid x:Name="grid" Background="White" RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.RenderTransform>
 
         <StackPanel
             HorizontalAlignment="Center"
@@ -27,10 +52,10 @@
                 <Border Grid.Row="0" Margin="10">
                     <Path
                         x:Name="Image"
-                        Width="250"
+                        Width="350"
                         Height="350"
-                        Data="{Binding Data, Source={StaticResource question}}"
-                        Fill="{DynamicResource BackgroundForegroundVeryDarkBrush}"
+                        Data="{Binding Data, Source={StaticResource ConfrimExit}}"
+                        Fill="{StaticResource BackgroundGrayColor}"
                         Stretch="Fill" />
                 </Border>
 

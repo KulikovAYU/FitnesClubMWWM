@@ -12,6 +12,23 @@ namespace FitnessClubMWWM.Logic.Ui
 {
     public class AdminPageViewModel : ViewModelBase
     {
-    
+
+        public RelayCommand GoHomeCommand => new RelayCommand(GoHome);
+
+
+        void GoHome()
+        {
+            Messenger.Default.Send("MainPage");
+        }
+
+        public RelayCommand RegisterNewUserCommand => new RelayCommand(RegisterNewUser);
+
+        void RegisterNewUser()
+        {
+            MessageBox.Show("Сработало");
+        }
+
+      
+
     }
 }
