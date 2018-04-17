@@ -6,11 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ui="clr-namespace:FitnessClubMWWM.Logic.Ui;assembly=FitnessClubMWWM.Logic.Ui"
+    xmlns:ui1="clr-namespace:FitnessClubMWWM.Logic.Ui"
     mc:Ignorable="d">
 
     <UserControl.Resources>
-        <ui:BeginPanelPageViewModel x:Key="ViewModel" />
+        <ui1:BeginPanelPageViewModel x:Key="ViewModel" />
     </UserControl.Resources>
 
 

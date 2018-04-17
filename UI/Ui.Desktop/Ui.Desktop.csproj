@@ -121,6 +121,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataModels\ApplicationPage.cs" />
     <Compile Include="local.xaml.cs">
       <DependentUpon>local.xaml</DependentUpon>
     </Compile>
@@ -164,6 +165,10 @@
     <Compile Include="ValueConverters\BaseValueConverter.cs" />
     <Compile Include="ValueConverters\DependecyPropertyBehavior.cs" />
     <Compile Include="ValueConverters\WorkingValueConverters.cs" />
+    <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="ViewModels\AdminPageViewModel.cs" />
+    <Compile Include="ViewModels\BeginPanelPageViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="local.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -290,12 +295,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Logic\Logic.Ui\Logic.Ui.csproj">
-      <Project>{267ae534-1ba4-4fd7-993f-8a878fa0dd9a}</Project>
-      <Name>Logic.Ui</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\AutorizationPictureImages\fitness-club1.jpg" />

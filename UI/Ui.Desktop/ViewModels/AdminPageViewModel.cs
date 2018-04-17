@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -29,8 +30,7 @@ namespace FitnessClubMWWM.Logic.Ui
             bVisibility = Visibility.Visible;
            // RaisePropertyChanged(nameof(bVisibility));
             MessageBox.Show("Сработало");
-            Application.Current.Dispatcher.Invoke(() => { new Window1().ShowDialog(); });
-
+            Application.Current.Dispatcher.Invoke(() => { new Window1().ShowDialog();});
         }
 
         public Visibility bVisibility { get; set; } = Visibility.Hidden;
