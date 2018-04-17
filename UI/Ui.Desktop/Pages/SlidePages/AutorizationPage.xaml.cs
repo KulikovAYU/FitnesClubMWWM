@@ -15,81 +15,71 @@ namespace FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AutorizationPage
     /// </summary>
     public partial class AutorizationPage : Page
     {
-        private const int MnCntOfPages = 4;
-        private int m_nPagesCounter;
-        private readonly List<string> m_strPath;
-        private readonly DispatcherTimer m_timer;
+        //private const int MnCntOfPages = 4;
+        //private int m_nPagesCounter;
+        //private readonly List<string> m_strPath;
+        //private readonly DispatcherTimer m_timer;
         public AutorizationPage()
         {
-            m_nPagesCounter = 0;
-            m_strPath = new List<string>();
-            InitializeImagesPath(ref m_strPath, MnCntOfPages);
+            //m_nPagesCounter = 0;
+            //m_strPath = new List<string>();
+            //InitializeImagesPath(ref m_strPath, MnCntOfPages);
 
-            m_timer = new DispatcherTimer { Interval = new TimeSpan(0, 0, 10) };
-            m_timer.Tick += TimerTick;
+            //m_timer = new DispatcherTimer { Interval = new TimeSpan(0, 0, 10) };
+            //m_timer.Tick += TimerTick;
             
             InitializeComponent();
         }
 
-        private void TimerTick(object sender, EventArgs e)
-        {
-            m_nPagesCounter++;
-            if (m_nPagesCounter >= MnCntOfPages)
-                m_nPagesCounter = 0;
-            PlaySlideShow(m_nPagesCounter);
-        }
+        //private void TimerTick(object sender, EventArgs e)
+        //{
+        //    m_nPagesCounter++;
+        //    if (m_nPagesCounter >= MnCntOfPages)
+        //        m_nPagesCounter = 0;
+        //    PlaySlideShow(m_nPagesCounter);
+        //}
 
-        private void InitializeImagesPath(ref List<string> strPath, int nCnt)
-        {
-            for (int i = 0; i < nCnt; i++)
-            {
-                int nCount = i + 1;
-                string filename = Path.GetFullPath(
-                    $@"\Projects\FitnessClub\FitnesClubMWWM\UI\Ui.Desktop\Images\AutorizationPictureImages\fitness-club{
-                    nCount
-                    }.jpg");
+        //private void InitializeImagesPath(ref List<string> strPath, int nCnt)
+        //{
+        //    for (int i = 0; i < nCnt; i++)
+        //    {
+        //        int nCount = i + 1;
+        //        string filename = Path.GetFullPath(
+        //            $@"\Projects\FitnessClub\FitnesClubMWWM\UI\Ui.Desktop\Images\AutorizationPictureImages\fitness-club{
+        //            nCount
+        //            }.jpg");
 
-                strPath.Add(filename);
-            }
-        }
+        //        strPath.Add(filename);
+        //    }
+        //}
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            m_timer.Start();
-            PlaySlideShow(m_nPagesCounter);
-        }
+        //private void Window_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    m_timer.Start();
+        //    PlaySlideShow(m_nPagesCounter);
+        //}
 
-        private void PlaySlideShow(int nPagesCounter)
-        {
-           BitmapImage image = new BitmapImage();
-           image.BeginInit();
-           image.UriSource = new Uri(m_strPath[m_nPagesCounter], UriKind.Relative);
-           image.EndInit();
-           MyImage.ImageSource = image;
+        //private void PlaySlideShow(int nPagesCounter)
+        //{
+        //   BitmapImage image = new BitmapImage();
+        //   image.BeginInit();
+        //   image.UriSource = new Uri(m_strPath[m_nPagesCounter], UriKind.Relative);
+        //   image.EndInit();
+        //   MyImage.ImageSource = image;
 
-           DoubleAnimation animation = new DoubleAnimation
-           {
-               From = 0.2,
-               To = 0.3,
-               Duration = TimeSpan.FromSeconds(5)
+        //   DoubleAnimation animation = new DoubleAnimation
+        //   {
+        //       From = 0.2,
+        //       To = 0.3,
+        //       Duration = TimeSpan.FromSeconds(5)
 
-           };
-           AnimatedGrid.BeginAnimation(OpacityProperty, animation);
-        }
+        //   };
+        //   AnimatedGrid.BeginAnimation(OpacityProperty, animation);
+        //}
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
         //    MessageBox.Show(AutorizationTextBox.InputString);
-        }
-
-        private void CustomTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CustomTextBox_FocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
         }
     }
 }

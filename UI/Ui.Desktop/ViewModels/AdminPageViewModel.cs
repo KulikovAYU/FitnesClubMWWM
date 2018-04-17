@@ -23,17 +23,46 @@ namespace FitnessClubMWWM.Logic.Ui
             Messenger.Default.Send("MainPage");
         }
 
-        public RelayCommand RegisterNewUserCommand => new RelayCommand(RegisterNewUser);
-
-        void RegisterNewUser()
+        public RelayCommand RegisterNewUserCommand => new RelayCommand(() =>
         {
-            bVisibility = Visibility.Visible;
-           // RaisePropertyChanged(nameof(bVisibility));
-            MessageBox.Show("Сработало");
-            Application.Current.Dispatcher.Invoke(() => { new Window1().ShowDialog();});
-        }
+            CurrentPage = ApplicationPage.AddNewUserPage;});
 
-        public Visibility bVisibility { get; set; } = Visibility.Hidden;
+        public RelayCommand AddNewUserPrivilegyCommand => new RelayCommand(() => { CurrentPage = ApplicationPage.AddUserPrivilegyPage; });
+
+        private Window1 wind;
+        //void RegisterNewUser()
+        //{
+
+        //    //Messenger.Default.Send("ShowAddNewUserPage");
+        //   // RaisePropertyChanged(nameof(bVisibility));
+        //   // MessageBox.Show("Сработало");
+           
+        //    //Application.Current.Dispatcher.Invoke(() =>
+        //    //{
+        //    //    try
+        //    //    {
+        //    //        wind = new Window1();
+        //    //        wind.ShowDialog();
+        //    //    }
+        //    //    catch (Exception e)
+        //    //    {
+        //    //        Console.WriteLine(e);
+        //    //        throw;
+        //    //    }
+        //    //});
+        //    CurrentPage = ApplicationPage.AddNewUserPage;
+        //    //RaisePropertyChanged(nameof(AdminPageViewModel));
+        //}
+        ////public RelayCommand CloseSecWindow => new RelayCommand(Close);
+
+        ////void Close()
+        ////{
+        ////   wind.Close();
+        ////}
+
+
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.AddUserPrivilegyPage;
+
 
 
     }

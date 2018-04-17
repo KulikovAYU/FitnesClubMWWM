@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
-
-
+using FitnessClubMWWM.Logic.Ui;
+using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AdminPanelPages;
 
 namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
 {
@@ -14,18 +10,26 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
     {
     }
 
-    class ConvertPasswordToString : IValueConverter
+    public class AdminPageValueConverter : BaseValueConverter<AdminPageValueConverter>
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-          return System.Convert.ToString(value);
+            switch ((ApplicationPage)value)
+            {
+                case ApplicationPage.AddUserPrivilegyPage:
+                    return new AddUserPrivilegyPage();
+                case ApplicationPage.AddNewUserPage:
+                    return new AddNewUserPage();
+                default:
+                    Debugger.Break();
+                    return null;
+            }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
     }
-
 
 }

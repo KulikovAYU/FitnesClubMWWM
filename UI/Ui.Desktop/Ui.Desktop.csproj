@@ -125,7 +125,13 @@
     <Compile Include="local.xaml.cs">
       <DependentUpon>local.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SlidePages\AdminPanelPage.xaml.cs">
+    <Compile Include="Pages\SlidePages\AdminPanelPages\AddNewUserPage.xaml.cs">
+      <DependentUpon>AddNewUserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SlidePages\AdminPanelPages\AddUserPrivilegyPage.xaml.cs">
+      <DependentUpon>AddUserPrivilegyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SlidePages\AdminPanelPages\AdminPanelPage.xaml.cs">
       <DependentUpon>AdminPanelPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SlidePages\AutorizationPage.xaml.cs">
@@ -167,13 +173,22 @@
     <Compile Include="ValueConverters\WorkingValueConverters.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\AdminPageViewModel.cs" />
+    <Compile Include="ViewModels\AutorizationPageViewModel.cs" />
     <Compile Include="ViewModels\BeginPanelPageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="local.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\SlidePages\AdminPanelPage.xaml">
+    <Page Include="Pages\SlidePages\AdminPanelPages\AddNewUserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SlidePages\AdminPanelPages\AddUserPrivilegyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SlidePages\AdminPanelPages\AdminPanelPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -333,6 +348,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Fody.3.0.3\build\Fody.targets" Condition="Exists('..\..\packages\Fody.3.0.3\build\Fody.targets')" />

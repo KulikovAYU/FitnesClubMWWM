@@ -87,7 +87,7 @@ namespace FitnessClubMWWM.Logic.Ui
         // <summary>
         // Текущая страница приложения
         // </summary>
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.ConfrimExit; // ApplicationPage.Login;  ApplicationPage.MainPage
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.MainPage; // ApplicationPage.Login;  ApplicationPage.MainPage
 
      
        

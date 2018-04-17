@@ -50,6 +50,7 @@
                 Background="White"
                 BorderBrush="{x:Null}"
                 Cursor="Hand"
+                Command="{Binding AddNewUserPrivilegyCommand}"
                 GeomPicture="{Binding Data, Source={StaticResource NewUser}}"
                 GeomPictureFill="Black"
                 GeomPictureHeight="20"
@@ -72,7 +73,7 @@
                 GeomPictureHeight="20"
                 GeomPictureWidth="20"
                 Template="{DynamicResource AboutUserControlTemplate}"
-                ToolTip="Добавить пользователя" />
+                ToolTip="Редактирование данных пользователя и установка привилегий" />
 
         </StackPanel>
 

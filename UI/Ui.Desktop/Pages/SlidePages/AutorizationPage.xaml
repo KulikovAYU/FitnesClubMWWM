@@ -10,9 +10,11 @@
     Title="AutorizationPage"
     d:DesignHeight="800"
     d:DesignWidth="1000"
-    Loaded="Window_Loaded"
+  
+    DataContext="{Binding AutorizationViewModel,Source={StaticResource Locator}}"
     mc:Ignorable="d">
 
+   
     <Page.Resources>
         <valueConverters:ApplicationPageValueConverter x:Key="ApplicationPageValueConverter" />
         <userControls:PasswordHelper x:Key="PasswordHelper" PasswordString="" />
@@ -35,7 +37,7 @@
                     Height="500"
                     Margin="50,50,50,50">
 
-                    <Grid ShowGridLines="True">
+                    <Grid ShowGridLines="False">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="40" />
@@ -123,7 +125,8 @@
                                 FontFamily="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz"
                                 FontSize="25"
                                 Foreground="{DynamicResource BackgroundForegroundLightBrush}"
-                                Template="{DynamicResource ButtonBaseControlTemplate}" />
+                                Template="{DynamicResource ButtonBaseControlTemplate}" 
+                                Command="{Binding Autentification}"/>
                         </Border>
                         <Border
                             Grid.Row="4"

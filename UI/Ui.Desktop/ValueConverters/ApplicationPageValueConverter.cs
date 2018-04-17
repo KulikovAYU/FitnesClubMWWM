@@ -4,6 +4,7 @@ using System.Globalization;
 using FitnessClubMWWM.Logic.Ui;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AdminPanel;
+using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AdminPanelPages;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AutorizationPage;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.BeginPanel;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.ConfirmationPages;
