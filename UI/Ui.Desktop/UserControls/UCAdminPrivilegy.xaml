@@ -65,6 +65,7 @@
                 VerticalAlignment="Top"
                 Background="White"
                 BorderBrush="{x:Null}"
+                Command="{Binding RegisterNewUserCommand}"
                 Cursor="Hand"
                 GeomPicture="{Binding Data, Source={StaticResource Tools}}"
                 GeomPictureFill="Black"

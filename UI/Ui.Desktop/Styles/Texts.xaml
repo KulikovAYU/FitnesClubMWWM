@@ -52,13 +52,13 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="300*" />
-                    <ColumnDefinition Width="30*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <ScrollViewer
                     x:Name="PART_ContentHost"
                     Grid.Column="0"
-                    Margin="0"
+                    Margin="0,0,2,0"
                     VerticalAlignment="Stretch"
                     FontSize="{TemplateBinding FontSize}" />
                 <TextBlock
@@ -83,14 +83,13 @@
                     BorderBrush="Transparent"
                     Template="{DynamicResource ButtonClear}">
                     <Border
-                        Margin="13"
+                        Margin="12"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
                         <Path
                             x:Name="___CloseIcon_"
                             Data="M 476,47.6L 428.4,0L 238,190.4L 47.6,0L 0,47.6L 190.4,238L 0,428.4L 47.6,476L 238,285.6L 428.4,476L 476,428.4L 285.6,238L 476,47.6 Z "
                             Fill="Gray"
-                            RenderOptions.EdgeMode="Aliased"
                             Stretch="Uniform"
                             Stroke="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
                             StrokeThickness="0" />
@@ -258,12 +257,5 @@
 
 
     </ControlTemplate>
-
-
-
-
-
-
-
 
 </ResourceDictionary>

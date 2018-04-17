@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,10 +26,14 @@ namespace FitnessClubMWWM.Logic.Ui
 
         void RegisterNewUser()
         {
+            bVisibility = Visibility.Visible;
+           // RaisePropertyChanged(nameof(bVisibility));
             MessageBox.Show("Сработало");
+           
         }
 
-      
+        public Visibility bVisibility { get; set; } = Visibility.Hidden;
+
 
     }
 }
