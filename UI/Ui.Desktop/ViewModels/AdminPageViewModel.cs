@@ -1,11 +1,4 @@
 ﻿using GalaSoft.MvvmLight;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -15,17 +8,13 @@ namespace FitnessClubMWWM.Logic.Ui
     public class AdminPageViewModel : ViewModelBase
     {
 
-        public RelayCommand GoHomeCommand => new RelayCommand(GoHome);
+        public RelayCommand CloseCommand => new RelayCommand((() => { wind.Close();}));
+ 
+        public RelayCommand GoHomeCommand => new RelayCommand(() => { Messenger.Default.Send("MainPage");});
 
 
-        void GoHome()
-        {
-            Messenger.Default.Send("MainPage");
-        }
-
-        public RelayCommand RegisterNewUserCommand => new RelayCommand(() =>
-        {
-            CurrentPage = ApplicationPage.AddNewUserPage;});
+       public RelayCommand RegisterNewUserCommand => new RelayCommand(() =>{CurrentPage = ApplicationPage.AddNewUserPage; wind = new Window1();
+             wind.ShowDialog();});
 
         public RelayCommand AddNewUserPrivilegyCommand => new RelayCommand(() => { CurrentPage = ApplicationPage.AddUserPrivilegyPage; });
 

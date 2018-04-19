@@ -33,7 +33,7 @@
             Columns="4"
             Rows="2">
             <local:StartButton
-                Background="White"
+                Background="{x:Null}"
                 BorderThickness="0"
                 ButtonComment="Создание, поиск учетной записи по номеру клубной карты"
                 ButtonCommentBrush="{StaticResource BackgroundGraphiteGreyBrush}"
@@ -49,7 +49,7 @@
                 RenderTransformOrigin="0.5,0.5"
                 Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton
-                Background="White"
+                Background="{x:Null}"
                 BorderThickness="0"
                 ButtonComment="Управление учетной записью клиентов"
                 ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
@@ -65,7 +65,7 @@
                 RenderTransformOrigin="0.5,0.5"
                 Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton
-                Background="White"
+                Background="{x:Null}"
                 BorderThickness="0"
                 ButtonComment="Просмотр учетных записей, управление, удаление"
                 ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
@@ -81,7 +81,7 @@
                 RenderTransformOrigin="0.5,0.5"
                 Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton
-                Background="White"
+                Background="{x:Null}"
                 BorderThickness="0"
                 ButtonComment="Запись, фиксация посещения"
                 ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
@@ -97,7 +97,7 @@
                 RenderTransformOrigin="0.5,0.5"
                 Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton
-                Background="White"
+                Background="{x:Null}"
                 BorderThickness="0"
                 ButtonComment="Просмотр предстоящих занятий"
                 ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
@@ -113,7 +113,7 @@
                 RenderTransformOrigin="0.5,0.5"
                 Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton
-                Background="White"
+                Background="{x:Null}"
                 BorderThickness="0"
                 ButtonComment="Управление окладами, назначение стоимости за тренировку"
                 ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
@@ -129,7 +129,7 @@
                 RenderTransformOrigin="0.5,0.5"
                 Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton
-                Background="White"
+                Background="{x:Null}"
                 BorderThickness="0"
                 ButtonComment="Управление, редактирование данных пользователей системы"
                 ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
@@ -147,7 +147,7 @@
                 Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton
                 x:Name="Exit"
-                Background="White"
+                Background="{x:Null}"
                 BorderThickness="0"
                 ButtonComment="Завершение текущего сеанса пользователя"
                 ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"

@@ -13,6 +13,8 @@ namespace FitnessClubMWWM.Ui.Desktop.Pages.MainWindow
         {
             InitializeComponent();
         }
+
+
     }
 
 }

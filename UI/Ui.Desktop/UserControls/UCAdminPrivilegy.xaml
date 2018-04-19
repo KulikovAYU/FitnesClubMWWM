@@ -8,6 +8,25 @@
     d:DesignHeight="800"
     d:DesignWidth="50"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <Storyboard x:Key="ShowAdminPanel">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="NewUser" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.1" Value="-30,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="-10,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="0" />
+            </ThicknessAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="SetPrivilegy" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="-30,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="-20,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.7" Value="0" />
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard x:Name="ShowAdminPanel_BeginStoryboard" Storyboard="{StaticResource ShowAdminPanel}" />
+        </EventTrigger>
+    </UserControl.Triggers>
 
     <UserControl.DataContext>
         <Binding Path="AdminPageViewModel" Source="{StaticResource Locator}" />
@@ -25,10 +44,10 @@
             x:Name="GoHome"
             Grid.Row="0"
             Width="50"
-            Height="50"
+            Height="40"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Background="White"
+            Background="{x:Null}"
             BorderBrush="{x:Null}"
             Command="{Binding GoHomeCommand, Mode=OneWay}"
             Cursor="Hand"
@@ -45,12 +64,13 @@
                 x:Name="NewUser"
                 Width="50"
                 Height="50"
+                Margin="-50,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Background="White"
+                Background="{x:Null}"
                 BorderBrush="{x:Null}"
-                Cursor="Hand"
                 Command="{Binding AddNewUserPrivilegyCommand}"
+                Cursor="Hand"
                 GeomPicture="{Binding Data, Source={StaticResource NewUser}}"
                 GeomPictureFill="Black"
                 GeomPictureHeight="20"
@@ -62,9 +82,10 @@
                 x:Name="SetPrivilegy"
                 Width="50"
                 Height="50"
+                Margin="-50,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Background="White"
+                Background="{x:Null}"
                 BorderBrush="{x:Null}"
                 Command="{Binding RegisterNewUserCommand}"
                 Cursor="Hand"

@@ -24,5 +24,7 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
         {
             InitializeComponent();
         }
+
+
     }
 }

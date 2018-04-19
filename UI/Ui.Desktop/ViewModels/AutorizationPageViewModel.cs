@@ -9,7 +9,7 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 {
-    class AutorizationPageViewModel : ViewModelBase
+   public class AutorizationPageViewModel : ViewModelBase
     {
 
         public RelayCommand Autentification => new RelayCommand(()=>{ Messenger.Default.Send("MainPage");});

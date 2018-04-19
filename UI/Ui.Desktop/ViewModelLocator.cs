@@ -1,6 +1,7 @@
 using CommonServiceLocator;
 using FitnessClubMWWM.Logic.Ui;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AutorizationPage;
+using FitnessClubMWWM.Ui.Desktop.ViewModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 
@@ -31,11 +32,11 @@ namespace FitnessClubMWWM.Ui.Desktop
             SimpleIoc.Default.Register<MainViewModel>(); //регистрация view modele-й
             SimpleIoc.Default.Register<BeginPanelPageViewModel>();
             SimpleIoc.Default.Register<AdminPageViewModel>();
-            SimpleIoc.Default.Register<AutorizationPage>();
+            SimpleIoc.Default.Register<AutorizationPageViewModel>();
         }
 
 
-        public AutorizationPage AutorizationViewModel => ServiceLocator.Current.GetInstance<AutorizationPage>();
+        public AutorizationPageViewModel AutorizationViewModel => ServiceLocator.Current.GetInstance<AutorizationPageViewModel>();
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         public BeginPanelPageViewModel BeginPanelPageViewModelMain => ServiceLocator.Current.GetInstance<BeginPanelPageViewModel>();
         public AdminPageViewModel AdminPageViewModel => ServiceLocator.Current.GetInstance<AdminPageViewModel>();

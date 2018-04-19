@@ -431,4 +431,189 @@
         </Setter>
     </Style>
 
+
+
+    <ControlTemplate x:Key="ButtonCloseTemplate" TargetType="{x:Type ButtonBase}">
+        <Border
+            x:Name="border"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            SnapsToDevicePixels="True">
+            <ContentPresenter
+                x:Name="contentPresenter"
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                Content="{TemplateBinding Content}"
+                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                ContentTemplate="{TemplateBinding ContentTemplate}"
+                Focusable="False"
+                RecognizesAccessKey="True"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+
+
+        </Border>
+
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsDefaulted" Value="True">
+                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="border" Property="Background" Value="Red" />
+                <Setter TargetName="border" Property="BorderBrush" Value="#FF3C7FB1" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="border" Property="Background" Value="#FFC4E5F6" />
+                <Setter TargetName="border" Property="BorderBrush" Value="#FF2C628B" />
+            </Trigger>
+            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                <Setter TargetName="border" Property="Background" Value="#FFBCDDEE" />
+                <Setter TargetName="border" Property="BorderBrush" Value="#FF245A83" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="border" Property="Background" Value="#FFF4F4F4" />
+                <Setter TargetName="border" Property="BorderBrush" Value="#FFADB2B5" />
+                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="#FF838383" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <!--  Кнопка закрытия  -->
+    <Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="_Main" Background="{x:Null}">
+                        <Border Width="15" Height="15">
+                            <Path
+                                x:Name="___CloseIcon_"
+                                Data="M 476,47.6L 428.4,0L 238,190.4L 47.6,0L 0,47.6L 190.4,238L 0,428.4L 47.6,476L 238,285.6L 428.4,476L 476,428.4L 285.6,238L 476,47.6 Z "
+                                Fill="Gray"
+                                Stretch="Uniform"
+                                Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                                StrokeThickness="0" />
+                        </Border>
+                        <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True" />
+                        <Trigger Property="IsDefaulted" Value="True" />
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="___CloseIcon_" Property="Fill" Value="{StaticResource BackgroundForegroundLightBrush}" />
+                            <Setter TargetName="_Main" Property="Background" Value="Red" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="___CloseIcon_" Property="Fill" Value="{StaticResource BackgroundGraphiteGreyBrush}" />
+                            <Setter TargetName="_Main" Property="Background" Value="Brown" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False" />
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  Кнопки свернуть и развернуть  -->
+    <Style x:Key="RepairButtonStyle" TargetType="{x:Type userControls:ButtonWithPicture}">
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type userControls:ButtonWithPicture}">
+                    <Grid x:Name="_Main" Background="{x:Null}">
+                        <Border Width="18" Height="18">
+                            <Grid>
+                                <Path
+                                    x:Name="_Icon_"
+                                    Margin="{TemplateBinding GeomPictureMargin}"
+                                    Data="{Binding GeomPicture, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Fill="{Binding GeomPictureFill, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Stretch="Uniform"
+                                    Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                                    StrokeThickness="0.2"
+                                    Visibility="Visible" />
+                            </Grid>
+
+                        </Border>
+                        <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True" />
+                        <Trigger Property="IsDefaulted" Value="True" />
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="_Icon_" Property="Fill" Value="White" />
+
+                            <Setter TargetName="_Main" Property="Background" Value="{StaticResource BackgroundBlueColor}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="_Icon_" Property="Fill" Value="{StaticResource BackgroundGraphiteGreyBrush}" />
+
+                            <Setter TargetName="_Main" Property="Background" Value="Gray" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False" />
+
+
+
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+
+    <Style x:Key="CloseDialogButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="_Main" Background="{x:Null}">
+                        <Border Width="18" Height="18">
+                            <Path
+                                x:Name="___CloseIcon_"
+                                Data="M 476,47.6L 428.4,0L 238,190.4L 47.6,0L 0,47.6L 190.4,238L 0,428.4L 47.6,476L 238,285.6L 428.4,476L 476,428.4L 285.6,238L 476,47.6 Z "
+                                Fill="Gray"
+                                Stretch="Uniform"
+                                Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                                 />
+                        </Border>
+                        <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True" />
+                        <Trigger Property="IsDefaulted" Value="True" />
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="___CloseIcon_" Property="Fill" Value="{StaticResource BackgroundForegroundVeryDarkBrush}" />
+                          
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="___CloseIcon_" Property="Fill" Value="{StaticResource BackgroundGraphiteGreyBrush}" />
+                            
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False" />
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+
+
 </ResourceDictionary>

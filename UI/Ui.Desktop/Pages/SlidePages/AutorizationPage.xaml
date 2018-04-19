@@ -10,23 +10,56 @@
     Title="AutorizationPage"
     d:DesignHeight="800"
     d:DesignWidth="1000"
-  
-    DataContext="{Binding AutorizationViewModel,Source={StaticResource Locator}}"
+    DataContext="{Binding AutorizationViewModel, Source={StaticResource Locator}}"
     mc:Ignorable="d">
 
-   
+
     <Page.Resources>
         <valueConverters:ApplicationPageValueConverter x:Key="ApplicationPageValueConverter" />
         <userControls:PasswordHelper x:Key="PasswordHelper" PasswordString="" />
+
     </Page.Resources>
 
 
-    <Grid>
-        <Grid x:Name="AnimatedGrid" ClipToBounds="True">
-            <Grid.Background>
-                <ImageBrush x:Name="MyImage" />
-            </Grid.Background>
 
+    <Grid>
+
+        <Grid Name="Animation">
+            <Image
+                Name="Image1"
+                Opacity="0"
+                Source="/FitnessClubMWWM.Ui.Desktop;component/Images/AutorizationPictureImages/fitness-club1.jpg"
+                Stretch="UniformToFill" />
+            <Image
+                Name="Image2"
+                Opacity="0"
+                Source="/FitnessClubMWWM.Ui.Desktop;component/Images/AutorizationPictureImages/fitness-club2.jpg"
+                Stretch="UniformToFill" />
+            <Image
+                Name="Image3"
+                Opacity="0"
+                Source="/FitnessClubMWWM.Ui.Desktop;component/Images/AutorizationPictureImages/fitness-club3.jpg"
+                Stretch="UniformToFill" />
+            <Image
+                Name="Image4"
+                Opacity="0"
+                Source="/FitnessClubMWWM.Ui.Desktop;component/Images/AutorizationPictureImages/fitness-club4.jpg"
+                Stretch="UniformToFill" />
+            <Image
+                Name="Image5"
+                Opacity="100"
+                Source="/FitnessClubMWWM.Ui.Desktop;component/Images/AutorizationPictureImages/fitness-club5.jpg"
+                Stretch="UniformToFill" />
+            <Image
+                Name="Image6"
+                Opacity="0"
+                Source="/FitnessClubMWWM.Ui.Desktop;component/Images/AutorizationPictureImages/fitness-club6.jpg"
+                Stretch="UniformToFill" />
+            <Image
+                Name="Image7"
+                Opacity="0"
+                Source="/FitnessClubMWWM.Ui.Desktop;component/Images/AutorizationPictureImages/fitness-club7.jpg"
+                Stretch="UniformToFill" />
         </Grid>
 
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
@@ -120,13 +153,13 @@
                                 Width="200"
                                 Height="60"
                                 Click="Button_Click"
+                                Command="{Binding Autentification}"
                                 Content="Войти"
                                 Cursor="Hand"
                                 FontFamily="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz"
                                 FontSize="25"
                                 Foreground="{DynamicResource BackgroundForegroundLightBrush}"
-                                Template="{DynamicResource ButtonBaseControlTemplate}" 
-                                Command="{Binding Autentification}"/>
+                                Template="{DynamicResource ButtonBaseControlTemplate}" />
                         </Border>
                         <Border
                             Grid.Row="4"

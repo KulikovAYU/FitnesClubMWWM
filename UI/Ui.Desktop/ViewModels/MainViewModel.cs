@@ -1,5 +1,8 @@
 using System;
+using System.Windows;
+using System.Windows.Media;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace FitnessClubMWWM.Logic.Ui
@@ -25,12 +28,11 @@ namespace FitnessClubMWWM.Logic.Ui
         #region Public Properties
 
         public string WindowTitle { get; private set; }
-
-      
+     
         /// <summary>
         /// The size of tre resize border around the window
         /// </summary>
-        // public int ResizeBorder { get; set; } = 6;
+        public int ResizeBorder { get; set; } = 6;
 
         /// <summary>
         /// The size of tre resize border around the window, taking into account the outer marging
@@ -76,7 +78,7 @@ namespace FitnessClubMWWM.Logic.Ui
         ///// <summary>
         ///// The height of the title bar / caption of the window
         ///// </summary>
-        //public int TitleHeight { get; set; } = 42;
+        public int TitleHeight { get; set; } = 42;
 
         ///// <summary>
         ///// The height of the title bar / caption of the window
@@ -89,8 +91,23 @@ namespace FitnessClubMWWM.Logic.Ui
         // </summary>
         public ApplicationPage CurrentPage { get; set; } = ApplicationPage.MainPage; // ApplicationPage.Login;  ApplicationPage.MainPage
 
-     
-       
+
+        public RelayCommand CloseCommand { get; set; } = new RelayCommand(() =>
+        {
+            if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
+        });
+
+        public RelayCommand MinMaxCommand { get; set; } = new RelayCommand(() =>
+        {
+            if (Application.Current.MainWindow != null)
+                Application.Current.MainWindow.WindowState ^= WindowState.Maximized;
+        });
+
+        public RelayCommand MinimizeCommand { get; set; } = new RelayCommand(() =>
+        {
+            if (Application.Current.MainWindow != null)
+                Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        });
 
         #endregion
 
@@ -146,6 +163,23 @@ namespace FitnessClubMWWM.Logic.Ui
             }
 
             Messenger.Default.Register(this, new Action<string>(ProcessMessage));
+
+
+
+
+
+            if (Application.Current.MainWindow != null)
+            {
+                Application.Current.MainWindow.MouseLeftButtonDown += (sender, e) =>
+                {
+                    Application.Current.MainWindow.DragMove();
+                };
+            }
+
+          
+
+
+
             //Application.Current.MainWindow.Initialized += (sender, e) =>
             //  {
             //      FrameWND.NavigationService.Navigate(new Uri("AutorizationPage.xaml", UriKind.Relative));
