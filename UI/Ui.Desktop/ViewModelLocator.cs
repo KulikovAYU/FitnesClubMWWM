@@ -33,6 +33,7 @@ namespace FitnessClubMWWM.Ui.Desktop
             SimpleIoc.Default.Register<BeginPanelPageViewModel>();
             SimpleIoc.Default.Register<AdminPageViewModel>();
             SimpleIoc.Default.Register<AutorizationPageViewModel>();
+            SimpleIoc.Default.Register<MessageWindowViewModel>();
         }
 
 
@@ -40,6 +41,7 @@ namespace FitnessClubMWWM.Ui.Desktop
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         public BeginPanelPageViewModel BeginPanelPageViewModelMain => ServiceLocator.Current.GetInstance<BeginPanelPageViewModel>();
         public AdminPageViewModel AdminPageViewModel => ServiceLocator.Current.GetInstance<AdminPageViewModel>();
+        public MessageWindowViewModel MessageWindowViewModel => ServiceLocator.Current.GetInstance<MessageWindowViewModel>();
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

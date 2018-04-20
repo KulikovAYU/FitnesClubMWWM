@@ -11,6 +11,7 @@
         <!--  Static Recources  -->
         <ResourceDictionary>
             <desktop:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+
             <ResourceDictionary.MergedDictionaries>
                 <!--  Order is Important  -->
                 <ResourceDictionary Source="Styles/Colors.xaml" />
@@ -19,6 +20,7 @@
                 <ResourceDictionary Source="Styles/Texts.xaml" />
                 <ResourceDictionary Source="Styles/Windows.xaml" />
                 <ResourceDictionary Source="Styles/Geometry.xaml" />
+                <ResourceDictionary Source="Styles/CustomsStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -152,8 +152,8 @@
     <Compile Include="Pages\MainWindow\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Wind\Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="Pages\Wind\MessageWindow.xaml.cs">
+      <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="App.xaml.cs">
@@ -179,6 +179,7 @@
     <Compile Include="ViewModels\AutorizationPageViewModel.cs" />
     <Compile Include="ViewModels\BeginPanelPageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\MessageWindowViewModel.cs" />
     <Page Include="local.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -215,7 +216,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Wind\Window1.xaml">
+    <Page Include="Pages\Wind\MessageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -227,6 +228,10 @@
     <Page Include="Styles\Buttons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\CustomsStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Geometry.xaml">
       <SubType>Designer</SubType>
@@ -365,6 +370,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\MainPageImages\aboutuserpicture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DialogPictures\BackgroundDialogWindow.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Fody.3.0.3\build\Fody.targets" Condition="Exists('..\..\packages\Fody.3.0.3\build\Fody.targets')" />

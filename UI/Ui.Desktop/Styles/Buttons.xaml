@@ -7,6 +7,9 @@
     xmlns:userControls="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
     mc:Ignorable="d">
 
+
+
+
     <!--  Шаблон обычной кнопки  -->
     <ControlTemplate x:Key="ButtonBaseControlTemplate" TargetType="{x:Type ButtonBase}">
         <ControlTemplate.Resources>
@@ -20,6 +23,7 @@
                     <SplineColorKeyFrame KeyTime="0:0:0.3" Value="{StaticResource TextBoksBlue}" />
                 </ColorAnimationUsingKeyFrames>
             </Storyboard>
+
         </ControlTemplate.Resources>
         <Border
             x:Name="border"
@@ -571,8 +575,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    
+
+
 
     <Style x:Key="CloseDialogButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Template">
@@ -585,8 +589,7 @@
                                 Data="M 476,47.6L 428.4,0L 238,190.4L 47.6,0L 0,47.6L 190.4,238L 0,428.4L 47.6,476L 238,285.6L 428.4,476L 476,428.4L 285.6,238L 476,47.6 Z "
                                 Fill="Gray"
                                 Stretch="Uniform"
-                                Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                 />
+                                Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
                         </Border>
                         <ContentPresenter
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -599,11 +602,11 @@
                         <Trigger Property="IsDefaulted" Value="True" />
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="___CloseIcon_" Property="Fill" Value="{StaticResource BackgroundForegroundVeryDarkBrush}" />
-                          
+
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="___CloseIcon_" Property="Fill" Value="{StaticResource BackgroundGraphiteGreyBrush}" />
-                            
+
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False" />
                     </ControlTemplate.Triggers>
