@@ -41,18 +41,39 @@
                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}" />
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="ShowUserLog" />
+        <Storyboard x:Key="ShowUserLog" >
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="border">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="100"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="250"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="280"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="320"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="360"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.367" Value="400"/>
+
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="aboutUserButton">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.067" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="CloseaboutUserButton">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.383" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ellipse">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0.2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.567" Value="0.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.633" Value="0.8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.733" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </UserControl.Resources>
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="aboutUserButton">
-            <BeginStoryboard Storyboard="{StaticResource OnClick_Show}" />
+            <BeginStoryboard x:Name="ShowUserLog_BeginStoryboard" Storyboard="{StaticResource ShowUserLog}" />
         </EventTrigger>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="CloseaboutUserButton">
             <BeginStoryboard x:Name="OnClick_Hidden_BeginStoryboard" Storyboard="{StaticResource OnClick_Hidden}" />
         </EventTrigger>
-        <EventTrigger RoutedEvent="UIElement.MouseMove" SourceName="aboutUserButton">
-            <BeginStoryboard x:Name="ShowUserLog_BeginStoryboard" Storyboard="{StaticResource ShowUserLog}" />
-        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseMove" SourceName="aboutUserButton"/>
     </UserControl.Triggers>
 
     <Grid x:Name="Base" Cursor="Hand">
@@ -120,7 +141,7 @@
 
                     </Grid.RowDefinitions>
 
-                    <Ellipse
+                    <Ellipse x:Name="ellipse"
                         Grid.Row="0"
                         Width="110"
                         Height="110"

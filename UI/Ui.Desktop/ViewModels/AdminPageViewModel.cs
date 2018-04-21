@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Windows;
+using FitnessClubMWWM.Ui.Desktop;
+using GalaSoft.MvvmLight;
 using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -8,17 +10,18 @@ namespace FitnessClubMWWM.Logic.Ui
     public class AdminPageViewModel : ViewModelBase
     {
 
-        public RelayCommand CloseCommand => new RelayCommand((() => { wind.Close();}));
+        //public RelayCommand CloseCommand => new RelayCommand((() => { wind.Close();}));
  
         public RelayCommand GoHomeCommand => new RelayCommand(() => { Messenger.Default.Send("MainPage");});
 
 
-       public RelayCommand RegisterNewUserCommand => new RelayCommand(() =>{CurrentPage = ApplicationPage.AddNewUserPage; wind = new Window1();
-             wind.ShowDialog();});
+       public RelayCommand RegisterNewUserCommand => new RelayCommand(() =>{CurrentPage = ApplicationPage.AddNewUserPage;
+
+           CustomMessageBox.Show("sdds","Сообщение",MessageBoxButton.OK,eMessageBoxIcons.eWarning); });
 
         public RelayCommand AddNewUserPrivilegyCommand => new RelayCommand(() => { CurrentPage = ApplicationPage.AddUserPrivilegyPage; });
 
-        private Window1 wind;
+        //private CustomMessageBox wind;
         //void RegisterNewUser()
         //{
 
@@ -30,7 +33,7 @@ namespace FitnessClubMWWM.Logic.Ui
         //    //{
         //    //    try
         //    //    {
-        //    //        wind = new Window1();
+        //    //        wind = new CustomMessageBox();
         //    //        wind.ShowDialog();
         //    //    }
         //    //    catch (Exception e)

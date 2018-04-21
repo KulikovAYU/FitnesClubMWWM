@@ -16,6 +16,7 @@
     AllowsTransparency="True"
     BorderBrush="#FF121DFF"
     BorderThickness="1"
+    Closing="window_Closing"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
@@ -46,15 +47,10 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
-                            <Image
-                                Grid.RowSpan="2"
-                                VerticalAlignment="Stretch"
-                                Source="/FitnessClubMWWM.Ui.Desktop;component/Images/MainPageImages/mainpicture.jpg"
-                                Stretch="UniformToFill" />
-
                             <Frame
                                 x:Name="MainFrame"
-                                Grid.Row="1"
+                                Grid.Row="0" 
+                                Grid.RowSpan="2"
                                 Content="{Binding CurrentPage, Converter={valueConverters:ApplicationPageValueConverter}}"
                                 NavigationUIVisibility="Hidden" />
 
@@ -119,7 +115,9 @@
                                 Width="400"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Stretch"
-                                Panel.ZIndex="3" />
+                                Panel.ZIndex="3" 
+                                Visibility="{Binding AboutUserPanelVisibility}"
+                                />
 
                         </Grid>
 

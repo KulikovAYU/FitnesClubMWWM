@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 
 namespace FitnessClubMWWM.Ui.Desktop.Pages.MainWindow
 {
@@ -13,8 +14,17 @@ namespace FitnessClubMWWM.Ui.Desktop.Pages.MainWindow
         {
             InitializeComponent();
         }
+        
 
+        ~MainWindow()
+        {
+           
+        }
 
+        private void window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            
+        }
     }
 
 }

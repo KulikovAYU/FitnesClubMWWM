@@ -1,6 +1,7 @@
 using System;
 using System.Windows;
 using System.Windows.Media;
+using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -119,6 +120,7 @@ namespace FitnessClubMWWM.Logic.Ui
                 case "AgreeWithExit":
                     CurrentPage = ApplicationPage.Login;
                     RaisePropertyChanged(nameof(CurrentPage));
+                    AboutUserPanelVisibility = Visibility.Hidden;
                     break;
                 case "AutorizationError":
                     CurrentPage = ApplicationPage.AutorizationError;
@@ -141,7 +143,6 @@ namespace FitnessClubMWWM.Logic.Ui
                     CurrentPage = ApplicationPage.MainPage;
                     RaisePropertyChanged(nameof(CurrentPage));
                     break;
-
             }
         }
 
@@ -201,5 +202,10 @@ namespace FitnessClubMWWM.Logic.Ui
         #endregion
 
 
+        public Visibility AboutUserPanelVisibility
+        {
+            get => CurrentPage != ApplicationPage.Login ? Visibility.Visible : Visibility.Hidden;
+            set => AboutUserPanelVisibility = value;
+        }
     }
 }

@@ -17,8 +17,8 @@
             </ThicknessAnimationUsingKeyFrames>
             <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="SetPrivilegy" Storyboard.TargetProperty="(FrameworkElement.Margin)">
                 <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="-30,0,0,0" />
-                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="-20,0,0,0" />
-                <EasingThicknessKeyFrame KeyTime="0:0:0.7" Value="0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="-20,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.483" Value="0" />
             </ThicknessAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>

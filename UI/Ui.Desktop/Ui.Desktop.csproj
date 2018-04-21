@@ -124,6 +124,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Constants\Constants.cs" />
     <Compile Include="DataModels\ApplicationPage.cs" />
     <Compile Include="local.xaml.cs">
       <DependentUpon>local.xaml</DependentUpon>

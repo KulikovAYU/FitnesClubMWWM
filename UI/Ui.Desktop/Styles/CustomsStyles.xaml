@@ -22,4 +22,25 @@
     </Style>
 
 
+    <Style x:Key="PageBaseStyle" TargetType="{x:Type Page}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Page}">
+                    <Border Background="{TemplateBinding Background}">
+                        <Grid>
+                            <ContentPresenter Panel.ZIndex="2" Content="{TemplateBinding Content}" />
+                            <Image
+                                Grid.RowSpan="2"
+                                VerticalAlignment="Stretch"
+                                Source="/FitnessClubMWWM.Ui.Desktop;component/Images/MainPageImages/mainpicture.jpg"
+                                Stretch="UniformToFill" />
+                        </Grid>
+
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

@@ -9,6 +9,7 @@
     d:DesignHeight="800"
     d:DesignWidth="1000"
     DataContext="{Binding BeginPanelPageViewModelMain, Source={StaticResource Locator}}"
+    Style="{StaticResource PageBaseStyle}"
     mc:Ignorable="d">
     <Page.Resources>
         <Storyboard x:Key="OnLoaded1">
@@ -37,8 +38,6 @@
     </Page.Triggers>
 
     <Grid>
-
-
         <Grid.RowDefinitions>
             <RowDefinition Height="800*" />
         </Grid.RowDefinitions>
@@ -73,9 +72,5 @@
                 </TransformGroup>
             </userControls:UCStartPanel.RenderTransform>
         </userControls:UCStartPanel>
-
-
-
     </Grid>
 </Page>
-

@@ -4,16 +4,13 @@ using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 //В ЭТОМ КЛАССЕ БУДУТ ОПРЕДЕЛЯТЬСЯ ПОЛЬЗОВАТЕЛЬСКИЕ ЭЛЕМЕНТЫ УПРАВЛЕНИЯ
 
 namespace FitnessClubMWWM.Ui.Desktop.UserControls
 {
-    class InheritedControls
-    {
-    }
-
-
     public class PasswordHelper
     {
         public string PasswordString { get; set; }
@@ -55,7 +52,6 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
             DependencyProperty.Register("IsShowingPassword", typeof(bool), typeof(ShowPasswordButton), new PropertyMetadata(false));
     }
 
-
     class CustomPasswordBox : TextBox
     {
 
@@ -73,8 +69,6 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
             DependencyProperty.Register("Password", typeof(string), typeof(CustomPasswordBox), new PropertyMetadata(null));
 
         #endregion
-
-
      
     }
 
@@ -180,8 +174,6 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
             dp.SetValue(UpdatingPassword, value);
         }
     }
-
-
 
     /// <summary>
     /// Класс определяет кнопку с векторной картинкой
@@ -324,5 +316,7 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
         #endregion
     }
 
+
+    
 
 }
