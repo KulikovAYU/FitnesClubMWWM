@@ -90,7 +90,7 @@
                         Cursor="Hand"
                         FontSize="20"
                         Foreground="White"
-                        Template="{DynamicResource ButtonBaseControlTemplate}" />
+                        Template="{StaticResource ButtonBaseControlTemplate}" />
                 </Grid>
 
                 <StackPanel Orientation="Vertical">
@@ -106,7 +106,7 @@
                             BorderThickness="2"
                             FontSize="18"
                             Tag="Фамилия"
-                            Template="{DynamicResource InputTextBox}" />
+                            Template="{StaticResource InputTextBox}" />
                     </Border>
 
 
@@ -123,7 +123,7 @@
                             BorderThickness="2"
                             FontSize="18"
                             Tag="Имя"
-                            Template="{DynamicResource InputTextBox}" />
+                            Template="{StaticResource InputTextBox}" />
 
                     </Border>
 
@@ -140,17 +140,14 @@
                             BorderThickness="2"
                             FontSize="18"
                             Tag="Отчество"
-                            Template="{DynamicResource InputTextBox}" />
+                            Template="{StaticResource InputTextBox}" />
 
                     </Border>
-
-
 
                     <Border
                         Width="700"
                         Height="50"
                         Margin="0,10,0,0">
-
 
                         <TextBox
                             Grid.ColumnSpan="2"
@@ -160,7 +157,7 @@
                             BorderThickness="2"
                             FontSize="18"
                             Tag="Пароль"
-                            Template="{DynamicResource InputTextBox}" />
+                            Template="{StaticResource InputTextBox}" />
 
                     </Border>
                     <Border
@@ -183,7 +180,7 @@
                                 BorderThickness="2"
                                 FontSize="18"
                                 Tag="дд"
-                                Template="{DynamicResource InputTextBox}" />
+                                Template="{StaticResource InputTextBox}" />
                             <TextBox
                                 Grid.Column="1"
                                 Width="100"
@@ -193,7 +190,7 @@
                                 BorderThickness="2"
                                 FontSize="18"
                                 Tag="мм"
-                                Template="{DynamicResource InputTextBox}" />
+                                Template="{StaticResource InputTextBox}" />
 
                             <TextBox
                                 Grid.Column="2"
@@ -204,7 +201,7 @@
                                 BorderThickness="2"
                                 FontSize="18"
                                 Tag="гг"
-                                Template="{DynamicResource InputTextBox}" />
+                                Template="{StaticResource InputTextBox}" />
                         </Grid>
                     </Border>
                     <ComboBox
@@ -221,7 +218,7 @@
                         Cursor="Hand"
                         FontSize="20"
                         Foreground="White"
-                        Template="{DynamicResource ButtonBaseControlTemplate}" />
+                        Template="{StaticResource ButtonBaseControlTemplate}" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

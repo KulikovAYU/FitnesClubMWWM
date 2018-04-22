@@ -23,6 +23,11 @@ namespace FitnessClubMWWM.Ui.Desktop
             if (ViewModelBase.IsInDesignModeStatic)
             {
                 // Create design time view services and models
+                SimpleIoc.Default.Register<MainViewModel>(); //регистрация view modele-й
+                SimpleIoc.Default.Register<BeginPanelPageViewModel>();
+                SimpleIoc.Default.Register<AdminPageViewModel>();
+                SimpleIoc.Default.Register<AutorizationPageViewModel>();
+                SimpleIoc.Default.Register<WorkingCabinetPageViewModel>();
             }
             else
             {
@@ -32,15 +37,20 @@ namespace FitnessClubMWWM.Ui.Desktop
                 SimpleIoc.Default.Register<BeginPanelPageViewModel>();
                 SimpleIoc.Default.Register<AdminPageViewModel>();
                 SimpleIoc.Default.Register<AutorizationPageViewModel>();
-               }
+                // TODO Возможно, придется дополнительно добавить WiewModel для диалогового окна
+                SimpleIoc.Default.Register<WorkingCabinetPageViewModel>();
+
+            }
        
         }
-
 
         public AutorizationPageViewModel AutorizationViewModel => ServiceLocator.Current.GetInstance<AutorizationPageViewModel>();
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         public BeginPanelPageViewModel BeginPanelPageViewModelMain => ServiceLocator.Current.GetInstance<BeginPanelPageViewModel>();
         public AdminPageViewModel AdminPageViewModel => ServiceLocator.Current.GetInstance<AdminPageViewModel>();
+
+        public WorkingCabinetPageViewModel WorkingCabinetViewModel =>
+            ServiceLocator.Current.GetInstance<WorkingCabinetPageViewModel>();
 
         public static void Cleanup()
         {

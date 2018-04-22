@@ -26,10 +26,12 @@
     <Style BasedOn="{StaticResource BaseStyle}" TargetType="{x:Type TextBox}" />
     <Style BasedOn="{StaticResource BaseTextBlockStyle}" TargetType="{x:Type TextBlock}" />
     <Style BasedOn="{StaticResource BaseStyle}" TargetType="{x:Type ListView}" />
+    <Style BasedOn="{StaticResource BaseStyle}" TargetType="{x:Type CheckBox}" />
 
     <!--  Размеры шрифтов  -->
     <system:Double x:Key="Small">14</system:Double>
     <system:Double x:Key="Regular">16</system:Double>
+    <system:Double x:Key="RegularBig">18</system:Double>
     <system:Double x:Key="Big">20</system:Double>
     <system:Double x:Key="Higth">23</system:Double>
     <system:Double x:Key="VeryBig">25</system:Double>

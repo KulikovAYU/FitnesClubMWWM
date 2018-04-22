@@ -21,6 +21,7 @@
                 <ResourceDictionary Source="Styles/Windows.xaml" />
                 <ResourceDictionary Source="Styles/Geometry.xaml" />
                 <ResourceDictionary Source="Styles/CustomsStyles.xaml" />
+                <ResourceDictionary Source="Styles/ScrollBar.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

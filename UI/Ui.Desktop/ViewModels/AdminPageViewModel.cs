@@ -19,7 +19,7 @@ namespace FitnessClubMWWM.Logic.Ui
 
            CustomMessageBox.Show("sdds","Сообщение",MessageBoxButton.OK,eMessageBoxIcons.eWarning); });
 
-        public RelayCommand AddNewUserPrivilegyCommand => new RelayCommand(() => { CurrentPage = ApplicationPage.AddUserPrivilegyPage; });
+        public RelayCommand AddNewUserPrivilegyCommand => new RelayCommand(() => { CurrentPage = ApplicationPage.AddUserPrivilegyPage;});
 
         //private CustomMessageBox wind;
         //void RegisterNewUser()

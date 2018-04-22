@@ -39,7 +39,17 @@
         /// <summary>
         /// Панель в панели администратора, отвечающая за предоставление прав пользователя
         /// </summary>
-        AddUserPrivilegyPage = 6
+        AddUserPrivilegyPage = 6,
+        
+        /// <summary>
+        /// Панель рабочий кабинет
+        /// </summary>
+        WorkingCabinet = 7,
+
+        /// <summary>
+        /// Панель регистрации нового посетителя фитнес-клуба
+        /// </summary>
+        RegisterNewClient = 8,
 
     }
 }

@@ -11,7 +11,8 @@
     d:DesignHeight="800"
     d:DesignWidth="1000"
     RenderTransformOrigin="0.5,0.5"
-    Style="{StaticResource PageBaseStyle}"
+    ShowsNavigationUI="False"
+    Style="{StaticResource PageNextWorkingBaseStyle}"
     mc:Ignorable="d">
 
     <!--  Подключаем ViewModel  -->

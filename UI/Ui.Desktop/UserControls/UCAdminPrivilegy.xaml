@@ -40,24 +40,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <local:ButtonWithPicture
-            x:Name="GoHome"
-            Grid.Row="0"
-            Width="50"
-            Height="40"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Background="{x:Null}"
-            BorderBrush="{x:Null}"
-            Command="{Binding GoHomeCommand, Mode=OneWay}"
-            Cursor="Hand"
-            GeomPicture="{Binding Data, Source={StaticResource GoHome}}"
-            GeomPictureFill="Black"
-            GeomPictureHeight="20"
-            GeomPictureWidth="20"
-            Template="{DynamicResource AboutUserControlTemplate}"
-            ToolTip="На главную страницу" />
-
+      
         <StackPanel Grid.Row="2" Orientation="Vertical">
 
             <local:ButtonWithPicture

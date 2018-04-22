@@ -49,7 +49,7 @@
 
                             <Frame
                                 x:Name="MainFrame"
-                                Grid.Row="0" 
+                                Grid.Row="0"
                                 Grid.RowSpan="2"
                                 Content="{Binding CurrentPage, Converter={valueConverters:ApplicationPageValueConverter}}"
                                 NavigationUIVisibility="Hidden" />
@@ -115,9 +115,8 @@
                                 Width="400"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Stretch"
-                                Panel.ZIndex="3" 
-                                Visibility="{Binding AboutUserPanelVisibility}"
-                                />
+                                Panel.ZIndex="3"
+                                Visibility="{Binding AboutUserPanelVisibility}" />
 
                         </Grid>
 

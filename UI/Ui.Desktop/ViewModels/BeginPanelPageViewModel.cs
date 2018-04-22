@@ -3,7 +3,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace FitnessClubMWWM.Logic.Ui
+namespace FitnessClubMWWM.Ui.Desktop
 {
     public  class BeginPanelPageViewModel : ViewModelBase
     {
@@ -11,14 +11,25 @@ namespace FitnessClubMWWM.Logic.Ui
         {
             //ButtonClick = new RelayCommand(ExecuteCommand);
         }
-        
-        public RelayCommand ButtonClick => new RelayCommand(LogoutCommand);
 
+        #region Команды, отвечающие за показ страниц
+
+        public RelayCommand ShowLogoutPageCommand => new RelayCommand(() => { Messenger.Default.Send("ConfrimExit"); });
+
+        public RelayCommand ShowAdminPanelCommand => new RelayCommand(() => { Messenger.Default.Send("AdminPage"); });
+
+        public RelayCommand ShowWorkingCabinetCommand => new RelayCommand(() => { Messenger.Default.Send("WorkingCabinetPage");});
+
+        #endregion
+
+
+
+      
         public RelayCommand ButtonAgreeWithExitClick => new RelayCommand(AgreeWithExit);
 
         public RelayCommand ButtonDisagreeWithExitClick => new RelayCommand(DisagreeWithExit);
 
-        public RelayCommand AdminPanelClick => new RelayCommand(ShowAdminPanel);
+
 
 
         void ExecuteCommand()
@@ -27,10 +38,7 @@ namespace FitnessClubMWWM.Logic.Ui
             Messenger.Default.Send("LoginPage");
         }
 
-        private void LogoutCommand()
-        {
-            Messenger.Default.Send("ConfrimExit");
-        }
+      
 
         private void AgreeWithExit()
         {
@@ -42,10 +50,6 @@ namespace FitnessClubMWWM.Logic.Ui
             Messenger.Default.Send("DisagreeWithExit");
         }
 
-        private void ShowAdminPanel()
-        {
-            Messenger.Default.Send("AdminPage");
-        }
 
     }
 }

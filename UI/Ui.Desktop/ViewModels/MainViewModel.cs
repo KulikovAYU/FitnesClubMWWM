@@ -4,6 +4,7 @@ using System.Windows.Media;
 using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace FitnessClubMWWM.Logic.Ui
@@ -93,6 +94,8 @@ namespace FitnessClubMWWM.Logic.Ui
         public ApplicationPage CurrentPage { get; set; } = ApplicationPage.MainPage; // ApplicationPage.Login;  ApplicationPage.MainPage
 
 
+        #region Команды управления состояния окна
+
         public RelayCommand CloseCommand { get; set; } = new RelayCommand(() =>
         {
             if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
@@ -109,6 +112,10 @@ namespace FitnessClubMWWM.Logic.Ui
             if (Application.Current.MainWindow != null)
                 Application.Current.MainWindow.WindowState = WindowState.Minimized;
         });
+
+
+        #endregion
+
 
         #endregion
 
@@ -143,6 +150,16 @@ namespace FitnessClubMWWM.Logic.Ui
                     CurrentPage = ApplicationPage.MainPage;
                     RaisePropertyChanged(nameof(CurrentPage));
                     break;
+
+                case "WorkingCabinetPage":
+                    CurrentPage = ApplicationPage.WorkingCabinet;
+                    break;
+
+                case "RegisterNewClientPage":
+                    CurrentPage = ApplicationPage.RegisterNewClient;
+                    break;
+
+
             }
         }
 
@@ -202,6 +219,10 @@ namespace FitnessClubMWWM.Logic.Ui
         #endregion
 
 
+
+        /// <summary>
+        /// Видимость панели о пользователе
+        /// </summary>
         public Visibility AboutUserPanelVisibility
         {
             get => CurrentPage != ApplicationPage.Login ? Visibility.Visible : Visibility.Hidden;

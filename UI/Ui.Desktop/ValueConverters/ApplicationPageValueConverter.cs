@@ -78,6 +78,12 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
                 case ApplicationPage.AdminPanel:
                     return new AdminPanelPage();
 
+                case ApplicationPage.WorkingCabinet:
+                    return new WorkingCabinetPage();
+
+                case ApplicationPage.RegisterNewClient:
+                   return new RegisterNewClientPage();
+
                 default: Debugger.Break();
                         return null;
             }
