@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Data;
 using FitnessClubMWWM.Logic.Ui;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AdminPanelPages;
 
@@ -33,7 +34,32 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
         }
     }
 
+    /// <summary>
+    /// Конвертер для DataGridRowDetails (служит для скрытия или показа RowDetails)
+    /// </summary>
+    public class VisibilityToNullableBooleanConverter : BaseValueConverter<VisibilityToNullableBooleanConverter>
+    {
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Visibility visibility)
+            {
+                return (visibility == Visibility.Visible);
+            }
+
+            return Binding.DoNothing;
+        }
+
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is bool b)
+            {
+                return (b ? Visibility.Visible : Visibility.Collapsed);
+            }
+
+            return Binding.DoNothing;
+        }
+    }
 
 
-  
+
 }

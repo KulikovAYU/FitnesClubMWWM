@@ -56,4 +56,9 @@
     <Color x:Key="BackgroundGray">#FF5A5858</Color>
     <SolidColorBrush x:Key="BackgroundGrayColor" Color="{StaticResource BackgroundGray}" />
 
+    <!--  Серый цвет сообщений диалогов  -->
+    <Color x:Key="BackgroundGrayLightGridView">#EBEBEB</Color>
+    <SolidColorBrush x:Key="BackgroundGrayColorGridView" Color="{StaticResource BackgroundGrayLightGridView}" />
+
+
 </ResourceDictionary>

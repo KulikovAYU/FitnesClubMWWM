@@ -22,6 +22,7 @@
                 <ResourceDictionary Source="Styles/Geometry.xaml" />
                 <ResourceDictionary Source="Styles/CustomsStyles.xaml" />
                 <ResourceDictionary Source="Styles/ScrollBar.xaml" />
+                <ResourceDictionary Source="Styles/Tables.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

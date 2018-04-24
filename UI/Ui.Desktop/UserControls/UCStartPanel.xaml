@@ -54,6 +54,7 @@
                 ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
                 ButtonCommentFontSize="12"
                 ButtonCommentWrapping="Wrap"
+                Command="{Binding ShowClientPageCommand}"
                 Content="Клиенты"
                 FontSize="16"
                 GeomPicture="{Binding Data, Source={StaticResource User}}"

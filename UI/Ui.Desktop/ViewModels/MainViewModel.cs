@@ -159,6 +159,10 @@ namespace FitnessClubMWWM.Logic.Ui
                     CurrentPage = ApplicationPage.RegisterNewClient;
                     break;
 
+                case "ClientPage":
+                    CurrentPage = ApplicationPage.ClientPage;
+                    break;
+
 
             }
         }

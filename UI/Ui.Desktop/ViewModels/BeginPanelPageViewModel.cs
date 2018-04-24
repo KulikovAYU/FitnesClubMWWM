@@ -20,11 +20,14 @@ namespace FitnessClubMWWM.Ui.Desktop
 
         public RelayCommand ShowWorkingCabinetCommand => new RelayCommand(() => { Messenger.Default.Send("WorkingCabinetPage");});
 
+        public RelayCommand ShowClientPageCommand => new RelayCommand(() => { Messenger.Default.Send("ClientPage"); });
+
+
         #endregion
 
 
 
-      
+
         public RelayCommand ButtonAgreeWithExitClick => new RelayCommand(AgreeWithExit);
 
         public RelayCommand ButtonDisagreeWithExitClick => new RelayCommand(DisagreeWithExit);

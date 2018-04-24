@@ -21,6 +21,15 @@
         <Setter Property="FontFamily" Value="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz " />
     </Style>
 
+
+    <!--  Стиль для шапки таблицы  -->
+    <Style x:Key="BaseDataGridLabelFontStyle" TargetType="{x:Type DataGrid}">
+        <!--<Setter Property="FontFamily" Value="{StaticResource TitilliumWebRegular}" />-->
+        <Setter Property="FontFamily" Value="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz " />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="Gray" />
+    </Style>
+
     <Style BasedOn="{StaticResource BaseButtonStyle}" TargetType="{x:Type Button}" />
     <Style BasedOn="{StaticResource BaseStyle}" TargetType="{x:Type Label}" />
     <Style BasedOn="{StaticResource BaseStyle}" TargetType="{x:Type TextBox}" />

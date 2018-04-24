@@ -84,6 +84,7 @@
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="PropertyChanged, Version=2.5.4.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\..\packages\PropertyChanged.Fody.2.5.4\lib\net452\PropertyChanged.dll</HintPath>
     </Reference>
@@ -147,6 +148,9 @@
     <Compile Include="Pages\SlidePages\Cards\RegisterNewClientPage.xaml.cs">
       <DependentUpon>RegisterNewClientPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SlidePages\ClientPage.xaml.cs">
+      <DependentUpon>ClientPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SlidePages\TheConfrimLogout.xaml.cs">
       <DependentUpon>TheConfrimLogout.xaml</DependentUpon>
     </Compile>
@@ -185,6 +189,7 @@
     <Compile Include="ViewModels\AdminPageViewModel.cs" />
     <Compile Include="ViewModels\AutorizationPageViewModel.cs" />
     <Compile Include="ViewModels\BeginPanelPageViewModel.cs" />
+    <Compile Include="ViewModels\ClientsPageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MessageWindowViewModel.cs" />
     <Compile Include="ViewModels\WorkingCabinetPageViewModel.cs" />
@@ -213,6 +218,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SlidePages\Cards\RegisterNewClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SlidePages\ClientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,6 +263,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\ScrollBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Tables.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

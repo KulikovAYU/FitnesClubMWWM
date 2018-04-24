@@ -317,6 +317,11 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
     }
 
 
-    
+    //TODO: переписать
+    class CustomDataGrid : DataGrid
+    {
+
+    }
+
 
 }

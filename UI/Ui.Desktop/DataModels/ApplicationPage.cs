@@ -51,5 +51,10 @@
         /// </summary>
         RegisterNewClient = 8,
 
+        /// <summary>
+        /// Панель списка клиентов
+        /// </summary>
+        ClientPage = 9
+
     }
 }

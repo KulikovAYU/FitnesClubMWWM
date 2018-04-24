@@ -84,6 +84,10 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
                 case ApplicationPage.RegisterNewClient:
                    return new RegisterNewClientPage();
 
+
+                case ApplicationPage.ClientPage:
+                    return new ClientPage();
+
                 default: Debugger.Break();
                         return null;
             }

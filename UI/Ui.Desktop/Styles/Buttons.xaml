@@ -615,6 +615,87 @@
         </Setter>
     </Style>
 
+    <!--  Шаблон определяет кнопку открыть/закрыть DataGridRowDetails  -->
+
+    <Style x:Key="DataGridRowDetailsToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <ControlTemplate.Resources>
+                        <Path x:Key="Show" Data="M 149.911,58.6614C 147.882,56.6335 145.42,55.6197 142.523,55.6197L 97.3327,55.6197L 97.3327,10.4277C 97.3327,7.53183 96.3171,5.06894 94.2909,3.04092C 92.2623,1.01425 89.8013,-3.05176e-005 86.9029,-3.05176e-005L 66.0468,-3.05176e-005C 63.1504,-3.05176e-005 60.6881,1.01291 58.6601,3.04092C 56.6321,5.06894 55.6184,7.53183 55.6184,10.4277L 55.6184,55.6197L 10.4277,55.6197C 7.53187,55.6197 5.06894,56.6335 3.04094,58.6614C 1.01294,60.6895 0,63.1504 0,66.0481L 0,86.9068C 0,89.804 1.01294,92.2649 3.04094,94.2909C 5.06894,96.3195 7.53187,97.3327 10.4277,97.3327L 55.6184,97.3327L 55.6184,142.527C 55.6184,145.423 56.6321,147.887 58.6601,149.913C 60.6881,151.939 63.1504,152.952 66.0468,152.952L 86.9029,152.952C 89.8027,152.952 92.2636,151.939 94.2909,149.913C 96.3196,147.885 97.3327,145.423 97.3327,142.527L 97.3327,97.3327L 142.524,97.3327C 145.421,97.3327 147.885,96.3195 149.912,94.2909C 151.939,92.2649 152.952,89.804 152.952,86.9068L 152.952,66.0481C 152.952,63.1504 151.939,60.6881 149.911,58.6614 Z " />
+                        <Path x:Key="Hide" Data="M 816,34C 816,13.6 802.4,0 782,0L 34,0C 13.6,0 0,13.6 0,34L 0,102C 0,122.4 13.6,136 34,136L 782,136C 802.4,136 816,122.4 816,102L 816,34 Z " />
+                    </ControlTemplate.Resources>
+
+
+                    <Grid>
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="true">
+                            <ContentPresenter
+                                x:Name="contentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Focusable="False"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Path
+                                x:Name="VectorPicture"
+                                Width="10"
+                                Height="10"
+                                Data="{Binding Source={StaticResource Show}, Path=Data}"
+                                Fill="Gray"
+                                Stretch="Uniform" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsDefaulted" Value="true">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                        </Trigger>
+                        <!--<Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                        </Trigger>-->
+                        <!--<Trigger Property="IsPressed" Value="true">
+                        -->
+                        <!--<Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>-->
+                        <!--
+                            <Setter Property="Data" TargetName="VectorPicture" Value="{Binding Source={StaticResource Hide},Path=Data}"/>
+                            <Setter Property="Fill" TargetName="VectorPicture" Value="{StaticResource BackgroundBlueColor}"/>
+                        </Trigger>-->
+
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter TargetName="VectorPicture" Property="Data" Value="{Binding Source={StaticResource Hide}, Path=Data}" />
+                            <Setter TargetName="VectorPicture" Property="Fill" Value="{StaticResource BackgroundBlueColor}" />
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource BackgroundGrayColorGridView}" />
+                        </Trigger>
+
+
+                        <!--<Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                        </Trigger>-->
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
 
 
