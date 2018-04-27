@@ -73,18 +73,21 @@
                     </ControlTemplate.Triggers>
 
                     <Border Background="{TemplateBinding Background}">
-                        <ScrollViewer
-                            HorizontalScrollBarVisibility="Auto"
-                            Template="{DynamicResource ScrollViewerControlTemplate1}"
-                            VerticalScrollBarVisibility="Auto">
-                            <Grid>
-                                <!--  Фоновый рисунок  -->
-                                <Image
-                                    Grid.RowSpan="2"
-                                    VerticalAlignment="Stretch"
-                                    Source="/FitnessClubMWWM.Ui.Desktop;component/Images/MainPageImages/mainpicture.jpg"
-                                    Stretch="UniformToFill" />
-                                <!--  Кнопка домой  -->
+
+                        <Grid>
+                            <!--  Фоновый рисунок  -->
+                            <Image
+                                Grid.RowSpan="2"
+                                VerticalAlignment="Stretch"
+                                Source="/FitnessClubMWWM.Ui.Desktop;component/Images/MainPageImages/mainpicture.jpg"
+                                Stretch="UniformToFill" />
+                            <!--  Кнопка домой  -->
+
+                            <ScrollViewer
+                                Margin="0,0,0,0"
+                                HorizontalScrollBarVisibility="Auto"
+                                Template="{DynamicResource ScrollViewerControlTemplate1}"
+                                VerticalScrollBarVisibility="Auto">
                                 <UserControls:ButtonWithPicture
                                     x:Name="GoHome"
                                     Grid.Row="0"
@@ -103,9 +106,11 @@
                                     GeomPictureWidth="20"
                                     Template="{DynamicResource AboutUserControlTemplate}"
                                     ToolTip="На главную страницу" />
-                                <ContentPresenter Panel.ZIndex="2" Content="{TemplateBinding Content}" />
-                            </Grid>
-                        </ScrollViewer>
+
+                            </ScrollViewer>
+                            <ContentPresenter Panel.ZIndex="2" Content="{TemplateBinding Content}" />
+                        </Grid>
+
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

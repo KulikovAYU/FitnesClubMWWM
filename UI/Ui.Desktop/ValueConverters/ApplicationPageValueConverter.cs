@@ -7,8 +7,10 @@ using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AdminPanel;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AdminPanelPages;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AutorizationPage;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.BeginPanel;
+using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.ClientPages;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.ConfirmationPages;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.ErrorsPages.ErrAutorization;
+using FitnessClubMWWM.Ui.Desktop.UserControls;
 
 namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
 {
@@ -84,9 +86,15 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
                 case ApplicationPage.RegisterNewClient:
                    return new RegisterNewClientPage();
 
-
                 case ApplicationPage.ClientPage:
                     return new ClientPage();
+
+                //case ApplicationPage.ClientPageDetails:
+                //    return new ClientPageDetails();
+
+                case ApplicationPage.ClientInfoPage:
+                    return new ClientInfo();
+
 
                 default: Debugger.Break();
                         return null;

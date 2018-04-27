@@ -151,6 +151,10 @@
     <Compile Include="Pages\SlidePages\ClientPage.xaml.cs">
       <DependentUpon>ClientPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SlidePages\ClientPages\ClientInfo.xaml.cs">
+      <DependentUpon>ClientInfo.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Pages\SlidePages\TheConfrimLogout.xaml.cs">
       <DependentUpon>TheConfrimLogout.xaml</DependentUpon>
     </Compile>
@@ -174,6 +178,9 @@
     <Compile Include="UserControls\InheritedControls.cs" />
     <Compile Include="UserControls\UCAdminPrivilegy.xaml.cs">
       <DependentUpon>UCAdminPrivilegy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCClientPageDetails.xaml.cs">
+      <DependentUpon>UCClientPageDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCStartPanel.xaml.cs">
       <DependentUpon>UCStartPanel.xaml</DependentUpon>
@@ -224,6 +231,10 @@
     <Page Include="Pages\SlidePages\ClientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SlidePages\ClientPages\ClientInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Pages\SlidePages\TheConfrimLogout.xaml">
       <SubType>Designer</SubType>
@@ -287,6 +298,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCAdminPrivilegy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCClientPageDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

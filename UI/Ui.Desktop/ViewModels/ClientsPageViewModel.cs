@@ -1,15 +1,41 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using FitnessClubMWWM.Logic.Ui;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace FitnessClubMWWM.Ui.Desktop
 {
     public class ClientsPageViewModel : ViewModelBase
     {
-        public DataGridLength FirstColumnWidth { get; set; } = new DataGridLength(50);
+    
 
-        public DataGridLength FamilyWidth { get; set; } = 150.0;
+        public ClientsPageViewModel()
+        {
+          //  Messenger.Default.Register(this, new Action<string>(ProcessMessage));
+        }
 
+        //public RelayCommand ShowClientInfoPageCommand { get; set; } =
+        //    new RelayCommand (() => { Messenger.Default.Send("ClientPageDetails"); });
+
+
+        //void ProcessMessage(string msg)
+        //{
+        //    switch (msg)
+        //    {
+        //        case "ClientPageDetails":
+        //            CurrentPage = ApplicationPage.ClientPageDetails;
+        //            break;
+
+        //        case "AbonementControlPage":
+        //            CurrentPage = ApplicationPage.ClientAccountControl;
+        //            break;
+        //    }
+        //}
+
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.ClientInfoPage; // ApplicationPage.Login;  ApplicationPage.MainPage
 
 
 
@@ -27,7 +53,6 @@ namespace FitnessClubMWWM.Ui.Desktop
 
             public string PhoneNumber { get; set; }
 
-
         }
 
 
@@ -43,6 +68,20 @@ namespace FitnessClubMWWM.Ui.Desktop
 
                 clientsList = new ObservableCollection<Clients>();
                 clientsList.Add(new Clients(){ Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement="Vip",PhoneNumber = "8-920-672-0-68" });
+                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
+                clientsList.Add(new Clients() { Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement = "Vip", PhoneNumber = "8-920-672-0-68" });
+                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
+                clientsList.Add(new Clients() { Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement = "Vip", PhoneNumber = "8-920-672-0-68" });
+                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
+                clientsList.Add(new Clients() { Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement = "Vip", PhoneNumber = "8-920-672-0-68" });
+                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
+                clientsList.Add(new Clients() { Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement = "Vip", PhoneNumber = "8-920-672-0-68" });
+                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
+                clientsList.Add(new Clients() { Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement = "Vip", PhoneNumber = "8-920-672-0-68" });
+                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
+                clientsList.Add(new Clients() { Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement = "Vip", PhoneNumber = "8-920-672-0-68" });
+                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
+                clientsList.Add(new Clients() { Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement = "Vip", PhoneNumber = "8-920-672-0-68" });
                 clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
                 return clientsList;
             }

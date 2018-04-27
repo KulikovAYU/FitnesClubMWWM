@@ -4,13 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="clr-namespace:FitnessClubMWWM.Ui.Desktop.ValueConverters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop.Pages.SlidePages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="page"
+    xmlns:userControls="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
     Title="ClientPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
     <Page.Resources>
         <converter:VisibilityToNullableBooleanConverter x:Key="VisibilityToNullableBooleanConverter" />
 
@@ -18,16 +18,11 @@
             x:Key="StyleToogle"
             BasedOn="{StaticResource DataGridRowDetailsToggleButtonStyle}"
             TargetType="{x:Type ToggleButton}">
-            <Setter Property="Background" Value="White" />
-            <Setter Property="BorderBrush" Value="White" />
-
-
-            <Setter Property="IsChecked" Value="{Binding Path=DetailsVisibility, Converter={StaticResource VisibilityToNullableBooleanConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Mode=OneWayToSource}" />
+            <Setter Property="Background" Value="{x:Null}" />
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter x:Name="Toogle" Property="IsChecked" Value="{Binding Path=DetailsVisibility, Converter={StaticResource VisibilityToNullableBooleanConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Mode=OneWayToSource}" />
             <Setter x:Name="SetterWidth" Property="Width" Value="50" />
-            <Setter Property="Height" Value="{Binding ElementName=SetterWidth}" />
-
-
-
+            <Setter Property="Height" Value="50" />
         </Style>
 
 
@@ -43,10 +38,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-
-
-
     </Page.Resources>
 
 
@@ -54,33 +45,33 @@
     <Page.DataContext>
         <Binding Path="ClientsViewModel" Source="{StaticResource Locator}" />
     </Page.DataContext>
+
     <Page.Style>
         <StaticResource ResourceKey="PageNextWorkingBaseStyle" />
     </Page.Style>
 
 
 
-
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
         </Grid.RowDefinitions>
 
 
-
-
         <DataGrid
-            x:Name="DataGridC"
             Grid.Row="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
+            Margin="50,0,10,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
             AutoGenerateColumns="False"
             Background="White"
             CanUserAddRows="False"
             ColumnHeaderHeight="40"
             ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}"
+            ColumnWidth="Auto"
+            Foreground="Black"
             GridLinesVisibility="None"
             HeadersVisibility="Column"
             HorizontalScrollBarVisibility="Auto"
@@ -91,25 +82,11 @@
             Template="{DynamicResource DataGridControlTemplate}"
             VerticalScrollBarVisibility="Auto">
 
-
             <!--  Цветовое выделение ячейки  -->
-            <DataGrid.CellStyle>
-                <Style TargetType="{x:Type DataGridCell}">
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter x:Name="SetterBackground" Property="Background" Value="{StaticResource BackgroundGrayColorGridView}" />
-                            <Setter Property="BorderBrush" Value="{StaticResource BackgroundGrayColorGridView}" />
-                            <Setter Property="Foreground" Value="Black" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.CellStyle>
-
             <DataGrid.Columns>
-
-
                 <DataGridTemplateColumn
                     Width="30"
+                    CanUserResize="False"
                     Header=""
                     HeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}">
                     <DataGridTemplateColumn.CellTemplate>
@@ -135,7 +112,6 @@
                                     Height="30"
                                     Fill="#FFEA1B1B" />
                             </Border>
-
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -165,7 +141,7 @@
                     Header="Тип абонемента" />
 
                 <DataGridTextColumn
-                    Width="150"
+                    Width="120"
                     Binding="{Binding PhoneNumber}"
                     CellStyle="{StaticResource StyleCenter}"
                     Header="Телефон" />
@@ -174,20 +150,54 @@
 
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <Rectangle Height="50" Fill="Aqua" />
+                    <Border Margin="5,0,5,0" VerticalAlignment="Center">
+                        <userControls:UCClientPageDetails />
+                    </Border>
+
                 </DataTemplate>
 
             </DataGrid.RowDetailsTemplate>
-
-
-
-
-
         </DataGrid>
 
+        <GroupBox
+            Grid.Row="2"
+            Margin="50,0,10,0"
+            VerticalAlignment="Center"
+            Foreground="Gray"
+            Header="Поиск клиента">
 
-
+            <StackPanel
+                Margin="0,10,0,10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBox
+                    Width="200"
+                    Height="40"
+                    VerticalContentAlignment="Center"
+                    BorderThickness="2"
+                    FontSize="16"
+                    Tag="Фамилия"
+                    Template="{DynamicResource InputTextBox}" />
+                <TextBox
+                    Width="200"
+                    Height="40"
+                    Margin="10,0,0,0"
+                    VerticalContentAlignment="Center"
+                    BorderThickness="2"
+                    FontSize="16"
+                    Tag="Имя"
+                    Template="{DynamicResource InputTextBox}" />
+                <TextBox
+                    Width="200"
+                    Height="40"
+                    Margin="10,0,0,0"
+                    VerticalContentAlignment="Center"
+                    BorderThickness="2"
+                    FontSize="16"
+                    Tag="Отчество"
+                    Template="{DynamicResource InputTextBox}" />
+            </StackPanel>
+        </GroupBox>
     </Grid>
-
-
 </Page>

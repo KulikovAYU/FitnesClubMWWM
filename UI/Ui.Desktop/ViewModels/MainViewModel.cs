@@ -126,29 +126,23 @@ namespace FitnessClubMWWM.Logic.Ui
                 case "LoginPage":
                 case "AgreeWithExit":
                     CurrentPage = ApplicationPage.Login;
-                    RaisePropertyChanged(nameof(CurrentPage));
                     AboutUserPanelVisibility = Visibility.Hidden;
                     break;
                 case "AutorizationError":
                     CurrentPage = ApplicationPage.AutorizationError;
-                    RaisePropertyChanged(nameof(CurrentPage));
                     break;
                 case "ConfrimExit":
                     CurrentPage = ApplicationPage.ConfrimExit;
-                    RaisePropertyChanged(nameof(CurrentPage));
                     break;
                 case "DisagreeWithExit":
                     CurrentPage = ApplicationPage.MainPage;
-                    RaisePropertyChanged(nameof(CurrentPage));
                     break;
                 case "AdminPage":
                     CurrentPage = ApplicationPage.AdminPanel;
-                    RaisePropertyChanged(nameof(CurrentPage));
                     break;
 
                 case "MainPage":
                     CurrentPage = ApplicationPage.MainPage;
-                    RaisePropertyChanged(nameof(CurrentPage));
                     break;
 
                 case "WorkingCabinetPage":

@@ -22,6 +22,9 @@
     </Style>
 
 
+
+
+
     <!--  Стиль для шапки таблицы  -->
     <Style x:Key="BaseDataGridLabelFontStyle" TargetType="{x:Type DataGrid}">
         <!--<Setter Property="FontFamily" Value="{StaticResource TitilliumWebRegular}" />-->

@@ -54,7 +54,22 @@
         /// <summary>
         /// Панель списка клиентов
         /// </summary>
-        ClientPage = 9
+        ClientPage = 9,
+
+        /// <summary>
+        /// Панель списка клиентов
+        /// </summary>
+        ClientPageDetails = 10,
+
+        /// <summary>
+        /// Панель информации о клиенте
+        /// </summary>
+        ClientInfoPage = 11,
+
+        /// <summary>
+        /// Панель информации
+        /// </summary>
+        ClientAccountControl =12,
 
     }
 }

@@ -60,5 +60,9 @@
     <Color x:Key="BackgroundGrayLightGridView">#EBEBEB</Color>
     <SolidColorBrush x:Key="BackgroundGrayColorGridView" Color="{StaticResource BackgroundGrayLightGridView}" />
 
+    <!--  Голубой цвет расширенной ифнормации о посетителе или пользователе информационной системы  -->
+    <Color x:Key="BlueDataGridRowDetailsView">#FF46B5FF</Color>
+    <SolidColorBrush x:Key="BlueDataGridRowDetailsViewColor" Color="{StaticResource BlueDataGridRowDetailsView}" />
+
 
 </ResourceDictionary>
