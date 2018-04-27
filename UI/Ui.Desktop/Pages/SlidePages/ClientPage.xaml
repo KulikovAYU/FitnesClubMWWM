@@ -150,7 +150,7 @@
 
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <Border Margin="5,0,5,0" VerticalAlignment="Center">
+                    <Border Margin="10" VerticalAlignment="Center">
                         <userControls:UCClientPageDetails />
                     </Border>
 

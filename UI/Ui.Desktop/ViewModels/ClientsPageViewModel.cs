@@ -14,8 +14,13 @@ namespace FitnessClubMWWM.Ui.Desktop
 
         public ClientsPageViewModel()
         {
-          //  Messenger.Default.Register(this, new Action<string>(ProcessMessage));
+         
+
+            //  Messenger.Default.Register(this, new Action<string>(ProcessMessage));
         }
+
+        public RelayCommand GoHomeCommand => new RelayCommand(() => { Messenger.Default.Send("MainPage"); });
+
 
         //public RelayCommand ShowClientInfoPageCommand { get; set; } =
         //    new RelayCommand (() => { Messenger.Default.Send("ClientPageDetails"); });
@@ -34,8 +39,6 @@ namespace FitnessClubMWWM.Ui.Desktop
         //            break;
         //    }
         //}
-
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.ClientInfoPage; // ApplicationPage.Login;  ApplicationPage.MainPage
 
 
 

@@ -7,9 +7,6 @@
     xmlns:userControls="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
     mc:Ignorable="d">
 
-
-
-
     <!--  Шаблон обычной кнопки  -->
     <ControlTemplate x:Key="ButtonBaseControlTemplate" TargetType="{x:Type ButtonBase}">
         <ControlTemplate.Resources>
@@ -752,6 +749,226 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+
+    <!--  Стиль для шапки табконтрола  -->
+    <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="FontFamily" Value="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz " />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="{StaticResource BlueDataGridRowDetailsViewColor}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BlueDataGridRowDetailsViewColor}" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="6,2,6,2" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                        <Border
+                            x:Name="mainBorder"
+                            Margin="0"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1,1,1,0" />
+                        <ContentPresenter
+                            x:Name="contentPresenter"
+                            Margin="5,0,5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            ContentSource="Header"
+                            Focusable="False" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="true" />
+                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="contentPresenter" Property="Opacity" Value="1" />
+                            <Setter TargetName="mainBorder" Property="Background" Value="White" />
+                            <Setter TargetName="mainBorder" Property="BorderBrush" Value="{StaticResource BlueDataGridRowDetailsViewColor}" />
+                            <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,1,0,1" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,1,0,1" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,0,1,1" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Panel.ZIndex" Value="1" />
+                            <Setter Property="Margin" Value="0,0,0,0" />
+                            <Setter TargetName="mainBorder" Property="BorderThickness" Value="1,1,0,1" />
+                            <Setter TargetName="mainBorder" Property="Background" Value="White" />
+                            <Setter TargetName="mainBorder" Property="BorderBrush" Value="White" />
+                            <Setter TargetName="templateRoot" Property="TabItem.Foreground" Value="Black" />
+                            <Setter Property="BorderBrush" Value="{StaticResource BlueDataGridRowDetailsViewColor}" />
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  Стиль для табконтрола  -->
+    <Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderBrush" Value="{StaticResource BlueDataGridRowDetailsViewColor}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabControl}">
+                    <Grid
+                        x:Name="templateRoot"
+                        Background="{StaticResource BlueDataGridRowDetailsViewColor}"
+                        ClipToBounds="true"
+                        KeyboardNavigation.TabNavigation="Local"
+                        SnapsToDevicePixels="true">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="ColumnDefinition0" />
+                            <ColumnDefinition x:Name="ColumnDefinition1" Width="0" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition x:Name="RowDefinition0" Height="Auto" />
+                            <RowDefinition x:Name="RowDefinition1" Height="*" />
+                        </Grid.RowDefinitions>
+                        <TabPanel
+                            x:Name="headerPanel"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="10,7,0,0"
+                            Panel.ZIndex="1"
+                            Background="{StaticResource BlueDataGridRowDetailsViewColor}"
+                            IsItemsHost="true"
+                            KeyboardNavigation.TabIndex="1" />
+                        <Border
+                            x:Name="contentPanel"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1,0,1,1"
+                            KeyboardNavigation.DirectionalNavigation="Contained"
+                            KeyboardNavigation.TabIndex="2"
+                            KeyboardNavigation.TabNavigation="Local">
+                            <ContentPresenter
+                                x:Name="PART_SelectedContentHost"
+                                Margin="{TemplateBinding Padding}"
+                                ContentSource="SelectedContent"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="TabStripPlacement" Value="Bottom">
+                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="1" />
+                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
+                            <Setter TargetName="RowDefinition1" Property="Height" Value="Auto" />
+                            <Setter TargetName="headerPanel" Property="Margin" Value="2,0,2,2" />
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Left">
+                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="headerPanel" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="contentPanel" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="ColumnDefinition0" Property="Width" Value="Auto" />
+                            <Setter TargetName="ColumnDefinition1" Property="Width" Value="*" />
+                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
+                            <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
+                            <Setter TargetName="headerPanel" Property="Margin" Value="2,2,0,2" />
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Right">
+                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="headerPanel" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="contentPanel" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="ColumnDefinition0" Property="Width" Value="*" />
+                            <Setter TargetName="ColumnDefinition1" Property="Width" Value="Auto" />
+                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
+                            <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
+                            <Setter TargetName="headerPanel" Property="Margin" Value="0,2,2,2" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="templateRoot" Property="TextElement.Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--Кнопки управления абонементами: продать абонемент, активировать, продлить, заморозить-->
+    <ControlTemplate x:Key="ControlAbonementButtonBaseControlTemplate" TargetType="{x:Type userControls:ButtonWithPicture}">
+        <Border
+            x:Name="border"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            SnapsToDevicePixels="True">
+            <StackPanel Orientation="Horizontal" Margin="5 0 5 0">
+                <Path
+                    Width="{Binding GeomPictureWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                    Height="{Binding GeomPictureHeight, RelativeSource={RelativeSource TemplatedParent}}"
+                    Margin="{Binding GeomPictureMargin, RelativeSource={RelativeSource TemplatedParent}}"
+                    Data="{Binding GeomPicture, RelativeSource={RelativeSource TemplatedParent}}"
+                    Fill="{Binding GeomPictureFill, RelativeSource={RelativeSource TemplatedParent}}"
+                    Stretch="Fill" />
+
+                <ContentPresenter
+                    x:Name="contentPresenter"
+                    Margin="{TemplateBinding Padding}"
+                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    Content="{TemplateBinding Content}"
+                    ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                    Focusable="False"
+                    RecognizesAccessKey="True"
+                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+            </StackPanel>
+
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsDefaulted" Value="True">
+                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="border" Property="Background" Value="#FFBEE6FD" />
+                <Setter TargetName="border" Property="BorderBrush" Value="#FF3C7FB1" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="border" Property="Background" Value="#FFC4E5F6" />
+                <Setter TargetName="border" Property="BorderBrush" Value="#FF2C628B" />
+            </Trigger>
+            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                <Setter TargetName="border" Property="Background" Value="#FFBCDDEE" />
+                <Setter TargetName="border" Property="BorderBrush" Value="#FF245A83" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="border" Property="Background" Value="#FFF4F4F4" />
+                <Setter TargetName="border" Property="BorderBrush" Value="#FFADB2B5" />
+                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="#FF838383" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 
 
 
