@@ -111,15 +111,16 @@
                 GeomPictureMargin="5"
                 GeomPictureWidth="55"
                 RenderTransformOrigin="0.5,0.5"
+                Command="{Binding ShowClassScheduleCommand}"
                 Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton
                 Background="{x:Null}"
                 BorderThickness="0"
-                ButtonComment="Управление окладами, назначение стоимости за тренировку"
+                ButtonComment="Управление окладами, назначение стоимости за тренировку,создание новой тренировки, управление услугами и залами"
                 ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
                 ButtonCommentFontSize="12"
                 ButtonCommentWrapping="Wrap"
-                Content="Финансы"
+                Content="Финансы, услуги, залы"
                 FontSize="16"
                 GeomPicture="{Binding Data, Source={StaticResource Finances}}"
                 GeomPictureFill="{StaticResource BackgroundBlueColor}"

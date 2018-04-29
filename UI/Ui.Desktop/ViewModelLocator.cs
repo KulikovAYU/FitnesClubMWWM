@@ -29,6 +29,7 @@ namespace FitnessClubMWWM.Ui.Desktop
                 SimpleIoc.Default.Register<AutorizationPageViewModel>();
                 SimpleIoc.Default.Register<WorkingCabinetPageViewModel>();
                 SimpleIoc.Default.Register<ClientsPageViewModel>();
+                SimpleIoc.Default.Register<ScheduleViewModel>();
             }
             else
             {
@@ -41,6 +42,7 @@ namespace FitnessClubMWWM.Ui.Desktop
                 // TODO Возможно, придется дополнительно добавить WiewModel для диалогового окна
                 SimpleIoc.Default.Register<WorkingCabinetPageViewModel>();
                 SimpleIoc.Default.Register<ClientsPageViewModel>();
+                SimpleIoc.Default.Register<ScheduleViewModel>();
 
 
             }
@@ -57,6 +59,9 @@ namespace FitnessClubMWWM.Ui.Desktop
 
     public ClientsPageViewModel ClientsViewModel =>
             ServiceLocator.Current.GetInstance<ClientsPageViewModel>();
+
+  public ScheduleViewModel SchedulePageViewModel =>
+            ServiceLocator.Current.GetInstance<ScheduleViewModel>();
 
         public static void Cleanup()
         {

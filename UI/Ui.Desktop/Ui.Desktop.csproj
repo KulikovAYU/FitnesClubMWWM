@@ -151,6 +151,9 @@
     <Compile Include="Pages\SlidePages\ClientPage.xaml.cs">
       <DependentUpon>ClientPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SlidePages\SchedulePage.xaml.cs">
+      <DependentUpon>SchedulePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SlidePages\TheConfrimLogout.xaml.cs">
       <DependentUpon>TheConfrimLogout.xaml</DependentUpon>
     </Compile>
@@ -178,6 +181,9 @@
     <Compile Include="UserControls\UCClientPageDetails.xaml.cs">
       <DependentUpon>UCClientPageDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCSearchHuman.xaml.cs">
+      <DependentUpon>UCSearchHuman.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCStartPanel.xaml.cs">
       <DependentUpon>UCStartPanel.xaml</DependentUpon>
     </Compile>
@@ -195,6 +201,7 @@
     <Compile Include="ViewModels\ClientsPageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MessageWindowViewModel.cs" />
+    <Compile Include="ViewModels\ScheduleViewModel.cs" />
     <Compile Include="ViewModels\WorkingCabinetPageViewModel.cs" />
     <Page Include="local.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -225,6 +232,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SlidePages\ClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SlidePages\SchedulePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -294,6 +305,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCClientPageDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCSearchHuman.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

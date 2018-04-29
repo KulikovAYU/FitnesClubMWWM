@@ -10,6 +10,16 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <Page.InputBindings>
+        <KeyBinding
+            Key="F"
+            Command="{Binding FindClientCommand}"
+            Modifiers="Control" />
+    </Page.InputBindings>
+
+
+
+
 
     <Page.Resources>
         <converter:VisibilityToNullableBooleanConverter x:Key="VisibilityToNullableBooleanConverter" />
@@ -25,7 +35,6 @@
             <Setter Property="Height" Value="50" />
         </Style>
 
-
         <!--  Выравнивание содержимого в ячейках по цетру  -->
         <Style x:Key="StyleCenter" TargetType="{x:Type DataGridCell}">
             <Setter Property="Template">
@@ -38,8 +47,38 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </Page.Resources>
+        <Storyboard x:Key="Storyboard1">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="FindUser" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0:0:0.1" Value="-30,40,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="-10,40,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="0,40,0,0" />
+            </ThicknessAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="dataGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.97" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.98">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseInOut" Exponent="5" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="dataGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.97" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.98">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseInOut" Exponent="5" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
 
+    </Page.Resources>
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource Storyboard1}" />
+        </EventTrigger>
+    </Page.Triggers>
 
 
     <Page.DataContext>
@@ -50,17 +89,15 @@
         <StaticResource ResourceKey="PageNextWorkingBaseStyle" />
     </Page.Style>
 
-
-
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="100" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-
         <DataGrid
+            x:Name="dataGrid"
             Grid.Row="1"
             Margin="50,0,10,0"
             HorizontalAlignment="Stretch"
@@ -77,10 +114,19 @@
             HorizontalScrollBarVisibility="Auto"
             ItemsSource="{Binding ClientsList}"
             MinColumnWidth="50"
+            RenderTransformOrigin="0.5,0.5"
             SelectionMode="Extended"
             Style="{StaticResource BaseDataGridLabelFontStyle}"
             Template="{DynamicResource DataGridControlTemplate}"
             VerticalScrollBarVisibility="Auto">
+            <DataGrid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="0.96" ScaleY="0.96" />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
+                </TransformGroup>
+            </DataGrid.RenderTransform>
 
             <!--  Цветовое выделение ячейки  -->
             <DataGrid.Columns>
@@ -93,8 +139,8 @@
                         <DataTemplate>
                             <ToggleButton
                                 x:Name="ToggleButton1"
-                                Width="20"
-                                Height="20"
+                                Width="30"
+                                Height="30"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Style="{StaticResource StyleToogle}" />
@@ -159,45 +205,31 @@
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
 
-        <GroupBox
-            Grid.Row="2"
-            Margin="50,0,10,0"
-            VerticalAlignment="Center"
-            Foreground="Gray"
-            Header="Поиск клиента">
+        <userControls:ButtonWithPicture
+            x:Name="FindUser"
+            Grid.Row="1"
+            Width="50"
+            Height="40"
+            Margin="-50,40,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="{x:Null}"
+            BorderBrush="{x:Null}"
+            Command="{Binding FindClientCommand}"
+            Cursor="Hand"
+            GeomPicture="{Binding Data, Source={StaticResource FindPeople}}"
+            GeomPictureFill="Black"
+            GeomPictureHeight="20"
+            GeomPictureWidth="20"
+            Template="{DynamicResource AboutUserControlTemplate}"
+            ToolTip="Найти человека" />
 
-            <StackPanel
-                Margin="0,10,0,10"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Orientation="Horizontal">
-                <TextBox
-                    Width="200"
-                    Height="40"
-                    VerticalContentAlignment="Center"
-                    BorderThickness="2"
-                    FontSize="16"
-                    Tag="Фамилия"
-                    Template="{DynamicResource InputTextBox}" />
-                <TextBox
-                    Width="200"
-                    Height="40"
-                    Margin="10,0,0,0"
-                    VerticalContentAlignment="Center"
-                    BorderThickness="2"
-                    FontSize="16"
-                    Tag="Имя"
-                    Template="{DynamicResource InputTextBox}" />
-                <TextBox
-                    Width="200"
-                    Height="40"
-                    Margin="10,0,0,0"
-                    VerticalContentAlignment="Center"
-                    BorderThickness="2"
-                    FontSize="16"
-                    Tag="Отчество"
-                    Template="{DynamicResource InputTextBox}" />
-            </StackPanel>
-        </GroupBox>
+        <userControls:UCSearchHuman
+            x:Name="Finder"
+            Grid.Row="1"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Visibility="{Binding visibleSearchPanel}" />
+
     </Grid>
 </Page>

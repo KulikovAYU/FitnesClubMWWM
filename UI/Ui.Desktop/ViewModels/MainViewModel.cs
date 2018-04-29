@@ -157,6 +157,11 @@ namespace FitnessClubMWWM.Logic.Ui
                     CurrentPage = ApplicationPage.ClientPage;
                     break;
 
+                case "ClassSchedule":
+                    CurrentPage = ApplicationPage.ClassSchedule;
+                    break;
+
+
 
             }
         }

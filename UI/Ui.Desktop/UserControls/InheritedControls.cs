@@ -178,7 +178,7 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
     /// <summary>
     /// Класс определяет кнопку с векторной картинкой
     /// </summary>
-    class ButtonWithPicture : Button
+    public class ButtonWithPicture : Button
     {
 
         #region Свойство, определяющее векторную картинку

@@ -256,6 +256,17 @@
                                 Style="{StaticResource ButtonWidthPictureIsNotPressed}"
                                 Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
                         </Grid>
+
+                        <DataGrid AutoGenerateColumns="False" Name="Abonement" CanUserAddRows="False" Margin="0 10 0 0 " ItemsSource="{ Binding GetAbonement}" Height="50">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Номер абонемента" Binding="{Binding m_nNumber}"/>
+                                <DataGridTextColumn Header="Статус" Binding="{Binding m_strStatus}"/>
+                                <DataGridTextColumn Header="Услуга"  Binding="{Binding m_strService}"/>
+                                <DataGridTextColumn Header="Тариф" Binding="{Binding m_strTariff}"/>
+                                <DataGridTextColumn Header="Куплено тренировок" Binding="{Binding m_nAllCntTrainings}" />
+                                <DataGridTextColumn Header="Осталось тренировок" Binding="{Binding m_nRemainedTrainings}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </StackPanel>
                 </Border>
             </Grid>

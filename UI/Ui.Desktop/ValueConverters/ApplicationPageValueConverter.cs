@@ -88,6 +88,9 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
                 case ApplicationPage.ClientPage:
                     return new ClientPage();
 
+                case ApplicationPage.ClassSchedule:
+                    return new SchedulePage();
+
                 default: Debugger.Break();
                         return null;
             }

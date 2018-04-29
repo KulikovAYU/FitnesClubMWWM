@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using FitnessClubMWWM.Logic.Ui;
+using FitnessClubMWWM.Ui.Desktop.UserControls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -20,6 +22,27 @@ namespace FitnessClubMWWM.Ui.Desktop
         }
 
         public RelayCommand GoHomeCommand => new RelayCommand(() => { Messenger.Default.Send("MainPage"); });
+
+
+        public Visibility visibleSearchPanel { get; set; } = Visibility.Hidden;
+
+        public RelayCommand FindClientCommand =>
+            new RelayCommand((() => {
+                if (visibleSearchPanel == Visibility.Hidden)
+                {
+                    visibleSearchPanel = Visibility.Visible;
+                }
+
+                }));
+
+ public RelayCommand HideSearchPanel =>
+            new RelayCommand((() => {
+                if (visibleSearchPanel == Visibility.Visible)
+                {
+                    visibleSearchPanel = Visibility.Hidden;
+                }
+
+                }));
 
 
         //public RelayCommand ShowClientInfoPageCommand { get; set; } =
@@ -89,5 +112,49 @@ namespace FitnessClubMWWM.Ui.Desktop
                 return clientsList;
             }
         }
+
+        /// <summary>
+        /// абонемент клиенгта
+        /// </summary>
+       public class Abonement
+        {
+            public Abonement()
+            {
+                m_nNumber++;
+            }
+
+            public Abonement(string strStatus, string strService,string strTariff,int nAllCntTrainings, int nRemainedTrainings) : this()
+            {
+               
+                m_strStatus = strStatus;
+                m_strService = strService;
+                m_strTariff = strTariff;
+                m_nAllCntTrainings = nAllCntTrainings;
+                m_nRemainedTrainings = nRemainedTrainings;
+            }
+
+            public static int m_nNumber { get; set; } = 0;//номер абонемента
+            public string m_strStatus { get; set; } //статус абонемента
+            public string m_strService { get; set; }//услуга
+            public string m_strTariff { get; set; }//тариф
+            public int m_nAllCntTrainings { get; set; }//куплено трениовок
+            public int m_nRemainedTrainings { get; set; }//осталось трениовок
+        }
+
+        private ObservableCollection<Abonement> m_abonementList = null;
+
+        public ObservableCollection<Abonement> GetAbonement
+        {
+            get
+            {
+                if (m_abonementList != null)
+                    return m_abonementList;
+
+                m_abonementList = new ObservableCollection<Abonement>();
+                m_abonementList.Add(new Abonement() { m_strStatus = "Активна", m_strService = "VIP-карта", m_strTariff = "Весь день", m_nAllCntTrainings = 10, m_nRemainedTrainings =5 });
+                return m_abonementList;
+            }
+        }
+
     }
 }

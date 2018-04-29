@@ -22,6 +22,8 @@ namespace FitnessClubMWWM.Ui.Desktop
 
         public RelayCommand ShowClientPageCommand => new RelayCommand(() => { Messenger.Default.Send("ClientPage"); });
 
+        public  RelayCommand ShowClassScheduleCommand =>new RelayCommand(() => { Messenger.Default.Send("ClassSchedule"); });
+
 
         #endregion
 

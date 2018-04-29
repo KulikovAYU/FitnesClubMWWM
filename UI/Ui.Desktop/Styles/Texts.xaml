@@ -263,8 +263,17 @@
             </Trigger>
 
         </ControlTemplate.Triggers>
-
-
     </ControlTemplate>
+
+    <!--  Стиль текстового поля (жирный, по центру)  -->
+    <Style
+        x:Key="HeaderStyle"
+        BasedOn="{StaticResource BaseTextBlockStyle}"
+        TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
 
 </ResourceDictionary>

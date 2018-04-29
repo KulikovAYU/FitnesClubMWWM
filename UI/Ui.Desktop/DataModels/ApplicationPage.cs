@@ -56,7 +56,11 @@
         /// </summary>
         ClientPage = 9,
 
-      
+        /// <summary>
+        /// Панель списка тренировок
+        /// </summary>
+        ClassSchedule = 10,
+
 
     }
 }
