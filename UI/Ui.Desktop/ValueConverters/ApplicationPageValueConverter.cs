@@ -91,6 +91,18 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
                 case ApplicationPage.ClassSchedule:
                     return new SchedulePage();
 
+                case ApplicationPage.StaffPage:
+                    return new StaffPage();
+
+                case ApplicationPage.PayPage:
+                    return  new PayPage();
+
+                case ApplicationPage.PriceAbonementPage:
+                    return new PriceAbonementPage();
+
+                case ApplicationPage.GymPage:
+                    return new GymPage();
+
                 default: Debugger.Break();
                         return null;
             }

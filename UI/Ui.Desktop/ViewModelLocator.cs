@@ -30,6 +30,9 @@ namespace FitnessClubMWWM.Ui.Desktop
                 SimpleIoc.Default.Register<WorkingCabinetPageViewModel>();
                 SimpleIoc.Default.Register<ClientsPageViewModel>();
                 SimpleIoc.Default.Register<ScheduleViewModel>();
+                SimpleIoc.Default.Register<StaffPaymentViewModel>();
+                SimpleIoc.Default.Register<GymPageViewModel>();
+                SimpleIoc.Default.Register<PriceAbonementPageViewModel>();
             }
             else
             {
@@ -43,8 +46,9 @@ namespace FitnessClubMWWM.Ui.Desktop
                 SimpleIoc.Default.Register<WorkingCabinetPageViewModel>();
                 SimpleIoc.Default.Register<ClientsPageViewModel>();
                 SimpleIoc.Default.Register<ScheduleViewModel>();
-
-
+                SimpleIoc.Default.Register<StaffPaymentViewModel>();
+                SimpleIoc.Default.Register<GymPageViewModel>();
+                SimpleIoc.Default.Register<PriceAbonementPageViewModel>();
             }
        
         }
@@ -57,11 +61,22 @@ namespace FitnessClubMWWM.Ui.Desktop
         public WorkingCabinetPageViewModel WorkingCabinetViewModel =>
             ServiceLocator.Current.GetInstance<WorkingCabinetPageViewModel>();
 
-    public ClientsPageViewModel ClientsViewModel =>
+        public ClientsPageViewModel ClientsViewModel =>
             ServiceLocator.Current.GetInstance<ClientsPageViewModel>();
 
-  public ScheduleViewModel SchedulePageViewModel =>
+        public ScheduleViewModel SchedulePageViewModel =>
             ServiceLocator.Current.GetInstance<ScheduleViewModel>();
+
+        public StaffPaymentViewModel StaffPaymentPageViewModel =>
+                    ServiceLocator.Current.GetInstance<StaffPaymentViewModel>();
+
+  public GymPageViewModel GymViewModel =>
+                    ServiceLocator.Current.GetInstance<GymPageViewModel>();
+
+
+public PriceAbonementPageViewModel PriceViewModel =>
+                    ServiceLocator.Current.GetInstance<PriceAbonementPageViewModel>();
+
 
         public static void Cleanup()
         {

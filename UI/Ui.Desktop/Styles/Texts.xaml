@@ -143,7 +143,6 @@
     </ControlTemplate>
 
 
-
     <!--  Шаблон текстового поля для пароля  -->
     <ControlTemplate x:Key="PasswordTextBox" TargetType="{x:Type PasswordBox}">
 
@@ -275,5 +274,10 @@
         <Setter Property="TextAlignment" Value="Center" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
+
+
+
+
+
 
 </ResourceDictionary>

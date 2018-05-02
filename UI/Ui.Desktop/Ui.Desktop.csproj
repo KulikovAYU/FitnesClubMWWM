@@ -151,8 +151,20 @@
     <Compile Include="Pages\SlidePages\ClientPage.xaml.cs">
       <DependentUpon>ClientPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SlidePages\ActionPages\GymPage.xaml.cs">
+      <DependentUpon>GymPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SlidePages\ActionPages\PayPage.xaml.cs">
+      <DependentUpon>PayPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SlidePages\ActionPages\PriceAbonementPage.xaml.cs">
+      <DependentUpon>PriceAbonementPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SlidePages\SchedulePage.xaml.cs">
       <DependentUpon>SchedulePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SlidePages\StaffPage.xaml.cs">
+      <DependentUpon>StaffPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SlidePages\TheConfrimLogout.xaml.cs">
       <DependentUpon>TheConfrimLogout.xaml</DependentUpon>
@@ -166,8 +178,17 @@
     <Compile Include="Pages\SlidePages\Cards\WorkingCabinetPage.xaml.cs">
       <DependentUpon>WorkingCabinetPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Wind\AddNewTrainingWindow.xaml.cs">
+      <DependentUpon>AddNewTrainingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Wind\MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wind\NewEntryInScheduleWindow.xaml.cs">
+      <DependentUpon>NewEntryInScheduleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wind\SelectActionWindow.xaml.cs">
+      <DependentUpon>SelectActionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="App.xaml.cs">
@@ -184,6 +205,9 @@
     <Compile Include="UserControls\UCSearchHuman.xaml.cs">
       <DependentUpon>UCSearchHuman.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCStaffInfo.xaml.cs">
+      <DependentUpon>UCStaffInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCStartPanel.xaml.cs">
       <DependentUpon>UCStartPanel.xaml</DependentUpon>
     </Compile>
@@ -199,9 +223,12 @@
     <Compile Include="ViewModels\AutorizationPageViewModel.cs" />
     <Compile Include="ViewModels\BeginPanelPageViewModel.cs" />
     <Compile Include="ViewModels\ClientsPageViewModel.cs" />
+    <Compile Include="ViewModels\GymPageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MessageWindowViewModel.cs" />
+    <Compile Include="ViewModels\PriceAbonementPageViewModel.cs" />
     <Compile Include="ViewModels\ScheduleViewModel.cs" />
+    <Compile Include="ViewModels\StaffViewModel.cs" />
     <Compile Include="ViewModels\WorkingCabinetPageViewModel.cs" />
     <Page Include="local.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -235,7 +262,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\SlidePages\ActionPages\GymPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SlidePages\ActionPages\PayPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SlidePages\ActionPages\PriceAbonementPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\SlidePages\SchedulePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SlidePages\StaffPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -255,7 +298,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Wind\AddNewTrainingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Wind\MessageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Wind\NewEntryInScheduleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Wind\SelectActionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -309,6 +364,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCSearchHuman.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCStaffInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -431,6 +490,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="TasksForMeForTheFuture\Tasks.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\delete.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Fody.3.0.3\build\Fody.targets" Condition="Exists('..\..\packages\Fody.3.0.3\build\Fody.targets')" />

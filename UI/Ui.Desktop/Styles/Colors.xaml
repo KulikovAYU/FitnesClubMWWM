@@ -30,6 +30,10 @@
     <Color x:Key="TextBoksBlue">#0063B1</Color>
     <SolidColorBrush x:Key="BackgroundTextBoksBlue" Color="{StaticResource TextBoksBlue}" />
 
+    <Color x:Key="ButtonBlue">#FF008AC3</Color>
+    <SolidColorBrush x:Key="BackgroundButtonBlue" Color="{StaticResource ButtonBlue}" />
+
+
     <Color x:Key="ThiknessGrey">#E6E6E6</Color>
     <SolidColorBrush x:Key="BackgroundThiknessGrey" Color="{StaticResource ThiknessGrey}" />
 

@@ -43,6 +43,7 @@
                 Cursor="Hand"
                 FontSize="14"
                 Foreground="White"
+                Command="{Binding ShowNewEntryInScheduleWindowCommand}"
                 Template="{StaticResource ButtonBaseControlTemplate}" />
             <ScrollViewer VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <Grid>

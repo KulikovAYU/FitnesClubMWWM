@@ -1,16 +1,18 @@
 ﻿using System.Windows;
+using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace FitnessClubMWWM.Ui.Desktop
 {
-    public  class BeginPanelPageViewModel : ViewModelBase
+    public class BeginPanelPageViewModel : ViewModelBase
     {
         public BeginPanelPageViewModel()
         {
             //ButtonClick = new RelayCommand(ExecuteCommand);
         }
+
 
         #region Команды, отвечающие за показ страниц
 
@@ -18,11 +20,71 @@ namespace FitnessClubMWWM.Ui.Desktop
 
         public RelayCommand ShowAdminPanelCommand => new RelayCommand(() => { Messenger.Default.Send("AdminPage"); });
 
-        public RelayCommand ShowWorkingCabinetCommand => new RelayCommand(() => { Messenger.Default.Send("WorkingCabinetPage");});
+        public RelayCommand ShowWorkingCabinetCommand => new RelayCommand(() =>
+        {
+            Messenger.Default.Send("WorkingCabinetPage");
+        });
 
         public RelayCommand ShowClientPageCommand => new RelayCommand(() => { Messenger.Default.Send("ClientPage"); });
 
-        public  RelayCommand ShowClassScheduleCommand =>new RelayCommand(() => { Messenger.Default.Send("ClassSchedule"); });
+        public RelayCommand ShowClassScheduleCommand =>
+            new RelayCommand(() => { Messenger.Default.Send("ClassSchedule"); });
+
+        public RelayCommand ShowStaffPageCommand => new RelayCommand(() => { Messenger.Default.Send("StaffPage"); });
+
+        public RelayCommand ShowSelectActionWindowCommand => new RelayCommand(() =>
+        {
+            Window selectActionWIndow = new SelectActionWindow();
+            selectActionWIndow.ShowDialog();
+        });
+
+
+        #region Окно выбора действия
+        /// <summary>
+        /// Команда закрытия диалогового окна
+        /// </summary>
+        public RelayCommand<Window> CloseCommand { get; set; } =
+            new RelayCommand<Window>((window) => { window?.Close(); });
+
+        private delegate void ShowPages(Window wind, string strPageName);
+        /// <summary>
+        /// Показать страницу с установкой окладов работникам
+        /// </summary>
+        public RelayCommand<Window> ShowSalaryPageCommand { get; set; } = new RelayCommand<Window>(
+            delegate (Window wind)
+            {
+                ShowPages del = InvokeShowPages;
+                del(wind, "PayPage");
+           
+            });
+
+
+        /// <summary>
+        /// Показать страницу с установкой информации о тренировках
+        /// </summary>
+        public RelayCommand<Window> ShowPriceAbonementPageCommand { get; set; } = new RelayCommand<Window>(
+            delegate(Window wind)
+            {
+                ShowPages del = InvokeShowPages;
+                del(wind, "PriceAbonementPage");
+            });
+
+        /// <summary>
+        /// Показать страницу со списком залов
+        /// </summary>
+        public RelayCommand<Window> ShowGymsPageCommand { get; set; } = new RelayCommand<Window>(
+            delegate (Window wind)
+            {
+                ShowPages del = InvokeShowPages;
+                del(wind, "GymPage");
+            });
+
+        //Метод, отвечающий за показ страниц
+        static void InvokeShowPages(Window wind, string strPageName)
+        {
+            wind?.Close();
+            Messenger.Default.Send(strPageName);
+        }
 
 
         #endregion
@@ -30,12 +92,11 @@ namespace FitnessClubMWWM.Ui.Desktop
 
 
 
+        #endregion
+
         public RelayCommand ButtonAgreeWithExitClick => new RelayCommand(AgreeWithExit);
 
         public RelayCommand ButtonDisagreeWithExitClick => new RelayCommand(DisagreeWithExit);
-
-
-
 
         void ExecuteCommand()
         {

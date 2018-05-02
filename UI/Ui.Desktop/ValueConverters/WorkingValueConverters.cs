@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using FitnessClubMWWM.Logic.Ui;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AdminPanelPages;
@@ -74,5 +75,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
             return  value != null && ((bool)value);
         }
     }
+
+
+  
 
 }

@@ -1,4 +1,655 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop" />
+    xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop"
+    xmlns:userControls="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
+    xmlns:viewModels="clr-namespace:FitnessClubMWWM.Ui.Desktop.ViewModels">
+    <ControlTemplate x:Key="WindowTemplateKey" TargetType="{x:Type Window}">
+        <Border
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}">
+            <Grid>
+                <AdornerDecorator>
+                    <ContentPresenter />
+                </AdornerDecorator>
+                <ResizeGrip
+                    x:Name="WindowResizeGrip"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    IsTabStop="false"
+                    Visibility="Collapsed" />
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="ResizeMode" Value="CanResizeWithGrip" />
+                    <Condition Property="WindowState" Value="Normal" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Visible" />
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <!--  Шаблон диалогового окна (создание новой записи в расписании)  -->
+    <Style x:Key="WindowMessageStyle" TargetType="{x:Type Window}">
+
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="WindowChrome.CaptionHeight" Value="20" />
+        <Setter Property="WindowChrome.CornerRadius" Value="0" />
+        <Setter Property="WindowChrome.GlassFrameThickness" Value="0" />
+        <Setter Property="WindowChrome.ResizeBorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <ControlTemplate.Resources>
+                        <viewModels:ScheduleViewModel x:Key="ViewModel" />
+                    </ControlTemplate.Resources>
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <Border.Resources>
+                            <Storyboard x:Key="ShowWindow">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.95">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <ExponentialEase EasingMode="EaseIn" />
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <ExponentialEase EasingMode="EaseIn" />
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.95">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <ExponentialEase EasingMode="EaseIn" />
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <ExponentialEase EasingMode="EaseIn" />
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </Border.Resources>
+
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <BeginStoryboard Storyboard="{StaticResource ShowWindow}" />
+                            </EventTrigger>
+                        </Border.Triggers>
+
+                        <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <!--  Фоновая картинка на заднем фоне  -->
+                            <Image
+                                Grid.RowSpan="2"
+                                Panel.ZIndex="0"
+                                Opacity="0.35"
+                                Source="/FitnessClubMWWM.Ui.Desktop;component/Images/DialogPictures/BackgroundDialogWindow.jpg"
+                                Stretch="Fill" />
+                            <!--  Рамка окна  -->
+                            <Rectangle
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Panel.ZIndex="1"
+                                StrokeThickness="1">
+                                <Rectangle.Stroke>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Offset="0" Color="#FF1E53D0" />
+                                        <GradientStop Offset="1" Color="#FF1171BF" />
+                                        <GradientStop Offset="0.149" Color="#FF2371E2" />
+                                    </LinearGradientBrush>
+                                </Rectangle.Stroke>
+                            </Rectangle>
+                            <!--  Панель с кнопкой закрыть  -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="50" />
+                                </Grid.ColumnDefinitions>
+
+                                <Border
+                                    Grid.Row="0"
+                                    Grid.ColumnSpan="2"
+                                    BorderBrush="{StaticResource BackgroundThiknessGrey}"
+                                    BorderThickness="0,0,0,2" />
+
+                                <Button
+                                    Grid.Column="1"
+                                    Panel.ZIndex="2"
+                                    Background="{x:Null}"
+                                    Command="{Binding CloseCommand, Mode=OneWay, Source={StaticResource ViewModel}}"
+                                    CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Cursor="Hand"
+                                    Foreground="Gray"
+                                    Style="{DynamicResource CloseDialogButtonStyle}"
+                                    ToolTip="Закрыть" />
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    VerticalAlignment="Center"
+                                    FontFamily="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz "
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    Foreground="Gray"
+                                    Text="Создание новой записи в расписании"
+                                    TextAlignment="Center" />
+                            </Grid>
+                            <!--  Панель с созданием нового расписания  -->
+                            <Border
+                                Grid.Row="1"
+                                Width="450"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBox
+                                        Width="300"
+                                        Height="40"
+                                        Margin="5"
+                                        VerticalContentAlignment="Center"
+                                        BorderThickness="2"
+                                        FontSize="18"
+                                        Tag="Название"
+                                        Template="{StaticResource InputTextBox}" />
+                                    <TextBox
+                                        Width="300"
+                                        Height="40"
+                                        Margin="5"
+                                        VerticalContentAlignment="Center"
+                                        BorderThickness="2"
+                                        FontSize="18"
+                                        Tag="Тип"
+                                        Template="{StaticResource InputTextBox}" />
+                                    <TextBox
+                                        Width="300"
+                                        Height="40"
+                                        Margin="5"
+                                        VerticalContentAlignment="Center"
+                                        BorderThickness="2"
+                                        FontSize="18"
+                                        Tag="Продолжительность"
+                                        Template="{StaticResource InputTextBox}" />
+                                    <TextBox
+                                        Width="300"
+                                        Height="70"
+                                        Margin="5"
+                                        VerticalContentAlignment="Center"
+                                        AcceptsReturn="True"
+                                        AcceptsTab="True"
+                                        BorderThickness="2"
+                                        FontSize="18"
+                                        Tag="Краткое описание"
+                                        Template="{StaticResource InputTextBox}" />
+                                    <DatePicker
+                                        Width="300"
+                                        Height="50"
+                                        Margin="5"
+                                        Padding="7,0,0,0"
+                                        VerticalContentAlignment="Center"
+                                        FontSize="{StaticResource Regular}"
+                                        Foreground="Gray"
+                                        Style="{StaticResource BaseStyle}" />
+                                    <Button
+                                        Width="300"
+                                        Height="50"
+                                        Content="Применить"
+                                        FontSize="{StaticResource Regular}"
+                                        Foreground="White"
+                                        Template="{DynamicResource ButtonBaseControlTemplate}" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                <Setter Property="Template" Value="{StaticResource WindowTemplateKey}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+
+    <!--  Шаблон диалогового окна (выбор действия от полььзователя)  -->
+    <Style x:Key="WindowSelectActioneStyle" TargetType="{x:Type Window}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="WindowChrome.CaptionHeight" Value="20" />
+        <Setter Property="WindowChrome.CornerRadius" Value="0" />
+        <Setter Property="WindowChrome.GlassFrameThickness" Value="0" />
+        <Setter Property="WindowChrome.ResizeBorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <ControlTemplate.Resources>
+                        <viewModels:ScheduleViewModel x:Key="ViewModel" />
+                    </ControlTemplate.Resources>
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <Border.Resources>
+                            <Storyboard x:Key="ShowWindow">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.95">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <ExponentialEase EasingMode="EaseIn" />
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <ExponentialEase EasingMode="EaseIn" />
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.95">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <ExponentialEase EasingMode="EaseIn" />
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <ExponentialEase EasingMode="EaseIn" />
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </Border.Resources>
+
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <BeginStoryboard Storyboard="{StaticResource ShowWindow}" />
+                            </EventTrigger>
+                        </Border.Triggers>
+
+                        <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <!--  Фоновая картинка на заднем фоне  -->
+                            <Image
+                                Grid.RowSpan="2"
+                                Panel.ZIndex="0"
+                                Opacity="0.35"
+                                Source="/FitnessClubMWWM.Ui.Desktop;component/Images/DialogPictures/BackgroundDialogWindow.jpg"
+                                Stretch="Fill" />
+                            <!--  Рамка окна  -->
+                            <Rectangle
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Panel.ZIndex="1"
+                                StrokeThickness="1">
+                                <Rectangle.Stroke>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Offset="0" Color="#FF1E53D0" />
+                                        <GradientStop Offset="1" Color="#FF1171BF" />
+                                        <GradientStop Offset="0.149" Color="#FF2371E2" />
+                                    </LinearGradientBrush>
+                                </Rectangle.Stroke>
+                            </Rectangle>
+                            <!--  Панель с кнопкой закрыть  -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="50" />
+                                </Grid.ColumnDefinitions>
+
+                                <Border
+                                    Grid.Row="0"
+                                    Grid.ColumnSpan="2"
+                                    BorderBrush="{StaticResource BackgroundThiknessGrey}"
+                                    BorderThickness="0,0,0,2" />
+
+                                <Button
+                                    Grid.Column="1"
+                                    Panel.ZIndex="2"
+                                    Background="{x:Null}"
+                                    Command="{Binding CloseCommand, Mode=OneWay, Source={StaticResource ViewModel}}"
+                                    CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Cursor="Hand"
+                                    Foreground="Gray"
+                                    Style="{DynamicResource CloseDialogButtonStyle}"
+                                    ToolTip="Закрыть" />
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    VerticalAlignment="Center"
+                                    FontFamily="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz "
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    Foreground="Gray"
+                                    Text="Выберите следующее действие"
+                                    TextAlignment="Center" />
+                            </Grid>
+
+                            <!--  Панель с созданием нового расписания  -->
+
+                            <UniformGrid
+                                Grid.Row="1"
+                                Width="700"
+                                HorizontalAlignment="Center"
+                                Columns="4"
+                                Rows="1">
+                                <userControls:StartButton
+                                    Background="{x:Null}"
+                                    BorderThickness="0"
+                                    ButtonComment="Управление окладами сотрудников фитнес-клуба"
+                                    ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
+                                    ButtonCommentFontSize="12"
+                                    ButtonCommentWrapping="Wrap"
+                                    Command="{Binding ShowStaffPageCommand}"
+                                    Content="Заработная плата"
+                                    FontSize="16"
+                                    GeomPicture="{Binding Data, Source={StaticResource Money}}"
+                                    GeomPictureFill="{StaticResource BackgroundBlueColor}"
+                                    GeomPictureHeight="50"
+                                    GeomPictureMargin="5"
+                                    GeomPictureWidth="70"
+                                    RenderTransformOrigin="0.5,0.5"
+                                    Template="{DynamicResource StartBtnControlTemplate}" />
+
+                                <userControls:StartButton
+                                    Background="{x:Null}"
+                                    BorderThickness="0"
+                                    ButtonComment="Управление стоимостью тренировок"
+                                    ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
+                                    ButtonCommentFontSize="12"
+                                    ButtonCommentWrapping="Wrap"
+                                    Command="{Binding ShowStaffPageCommand}"
+                                    Content="Прайс-лист"
+                                    FontSize="16"
+                                    GeomPicture="{Binding Data, Source={StaticResource Money1}}"
+                                    GeomPictureFill="{StaticResource BackgroundBlueColor}"
+                                    GeomPictureHeight="50"
+                                    GeomPictureMargin="5"
+                                    GeomPictureWidth="50"
+                                    RenderTransformOrigin="0.5,0.5"
+                                    Template="{DynamicResource StartBtnControlTemplate}" />
+
+                                <userControls:StartButton
+                                    Background="{x:Null}"
+                                    BorderThickness="0"
+                                    ButtonComment="Редактирование, удаление информации о залах"
+                                    ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
+                                    ButtonCommentFontSize="12"
+                                    ButtonCommentWrapping="Wrap"
+                                    Command="{Binding ShowStaffPageCommand}"
+                                    Content="Зал"
+                                    FontSize="16"
+                                    GeomPicture="{Binding Data, Source={StaticResource Gym}}"
+                                    GeomPictureFill="{StaticResource BackgroundBlueColor}"
+                                    GeomPictureHeight="50"
+                                    GeomPictureMargin="5"
+                                    GeomPictureWidth="50"
+                                    RenderTransformOrigin="0.5,0.5"
+                                    Template="{DynamicResource StartBtnControlTemplate}" />
+
+                                <userControls:StartButton
+                                    Background="{x:Null}"
+                                    BorderThickness="0"
+                                    ButtonComment="Редактирование, добавление ,удаление информации о тренировки"
+                                    ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
+                                    ButtonCommentFontSize="12"
+                                    ButtonCommentWrapping="Wrap"
+                                    Command="{Binding ShowStaffPageCommand}"
+                                    Content="Тренировка"
+                                    FontSize="16"
+                                    GeomPicture="{Binding Data, Source={StaticResource AddNewTraining}}"
+                                    GeomPictureFill="{StaticResource BackgroundBlueColor}"
+                                    GeomPictureHeight="50"
+                                    GeomPictureMargin="5"
+                                    GeomPictureWidth="50"
+                                    RenderTransformOrigin="0.5,0.5"
+                                    Template="{DynamicResource StartBtnControlTemplate}" />
+                            </UniformGrid>
+
+
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                <Setter Property="Template" Value="{StaticResource WindowTemplateKey}" />
+            </Trigger>
+
+        </Style.Triggers>
+    </Style>
+
+
+
+    <!--  Шаблон диалогового окна (ддобавления новой тренировки)  -->
+    <Style x:Key="AddNewTrainingWindowStyle" TargetType="{x:Type Window}">
+
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="WindowChrome.CaptionHeight" Value="20" />
+        <Setter Property="WindowChrome.CornerRadius" Value="0" />
+        <Setter Property="WindowChrome.GlassFrameThickness" Value="0" />
+        <Setter Property="WindowChrome.ResizeBorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <ControlTemplate.Resources>
+                        <viewModels:ScheduleViewModel x:Key="ViewModel" />
+                    </ControlTemplate.Resources>
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <Border.Resources>
+                            <Storyboard x:Key="ShowWindow">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.95">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <ExponentialEase EasingMode="EaseIn" />
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <ExponentialEase EasingMode="EaseIn" />
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.95">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <ExponentialEase EasingMode="EaseIn" />
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <ExponentialEase EasingMode="EaseIn" />
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </Border.Resources>
+
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <BeginStoryboard Storyboard="{StaticResource ShowWindow}" />
+                            </EventTrigger>
+                        </Border.Triggers>
+
+                        <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <!--  Фоновая картинка на заднем фоне  -->
+                            <Image
+                                Grid.RowSpan="2"
+                                Panel.ZIndex="0"
+                                Opacity="0.35"
+                                Source="/FitnessClubMWWM.Ui.Desktop;component/Images/DialogPictures/BackgroundDialogWindow.jpg"
+                                Stretch="Fill" />
+                            <!--  Рамка окна  -->
+                            <Rectangle
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Panel.ZIndex="1"
+                                StrokeThickness="1">
+                                <Rectangle.Stroke>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Offset="0" Color="#FF1E53D0" />
+                                        <GradientStop Offset="1" Color="#FF1171BF" />
+                                        <GradientStop Offset="0.149" Color="#FF2371E2" />
+                                    </LinearGradientBrush>
+                                </Rectangle.Stroke>
+                            </Rectangle>
+                            <!--  Панель с кнопкой закрыть  -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="50" />
+                                </Grid.ColumnDefinitions>
+
+                                <Border
+                                    Grid.Row="0"
+                                    Grid.ColumnSpan="2"
+                                    BorderBrush="{StaticResource BackgroundThiknessGrey}"
+                                    BorderThickness="0,0,0,2" />
+
+                                <Button
+                                    Grid.Column="1"
+                                    Panel.ZIndex="2"
+                                    Background="{x:Null}"
+                                    Command="{Binding CloseCommand, Mode=OneWay, Source={StaticResource ViewModel}}"
+                                    CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Cursor="Hand"
+                                    Foreground="Gray"
+                                    Style="{DynamicResource CloseDialogButtonStyle}"
+                                    ToolTip="Закрыть" />
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    VerticalAlignment="Center"
+                                    FontFamily="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz "
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    Foreground="Gray"
+                                    Text="Добавление нового вида тренировки"
+                                    TextAlignment="Center" />
+                            </Grid>
+                            <!--  Панель с созданием нового расписания  -->
+                            <Border
+                                Grid.Row="1"
+                                Width="450"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBox
+                                        Width="300"
+                                        Height="40"
+                                        Margin="5"
+                                        VerticalContentAlignment="Center"
+                                        BorderThickness="2"
+                                        FontSize="{StaticResource RegularBig}"
+                                        Tag="Название"
+                                        Template="{StaticResource InputTextBox}" />
+                                    <TextBox
+                                        Width="300"
+                                        Height="40"
+                                        Margin="5"
+                                        VerticalContentAlignment="Center"
+                                        BorderThickness="2"
+                                        FontSize="{StaticResource RegularBig}"
+                                        Tag="Тип"
+                                        Template="{StaticResource InputTextBox}" />
+                                    <TextBox
+                                        Width="300"
+                                        Height="40"
+                                        Margin="5"
+                                        VerticalContentAlignment="Center"
+                                        BorderThickness="2"
+                                        FontSize="{StaticResource RegularBig}"
+                                        Tag="Продолжительность"
+                                        Template="{StaticResource InputTextBox}" />
+                                    <TextBlock
+                                        Margin="75,0,0,0"
+                                        FontWeight="Bold"
+                                        Foreground="Gray"
+                                        Style="{StaticResource BaseTextBlockStyle}"
+                                        Text="Краткое описание" />
+                                    <RichTextBox
+                                        Width="300"
+                                        Height="150"
+                                        Margin="5"
+                                        VerticalContentAlignment="Center"
+                                        AcceptsReturn="True"
+                                        AcceptsTab="True"
+                                        BorderThickness="2"
+                                        FontSize="{StaticResource RegularBig}"
+                                        Tag="Краткое описание" />
+
+                                    <Button
+                                        Width="300"
+                                        Height="50"
+                                        Margin="0,2,0,0"
+                                        Content="Применить"
+                                        FontSize="{StaticResource Regular}"
+                                        Foreground="White"
+                                        Template="{DynamicResource ButtonBaseControlTemplate}" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                <Setter Property="Template" Value="{StaticResource WindowTemplateKey}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

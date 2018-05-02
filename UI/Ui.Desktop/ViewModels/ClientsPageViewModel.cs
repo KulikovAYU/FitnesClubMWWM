@@ -12,7 +12,9 @@ namespace FitnessClubMWWM.Ui.Desktop
 {
     public class ClientsPageViewModel : ViewModelBase
     {
-    
+
+
+        public RelayCommand RegisterNewClientCommand => new RelayCommand(() => { Messenger.Default.Send("RegisterNewClientPage"); });
 
         public ClientsPageViewModel()
         {
@@ -92,23 +94,153 @@ namespace FitnessClubMWWM.Ui.Desktop
                 if (clientsList != null)
                     return clientsList;
 
-                clientsList = new ObservableCollection<Clients>();
-                clientsList.Add(new Clients(){ Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement="Vip",PhoneNumber = "8-920-672-0-68" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement = "Vip", PhoneNumber = "8-920-672-0-68" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement = "Vip", PhoneNumber = "8-920-672-0-68" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement = "Vip", PhoneNumber = "8-920-672-0-68" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement = "Vip", PhoneNumber = "8-920-672-0-68" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement = "Vip", PhoneNumber = "8-920-672-0-68" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement = "Vip", PhoneNumber = "8-920-672-0-68" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "Куликов", FirstName = "Антон", FatherName = "Юрьевич", TypeAbonement = "Vip", PhoneNumber = "8-920-672-0-68" });
-                clientsList.Add(new Clients() { Photo = null, LastName = "РПОРрыов", FirstName = "пав", FatherName = "пав", TypeAbonement = "Норма", PhoneNumber = "8-920-672-0-32" });
+                clientsList = new ObservableCollection<Clients>
+                {
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "Куликов",
+                        FirstName = "Антон",
+                        FatherName = "Юрьевич",
+                        TypeAbonement = "Vip",
+                        PhoneNumber = "8-920-672-0-68"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "РПОРрыов",
+                        FirstName = "пав",
+                        FatherName = "пав",
+                        TypeAbonement = "Норма",
+                        PhoneNumber = "8-920-672-0-32"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "Куликов",
+                        FirstName = "Антон",
+                        FatherName = "Юрьевич",
+                        TypeAbonement = "Vip",
+                        PhoneNumber = "8-920-672-0-68"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "РПОРрыов",
+                        FirstName = "пав",
+                        FatherName = "пав",
+                        TypeAbonement = "Норма",
+                        PhoneNumber = "8-920-672-0-32"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "Куликов",
+                        FirstName = "Антон",
+                        FatherName = "Юрьевич",
+                        TypeAbonement = "Vip",
+                        PhoneNumber = "8-920-672-0-68"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "РПОРрыов",
+                        FirstName = "пав",
+                        FatherName = "пав",
+                        TypeAbonement = "Норма",
+                        PhoneNumber = "8-920-672-0-32"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "Куликов",
+                        FirstName = "Антон",
+                        FatherName = "Юрьевич",
+                        TypeAbonement = "Vip",
+                        PhoneNumber = "8-920-672-0-68"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "РПОРрыов",
+                        FirstName = "пав",
+                        FatherName = "пав",
+                        TypeAbonement = "Норма",
+                        PhoneNumber = "8-920-672-0-32"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "Куликов",
+                        FirstName = "Антон",
+                        FatherName = "Юрьевич",
+                        TypeAbonement = "Vip",
+                        PhoneNumber = "8-920-672-0-68"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "РПОРрыов",
+                        FirstName = "пав",
+                        FatherName = "пав",
+                        TypeAbonement = "Норма",
+                        PhoneNumber = "8-920-672-0-32"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "Куликов",
+                        FirstName = "Антон",
+                        FatherName = "Юрьевич",
+                        TypeAbonement = "Vip",
+                        PhoneNumber = "8-920-672-0-68"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "РПОРрыов",
+                        FirstName = "пав",
+                        FatherName = "пав",
+                        TypeAbonement = "Норма",
+                        PhoneNumber = "8-920-672-0-32"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "Куликов",
+                        FirstName = "Антон",
+                        FatherName = "Юрьевич",
+                        TypeAbonement = "Vip",
+                        PhoneNumber = "8-920-672-0-68"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "РПОРрыов",
+                        FirstName = "пав",
+                        FatherName = "пав",
+                        TypeAbonement = "Норма",
+                        PhoneNumber = "8-920-672-0-32"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "Куликов",
+                        FirstName = "Антон",
+                        FatherName = "Юрьевич",
+                        TypeAbonement = "Vip",
+                        PhoneNumber = "8-920-672-0-68"
+                    },
+                    new Clients()
+                    {
+                        Photo = null,
+                        LastName = "РПОРрыов",
+                        FirstName = "пав",
+                        FatherName = "пав",
+                        TypeAbonement = "Норма",
+                        PhoneNumber = "8-920-672-0-32"
+                    }
+                };
                 return clientsList;
             }
         }
@@ -150,8 +282,17 @@ namespace FitnessClubMWWM.Ui.Desktop
                 if (m_abonementList != null)
                     return m_abonementList;
 
-                m_abonementList = new ObservableCollection<Abonement>();
-                m_abonementList.Add(new Abonement() { m_strStatus = "Активна", m_strService = "VIP-карта", m_strTariff = "Весь день", m_nAllCntTrainings = 10, m_nRemainedTrainings =5 });
+                m_abonementList = new ObservableCollection<Abonement>
+                {
+                    new Abonement()
+                    {
+                        m_strStatus = "Активна",
+                        m_strService = "VIP-карта",
+                        m_strTariff = "Весь день",
+                        m_nAllCntTrainings = 10,
+                        m_nRemainedTrainings = 5
+                    }
+                };
                 return m_abonementList;
             }
         }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Windows;
+using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -11,6 +13,16 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
     {
 
         public RelayCommand GoHomeCommand => new RelayCommand(() => { Messenger.Default.Send("MainPage"); });
+
+        /// <summary>
+        /// Закрытие (нажатие на крестик)
+        /// </summary>
+        public RelayCommand<Window> CloseCommand => new RelayCommand<Window>((window) => { window?.Close(); });
+
+        public RelayCommand ShowNewEntryInScheduleWindowCommand => new RelayCommand(() =>
+        {
+            (new NewEntryInScheduleWindow()).ShowDialog(); });
+
 
         ///чисто для разметки
         public class Training
@@ -34,12 +46,14 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                 if (m_trainList != null)
                     return m_trainList;
 
-                m_trainList = new ObservableCollection<Training>();
+                m_trainList = new ObservableCollection<Training>
+                {
+                    new Training {Name = "Cycle", NameGym = "Зал N3"},
+                    new Training {Name = "PowerPump", NameGym = "Зал N5"},
+                    new Training {Name = "Кенезис", NameGym = "Зал N1"},
+                    new Training {Name = "Круговая", NameGym = "Зал N10"}
+                };
 
-                m_trainList.Add(new Training { Name = "Cycle", NameGym = "Зал N3" });
-                m_trainList.Add(new Training { Name = "PowerPump", NameGym = "Зал N5" });
-                m_trainList.Add(new Training { Name = "Кенезис", NameGym = "Зал N1" });
-                m_trainList.Add(new Training { Name = "Круговая", NameGym = "Зал N10" });
                 return m_trainList;
             }
           

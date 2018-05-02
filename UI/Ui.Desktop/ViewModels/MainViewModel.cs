@@ -1,16 +1,14 @@
 using System;
 using System.Windows;
-using System.Windows.Media;
-using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace FitnessClubMWWM.Logic.Ui
 {
     public class MainViewModel : ViewModelBase
     {
+      
 
         #region Private Member
 
@@ -101,6 +99,8 @@ namespace FitnessClubMWWM.Logic.Ui
             if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
         });
 
+
+
         public RelayCommand MinMaxCommand { get; set; } = new RelayCommand(() =>
         {
             if (Application.Current.MainWindow != null)
@@ -138,6 +138,7 @@ namespace FitnessClubMWWM.Logic.Ui
                     CurrentPage = ApplicationPage.MainPage;
                     break;
                 case "AdminPage":
+                    
                     CurrentPage = ApplicationPage.AdminPanel;
                     break;
 
@@ -161,7 +162,21 @@ namespace FitnessClubMWWM.Logic.Ui
                     CurrentPage = ApplicationPage.ClassSchedule;
                     break;
 
+                case "StaffPage":
+                    CurrentPage = ApplicationPage.StaffPage;
+                    break;
 
+                case "PayPage":
+                    CurrentPage = ApplicationPage.PayPage;
+                    break;
+
+                case "PriceAbonementPage":
+                    CurrentPage = ApplicationPage.PriceAbonementPage;
+                    break;
+
+                case "GymPage":
+                    CurrentPage = ApplicationPage.GymPage;
+                    break;
 
             }
         }

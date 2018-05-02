@@ -26,8 +26,8 @@
             <Ellipse
                 x:Name="Photo"
                 Grid.Row="0"
-                Width="120"
-                Height="120">
+                Width="100"
+                Height="100">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/red_gym_icon.ico" />
                 </Ellipse.Fill>
@@ -38,7 +38,7 @@
                 Grid.Row="1"
                 Width="200"
                 Height="40"
-                Margin="0,20,0,0"
+                Margin="0,10,0,0"
                 HorizontalAlignment="Center"
                 VerticalContentAlignment="Center"
                 Content="Загрузить фото"
@@ -50,7 +50,7 @@
 
         <StackPanel Orientation="Vertical">
             <GroupBox
-                Margin="5"
+                Margin="1"
                 Foreground="Gray"
                 Header="Клиент">
                 <StackPanel Width="600" Orientation="Vertical">
@@ -58,7 +58,7 @@
                     <TextBox
                         Name="Family"
                         Width="600"
-                        Height="40"
+                        Height="35"
                         Margin="0,5,0,0"
                         VerticalContentAlignment="Center"
                         BorderThickness="2"
@@ -69,7 +69,7 @@
                     <TextBox
                         Name="Name"
                         Width="600"
-                        Height="40"
+                        Height="35"
                         Margin="0,5,0,0"
                         VerticalContentAlignment="Center"
                         BorderThickness="2"
@@ -80,7 +80,7 @@
                     <TextBox
                         Name="SecondFamily"
                         Width="600"
-                        Height="40"
+                        Height="35"
                         Margin="0,5,0,0"
                         VerticalContentAlignment="Center"
                         BorderThickness="2"
@@ -116,7 +116,7 @@
                     <TextBox
                         Name="PhoneNuimber"
                         Width="600"
-                        Height="40"
+                        Height="35"
                         Margin="0,5,0,0"
                         VerticalContentAlignment="Center"
                         BorderThickness="2"
@@ -145,7 +145,7 @@
                             <TextBox
                                 Grid.ColumnSpan="2"
                                 Width="150"
-                                Height="40"
+                                Height="35"
                                 Margin="0,0,10,0"
                                 VerticalContentAlignment="Center"
                                 BorderThickness="2"
@@ -156,7 +156,7 @@
                             <TextBox
                                 Grid.ColumnSpan="2"
                                 Width="440"
-                                Height="40"
+                                Height="35"
                                 HorizontalAlignment="Right"
                                 VerticalContentAlignment="Center"
                                 BorderThickness="2"
@@ -169,7 +169,7 @@
                         <TextBox
                             Grid.ColumnSpan="2"
                             Width="600"
-                            Height="40"
+                            Height="35"
                             Margin="0,10,0,0"
                             VerticalContentAlignment="Center"
                             BorderThickness="2"
@@ -194,7 +194,7 @@
                                     <TextBox
                                         Grid.Column="0"
                                         Width="100"
-                                        Height="40"
+                                        Height="35"
                                         Margin="30,0,30,0"
                                         VerticalContentAlignment="Center"
                                         BorderThickness="2"
@@ -204,7 +204,7 @@
                                     <TextBox
                                         Grid.Column="1"
                                         Width="100"
-                                        Height="40"
+                                        Height="35"
                                         Margin="30,0,30,0"
                                         VerticalContentAlignment="Center"
                                         BorderThickness="2"
@@ -215,7 +215,7 @@
                                     <TextBox
                                         Grid.Column="2"
                                         Width="150"
-                                        Height="40"
+                                        Height="35"
                                         Margin="30,0,30,0"
                                         VerticalContentAlignment="Center"
                                         BorderThickness="2"
@@ -231,12 +231,12 @@
                     </StackPanel>
                 </GroupBox>
             </Border>
-           
-          
+
+
             <Button
                 Width="235"
-                Height="50"
-                Margin="0,20,0,10"
+                Height="40"
+                Margin="0,5,0,10"
                 HorizontalAlignment="Center"
                 VerticalContentAlignment="Center"
                 Content="Сохранить изменения"

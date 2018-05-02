@@ -1,15 +1,21 @@
 ﻿<Page
-    x:Class="FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.ClientPage"
+    x:Class="FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.StaffPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converter="clr-namespace:FitnessClubMWWM.Ui.Desktop.ValueConverters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop.Pages.SlidePages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userControls="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
-    Title="ClientPage"
+    xmlns:valueConverters="clr-namespace:FitnessClubMWWM.Ui.Desktop.ValueConverters"
+    Title="StaffPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
+    <Page.Style>
+        <StaticResource ResourceKey="PageNextWorkingBaseStyle" />
+    </Page.Style>
+
     <Page.InputBindings>
         <KeyBinding
             Key="F"
@@ -18,7 +24,7 @@
     </Page.InputBindings>
 
     <Page.Resources>
-        <converter:VisibilityToNullableBooleanConverter x:Key="VisibilityToNullableBooleanConverter" />
+        <valueConverters:VisibilityToNullableBooleanConverter x:Key="VisibilityToNullableBooleanConverter" />
 
         <Style
             x:Key="StyleToogle"
@@ -68,7 +74,6 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-
         <Storyboard x:Key="OnLoaded1">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.Opacity)">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0.1" />
@@ -78,7 +83,6 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-
     </Page.Resources>
     <Page.Triggers>
         <EventTrigger RoutedEvent="FrameworkElement.Loaded">
@@ -88,15 +92,9 @@
     </Page.Triggers>
 
 
-
-
     <Page.DataContext>
         <Binding Path="ClientsViewModel" Source="{StaticResource Locator}" />
     </Page.DataContext>
-
-    <Page.Style>
-        <StaticResource ResourceKey="PageNextWorkingBaseStyle" />
-    </Page.Style>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -116,17 +114,8 @@
                 FontSize="{StaticResource Big}"
                 FontWeight="Bold"
                 Foreground="{StaticResource BackgroundGrayColor}"
-                Text="Клиенты фитнес-клуба" />
-            <Button
-                Padding="5"
-                HorizontalAlignment="Right"
-                VerticalContentAlignment="Center"
-                Command="{Binding RegisterNewClientCommand}"
-                Content="+ Добавить новую запись"
-                Cursor="Hand"
-                FontSize="14"
-                Foreground="White"
-                Template="{StaticResource ButtonBaseControlTemplate}" />
+                Text="Работники фитнес-клуба" />
+
         </Grid>
 
         <DataGrid
@@ -161,9 +150,23 @@
                     <TranslateTransform />
                 </TransformGroup>
             </DataGrid.RenderTransform>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
 
+                    <MenuItem Header="Удалить">
+                        <MenuItem.Icon>
+                            <Image
+                                Width="16"
+                                Height="16"
+                                Source="/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/delete.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+
+            </DataGrid.ContextMenu>
             <!--  Цветовое выделение ячейки  -->
             <DataGrid.Columns>
+
                 <DataGridTemplateColumn
                     Width="30"
                     CanUserResize="False"
@@ -231,7 +234,7 @@
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <Border Margin="10" VerticalAlignment="Center">
-                        <userControls:UCClientPageDetails />
+                        <userControls:UCStaffInfo />
                     </Border>
 
                 </DataTemplate>
@@ -239,12 +242,6 @@
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
 
-        <userControls:UCSearchHuman
-            x:Name="Finder"
-            Grid.Row="2"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            Visibility="{Binding visibleSearchPanel}" />
         <userControls:ButtonWithPicture
             x:Name="FindUser"
             Grid.Row="2"
@@ -264,5 +261,13 @@
             Template="{DynamicResource AboutUserControlTemplate}"
             ToolTip="Найти человека" />
 
+        <userControls:UCSearchHuman
+            x:Name="Finder"
+            Grid.Row="2"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Visibility="{Binding visibleSearchPanel}" />
+
     </Grid>
+
 </Page>
