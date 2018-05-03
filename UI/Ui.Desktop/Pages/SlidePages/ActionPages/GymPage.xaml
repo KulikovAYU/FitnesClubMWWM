@@ -68,7 +68,7 @@
                 Padding="5"
                 HorizontalAlignment="Right"
                 VerticalContentAlignment="Center"
-                Command="{Binding ShowNewEntryInScheduleWindowCommand}"
+                Command="{Binding ShowGymWindowsCommand}"
                 Content="+ Добавить новую запись"
                 Cursor="Hand"
                 FontSize="14"

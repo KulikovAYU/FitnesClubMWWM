@@ -59,9 +59,9 @@
                     <ControlTemplate.Resources>
                         <Storyboard x:Key="OnLoaded2">
                             <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="GoHome" Storyboard.TargetProperty="(FrameworkElement.Margin)">
-                                <EasingThicknessKeyFrame KeyTime="0" Value="-50,40,0,0" />
-                                <EasingThicknessKeyFrame KeyTime="0:0:0.1" Value="-10,40,0,0" />
-                                <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="0,40,0,0" />
+                                <EasingThicknessKeyFrame KeyTime="0" Value="-50,0,0,0" />
+                                <EasingThicknessKeyFrame KeyTime="0:0:0.1" Value="-10,0,0,0" />
+                                <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="50,0,0,0" />
                             </ThicknessAnimationUsingKeyFrames>
                         </Storyboard>
                     </ControlTemplate.Resources>
@@ -89,11 +89,12 @@
                                 Template="{DynamicResource ScrollViewerControlTemplate1}"
                                 VerticalScrollBarVisibility="Auto">
                                 <UserControls:ButtonWithPicture
+                                    Panel.ZIndex="4"
                                     x:Name="GoHome"
                                     Grid.Row="0"
                                     Width="50"
                                     Height="40"
-                                    Margin="-50,40,0,0"
+                                    Margin="-50,0,0,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
                                     Background="{x:Null}"
@@ -108,7 +109,7 @@
                                     ToolTip="На главную страницу" />
 
                             </ScrollViewer>
-                            <ContentPresenter Panel.ZIndex="2" Content="{TemplateBinding Content}" />
+                            <ContentPresenter Panel.ZIndex="1" Content="{TemplateBinding Content}" />
                         </Grid>
 
                     </Border>

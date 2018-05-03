@@ -10,6 +10,10 @@
         <Setter Property="Control.FontFamily" Value="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz " />
     </Style>
 
+    <Style x:Key="BaseGridStyle" TargetType="{x:Type Grid}">
+        <Setter Property="Control.FontFamily" Value="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz " />
+    </Style>
+
     <Style x:Key="BaseButtonStyle" TargetType="{x:Type Control}">
         <Setter Property="Control.FontFamily" Value="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz " />
         <Setter Property="Control.FontWeight" Value="Bold" />

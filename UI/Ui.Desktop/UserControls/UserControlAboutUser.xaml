@@ -376,10 +376,10 @@
                     Panel.ZIndex="2"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
-                    GeomPicture="{Binding Data, Source={StaticResource AboutUser}}"
+                    GeomPicture="{Binding Data, Source={StaticResource NewClient}}"
                     GeomPictureFill="Black"
                     GeomPictureHeight="20"
-                    GeomPictureWidth="20"
+                    GeomPictureWidth="15"
                     Template="{DynamicResource AboutUserControlTemplate}"
                     ToolTip="Данные пользователя"
                     Visibility="Visible" />

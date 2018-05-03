@@ -181,11 +181,20 @@
     <Compile Include="Pages\Wind\AddNewTrainingWindow.xaml.cs">
       <DependentUpon>AddNewTrainingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Wind\CheckTheClubCardWindow.xaml.cs">
+      <DependentUpon>CheckTheClubCardWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Wind\MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Wind\NewEntryInScheduleWindow.xaml.cs">
       <DependentUpon>NewEntryInScheduleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wind\GymWindow.xaml.cs">
+      <DependentUpon>GymWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wind\SalariesEmployeesWindow.xaml.cs">
+      <DependentUpon>SalariesEmployeesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Wind\SelectActionWindow.xaml.cs">
       <DependentUpon>SelectActionWindow.xaml</DependentUpon>
@@ -302,11 +311,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Wind\CheckTheClubCardWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Wind\MessageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Wind\NewEntryInScheduleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Wind\GymWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Wind\SalariesEmployeesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

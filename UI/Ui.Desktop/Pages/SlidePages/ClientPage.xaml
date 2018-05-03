@@ -47,7 +47,7 @@
             <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="FindUser" Storyboard.TargetProperty="(FrameworkElement.Margin)">
                 <EasingThicknessKeyFrame KeyTime="0:0:0.1" Value="-30,0,0,0" />
                 <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="-10,0,0,0" />
-                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="0,0,0,0" />
+                <EasingThicknessKeyFrame KeyTime="0:0:0.4" Value="100,0,0,0" />
             </ThicknessAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="dataGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.97" />
@@ -132,14 +132,13 @@
         <DataGrid
             x:Name="dataGrid"
             Grid.Row="2"
-            Margin="50,0,10,0"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             AutoGenerateColumns="False"
             Background="White"
+            Margin="5 0 5 0"
             CanUserAddRows="False"
             ColumnHeaderHeight="40"
-            ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}"
             ColumnWidth="Auto"
             Foreground="Black"
             GridLinesVisibility="None"
@@ -247,7 +246,7 @@
             Visibility="{Binding visibleSearchPanel}" />
         <userControls:ButtonWithPicture
             x:Name="FindUser"
-            Grid.Row="2"
+            Grid.Row="0"
             Width="50"
             Height="40"
             Margin="-50,0,0,0"

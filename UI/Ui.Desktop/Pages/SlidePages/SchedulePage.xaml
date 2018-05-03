@@ -21,324 +21,361 @@
             <Setter Property="Width" Value="0.5" />
             <Setter Property="Background" Value="{StaticResource BlueDataGridRowDetailsViewColor}" />
         </Style>
+
+        <Storyboard x:Key="OnLoaded1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="textBlock" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.5" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0.6" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0.8" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Page.Resources>
 
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource OnLoaded1}" />
+        </EventTrigger>
+    </Page.Triggers>
+
     <Grid>
-        <Border
-            Margin="10"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top">
-           
-        </Border>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <Grid
+            Grid.Row="1"
+            Margin="50,0,50,0"
+            VerticalAlignment="Center">
+            <TextBlock
+                x:Name="textBlock"
+                VerticalAlignment="Center"
+                FontSize="{StaticResource Big}"
+                FontWeight="Bold"
+                Foreground="{StaticResource BackgroundGrayColor}"
+                Text="Расписание занятий фитнес-клуба" />
+        </Grid>
+
+
         <StackPanel
-            Margin="10 50 10 0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top">
+            Grid.Row="2"
+            Margin="10,0,10,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
             <Button
+                Margin="10,0,0,20"
                 Padding="5"
                 HorizontalAlignment="Right"
                 VerticalContentAlignment="Center"
+                Command="{Binding ShowNewEntryInScheduleWindowCommand}"
                 Content="+ Создать новую запись в расписании"
-                Margin="10 0 0 20"
                 Cursor="Hand"
                 FontSize="14"
                 Foreground="White"
-                Command="{Binding ShowNewEntryInScheduleWindowCommand}"
                 Template="{StaticResource ButtonBaseControlTemplate}" />
-            <ScrollViewer VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120*" />
-                    <ColumnDefinition Width="120*" />
-                    <ColumnDefinition Width="120*" />
-                    <ColumnDefinition Width="120*" />
-                    <ColumnDefinition Width="120*" />
-                    <ColumnDefinition Width="120*" />
-                    <ColumnDefinition Width="120*" />
-                </Grid.ColumnDefinitions>
+            <ScrollViewer
+                HorizontalAlignment="Stretch"
+                VerticalContentAlignment="Stretch"
+                HorizontalScrollBarVisibility="Auto"
+                VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120*" />
+                        <ColumnDefinition Width="120*" />
+                        <ColumnDefinition Width="120*" />
+                        <ColumnDefinition Width="120*" />
+                        <ColumnDefinition Width="120*" />
+                        <ColumnDefinition Width="120*" />
+                        <ColumnDefinition Width="120*" />
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock
-                    Grid.Column="0"
-                    Style="{StaticResource HeaderStyle}"
-                    Text="Понедельник" />
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Style="{StaticResource HeaderStyle}"
-                    Text="Вторник" />
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Style="{StaticResource HeaderStyle}"
-                    Text="Среда" />
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="3"
-                    Style="{StaticResource HeaderStyle}"
-                    Text="Четверг" />
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="4"
-                    Style="{StaticResource HeaderStyle}"
-                    Text="Пятница" />
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="5"
-                    Style="{StaticResource HeaderStyle}"
-                    Text="Суббота" />
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="6"
-                    Style="{StaticResource HeaderStyle}"
-                    Text="Воскресенье" />
-                <GridSplitter
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="7"
-                    Height="1"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Bottom"
-                    Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
-
-
-                <GridSplitter
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="0"
-                    Style="{StaticResource GridSplitterStyle}" />
-                <GridSplitter
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="1"
-                    Style="{StaticResource GridSplitterStyle}" />
-                <GridSplitter
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="2"
-                    Style="{StaticResource GridSplitterStyle}" />
-                <GridSplitter
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="3"
-                    Style="{StaticResource GridSplitterStyle}" />
-                <GridSplitter
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="4"
-                    Style="{StaticResource GridSplitterStyle}" />
-                <GridSplitter
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="5"
-                    Style="{StaticResource GridSplitterStyle}" />
-
-                <!--  Расписание занятий для понедельника (переработать список отсориторовать понедельник)  -->
-                <ListBox
-                    x:Name="TrainingsMonday"
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="1"
-                    HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Top"
-                    Background="{x:Null}"
-                    BorderBrush="{x:Null}"
-                    ItemsSource="{Binding GetTrainings}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Border
-                                Padding="5"
-                                HorizontalAlignment="Stretch"
-                                Background="White"
-                                BorderBrush="{StaticResource BackgroundThiknessGrey}"
-                                BorderThickness="2">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Path=Time}" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <!--  Расписание занятий для вторника (переработать список отсориторовать вторник)  -->
-                <ListBox
-                    x:Name="TrainingsTuesday"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="1"
-                    HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Top"
-                    Background="{x:Null}"
-                    BorderBrush="{x:Null}"
-                    ItemsSource="{Binding GetTrainings}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Border
-                                Padding="5"
-                                HorizontalAlignment="Stretch"
-                                Background="White"
-                                BorderBrush="{StaticResource BackgroundThiknessGrey}"
-                                BorderThickness="2">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Path=Time}" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <!--  Расписание занятий для среды (переработать список отсориторовать среду)  -->
-                <ListBox
-                    x:Name="TrainingsWednesday"
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Margin="1"
-                    HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Top"
-                    Background="{x:Null}"
-                    BorderBrush="{x:Null}"
-                    ItemsSource="{Binding GetTrainings}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Border
-                                Padding="5"
-                                HorizontalAlignment="Stretch"
-                                Background="White"
-                                BorderBrush="{StaticResource BackgroundThiknessGrey}"
-                                BorderThickness="2">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Path=Time}" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <!--  Расписание занятий для четверга (переработать список отсориторовать четверг)  -->
-                <ListBox
-                    x:Name="TrainingsThursday"
-                    Grid.Row="1"
-                    Grid.Column="3"
-                    Margin="1"
-                    HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Top"
-                    Background="{x:Null}"
-                    BorderBrush="{x:Null}"
-                    ItemsSource="{Binding GetTrainings}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Border
-                                Padding="5"
-                                HorizontalAlignment="Stretch"
-                                Background="White"
-                                BorderBrush="{StaticResource BackgroundThiknessGrey}"
-                                BorderThickness="2">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Path=Time}" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <!--  Расписание занятий для пятницы (переработать список отсориторовать пятницу)  -->
-                <ListBox
-                    x:Name="TrainingsFriday"
-                    Grid.Row="1"
-                    Grid.Column="4"
-                    Margin="1"
-                    HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Top"
-                    Background="{x:Null}"
-                    BorderBrush="{x:Null}"
-                    ItemsSource="{Binding GetTrainings}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Border
-                                Padding="5"
-                                HorizontalAlignment="Stretch"
-                                Background="White"
-                                BorderBrush="{StaticResource BackgroundThiknessGrey}"
-                                BorderThickness="2">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Path=Time}" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                    <TextBlock
+                        Grid.Column="0"
+                        Style="{StaticResource HeaderStyle}"
+                        Text="Понедельник" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Style="{StaticResource HeaderStyle}"
+                        Text="Вторник" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Style="{StaticResource HeaderStyle}"
+                        Text="Среда" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="3"
+                        Style="{StaticResource HeaderStyle}"
+                        Text="Четверг" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="4"
+                        Style="{StaticResource HeaderStyle}"
+                        Text="Пятница" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="5"
+                        Style="{StaticResource HeaderStyle}"
+                        Text="Суббота" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="6"
+                        Style="{StaticResource HeaderStyle}"
+                        Text="Воскресенье" />
+                    <GridSplitter
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="7"
+                        Height="1"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Bottom"
+                        Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
 
 
-                <!--  Расписание занятий для субботы (переработать список отсориторовать субботу)  -->
-                <ListBox
-                    x:Name="TrainingsSaturday"
-                    Grid.Row="1"
-                    Grid.Column="5"
-                    Margin="1"
-                    HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Top"
-                    Background="{x:Null}"
-                    BorderBrush="{x:Null}"
-                    ItemsSource="{Binding GetTrainings}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Border
-                                Padding="5"
-                                HorizontalAlignment="Stretch"
-                                Background="White"
-                                BorderBrush="{StaticResource BackgroundThiknessGrey}"
-                                BorderThickness="2">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Path=Time}" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                    <GridSplitter
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Style="{StaticResource GridSplitterStyle}" />
+                    <GridSplitter
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Style="{StaticResource GridSplitterStyle}" />
+                    <GridSplitter
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="2"
+                        Style="{StaticResource GridSplitterStyle}" />
+                    <GridSplitter
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="3"
+                        Style="{StaticResource GridSplitterStyle}" />
+                    <GridSplitter
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="4"
+                        Style="{StaticResource GridSplitterStyle}" />
+                    <GridSplitter
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="5"
+                        Style="{StaticResource GridSplitterStyle}" />
 
-                <!--  Расписание занятий для воскресенья (переработать список отсориторовать воскресенье)  -->
-                <ListBox
-                    x:Name="TrainingsSunday"
-                    Grid.Row="1"
-                    Grid.Column="6"
-                    Margin="1"
-                    HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Top"
-                    Background="{x:Null}"
-                    BorderBrush="{x:Null}"
-                    ItemsSource="{Binding GetTrainings}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Border
-                                Padding="5"
-                                HorizontalAlignment="Stretch"
-                                Background="White"
-                                BorderBrush="{StaticResource BackgroundThiknessGrey}"
-                                BorderThickness="2">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Path=Time}" TextAlignment="Center" />
-                                    <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Grid>
+                    <!--  Расписание занятий для понедельника (переработать список отсориторовать понедельник)  -->
+                    <ListBox
+                        x:Name="TrainingsMonday"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="1"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Top"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"
+                        ItemsSource="{Binding GetTrainings}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Padding="5"
+                                    HorizontalAlignment="Stretch"
+                                    Background="White"
+                                    BorderBrush="{StaticResource BackgroundThiknessGrey}"
+                                    BorderThickness="2">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" />
+                                        <TextBlock Text="{Binding Path=Time}" TextAlignment="Center" />
+                                        <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <!--  Расписание занятий для вторника (переработать список отсориторовать вторник)  -->
+                    <ListBox
+                        x:Name="TrainingsTuesday"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="1"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Top"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"
+                        ItemsSource="{Binding GetTrainings}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Padding="5"
+                                    HorizontalAlignment="Stretch"
+                                    Background="White"
+                                    BorderBrush="{StaticResource BackgroundThiknessGrey}"
+                                    BorderThickness="2">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" />
+                                        <TextBlock Text="{Binding Path=Time}" TextAlignment="Center" />
+                                        <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <!--  Расписание занятий для среды (переработать список отсориторовать среду)  -->
+                    <ListBox
+                        x:Name="TrainingsWednesday"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Margin="1"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Top"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"
+                        ItemsSource="{Binding GetTrainings}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Padding="5"
+                                    HorizontalAlignment="Stretch"
+                                    Background="White"
+                                    BorderBrush="{StaticResource BackgroundThiknessGrey}"
+                                    BorderThickness="2">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" />
+                                        <TextBlock Text="{Binding Path=Time}" TextAlignment="Center" />
+                                        <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <!--  Расписание занятий для четверга (переработать список отсориторовать четверг)  -->
+                    <ListBox
+                        x:Name="TrainingsThursday"
+                        Grid.Row="1"
+                        Grid.Column="3"
+                        Margin="1"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Top"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"
+                        ItemsSource="{Binding GetTrainings}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Padding="5"
+                                    HorizontalAlignment="Stretch"
+                                    Background="White"
+                                    BorderBrush="{StaticResource BackgroundThiknessGrey}"
+                                    BorderThickness="2">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" />
+                                        <TextBlock Text="{Binding Path=Time}" TextAlignment="Center" />
+                                        <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <!--  Расписание занятий для пятницы (переработать список отсориторовать пятницу)  -->
+                    <ListBox
+                        x:Name="TrainingsFriday"
+                        Grid.Row="1"
+                        Grid.Column="4"
+                        Margin="1"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Top"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"
+                        ItemsSource="{Binding GetTrainings}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Padding="5"
+                                    HorizontalAlignment="Stretch"
+                                    Background="White"
+                                    BorderBrush="{StaticResource BackgroundThiknessGrey}"
+                                    BorderThickness="2">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" />
+                                        <TextBlock Text="{Binding Path=Time}" TextAlignment="Center" />
+                                        <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+
+                    <!--  Расписание занятий для субботы (переработать список отсориторовать субботу)  -->
+                    <ListBox
+                        x:Name="TrainingsSaturday"
+                        Grid.Row="1"
+                        Grid.Column="5"
+                        Margin="1"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Top"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"
+                        ItemsSource="{Binding GetTrainings}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Padding="5"
+                                    HorizontalAlignment="Stretch"
+                                    Background="White"
+                                    BorderBrush="{StaticResource BackgroundThiknessGrey}"
+                                    BorderThickness="2">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" />
+                                        <TextBlock Text="{Binding Path=Time}" TextAlignment="Center" />
+                                        <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <!--  Расписание занятий для воскресенья (переработать список отсориторовать воскресенье)  -->
+                    <ListBox
+                        x:Name="TrainingsSunday"
+                        Grid.Row="1"
+                        Grid.Column="6"
+                        Margin="1"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Top"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"
+                        ItemsSource="{Binding GetTrainings}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Padding="5"
+                                    HorizontalAlignment="Stretch"
+                                    Background="White"
+                                    BorderBrush="{StaticResource BackgroundThiknessGrey}"
+                                    BorderThickness="2">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Path=Name}" TextAlignment="Center" />
+                                        <TextBlock Text="{Binding Path=Time}" TextAlignment="Center" />
+                                        <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
             </ScrollViewer>
         </StackPanel>
 

@@ -68,7 +68,7 @@
                 Padding="5"
                 HorizontalAlignment="Right"
                 VerticalContentAlignment="Center"
-                Command="{Binding ShowNewEntryInScheduleWindowCommand}"
+                Command="{Binding ShowSalariesEmployeesWindowCommand}"
                 Content="+ Добавить новую запись"
                 Cursor="Hand"
                 FontSize="14"
@@ -97,48 +97,47 @@
                 <DataGridTextColumn
                     Width="200"
                     Binding="{Binding Payment}"
-                    Header="Оклад (руб)" 
                     CellStyle="{StaticResource StyleCenter}"
-                    />
-          
+                    Header="Оклад (руб)" />
 
-            <DataGridTemplateColumn Width="150">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Button
-                                Padding="5"
-                                HorizontalAlignment="Right"
-                                VerticalContentAlignment="Center"
-                                Command="{Binding ShowNewEntryInScheduleWindowCommand}"
-                                Content="Редактировать"
-                                Cursor="Hand"
-                                FontSize="14"
-                                Foreground="White"
-                                Template="{StaticResource ButtonBaseControlTemplate}" />
-                        </Border>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
 
-            <DataGridTemplateColumn Width="150">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Button
-                                Padding="5"
-                                HorizontalAlignment="Right"
-                                VerticalContentAlignment="Center"
-                                Command="{Binding ShowNewEntryInScheduleWindowCommand}"
-                                Content="Удалить"
-                                Cursor="Hand"
-                                FontSize="14"
-                                Foreground="White"
-                                Template="{StaticResource ButtonBaseControlTemplate}" />
-                        </Border>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button
+                                    Padding="5"
+                                    HorizontalAlignment="Right"
+                                    VerticalContentAlignment="Center"
+                                    Command="{Binding ShowNewEntryInScheduleWindowCommand}"
+                                    Content="Редактировать"
+                                    Cursor="Hand"
+                                    FontSize="14"
+                                    Foreground="White"
+                                    Template="{StaticResource ButtonBaseControlTemplate}" />
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button
+                                    Padding="5"
+                                    HorizontalAlignment="Right"
+                                    VerticalContentAlignment="Center"
+                                    Command="{Binding ShowNewEntryInScheduleWindowCommand}"
+                                    Content="Удалить"
+                                    Cursor="Hand"
+                                    FontSize="14"
+                                    Foreground="White"
+                                    Template="{StaticResource ButtonBaseControlTemplate}" />
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 

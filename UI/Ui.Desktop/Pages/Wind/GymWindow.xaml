@@ -1,18 +1,19 @@
 ﻿<Window
-    x:Class="FitnessClubMWWM.Ui.Desktop.Pages.Wind.AddNewTrainingWindow"
+    x:Class="FitnessClubMWWM.Ui.Desktop.Pages.Wind.GymWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop.Pages.Wind"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="AddNewTrainingWindow"
-    Width="400"
-    Height="450"
+    Title="SalariesOfEmployeesWindow"
+    Width="380"
+    Height="400"
     AllowsTransparency="True"
-    Style="{StaticResource AddNewTrainingWindowStyle}"
+    DataContext="{Binding GymViewModel, Source={StaticResource Locator}}"
+    Style="{StaticResource GymWindowStyle}"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
-
     <WindowChrome.WindowChrome>
         <WindowChrome
             CaptionHeight="20"
@@ -20,6 +21,5 @@
             GlassFrameThickness="0"
             ResizeBorderThickness="0" />
     </WindowChrome.WindowChrome>
-
-    <Grid />
 </Window>
+

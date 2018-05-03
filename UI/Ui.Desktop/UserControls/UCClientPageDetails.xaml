@@ -188,7 +188,7 @@
             Header="Абонемент"
             Style="{DynamicResource TabItemStyle}">
             <Grid Background="White">
-                <Border Height="200">
+                <Border>
                     <StackPanel Margin="10,10,10,10" Orientation="Vertical">
                         <Grid Height="30">
                             <Grid.ColumnDefinitions>
@@ -203,6 +203,7 @@
 
                             <local:ButtonWithPicture
                                 Grid.Column="0"
+                                Command="{Binding ShowCheckClubCardWindow}"
                                 Content="Продать абонемент"
                                 GeomPicture="{Binding Source={StaticResource SellAbonement}, Path=Data}"
                                 GeomPictureFill="Black"

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -9,6 +10,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
     {
         public RelayCommand GoHomeCommand => new RelayCommand(() => { Messenger.Default.Send("MainPage"); });
 
+        public RelayCommand ShowSalariesEmployeesWindowCommand =>
+            new RelayCommand(() => (new SalariesEmployeesWindow()).ShowDialog());
 
         /// <summary>
         /// зарплата (для отладки)

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using FitnessClubMWWM.Logic.Ui;
+using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using FitnessClubMWWM.Ui.Desktop.UserControls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -15,6 +16,9 @@ namespace FitnessClubMWWM.Ui.Desktop
 
 
         public RelayCommand RegisterNewClientCommand => new RelayCommand(() => { Messenger.Default.Send("RegisterNewClientPage"); });
+
+        public RelayCommand ShowCheckClubCardWindow =>
+            new RelayCommand(() => (new CheckTheClubCardWindow()).ShowDialog());
 
         public ClientsPageViewModel()
         {
