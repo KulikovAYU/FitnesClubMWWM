@@ -16,28 +16,29 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             (new AddNewTrainingWindow()).ShowDialog();});
 
 
-        public class Training<T>
+        public class Training
         {
-            public T Name { get; set; }
-            public T Type { get; set; }
-            public T Duration { get; set; }
+            public int nCount { get; set; }
+            public string TrainingService { get; set; }
+            public string TrainingTariff { get; set; }
+            public double TrainingCost { get; set; }
         }
 
 
-        private ObservableCollection<Training<string>> trainingList = null;
+        private ObservableCollection<Training> trainingList = null;
 
-        public ObservableCollection<Training<string>> TrainingsList
+        public ObservableCollection<Training> TrainingsList
         {
             get
             {
                 if (trainingList != null)
                     return trainingList;
 
-                trainingList = new ObservableCollection<Training<string>>
+                trainingList = new ObservableCollection<Training>
                 { 
-                   new Training<string>() { Name = "Interval", Type = "Активный фитнес", Duration = "60 мин"},
-                   new Training<string>() { Name = "Step", Type = "Активный фитнес", Duration = "60 мин"},
-                   new Training<string>() { Name = "LatinaDance", Type = "Танцевальная тренировка", Duration = "60 мин"}
+                   new Training() { nCount=10, TrainingService = "Групповое занятие в фитнес-зале", TrainingTariff = "Утренний", TrainingCost = 200.0},
+                   new Training() { nCount=20, TrainingService = "Групповое занятие в фитнес-зале", TrainingTariff = "Утренний", TrainingCost = 350.0},
+                   new Training() { nCount=25, TrainingService = "Групповое занятие в фитнес-зале", TrainingTariff = "Утренний", TrainingCost = 400.0}
                 };
                 return trainingList;
             }

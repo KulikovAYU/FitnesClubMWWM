@@ -38,7 +38,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
     </Page.Resources>
 
     <Page.Triggers>
@@ -63,7 +62,7 @@
                 FontSize="{StaticResource Big}"
                 FontWeight="Bold"
                 Foreground="{StaticResource BackgroundGrayColor}"
-                Text="Тренировки" />
+                Text="Прайс-лист" />
             <Button
                 Padding="5"
                 HorizontalAlignment="Right"
@@ -81,35 +80,45 @@
             x:Name="DataGrid"
             Grid.Row="2"
             Margin="10,0,10,30"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
             AutoGenerateColumns="False"
+            Background="Transparent"
+            BorderThickness="0"
             CanUserAddRows="False"
             CellStyle="{DynamicResource DataGridCellStyle1}"
             ColumnHeaderHeight="40"
-            ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}"
             IsReadOnly="True"
             ItemsSource="{Binding TrainingsList}"
-            RowHeight="40">
+            RowHeight="40"
+            SelectionMode="Extended"
+            Style="{StaticResource BaseDataGridLabelFontStyle}">
 
 
 
             <DataGrid.Columns>
                 <DataGridTextColumn
-                    Width="100"
-                    Binding="{Binding Name}"
+                    Width="80"
+                    Binding="{Binding nCount}"
                     CellStyle="{StaticResource StyleCenter}"
-                    Header="Название" />
+                    Header="Количество тренировок" />
                 <DataGridTextColumn
-                    Width="150"
-                    Binding="{Binding Type}"
+                    Width="150*"
+                    Binding="{Binding TrainingService}"
                     CellStyle="{StaticResource StyleCenter}"
-                    Header="Тип тренировки" />
+                    Header="Услуга" />
                 <DataGridTextColumn
-                    Width="150"
-                    Binding="{Binding Duration}"
+                    Width="100*"
+                    Binding="{Binding TrainingTariff}"
                     CellStyle="{StaticResource StyleCenter}"
-                    Header="Продолжительность" />
+                    Header="Тариф" />
+                <DataGridTextColumn
+                    Width="100*"
+                    Binding="{Binding TrainingCost}"
+                    CellStyle="{StaticResource StyleCenter}"
+                    Header="Стоимость абонемента, руб." />
 
-                <DataGridTemplateColumn Width="150">
+                <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -128,7 +137,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Width="150">
+                <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -147,7 +156,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Width="150">
+                <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">

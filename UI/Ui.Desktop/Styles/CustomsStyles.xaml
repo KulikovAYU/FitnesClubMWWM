@@ -89,7 +89,6 @@
                                 Template="{DynamicResource ScrollViewerControlTemplate1}"
                                 VerticalScrollBarVisibility="Auto">
                                 <UserControls:ButtonWithPicture
-                                    Panel.ZIndex="4"
                                     x:Name="GoHome"
                                     Grid.Row="0"
                                     Width="50"
@@ -97,6 +96,7 @@
                                     Margin="-50,0,0,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
+                                    Panel.ZIndex="4"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     Command="{Binding GoHomeCommand, Mode=OneWay}"

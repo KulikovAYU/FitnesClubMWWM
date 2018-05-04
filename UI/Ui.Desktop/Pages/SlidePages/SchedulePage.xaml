@@ -200,6 +200,20 @@
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
+
+                        <ListBox.ContextMenu>
+                            <ContextMenu >
+                                <MenuItem Header="Удалить запись">
+                                    <MenuItem.Icon>
+                                        <Image
+                                            Width="16"
+                                            Height="16"
+                                            Source="/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/delete.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+
                     </ListBox>
                     <!--  Расписание занятий для вторника (переработать список отсориторовать вторник)  -->
                     <ListBox
@@ -226,8 +240,24 @@
                                         <TextBlock Text="{Binding Path=NameGym}" TextAlignment="Center" />
                                     </StackPanel>
                                 </Border>
+
+                             
                             </DataTemplate>
                         </ListBox.ItemTemplate>
+                        <ListBox.ContextMenu>
+                            <ContextMenu >
+                                <MenuItem Header="Удалить запись">
+                                    <MenuItem.Icon>
+                                        <Image
+                                            Width="16"
+                                            Height="16"
+                                            Source="/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/delete.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+                        
+
                     </ListBox>
 
                     <!--  Расписание занятий для среды (переработать список отсориторовать среду)  -->
@@ -257,6 +287,20 @@
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
+
+                        <ListBox.ContextMenu>
+                            <ContextMenu >
+                                <MenuItem Header="Удалить запись">
+                                    <MenuItem.Icon>
+                                        <Image
+                                            Width="16"
+                                            Height="16"
+                                            Source="/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/delete.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+
                     </ListBox>
 
                     <!--  Расписание занятий для четверга (переработать список отсориторовать четверг)  -->
@@ -286,6 +330,19 @@
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
+                        <ListBox.ContextMenu>
+                            <ContextMenu >
+                                <MenuItem Header="Удалить запись">
+                                    <MenuItem.Icon>
+                                        <Image
+                                            Width="16"
+                                            Height="16"
+                                            Source="/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/delete.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+
                     </ListBox>
 
                     <!--  Расписание занятий для пятницы (переработать список отсориторовать пятницу)  -->
@@ -315,6 +372,18 @@
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
+                        <ListBox.ContextMenu>
+                            <ContextMenu >
+                                <MenuItem Header="Удалить запись">
+                                    <MenuItem.Icon>
+                                        <Image
+                                            Width="16"
+                                            Height="16"
+                                            Source="/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/delete.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
                     </ListBox>
 
 
@@ -345,6 +414,18 @@
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
+                        <ListBox.ContextMenu>
+                            <ContextMenu >
+                                <MenuItem Header="Удалить запись">
+                                    <MenuItem.Icon>
+                                        <Image
+                                            Width="16"
+                                            Height="16"
+                                            Source="/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/delete.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
                     </ListBox>
 
                     <!--  Расписание занятий для воскресенья (переработать список отсориторовать воскресенье)  -->
@@ -374,6 +455,18 @@
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
+                        <ListBox.ContextMenu>
+                            <ContextMenu >
+                                <MenuItem Header="Удалить запись">
+                                    <MenuItem.Icon>
+                                        <Image
+                                            Width="16"
+                                            Height="16"
+                                            Source="/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/delete.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
                     </ListBox>
                 </Grid>
             </ScrollViewer>

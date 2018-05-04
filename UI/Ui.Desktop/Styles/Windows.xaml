@@ -159,50 +159,24 @@
                             <!--  Панель с созданием нового расписания  -->
                             <Border
                                 Grid.Row="1"
-                                Width="450"
+                                Width="500"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBox
-                                        Width="300"
+                                <StackPanel Width="350" Orientation="Vertical">
+                                    <TextBlock
+                                        FontWeight="Bold"
+                                        Foreground="Gray"
+                                        Style="{StaticResource BaseTextBlockStyle}"
+                                        Text="Тренировка" />
+                                    <ComboBox
                                         Height="40"
                                         Margin="5"
-                                        VerticalContentAlignment="Center"
+                                        VerticalAlignment="Stretch"
+                                        VerticalContentAlignment="Stretch"
                                         BorderThickness="2"
-                                        FontSize="18"
-                                        Tag="Название"
-                                        Template="{StaticResource InputTextBox}" />
-                                    <TextBox
-                                        Width="300"
-                                        Height="40"
-                                        Margin="5"
-                                        VerticalContentAlignment="Center"
-                                        BorderThickness="2"
-                                        FontSize="18"
-                                        Tag="Тип"
-                                        Template="{StaticResource InputTextBox}" />
-                                    <TextBox
-                                        Width="300"
-                                        Height="40"
-                                        Margin="5"
-                                        VerticalContentAlignment="Center"
-                                        BorderThickness="2"
-                                        FontSize="18"
-                                        Tag="Продолжительность"
-                                        Template="{StaticResource InputTextBox}" />
-                                    <TextBox
-                                        Width="300"
-                                        Height="70"
-                                        Margin="5"
-                                        VerticalContentAlignment="Center"
-                                        AcceptsReturn="True"
-                                        AcceptsTab="True"
-                                        BorderThickness="2"
-                                        FontSize="18"
-                                        Tag="Краткое описание"
-                                        Template="{StaticResource InputTextBox}" />
+                                        FontSize="18" />
+
                                     <DatePicker
-                                        Width="300"
                                         Height="50"
                                         Margin="5"
                                         Padding="7,0,0,0"
@@ -210,10 +184,36 @@
                                         FontSize="{StaticResource Regular}"
                                         Foreground="Gray"
                                         Style="{StaticResource BaseStyle}" />
+
+                                    <TextBox
+                                        Height="50"
+                                        Margin="5"
+                                        VerticalAlignment="Stretch"
+                                        AcceptsReturn="True"
+                                        AcceptsTab="True"
+                                        BorderThickness="2"
+                                        FontSize="18"
+                                        Tag="Время"
+                                        Template="{StaticResource InputTextBox}" />
+
+                                    <TextBlock
+                                        FontWeight="Bold"
+                                        Foreground="Gray"
+                                        Style="{StaticResource BaseTextBlockStyle}"
+                                        Text="Номер зала" />
+                                    <ComboBox
+                                        Height="40"
+                                        Margin="5"
+                                        VerticalAlignment="Stretch"
+                                        VerticalContentAlignment="Stretch"
+                                        BorderThickness="2"
+                                        FontSize="18" />
+
                                     <Button
                                         Width="300"
                                         Height="50"
-                                        Content="Применить"
+                                        Margin="0 15 0 0"
+                                        Content="Создать"
                                         FontSize="{StaticResource Regular}"
                                         Foreground="White"
                                         Template="{DynamicResource ButtonBaseControlTemplate}" />

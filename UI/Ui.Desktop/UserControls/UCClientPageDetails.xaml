@@ -41,16 +41,24 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Rectangle
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Width="100"
-                        Height="{Binding Width, RelativeSource={RelativeSource Self}}"
-                        Margin="10,10,10,30"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Fill="{Binding Source={StaticResource BlueDataGridRowDetailsViewColor}}"
-                        Stroke="#FF9C9C9C" />
+                    <StackPanel Grid.Row="0" Grid.Column="0">
+                        <Rectangle
+                            Width="100"
+                            Height="{Binding Width, RelativeSource={RelativeSource Self}}"
+                            Margin="10,10,10,10"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Fill="{Binding Source={StaticResource BlueDataGridRowDetailsViewColor}}"
+                            Stroke="#FF9C9C9C" />
+                        <local:ButtonWithPicture
+                            Background="{StaticResource BackgroundButtonBlue}"
+                            Content="Редактировать профиль"
+                            Foreground="White"
+                            GeomPicture="{Binding Source={StaticResource Tools}, Path=Data}"
+                            GeomPictureFill="White"
+                            Style="{StaticResource ButtonWidthPictureIsNotPressed}"
+                            Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
+                    </StackPanel>
                     <StackPanel
                         Grid.Row="0"
                         Grid.Column="1"

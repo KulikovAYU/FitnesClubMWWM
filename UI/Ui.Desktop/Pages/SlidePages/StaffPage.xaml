@@ -125,7 +125,8 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             AutoGenerateColumns="False"
-            Background="White"
+            Background="Transparent"
+            BorderThickness="0"
             CanUserAddRows="False"
             ColumnHeaderHeight="40"
             ColumnWidth="Auto"
@@ -151,7 +152,6 @@
             </DataGrid.RenderTransform>
             <DataGrid.ContextMenu>
                 <ContextMenu>
-
                     <MenuItem Header="Удалить">
                         <MenuItem.Icon>
                             <Image
@@ -223,7 +223,7 @@
                     Header="Тип абонемента" />
 
                 <DataGridTextColumn
-                    Width="120"
+                    Width="120*"
                     Binding="{Binding PhoneNumber}"
                     CellStyle="{StaticResource StyleCenter}"
                     Header="Телефон" />

@@ -7,12 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:FitnessClubMWWM.Ui.Desktop.ViewModels"
     Title="NewEntryInScheduleWindow"
-    Width="800"
-    Height="450"
+    Width="450"
+    Height="400"
     AllowsTransparency="True"
     Style="{DynamicResource WindowMessageStyle}"
-    WindowStyle="None"
     WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
     mc:Ignorable="d">
 
     <WindowChrome.WindowChrome>
@@ -27,7 +27,7 @@
         <viewModels:ScheduleViewModel />
     </Window.DataContext>
 
-  
+
 
 
 </Window>
