@@ -492,7 +492,12 @@
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\FitnesClubCL\FitnesClubCL.csproj">
+      <Project>{8f334a6c-671e-4e3c-99d6-2cd3ac072137}</Project>
+      <Name>FitnesClubCL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\AutorizationPictureImages\fitness-club5.jpg" />
     <Resource Include="Images\AutorizationPictureImages\fitness-club6.jpg" />
