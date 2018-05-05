@@ -492,9 +492,7 @@
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\AutorizationPictureImages\fitness-club5.jpg" />
     <Resource Include="Images\AutorizationPictureImages\fitness-club6.jpg" />

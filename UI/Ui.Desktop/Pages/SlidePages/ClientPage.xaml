@@ -91,7 +91,7 @@
 
 
     <Page.DataContext>
-        <Binding Path="ClientsViewModel" Source="{StaticResource Locator}" />
+        <Binding Path="ClientsPageViewModel" Source="{StaticResource Locator}" />
     </Page.DataContext>
 
     <Page.Style>

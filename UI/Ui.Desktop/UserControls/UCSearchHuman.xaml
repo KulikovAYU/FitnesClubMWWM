@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <UserControl.DataContext>
-        <Binding Path="ClientsViewModel" Source="{StaticResource Locator}" />
+        <Binding Path="ClientsPageViewModel" Source="{StaticResource Locator}" />
     </UserControl.DataContext>
 
     <Grid>

@@ -40,7 +40,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-      
+
         <StackPanel Grid.Row="2" Orientation="Vertical">
 
             <local:ButtonWithPicture

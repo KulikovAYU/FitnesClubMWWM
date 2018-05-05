@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using FitnessClubMWWM.Logic.Ui;
-using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
-using FitnessClubMWWM.Ui.Desktop.UserControls;
+using FitnessClubMWWM.Ui.Desktop.Pages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace FitnessClubMWWM.Ui.Desktop
+namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 {
     public class ClientsPageViewModel : ViewModelBase
     {

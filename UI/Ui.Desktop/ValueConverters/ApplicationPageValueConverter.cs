@@ -2,13 +2,10 @@
 using System.Diagnostics;
 using System.Globalization;
 using FitnessClubMWWM.Logic.Ui;
+using FitnessClubMWWM.Ui.Desktop.DataModels;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages;
-using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AdminPanel;
-using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AdminPanelPages;
-using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AutorizationPage;
-using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.BeginPanel;
-using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.ConfirmationPages;
-using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.ErrorsPages.ErrAutorization;
+using BeginPanelPage = FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.BeginPanelPage;
+using TheConfrimLogout = FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.TheConfrimLogout;
 
 
 namespace FitnessClubMWWM.Ui.Desktop.ValueConverters

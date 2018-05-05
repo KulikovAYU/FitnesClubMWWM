@@ -1,6 +1,4 @@
 using CommonServiceLocator;
-using FitnessClubMWWM.Logic.Ui;
-using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AutorizationPage;
 using FitnessClubMWWM.Ui.Desktop.ViewModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -52,30 +50,23 @@ namespace FitnessClubMWWM.Ui.Desktop
             }
        
         }
+        /// <summary>
+        /// Главная вью модель
+        /// </summary>
+        public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
 
+        /// <summary>
+        /// Остальные вью модели (вью модели страниц)
+        /// </summary>
         public AutorizationPageViewModel AutorizationViewModel => ServiceLocator.Current.GetInstance<AutorizationPageViewModel>();
-        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         public BeginPanelPageViewModel BeginPanelPageViewModelMain => ServiceLocator.Current.GetInstance<BeginPanelPageViewModel>();
         public AdminPageViewModel AdminPageViewModel => ServiceLocator.Current.GetInstance<AdminPageViewModel>();
-
-        public WorkingCabinetPageViewModel WorkingCabinetViewModel =>
-            ServiceLocator.Current.GetInstance<WorkingCabinetPageViewModel>();
-
-        public ClientsPageViewModel ClientsViewModel =>
-            ServiceLocator.Current.GetInstance<ClientsPageViewModel>();
-
-        public ScheduleViewModel SchedulePageViewModel =>
-            ServiceLocator.Current.GetInstance<ScheduleViewModel>();
-
-        public StaffPaymentViewModel StaffPaymentPageViewModel =>
-                    ServiceLocator.Current.GetInstance<StaffPaymentViewModel>();
-
-  public GymPageViewModel GymViewModel =>
-                    ServiceLocator.Current.GetInstance<GymPageViewModel>();
-
-
-public PriceAbonementPageViewModel PriceViewModel =>
-                    ServiceLocator.Current.GetInstance<PriceAbonementPageViewModel>();
+        public WorkingCabinetPageViewModel WorkingCabinetPageViewModel => ServiceLocator.Current.GetInstance<WorkingCabinetPageViewModel>();
+        public ClientsPageViewModel ClientsPageViewModel => ServiceLocator.Current.GetInstance<ClientsPageViewModel>();
+        public ScheduleViewModel SchedulePageViewModel => ServiceLocator.Current.GetInstance<ScheduleViewModel>();
+        public StaffPaymentViewModel StaffPaymentPageViewModel => ServiceLocator.Current.GetInstance<StaffPaymentViewModel>();
+        public GymPageViewModel GymPageViewModel => ServiceLocator.Current.GetInstance<GymPageViewModel>();
+        public PriceAbonementPageViewModel PricePageViewModel => ServiceLocator.Current.GetInstance<PriceAbonementPageViewModel>();
 
 
         public static void Cleanup()

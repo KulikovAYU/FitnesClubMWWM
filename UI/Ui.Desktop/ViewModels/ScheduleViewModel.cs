@@ -2,10 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows;
-using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using FitnessClubMWWM.Ui.Desktop.Pages;
 
 namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 {

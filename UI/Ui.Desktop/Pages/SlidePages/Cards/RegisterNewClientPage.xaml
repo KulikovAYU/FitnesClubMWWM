@@ -9,7 +9,7 @@
     Title="RegisterNewClientPage"
     d:DesignHeight="800"
     d:DesignWidth="1000"
-    DataContext="{Binding WorkingCabinetViewModel, Source={StaticResource Locator}}"
+    DataContext="{Binding WorkingCabinetPageViewModel, Source={StaticResource Locator}}"
     mc:Ignorable="d">
     <Page.Style>
         <StaticResource ResourceKey="PageNextWorkingBaseStyle" />

@@ -1,9 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
-
-namespace FitnessClubMWWM.Ui.Desktop.Pages.MainWindow
+﻿namespace FitnessClubMWWM.Ui.Desktop.Pages
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml

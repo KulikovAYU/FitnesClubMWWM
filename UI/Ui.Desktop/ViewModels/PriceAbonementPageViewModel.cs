@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
+﻿using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using FitnessClubMWWM.Ui.Desktop.Pages;
 
 namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 {

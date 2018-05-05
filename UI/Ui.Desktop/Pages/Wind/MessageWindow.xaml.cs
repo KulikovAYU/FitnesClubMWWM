@@ -1,11 +1,7 @@
-﻿
-using System.Windows;
-using System.Windows.Media;
-using FitnessClubMWWM.Ui.Desktop.UserControls;
+﻿using System.Windows;
 using FitnessClubMWWM.Ui.Desktop.ViewModels;
 
-
-namespace FitnessClubMWWM.Ui.Desktop.Pages.Wind
+namespace FitnessClubMWWM.Ui.Desktop.Pages
 {
     /// <summary>
     /// Логика взаимодействия для CustomMessageBox.xaml

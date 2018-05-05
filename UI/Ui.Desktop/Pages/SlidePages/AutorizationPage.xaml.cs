@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 
-namespace FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AutorizationPage
+namespace FitnessClubMWWM.Ui.Desktop.Pages.SlidePages
 {
     /// <summary>
     /// Логика взаимодействия для AutorizationPage.xaml

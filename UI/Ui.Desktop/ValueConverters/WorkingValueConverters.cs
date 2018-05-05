@@ -2,22 +2,21 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using FitnessClubMWWM.Logic.Ui;
-using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AdminPanelPages;
+using FitnessClubMWWM.Ui.Desktop.DataModels;
+using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages;
 
+// Вспомогательные конвертеры значений
 namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
 {
-    class WorkingValueConverters
-    {
-    }
-
     public class AdminPageValueConverter : BaseValueConverter<AdminPageValueConverter>
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch ((ApplicationPage)value)
+            if (!(value is ApplicationPage page)) return null;
+
+            switch (page)
             {
                 case ApplicationPage.AddUserPrivilegyPage:
                     return new AddUserPrivilegyPage();
@@ -42,21 +41,13 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Visibility visibility)
-            {
-                return (visibility == Visibility.Visible);
-            }
-
-            return Binding.DoNothing;
+            return value is Visibility visibility ? visibility == Visibility.Visible : Binding.DoNothing;
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool b)
-            {
+            if (value != null && value is bool b)
                 return (b ? Visibility.Visible : Visibility.Collapsed);
-            }
-
             return Binding.DoNothing;
         }
     }
@@ -65,18 +56,9 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
 
     public class IsCheckedToogleConverter : BaseValueConverter<IsCheckedToogleConverter>
     {
-        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return value != null && !(bool)value;
-        }
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture) => value != null && !(bool)value;
 
-        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return  value != null && ((bool)value);
-        }
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => value != null && ((bool)value);
     }
-
-
-  
 
 }

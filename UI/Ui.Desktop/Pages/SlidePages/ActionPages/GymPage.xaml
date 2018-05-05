@@ -35,7 +35,7 @@
 
     </Page.Resources>
     <Page.DataContext>
-        <Binding Path="GymViewModel" Source="{StaticResource Locator}" />
+        <Binding Path="GymPageViewModel" Source="{StaticResource Locator}" />
     </Page.DataContext>
     <Page.Style>
         <StaticResource ResourceKey="PageNextWorkingBaseStyle" />

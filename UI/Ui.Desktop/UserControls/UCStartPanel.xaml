@@ -1,17 +1,15 @@
 ﻿<UserControl
+    x:Class="FitnessClubMWWM.Ui.Desktop.UserControls.UCStartPanel"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:desktop="clr-namespace:FitnessClubMWWM.Ui.Desktop"
     xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ui1="clr-namespace:FitnessClubMWWM.Logic.Ui"
-    xmlns:MainWindow="clr-namespace:FitnessClubMWWM.Ui.Desktop.Pages.MainWindow"
-    x:Class="FitnessClubMWWM.Ui.Desktop.UserControls.UCStartPanel"
+    xmlns:viewModels="clr-namespace:FitnessClubMWWM.Ui.Desktop.ViewModels"
     mc:Ignorable="d">
 
     <UserControl.DataContext>
-        <desktop:BeginPanelPageViewModel />
+        <viewModels:BeginPanelPageViewModel />
     </UserControl.DataContext>
 
     <Border
@@ -72,6 +70,7 @@
                 ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
                 ButtonCommentFontSize="12"
                 ButtonCommentWrapping="Wrap"
+                Command="{Binding ShowStaffPageCommand}"
                 Content="Персонал"
                 FontSize="16"
                 GeomPicture="{Binding Data, Source={StaticResource Personal}}"
@@ -80,7 +79,6 @@
                 GeomPictureMargin="5"
                 GeomPictureWidth="45"
                 RenderTransformOrigin="0.5,0.5"
-                Command="{Binding ShowStaffPageCommand}"
                 Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton
                 Background="{x:Null}"
@@ -105,6 +103,7 @@
                 ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
                 ButtonCommentFontSize="12"
                 ButtonCommentWrapping="Wrap"
+                Command="{Binding ShowClassScheduleCommand}"
                 Content="Расписание занятий"
                 FontSize="16"
                 GeomPicture="{Binding Data, Source={StaticResource Schedule}}"
@@ -113,7 +112,6 @@
                 GeomPictureMargin="5"
                 GeomPictureWidth="55"
                 RenderTransformOrigin="0.5,0.5"
-                Command="{Binding ShowClassScheduleCommand}"
                 Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton
                 Background="{x:Null}"
@@ -122,11 +120,11 @@
                 ButtonCommentBrush="{DynamicResource BackgroundGraphiteGreyBrush}"
                 ButtonCommentFontSize="12"
                 ButtonCommentWrapping="Wrap"
+                Command="{Binding ShowSelectActionWindowCommand}"
                 Content="Финансы, услуги, залы"
                 FontSize="16"
                 GeomPicture="{Binding Data, Source={StaticResource Finances}}"
                 GeomPictureFill="{StaticResource BackgroundBlueColor}"
-                Command="{Binding ShowSelectActionWindowCommand}"
                 GeomPictureHeight="50"
                 GeomPictureMargin="5"
                 GeomPictureWidth="55"

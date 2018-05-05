@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop.Pages.SlidePages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="page"
     Title="SchedulePage"
@@ -202,7 +201,7 @@
                         </ListBox.ItemTemplate>
 
                         <ListBox.ContextMenu>
-                            <ContextMenu >
+                            <ContextMenu>
                                 <MenuItem Header="Удалить запись">
                                     <MenuItem.Icon>
                                         <Image
@@ -241,11 +240,11 @@
                                     </StackPanel>
                                 </Border>
 
-                             
+
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                         <ListBox.ContextMenu>
-                            <ContextMenu >
+                            <ContextMenu>
                                 <MenuItem Header="Удалить запись">
                                     <MenuItem.Icon>
                                         <Image
@@ -256,7 +255,7 @@
                                 </MenuItem>
                             </ContextMenu>
                         </ListBox.ContextMenu>
-                        
+
 
                     </ListBox>
 
@@ -289,7 +288,7 @@
                         </ListBox.ItemTemplate>
 
                         <ListBox.ContextMenu>
-                            <ContextMenu >
+                            <ContextMenu>
                                 <MenuItem Header="Удалить запись">
                                     <MenuItem.Icon>
                                         <Image
@@ -331,7 +330,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                         <ListBox.ContextMenu>
-                            <ContextMenu >
+                            <ContextMenu>
                                 <MenuItem Header="Удалить запись">
                                     <MenuItem.Icon>
                                         <Image
@@ -373,7 +372,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                         <ListBox.ContextMenu>
-                            <ContextMenu >
+                            <ContextMenu>
                                 <MenuItem Header="Удалить запись">
                                     <MenuItem.Icon>
                                         <Image
@@ -415,7 +414,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                         <ListBox.ContextMenu>
-                            <ContextMenu >
+                            <ContextMenu>
                                 <MenuItem Header="Удалить запись">
                                     <MenuItem.Icon>
                                         <Image
@@ -456,7 +455,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                         <ListBox.ContextMenu>
-                            <ContextMenu >
+                            <ContextMenu>
                                 <MenuItem Header="Удалить запись">
                                     <MenuItem.Icon>
                                         <Image

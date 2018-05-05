@@ -1,9 +1,8 @@
 ﻿<Window
-    x:Class="FitnessClubMWWM.Ui.Desktop.Pages.Wind.CustomMessageBox"
+    x:Class="FitnessClubMWWM.Ui.Desktop.Pages.CustomMessageBox"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mainWindow="clr-namespace:FitnessClubMWWM.Ui.Desktop.Pages.Wind"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:FitnessClubMWWM.Ui.Desktop.ViewModels"
     x:Name="MessageBoxWindow"

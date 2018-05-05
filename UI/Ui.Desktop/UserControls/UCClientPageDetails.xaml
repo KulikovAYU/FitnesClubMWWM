@@ -8,7 +8,7 @@
     xmlns:valueConverters="clr-namespace:FitnessClubMWWM.Ui.Desktop.ValueConverters"
     mc:Ignorable="d">
     <UserControl.DataContext>
-        <Binding Path="ClientsViewModel" Source="{StaticResource Locator}" />
+        <Binding Path="ClientsPageViewModel" Source="{StaticResource Locator}" />
     </UserControl.DataContext>
 
     <UserControl.Resources>

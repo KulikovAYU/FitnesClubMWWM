@@ -2,7 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace FitnessClubMWWM.Ui.Desktop
+namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 {
   public  class WorkingCabinetPageViewModel : ViewModelBase
     {

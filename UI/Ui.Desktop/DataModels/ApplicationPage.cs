@@ -1,4 +1,4 @@
-﻿namespace FitnessClubMWWM.Logic.Ui
+﻿namespace FitnessClubMWWM.Ui.Desktop.DataModels
 {
 
     /// <summary>

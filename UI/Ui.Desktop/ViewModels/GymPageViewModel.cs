@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
+﻿using System.Collections.ObjectModel;
+using FitnessClubMWWM.Ui.Desktop.Pages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -13,7 +8,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 {
    public class GymPageViewModel : ViewModelBase
     {
-
 
         public RelayCommand GoHomeCommand => new RelayCommand(() => { Messenger.Default.Send("MainPage"); });
 

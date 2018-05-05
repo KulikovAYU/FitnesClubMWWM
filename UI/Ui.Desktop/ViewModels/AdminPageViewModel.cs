@@ -1,11 +1,11 @@
 ﻿using System.Windows;
-using FitnessClubMWWM.Ui.Desktop;
+using FitnessClubMWWM.Ui.Desktop.DataModels;
 using GalaSoft.MvvmLight;
-using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using FitnessClubMWWM.Ui.Desktop.Pages;
 
-namespace FitnessClubMWWM.Logic.Ui
+namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 {
     public class AdminPageViewModel : ViewModelBase
     {

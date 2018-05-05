@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AdminPanelPages
+namespace FitnessClubMWWM.Ui.Desktop.Pages.SlidePages
 {
     /// <summary>
     /// Логика взаимодействия для AddUserPrivilegyPage.xaml
