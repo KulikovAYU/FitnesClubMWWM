@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FitnesClubCL.CF_EMDB
 {
     /// <summary>
     /// Описание сущности "тренировка"
     /// </summary>
-    class Training
+    public class Training
     {
+        public Training()
+        {
+            ArrAccounts = new HashSet<Account>();
+        }
         /// <summary>
         /// Id тренировки
         /// </summary>
@@ -37,6 +42,32 @@ namespace FitnesClubCL.CF_EMDB
         /// Статус трениорвки: Закончена или идет запись, группа набрана
         /// </summary>
         public string StatusTaraining { get; set; }
+
+        #region Связи между сущностями 0...* Account to 0...* Training
+
+        public virtual ICollection<Account> ArrAccounts { get; set; }
+
+        #endregion
+
+        #region Связи между сущностями 0...* Training to 1 TrainingList
+
+        public virtual TrainingList TrainingList { get; set; }
+
+        #endregion
+
+        #region Связи между сущностями 0...* Training to 1 Gym
+
+        public virtual Gym Gym { get; set; }
+
+        #endregion
+
+        #region Связи между сущностями 0..1 Employee to 0...* Training
+
+        /// <summary>
+        /// Свойство навигации (Virtual ->Lazy Load)
+        /// </summary>
+        public virtual Employee Employee { get; set; }
+        #endregion
 
     }
 }

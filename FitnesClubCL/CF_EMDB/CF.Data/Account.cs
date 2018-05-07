@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
-using System.Drawing;
+
 
 namespace FitnesClubCL.CF_EMDB
 {
-
     //Сущность аккаунта посетителя
     public class Account
     {
+        public Account()
+        {
+            ArrTrainings = new HashSet<Training>();
+        }
         #region Описание самого аккаунта (абонемента)
         /// <summary>
         /// Номер абонемента
@@ -32,7 +38,7 @@ namespace FitnesClubCL.CF_EMDB
         /// <summary>
         /// Общая стоимость
         /// </summary>
-        public SqlMoney TotalCost { get; set; }
+        public Decimal TotalCost { get; set; }
         #endregion
 
         #region Описание личных данных клиента
@@ -99,5 +105,25 @@ namespace FitnesClubCL.CF_EMDB
         /// </summary>
         public string ClientPasportDatеOfIssue { get; set; }
         #endregion
+
+        #region Связи между сущностями 1 Employee to 0...* Account
+        /// <summary>
+        /// Свойство навигации  (Virtual ->Lazy Load)
+        /// </summary>
+        public virtual Employee Employee { get; set; }
+        #endregion
+
+        #region Связи между сущностями 0...* Account to 0...* Training
+
+        public virtual ICollection<Training> ArrTrainings { get; set; }
+
+        #endregion
+
+        #region Связи между сущностями 0...* Account to 1 AccountStatus
+
+        public virtual AccountStatus AccountStatus { get; set; }
+
+        #endregion
+
     }
 }

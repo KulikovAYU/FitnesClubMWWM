@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+using FitnessClubMWWM.Ui.Desktop.Constants;
 using FitnessClubMWWM.Ui.Desktop.Pages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

@@ -1,11 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Automation.Peers;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 
 //В ЭТОМ КЛАССЕ БУДУТ ОПРЕДЕЛЯТЬСЯ ПОЛЬЗОВАТЕЛЬСКИЕ ЭЛЕМЕНТЫ УПРАВЛЕНИЯ
 
@@ -25,8 +21,8 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
         [Category("Очистить поле")]
         public bool IsClear
         {
-            get { return (bool)GetValue(IsClearProperty); }
-            set { SetValue(IsClearProperty, value); }
+            get => (bool)GetValue(IsClearProperty);
+            set => SetValue(IsClearProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for IsClear.  This enables animation, styling, binding, etc...
@@ -248,7 +244,7 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
     /// <summary>
     /// Класс определяет кнопку на стартовой странице
     /// </summary>
-    class StartButton : ButtonWithPicture
+    public class StartButton : ButtonWithPicture
     {
         #region Свойство коментарий к функции кнопки
         [Bindable(true)]

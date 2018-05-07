@@ -18,7 +18,7 @@ namespace FitnesClubCL.CF_EMDB
 
             Property(account => account.TrainingCount).IsRequired().HasColumnName("TrainingCount");
             Property(account => account.VisitedTrainingCount).IsRequired().HasColumnName("VisitedTrainingCount");
-            Property(account => account.TotalCost).IsRequired().HasColumnName("TotalCost");
+            Property(account => account.TotalCost).IsRequired().HasColumnName("TotalCost").HasColumnType("money"); ;
             Property(account => account.NumberSubscription).IsRequired().HasColumnName("NumberSubscription");
             Property(account => account.ClientFirstName).IsRequired().HasColumnName("ClientFirstName").HasMaxLength(50);
             Property(account => account.ClientLastName).IsRequired().HasColumnName("ClientLastName").HasMaxLength(50);

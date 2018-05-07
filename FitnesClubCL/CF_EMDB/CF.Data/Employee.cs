@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FitnesClubCL.CF_EMDB
 {
@@ -7,6 +8,12 @@ namespace FitnesClubCL.CF_EMDB
     /// </summary>
    public class Employee
     {
+        public Employee()
+        {
+            ArrAccounts = new HashSet<Account>();
+            ArrTrainings = new HashSet<Training>();
+        }
+
         /// <summary>
         /// Id клиента
         /// </summary>
@@ -66,5 +73,40 @@ namespace FitnesClubCL.CF_EMDB
         /// Статус работника (в отпуске или нет)
         /// </summary>
         public string EmployeeVacationStatus { get; set; }
+
+        #region Связи между сущностями 1 Employee to 0...* Account
+
+        /// <summary>
+        /// Свойство навигации (Virtual ->Lazy Load)
+        /// </summary>
+        public virtual ICollection<Account> ArrAccounts { get; set; }
+        #endregion
+
+
+        #region Связи между сущностями 0..1 Employee to 0...* Training
+
+        /// <summary>
+        /// Свойство навигации (Virtual ->Lazy Load)
+        /// </summary>
+        public virtual ICollection<Training> ArrTrainings { get; set; }
+        #endregion
+
+        #region Связи между сущностями 1..1 Salary to 0...* Employee
+
+        /// <summary>
+        /// Свойство навигации (Virtual ->Lazy Load)
+        /// </summary>
+        public virtual Salary Salary { get; set; }
+        #endregion
+
+
+        #region Связи между сущностями 1..1 EmployeeRole to 0...* Employee
+
+        /// <summary>
+        /// Свойство навигации (Virtual ->Lazy Load)
+        /// </summary>
+        public virtual EmployeeRole EmployeeRole { get; set; }
+        #endregion
+
     }
 }

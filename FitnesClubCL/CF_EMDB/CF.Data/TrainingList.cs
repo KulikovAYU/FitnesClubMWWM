@@ -1,11 +1,17 @@
-﻿namespace FitnesClubCL.CF_EMDB
+﻿using System.Collections.Generic;
+
+namespace FitnesClubCL.CF_EMDB
 {
 
     /// <summary>
     /// Сущность  список тренировок
     /// </summary>
-    class TrainingList
+    public class TrainingList
     {
+        public TrainingList()
+        {
+            ArrTrainings = new HashSet<Training>();
+        }
         /// <summary>
         /// Id списка тренировок
         /// </summary>
@@ -20,5 +26,11 @@
         /// Стоимость тренировки
         /// </summary>
         public double TrainingCurrentCost { get; set; }
+
+        #region Связи между сущностями 0...* Training to 1 TrainingList
+
+        public virtual ICollection<Training> ArrTrainings { get; set; }
+
+        #endregion
     }
 }

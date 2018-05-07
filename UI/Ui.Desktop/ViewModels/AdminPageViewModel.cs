@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using FitnessClubMWWM.Ui.Desktop.Constants;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

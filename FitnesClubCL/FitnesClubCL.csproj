@@ -39,6 +39,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,18 +50,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CF_EMDB\CF.DataAccess\Configuration\AccountConfig.cs" />
+    <Compile Include="CF_EMDB\CF.DataAccess\Configuration\AccountStatusConfig.cs" />
+    <Compile Include="CF_EMDB\CF.DataAccess\Configuration\EmployeeConfig.cs" />
+    <Compile Include="CF_EMDB\CF.DataAccess\Configuration\EmployeeRoleConfig.cs" />
+    <Compile Include="CF_EMDB\CF.DataAccess\Configuration\GymConfig.cs" />
+    <Compile Include="CF_EMDB\CF.DataAccess\Configuration\SalaryConfig.cs" />
+    <Compile Include="CF_EMDB\CF.DataAccess\Configuration\TrainingConfig.cs" />
+    <Compile Include="CF_EMDB\CF.DataAccess\Configuration\TrainingListConfig.cs" />
+    <Compile Include="CF_EMDB\CF.DataAccess\Context\DataBaseFCContext.cs" />
+    <Compile Include="CF_EMDB\CF.Data\Account.cs" />
+    <Compile Include="CF_EMDB\CF.Data\AccountStatus.cs" />
     <Compile Include="CF_EMDB\CF.Data\Employee.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="CF_EMDB\CF.Data\EmployeeRole.cs" />
+    <Compile Include="CF_EMDB\CF.Data\Gym.cs" />
+    <Compile Include="CF_EMDB\CF.Data\Salary.cs" />
+    <Compile Include="CF_EMDB\CF.Data\Training.cs" />
+    <Compile Include="CF_EMDB\CF.Data\TrainingList.cs" />
+    <Compile Include="ModelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CF_EMDB\CF.DataAccess\Configuration\" />
     <Folder Include="Classes\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

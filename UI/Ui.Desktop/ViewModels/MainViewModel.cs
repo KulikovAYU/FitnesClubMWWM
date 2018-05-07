@@ -1,5 +1,6 @@
 using System;
 using System.Windows;
+using FitnesClubCL;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -213,8 +214,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                 };
             }
 
-          
 
+            ModelManager.CreateDb();
 
 
             //Application.Current.MainWindow.Initialized += (sender, e) =>

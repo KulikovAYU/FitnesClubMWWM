@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using FitnessClubMWWM.Ui.Desktop.Constants;
 using FitnessClubMWWM.Ui.Desktop.ViewModels;
 
 namespace FitnessClubMWWM.Ui.Desktop.Pages
@@ -6,7 +7,7 @@ namespace FitnessClubMWWM.Ui.Desktop.Pages
     /// <summary>
     /// Логика взаимодействия для CustomMessageBox.xaml
     /// </summary>
-    public  partial class CustomMessageBox : Window
+    public sealed partial class CustomMessageBox : Window
     {
         private CustomMessageBox()
         {

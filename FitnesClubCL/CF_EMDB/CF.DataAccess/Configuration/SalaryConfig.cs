@@ -1,4 +1,5 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.ModelConfiguration;
 
 namespace FitnesClubCL.CF_EMDB
 {
@@ -13,7 +14,7 @@ namespace FitnesClubCL.CF_EMDB
         public SalaryConfig()
         {
             HasKey(salary => salary.SalaryId);
-            Property(salary => salary.SalaryValue).HasColumnName("SalaryValue");
+            Property(salary => salary.SalaryValue).HasColumnName("SalaryValue").HasColumnType("money");
             ToTable("Salary");
         }
     }

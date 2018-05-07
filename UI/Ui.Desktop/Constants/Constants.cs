@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FitnessClubMWWM.Ui.Desktop
+﻿namespace FitnessClubMWWM.Ui.Desktop.Constants
 {
     /// <summary>
     /// Типы кнопок для кастомного Messagebox
