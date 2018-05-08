@@ -11,7 +11,7 @@ namespace FitnesClubCL.CF_EMDB
         public Employee()
         {
             ArrAccounts = new HashSet<Account>();
-            ArrTrainings = new HashSet<Training>();
+           // ArrTrainings = new HashSet<Training>(); //Отладка
         }
 
         /// <summary>
@@ -80,6 +80,7 @@ namespace FitnesClubCL.CF_EMDB
         /// Свойство навигации (Virtual ->Lazy Load)
         /// </summary>
         public virtual ICollection<Account> ArrAccounts { get; set; }
+
         #endregion
 
 
@@ -88,7 +89,7 @@ namespace FitnesClubCL.CF_EMDB
         /// <summary>
         /// Свойство навигации (Virtual ->Lazy Load)
         /// </summary>
-        public virtual ICollection<Training> ArrTrainings { get; set; }
+       // public virtual ICollection<Training> ArrTrainings { get; set; } //Отладка
         #endregion
 
         #region Связи между сущностями 1..1 Salary to 0...* Employee
@@ -96,7 +97,7 @@ namespace FitnesClubCL.CF_EMDB
         /// <summary>
         /// Свойство навигации (Virtual ->Lazy Load)
         /// </summary>
-        public virtual Salary Salary { get; set; }
+      //  public virtual Salary Salary { get; set; } //Отладка
         #endregion
 
 
@@ -105,7 +106,7 @@ namespace FitnesClubCL.CF_EMDB
         /// <summary>
         /// Свойство навигации (Virtual ->Lazy Load)
         /// </summary>
-        public virtual EmployeeRole EmployeeRole { get; set; }
+     //   public virtual EmployeeRole EmployeeRole { get; set; } //Отладка
         #endregion
 
     }

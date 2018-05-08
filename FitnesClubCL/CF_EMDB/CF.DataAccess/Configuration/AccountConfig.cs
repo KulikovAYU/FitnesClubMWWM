@@ -36,7 +36,7 @@ namespace FitnesClubCL.CF_EMDB
                 .HasColumnName("ClientPasportDataNumber");
             Property(account => account.ClientPasportDataIssuedBy).IsRequired().HasMaxLength(30)
                 .HasColumnName("ClientPasportDataIssuedBy");
-            Property(account => account.ClientPasportDatеOfIssue).IsRequired().HasMaxLength(30).HasColumnName("ClientPasportDatеOfIssue");
+            Property(account => account.ClientPasportDatеOfIssue).IsRequired().HasColumnName("ClientPasportDatеOfIssue").HasColumnType("datetime2");
 
             ToTable("Account");
         }

@@ -12,7 +12,8 @@ namespace FitnesClubCL.CF_EMDB
     {
         public Account()
         {
-            ArrTrainings = new HashSet<Training>();
+       //     ArrTrainings = new HashSet<Training>();
+
         }
         #region Описание самого аккаунта (абонемента)
         /// <summary>
@@ -43,7 +44,7 @@ namespace FitnesClubCL.CF_EMDB
 
         #region Описание личных данных клиента
         /// <summary>
-        /// Id клиента
+        /// Id клиента (ключ PK)
         /// </summary>
         public int ClientId { get; set; }
 
@@ -103,7 +104,7 @@ namespace FitnesClubCL.CF_EMDB
         /// <summary>
         /// Дата выдачи
         /// </summary>
-        public string ClientPasportDatеOfIssue { get; set; }
+        public DateTime ClientPasportDatеOfIssue { get; set; }
         #endregion
 
         #region Связи между сущностями 1 Employee to 0...* Account
@@ -115,13 +116,13 @@ namespace FitnesClubCL.CF_EMDB
 
         #region Связи между сущностями 0...* Account to 0...* Training
 
-        public virtual ICollection<Training> ArrTrainings { get; set; }
+    //    public virtual ICollection<Training> ArrTrainings { get; set; }
 
         #endregion
 
         #region Связи между сущностями 0...* Account to 1 AccountStatus
 
-        public virtual AccountStatus AccountStatus { get; set; }
+     //   public virtual AccountStatus AccountStatus { get; set; }
 
         #endregion
 

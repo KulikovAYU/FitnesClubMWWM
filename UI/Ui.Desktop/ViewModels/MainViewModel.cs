@@ -1,7 +1,9 @@
 using System;
 using System.Windows;
 using FitnesClubCL;
+using FitnessClubMWWM.Ui.Desktop.Constants;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
+using FitnessClubMWWM.Ui.Desktop.Pages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -180,6 +182,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                     CurrentPage = ApplicationPage.GymPage;
                     break;
 
+               
             }
         }
 
@@ -201,10 +204,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             }
 
             Messenger.Default.Register(this, new Action<string>(ProcessMessage));
-
-
-
-
+ Messenger.Default.Register(this, new Action<Exception>(ErrorMessage));
 
             if (Application.Current.MainWindow != null)
             {
@@ -234,6 +234,11 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             //    RaisePropertyChanged(nameof(WindowCornerRadius));
             //};
 
+        }
+
+        private void ErrorMessage(Exception obj)
+        {
+            CustomMessageBox.Show(obj.Message, "Исключение", MessageBoxButton.OK, eMessageBoxIcons.eWarning);
         }
 
         #endregion
