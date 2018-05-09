@@ -11,10 +11,9 @@
         static DataBaseFcContext()
         {
             // Для справки: существует 3 варианта создания БД
-            //   Database.SetInitializer(new DropCreateDatabaseAlways<DataBaseFcContext>()); //создавать БД всегда
+            // Database.SetInitializer(new DropCreateDatabaseAlways<DataBaseFcContext>()); //создавать БД всегда
             // Database.SetInitializer(new CreateDatabaseIfNotExists<DataBaseFCContext>()); //создавить БД если её не существует
-            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataBaseFcContext>());
-            //    Database.SetInitializer(new InitializationModel()); //создавать БД если модель изменена
+            // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataBaseFcContext>());//создавать БД если модель изменена
             Database.SetInitializer(new InitializationModel()); //создавать БД если модель изменена
         }
 
@@ -26,26 +25,22 @@
         public DataBaseFcContext(string connString)
             : base(connString)
         {
-          //  Database.SetInitializer(new InitializationModel()); //создавать БД если модель изменена
+ 
         }
         #endregion
 
         #region Свойства доступа к полям БД
-        public DbSet<Account> Accounts { get; set; }
-
-        public DbSet<AccountStatus> AccountStatuses { get; set; }
-
-        public DbSet<Employee> Employees { get; set; }
-
-        public DbSet<EmployeeRole> EmployeeRoles { get; set; }
-
-        public DbSet<Gym> Gyms { get; set; }
-
-        public DbSet<Salary> Salaries { get; set; }
-
-        public DbSet<Training> Trainings { get; set; }
-
-        public DbSet<TrainingList> TrainingLists { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<AccountStatus> AccountStatuses { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<EmployeeRole> EmployeeRoles { get; set; }
+        public virtual DbSet<EmployeeWorkingStatus> EmployeeWorkingStatuses { get; set; }
+        public virtual DbSet<Gym> Gyms { get; set; }
+        public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<StatusTraining> StatusTrainings { get; set; }
+        public virtual DbSet<Tarif> Tarifs { get; set; }
+        public virtual DbSet<Training> Trainings { get; set; }
+        public virtual DbSet<TrainingList> TrainingLists { get; set; }
         #endregion
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -55,8 +50,11 @@
             modelBuilder.Configurations.Add(new AccountStatusConfig());
             modelBuilder.Configurations.Add(new EmployeeConfig());
             modelBuilder.Configurations.Add(new EmployeeRoleConfig());
+            modelBuilder.Configurations.Add(new EmployeeWorkingStatusConfig());
             modelBuilder.Configurations.Add(new GymConfig());
-            modelBuilder.Configurations.Add(new SalaryConfig());
+            modelBuilder.Configurations.Add(new ServiceConfig());
+            modelBuilder.Configurations.Add(new StatusTrainingConfig());
+            modelBuilder.Configurations.Add(new TarifConfig());
             modelBuilder.Configurations.Add(new TrainingConfig());
             modelBuilder.Configurations.Add(new TrainingListConfig());
         }

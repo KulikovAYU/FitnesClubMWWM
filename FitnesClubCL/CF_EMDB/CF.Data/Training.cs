@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace FitnesClubCL.CF_EMDB
 {
     /// <summary>
-    /// Описание сущности "тренировка"
+    /// Описание сущности "тренировка", которая предстоит
     /// </summary>
     public class Training
     {
@@ -18,19 +18,9 @@ namespace FitnesClubCL.CF_EMDB
         public int TrainingId { get; set; }
 
         /// <summary>
-        /// Продолжительность тренировки
+        /// Год, месяц, день, часы, минуты, секунды : Продолжительность тренировки, Дата тренировки,Время начала тренировки
         /// </summary>
-        public DateTime TrainingDuration { get; set; }
-
-        /// <summary>
-        /// Дата тренировки
-        /// </summary>
-        public DateTime TrainingStartDate { get; set; }
-
-        /// <summary>
-        /// Время начала тренировки
-        /// </summary>
-        public DateTime TrainingStartTime { get; set; }
+        public DateTime TrainingDateTime { get; set; }
 
         /// <summary>
         /// Количество мест
@@ -41,23 +31,25 @@ namespace FitnesClubCL.CF_EMDB
         /// <summary>
         /// Статус трениорвки: Закончена или идет запись, группа набрана
         /// </summary>
-        public string StatusTaraining { get; set; }
+        #region Связи между сущностями 1...1 StatusTraining to 0...* Training
+        public StatusTraining StatusTraining { get; set; }
+        #endregion
 
         #region Связи между сущностями 0...* Account to 0...* Training
 
-        public virtual ICollection<Account> ArrAccounts { get; set; }
+        public ICollection<Account> ArrAccounts { get; set; }
 
         #endregion
 
-        #region Связи между сущностями 0...* Training to 1 TrainingList
+        #region Связи между сущностями 0...* Training to 1 Service
 
-        public virtual TrainingList TrainingList { get; set; }
+        public Service Service { get; set; }
 
         #endregion
 
         #region Связи между сущностями 0...* Training to 1 Gym
 
-        public virtual Gym Gym { get; set; }
+        public Gym Gym { get; set; }
 
         #endregion
 
@@ -66,8 +58,7 @@ namespace FitnesClubCL.CF_EMDB
         /// <summary>
         /// Свойство навигации (Virtual ->Lazy Load)
         /// </summary>
-        public virtual Employee Employee { get; set; }
+        public Employee Employee { get; set; }
         #endregion
-
     }
 }

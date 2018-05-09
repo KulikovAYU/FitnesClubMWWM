@@ -2,15 +2,14 @@
 
 namespace FitnesClubCL.CF_EMDB
 {
-
     /// <summary>
-    /// Сущность  список тренировок
+    /// Сущность  список тренировок и услуг
     /// </summary>
     public class TrainingList
     {
         public TrainingList()
         {
-            ArrTrainings = new HashSet<Training>();
+            Accounts = new HashSet<Account>();
         }
         /// <summary>
         /// Id списка тренировок
@@ -18,19 +17,25 @@ namespace FitnesClubCL.CF_EMDB
         public int TrainingListId { get; set; }
 
         /// <summary>
-        /// Имя тренировки
+        /// Количество тренировок
         /// </summary>
-        public string TrainingListName { get; set; }
+        public int CountTrainingList { get; set; }
 
         /// <summary>
         /// Стоимость тренировки
         /// </summary>
-        public double TrainingCurrentCost { get; set; }
+        public decimal TrainingCurrentCost { get; set; }
+        
+        #region Связи между сущностями 0...* TrainingList to 1 Tarif
+        public Tarif Tarifs { get; set; }
+        #endregion
 
-        #region Связи между сущностями 0...* Training to 1 TrainingList
+        #region Связи между сущностями 1 TrainingList to 1 Service
+        public Service TrainingListName { get; set; }
+        #endregion
 
-        public virtual ICollection<Training> ArrTrainings { get; set; }
-
+        #region Связи между сущностями 0...* Accounts to 0...* TrainingList
+        public ICollection<Account> Accounts { get; set; }
         #endregion
     }
 }

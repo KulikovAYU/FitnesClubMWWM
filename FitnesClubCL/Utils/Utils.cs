@@ -42,7 +42,7 @@ namespace FitnesClubCL.Utils
             }
             catch (Exception e)
             {
-                Messenger.Default.Send< Exception>(e);
+                Messenger.Default.Send<Exception>(e);
                 Debug.Write("Исключение"+e.Message);
             }
             return number;
@@ -66,7 +66,7 @@ namespace FitnesClubCL.Utils
             }
             else
             {
-                //Получили номера абонементов всех клиеннтов
+                //Получим номера абонементов всех клиеннтов
                 var query = from numberSubscription in context.Accounts select numberSubscription.NumberSubscription;
                 //сгенерировали номер абонемента
                 m_next = m_rnd.Next(MinValue, MaxValue);

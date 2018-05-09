@@ -11,53 +11,43 @@ namespace FitnesClubCL.CF_EMDB
         public Employee()
         {
             ArrAccounts = new HashSet<Account>();
-           // ArrTrainings = new HashSet<Training>(); //Отладка
+            ArrTrainings = new HashSet<Training>(); //Отладка
         }
 
         /// <summary>
-        /// Id клиента
+        /// Id работника
         /// </summary>
         public int EmployeeId { get; set; }
 
         /// <summary>
-        /// имя клиента
+        /// имя работника
         /// </summary>
         public string EmployeeFirstName { get; set; }
 
         /// <summary>
-        /// Отчетство клиента
+        /// Отчетство работника
         /// </summary>
         public string EmployeeLastName { get; set; }
 
         /// <summary>
-        /// Фамилия клиента
+        /// Фамилия работника
         /// </summary>
         public string EmployeeFamilyName { get; set; }
 
         /// <summary>
         /// Дата рождения
         /// </summary>
-        public DateTime? EmployeeDateOfBirdth { get; set; }
+        public DateTime EmployeeDateOfBirdth { get; set; }
 
         /// <summary>
-        /// Адрес клиента
+        /// Адрес работника
         /// </summary>
         public string EmployeeAdress { get; set; }
 
         /// <summary>
-        /// Номер телефона клиента
+        /// Номер телефона работника
         /// </summary>
         public string EmployeePhoneNumber { get; set; }
-
-        /// <summary>
-        /// е-мэйл клиента
-        /// </summary>
-        public string EmployeeMail { get; set; }
-
-        /// <summary>
-        /// Фото клиента
-        /// </summary>
-        public byte[] EmployeePhoto { get; set; }
 
         /// <summary>
         /// Имя пользователя
@@ -70,44 +60,40 @@ namespace FitnesClubCL.CF_EMDB
         public string EmployeePasswordHash { get; set; }
 
         /// <summary>
-        /// Статус работника (в отпуске или нет)
+        /// е-мэйл работника
         /// </summary>
-        public string EmployeeVacationStatus { get; set; }
+        public string EmployeeMail { get; set; }
 
+        /// <summary>
+        /// Фото работника
+        /// </summary>
+        public byte[] EmployeePhoto { get; set; }
+
+       
         #region Связи между сущностями 1 Employee to 0...* Account
-
         /// <summary>
         /// Свойство навигации (Virtual ->Lazy Load)
         /// </summary>
-        public virtual ICollection<Account> ArrAccounts { get; set; }
+        public ICollection<Account> ArrAccounts { get; set; }
 
         #endregion
 
+        #region Связи между сущностями 0...* Employee to 1...1 EmployeeWorkingStatus
 
+        /// <summary>
+        /// Статус работника (в отпуске или нет)
+        /// </summary>
+        public EmployeeWorkingStatus EmployeeWorkingStatus { get; set; }
+
+        #endregion
+
+        public EmployeeRole EmployeeRole { get; set; }
         #region Связи между сущностями 0..1 Employee to 0...* Training
 
         /// <summary>
         /// Свойство навигации (Virtual ->Lazy Load)
         /// </summary>
-       // public virtual ICollection<Training> ArrTrainings { get; set; } //Отладка
+         public ICollection<Training> ArrTrainings { get; set; } //Отладка
         #endregion
-
-        #region Связи между сущностями 1..1 Salary to 0...* Employee
-
-        /// <summary>
-        /// Свойство навигации (Virtual ->Lazy Load)
-        /// </summary>
-      //  public virtual Salary Salary { get; set; } //Отладка
-        #endregion
-
-
-        #region Связи между сущностями 1..1 EmployeeRole to 0...* Employee
-
-        /// <summary>
-        /// Свойство навигации (Virtual ->Lazy Load)
-        /// </summary>
-     //   public virtual EmployeeRole EmployeeRole { get; set; } //Отладка
-        #endregion
-
     }
 }

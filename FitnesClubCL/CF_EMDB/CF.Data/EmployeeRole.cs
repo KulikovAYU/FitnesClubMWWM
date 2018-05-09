@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FitnesClubCL.CF_EMDB
 {
@@ -17,6 +18,11 @@ namespace FitnesClubCL.CF_EMDB
         /// </summary>
         public string EmployeeRoleName { get; set; }
 
+        /// <summary>
+        /// Размер оклада
+        /// </summary>
+        public Decimal EmployeeSalaryValue { get; set; }
+
         #region Связи между сущностями 1..1 EmployeeRole to 0...* Employee
 
         /// <summary>
@@ -24,5 +30,6 @@ namespace FitnesClubCL.CF_EMDB
         /// </summary>
         public virtual ICollection<Employee> ArrEmployees { get; set; }
         #endregion
+
     }
 }

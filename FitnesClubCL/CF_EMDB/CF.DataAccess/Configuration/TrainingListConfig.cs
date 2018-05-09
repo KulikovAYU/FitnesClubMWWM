@@ -13,10 +13,10 @@ namespace FitnesClubCL.CF_EMDB
         public TrainingListConfig()
         {
             HasKey(trainingList => trainingList.TrainingListId);
-            Property(trainingList => trainingList.TrainingListName).HasMaxLength(50).HasColumnName("TrainingListName")
-                .IsRequired();
             Property(trainingList => trainingList.TrainingCurrentCost).HasColumnName("TrainingCurrentCost")
                 .IsRequired();
+            Property(trainingList => trainingList.CountTrainingList).HasColumnName("CountTrainingList")
+                .IsRequired().HasColumnType("money");
 
             ToTable("TrainingList");
         }

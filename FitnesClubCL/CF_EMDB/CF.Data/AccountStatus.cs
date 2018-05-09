@@ -24,7 +24,7 @@ namespace FitnesClubCL.CF_EMDB
 
         #region Связи между сущностями 0...* Account to 1 AccountStatus
 
-        public virtual ICollection<Account> ArrAccounts { get; set; }
+        public ICollection<Account> ArrAccounts { get; set; }
 
         #endregion
 

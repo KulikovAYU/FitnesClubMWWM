@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.SqlTypes;
 
 
 namespace FitnesClubCL.CF_EMDB
@@ -12,8 +9,8 @@ namespace FitnesClubCL.CF_EMDB
     {
         public Account()
         {
-       //     ArrTrainings = new HashSet<Training>();
-
+            ArrTrainings = new HashSet<Training>();
+            ArrTrainingsList =new HashSet<TrainingList>();
         }
         #region Описание самого аккаунта (абонемента)
         /// <summary>
@@ -108,23 +105,24 @@ namespace FitnesClubCL.CF_EMDB
         #endregion
 
         #region Связи между сущностями 1 Employee to 0...* Account
-        /// <summary>
-        /// Свойство навигации  (Virtual ->Lazy Load)
-        /// </summary>
-        public virtual Employee Employee { get; set; }
+        public Employee Employee { get; set; }
         #endregion
+
+        #region Связи между сущностями 1...* Account to 1...* TrainingList
+        public ICollection<TrainingList> ArrTrainingsList { get; set; }
+        #endregion
+
 
         #region Связи между сущностями 0...* Account to 0...* Training
 
-    //    public virtual ICollection<Training> ArrTrainings { get; set; }
+        public ICollection<Training> ArrTrainings { get; set; }
 
         #endregion
 
         #region Связи между сущностями 0...* Account to 1 AccountStatus
 
-     //   public virtual AccountStatus AccountStatus { get; set; }
+         public AccountStatus AccountStatus { get; set; }
 
         #endregion
-
     }
 }

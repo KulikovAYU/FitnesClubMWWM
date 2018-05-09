@@ -13,7 +13,9 @@ namespace FitnesClubCL.CF_EMDB
         public EmployeeRoleConfig()
         {
             HasKey(employeeRole => employeeRole.EmployeeRoleId);
-            Property(employeeRole => employeeRole.EmployeeRoleName).HasMaxLength(50).HasColumnName("EmployeeRoleName");
+            Property(employeeRole => employeeRole.EmployeeRoleName).HasMaxLength(50).IsRequired().HasColumnName("EmployeeRoleName");
+            Property(employeeRole => employeeRole.EmployeeSalaryValue).IsRequired().HasColumnName("EmployeeSalaryValue").HasColumnType("money");
+            ToTable("EmployeeRolesAndSalaries");
         }
     }
 }

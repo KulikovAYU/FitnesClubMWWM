@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Windows;
 using FitnesClubCL;
 using FitnessClubMWWM.Ui.Desktop.Constants;
@@ -215,8 +216,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             }
 
 
-            ModelManager.CreateDb();
-
+            ModelManager.GetInstance().CreateDb();
 
             //Application.Current.MainWindow.Initialized += (sender, e) =>
             //  {

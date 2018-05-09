@@ -71,8 +71,11 @@
     <Compile Include="CF_EMDB\CF.DataAccess\Configuration\AccountStatusConfig.cs" />
     <Compile Include="CF_EMDB\CF.DataAccess\Configuration\EmployeeConfig.cs" />
     <Compile Include="CF_EMDB\CF.DataAccess\Configuration\EmployeeRoleConfig.cs" />
+    <Compile Include="CF_EMDB\CF.DataAccess\Configuration\EmployeeWorkingStatusConfig.cs" />
     <Compile Include="CF_EMDB\CF.DataAccess\Configuration\GymConfig.cs" />
-    <Compile Include="CF_EMDB\CF.DataAccess\Configuration\SalaryConfig.cs" />
+    <Compile Include="CF_EMDB\CF.DataAccess\Configuration\ServiceConfig.cs" />
+    <Compile Include="CF_EMDB\CF.DataAccess\Configuration\StatusTrainingConfig.cs" />
+    <Compile Include="CF_EMDB\CF.DataAccess\Configuration\TarifConfig.cs" />
     <Compile Include="CF_EMDB\CF.DataAccess\Configuration\TrainingConfig.cs" />
     <Compile Include="CF_EMDB\CF.DataAccess\Configuration\TrainingListConfig.cs" />
     <Compile Include="CF_EMDB\CF.DataAccess\Context\DataBaseFCContext.cs" />
@@ -81,11 +84,15 @@
     <Compile Include="CF_EMDB\CF.Data\AccountStatus.cs" />
     <Compile Include="CF_EMDB\CF.Data\Employee.cs" />
     <Compile Include="CF_EMDB\CF.Data\EmployeeRole.cs" />
+    <Compile Include="CF_EMDB\CF.Data\EmployeeWorkingStatus.cs" />
     <Compile Include="CF_EMDB\CF.Data\Gym.cs" />
-    <Compile Include="CF_EMDB\CF.Data\Salary.cs" />
+    <Compile Include="CF_EMDB\CF.Data\Service.cs" />
+    <Compile Include="CF_EMDB\CF.Data\StatusTaraining.cs" />
+    <Compile Include="CF_EMDB\CF.Data\Tarif.cs" />
     <Compile Include="CF_EMDB\CF.Data\Training.cs" />
     <Compile Include="CF_EMDB\CF.Data\TrainingList.cs" />
     <Compile Include="ModelManager.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Utils.cs" />
   </ItemGroup>

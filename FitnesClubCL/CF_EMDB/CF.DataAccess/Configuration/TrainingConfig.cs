@@ -12,16 +12,10 @@ namespace FitnesClubCL.CF_EMDB
         public TrainingConfig()
         {
             HasKey(training=> training.TrainingId);
-            Property(training => training.TrainingDuration).IsRequired().HasColumnName("TrainingDuration").
-                HasColumnType("datetime2");
-            Property(training => training.TrainingStartDate).IsRequired().HasColumnName("TrainingStartDate").
-                HasColumnType("datetime2");
-            Property(training => training.TrainingStartTime).IsRequired().HasColumnName("TrainingStartTime").
+            Property(training => training.TrainingDateTime).IsRequired().HasColumnName("TrainingDateTime").
                 HasColumnType("datetime2");
             Property(training => training.NumberOfSeats).IsRequired().HasColumnName("NumberOfSeats");
-            Property(training => training.StatusTaraining).IsRequired().HasColumnName("StatusTaraining")
-                .HasMaxLength(20);
-            ToTable("Training");
+           ToTable("Training");
         }
     }
 }

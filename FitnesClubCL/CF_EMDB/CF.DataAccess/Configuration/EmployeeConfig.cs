@@ -26,8 +26,6 @@ namespace FitnesClubCL.CF_EMDB
             Property(employee => employee.EmployeeLoginName).IsRequired().HasMaxLength(50).HasColumnName("EmployeeLoginName");
             Property(employee => employee.EmployeePasswordHash).IsRequired().HasMaxLength(50)
                 .HasColumnName("EmployeePasswordHash");
-            Property(employee => employee.EmployeeVacationStatus).IsRequired().HasMaxLength(50)
-                .HasColumnName("EmployeeVacationStatus");
 
             ToTable("Employee");
         }
