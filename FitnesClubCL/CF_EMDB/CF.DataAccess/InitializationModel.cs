@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.IO;
 using FitnesClubCL.Utils;
 
 namespace FitnesClubCL.CF_EMDB
@@ -167,7 +168,7 @@ namespace FitnesClubCL.CF_EMDB
             ObservableCollection<Account> accounts = new ObservableCollection<Account>
             {
                 new Account{
-                    NumberSubscription = AbonementGenerator.CreateNumberSubscription(context),
+                    NumberSubscription = AbonementGenerator.CreateNumberSubscription(),
                     AccountregistrationDate = DateTime.Now,
                     TrainingCount = 10,
                     VisitedTrainingCount = 5,
@@ -179,7 +180,7 @@ namespace FitnesClubCL.CF_EMDB
                     ClientAdress = "г.Иваново, ул.Бакинский проезд, д.82, кв.11",
                     ClientPhoneNumber = "8-920-672-00-68",
                     ClientMail = "tosha37@inbox.ru",
-                    /* ClientPhoto = ImageSQLController.ConvertToByteArray()*/ //реализовать
+                    ClientPhoto = SqlTools.ConvertImageToByteArray(@"C:\Users\User\Pictures\Img\men.png"),
                     ClientPasportDataSeries = "2409",
                     ClientPasportDataNumber = "460870",
                     ClientPasportDataIssuedBy = "ОУФМС РОССИИ",
@@ -189,7 +190,7 @@ namespace FitnesClubCL.CF_EMDB
                     AccountStatus = accountStatusList[0] 
                 },
                 new Account{
-                    NumberSubscription = AbonementGenerator.CreateNumberSubscription(context),
+                    NumberSubscription = AbonementGenerator.CreateNumberSubscription(),
                     AccountregistrationDate = DateTime.Now,
                     TrainingCount = 15,
                     VisitedTrainingCount = 5,

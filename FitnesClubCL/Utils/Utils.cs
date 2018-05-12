@@ -30,8 +30,9 @@ namespace FitnesClubCL.Utils
         /// </summary>
         /// <param name="context">контекст БД</param>
         /// <returns>Уникальный номер абонемента</returns>
-        public static int CreateNumberSubscription(DataBaseFcContext context)
+        public static int CreateNumberSubscription()
         {
+            DataBaseFcContext context = ModelManager.GetDbContext();
             int number = 0;
             try
             {
@@ -83,26 +84,76 @@ namespace FitnesClubCL.Utils
     }
 
     /// <summary>
-    /// Класс предоставляет загрузку и выгрузку изображений из БД
+    /// Класс предоставляет инструменты для работы с базой данных
     /// </summary>
-    public static class ImageSQLController
+    public static class SqlTools
     {
-        static ImageSQLController()
+        static SqlTools()
         {
 
+        }
+
+        #region Группа методов для работы с изображениями
+
+        /// <summary>
+        /// Метод конвертирует изображение в массив битов для последующего сохранения его в базе данных
+        /// </summary>
+        /// <returns>byte[]</returns>
+        public static byte[] ConvertImageToByteArray(string fileName)
+        {
+            return File.ReadAllBytes(Path.GetFullPath(fileName));
         }
 
         /// <summary>
-        /// Конвертируем изображение в массив битов
+        /// Метод конвертирует изображение из БД
         /// </summary>
+        /// <param name="entitity">сущность</param>
+        /// <param name="nIdHuman">id шник</param>
         /// <returns></returns>
-        public static byte[] ConvertToByteArray()
+        public static Image ConvertToImageFromByteArray(eEntities entitity, int nIdHuman)
         {
-            string fileName = "/FitnessClubMWWM.Ui.Desktop;component/Images/AutorizationPictureImages/fitness-club2.jpg";                  //Путь к файлу
-            Image image = Image.FromFile(fileName);
-            MemoryStream memoryStream = new MemoryStream();                                                                       //Поток в который запишем изображение
-            image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Bmp);
-            return memoryStream.ToArray();
+            DataBaseFcContext context = ModelManager.GetDbContext();
+
+            switch (entitity)
+            {
+                case eEntities.eNone:
+                    break;
+                case eEntities.eEmployee:
+                    //var queryGetEmployees = from arrByte in context.Employees where arrByte.EmployeeId == myIntVariable select arrByte;
+                    var queryGetHumanE = from arrByte in context.Accounts where arrByte.ClientId == nIdHuman select arrByte; //запрос на получение коллекции работников
+                    var queryGetPhotoE = from arrByte in queryGetHumanE select arrByte.ClientPhoto; // запрос на получение фотографии пользователя
+
+                    MemoryStream memoryStreamE = new MemoryStream();
+                    memoryStreamE.Write(queryGetPhotoE.First(), 0, queryGetPhotoE.First().Length);
+                    Image currentImageE = Image.FromStream(memoryStreamE);
+                    return currentImageE;
+
+                case eEntities.eClient:
+
+                    var queryGetHumanC = from arrByte in context.Accounts where arrByte.ClientId == nIdHuman select arrByte; //запрос на получение коллекции клиентов
+                    var queryGetPhotoC = from arrByte in queryGetHumanC select arrByte.ClientPhoto; // запрос на получение фотографии пользователя
+                    //var queryGetName = from name in queryGetHuman let fullName = name.NumberSubscription + "_" + name.ClientFirstName + "_" + name.ClientLastName
+                    //    select fullName;
+
+                    MemoryStream memoryStream = new MemoryStream();
+
+                    memoryStream.Write(queryGetPhotoC.First(), 0, queryGetPhotoC.First().Length);
+                    Image currentImage = Image.FromStream(memoryStream);
+                    //Учатсток кода для сохранения
+                    //DirectoryInfo directoryInfo = Directory.CreateDirectory(Environment.CurrentDirectory + @"\Temp");
+                    //currentImage.Save(directoryInfo.ToString()+ @"\"+queryGetName.First()+".BMP", System.Drawing.Imaging.ImageFormat.Bmp);
+                    //memoryStream.Dispose();
+                    //currentImage.Dispose();
+                    return currentImage;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(entitity), entitity, null);
+            }
+            return null;
         }
+
+        #endregion
+
+
     }
 }

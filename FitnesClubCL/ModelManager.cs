@@ -1,17 +1,21 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using FitnesClubCL.Annotations;
-using FitnesClubCL.CF_EMDB;
+﻿using FitnesClubCL.CF_EMDB;
 using FitnesClubCL.Utils;
+using GalaSoft.MvvmLight;
 
 namespace FitnesClubCL
 {
-   public class ModelManager : INotifyPropertyChanged
+   public class ModelManager : ViewModelBase
     {
         #region Конструктора
 
-       protected ModelManager()
+        static ModelManager()
+        {
+            if (_dataBaseContext == null)
+                _dataBaseContext = new DataBaseFcContext("dbContext");
+        }
+
+
+        protected ModelManager()
        {
 
        }
@@ -19,44 +23,41 @@ namespace FitnesClubCL
         #endregion
 
         #region Поля класса
-        private static ModelManager Manager;
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        private static ModelManager _manager;
+        private static DataBaseFcContext _dataBaseContext ;
         #endregion
 
         public static ModelManager GetInstance()
         {
-            return Manager ?? (Manager = new ModelManager());
+            return _manager ?? (_manager = new ModelManager());
         }
 
-      
-       // delegate int MyDelegate(DataBaseFcContext context);
+        public static DataBaseFcContext GetDbContext()
+        {
+            return _dataBaseContext ?? (_dataBaseContext = new DataBaseFcContext("dbContext"));
+        }
+
         /// <summary>
         /// Метод создает БД
         /// </summary>
         public void CreateDb()
         {
-            using (var db = new DataBaseFcContext("dbContext"))
+           
+            using (/*_dataBaseContext*/ var unitOfWork = new UnitOfWork(_dataBaseContext))
             {
                 //TODO: Внимание, для того, чтобы сработала дефолтная инициализация, необходимо прописать тут хоть одну инициализацию
-                //анонимный метод, генерирующий абонемент
 
                 #region Тарифы фитнес-клуба
-                var tarifs = new Tarif(){ TarifName = "Студенческий"};
-                db.Tarifs.Add(tarifs);
-                db.SaveChanges();
+                //var tarifs = new Tarif(){ TarifName = "Студенческий"};
+                //_dataBaseContext.Tarifs.Add(tarifs);
+                //_dataBaseContext.SaveChanges();
                 #endregion
-
-
+                // SQLTools.ConvertToImageFromByteArray(eEntities.eClient, 1); // TODO: отладка для проверки конвертации изображения из БД
             }
         }
 
         
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+    
     }
 }

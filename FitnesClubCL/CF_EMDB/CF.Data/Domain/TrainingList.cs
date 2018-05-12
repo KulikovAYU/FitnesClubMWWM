@@ -3,7 +3,7 @@
 namespace FitnesClubCL.CF_EMDB
 {
     /// <summary>
-    /// Сущность  список тренировок и услуг
+    /// Сущность  список тренировок и услуг(прайс-лист)
     /// </summary>
     public class TrainingList
     {
@@ -17,7 +17,7 @@ namespace FitnesClubCL.CF_EMDB
         public int TrainingListId { get; set; }
 
         /// <summary>
-        /// Количество тренировок
+        /// Количество тренировок или услуг
         /// </summary>
         public int CountTrainingList { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace FitnesClubCL.CF_EMDB
 {
     /// <summary>
@@ -11,7 +12,7 @@ namespace FitnesClubCL.CF_EMDB
         public Employee()
         {
             ArrAccounts = new HashSet<Account>();
-            ArrTrainings = new HashSet<Training>(); //Отладка
+            ArrTrainings = new HashSet<Training>();
         }
 
         /// <summary>
@@ -95,5 +96,6 @@ namespace FitnesClubCL.CF_EMDB
         /// </summary>
          public ICollection<Training> ArrTrainings { get; set; } //Отладка
         #endregion
+
     }
 }
