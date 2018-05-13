@@ -3,9 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop.Pages.SlidePages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:userControls="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
     Title="RegisterNewClientPage"
     d:DesignHeight="800"
     d:DesignWidth="1000"
@@ -67,7 +65,7 @@
                         Template="{StaticResource InputTextBox}" />
 
                     <TextBox
-                        Name="Name"
+                        Name="ClientName"
                         Width="600"
                         Height="35"
                         Margin="0,5,0,0"

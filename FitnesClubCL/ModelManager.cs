@@ -1,63 +1,40 @@
-﻿using FitnesClubCL.CF_EMDB;
-using FitnesClubCL.Utils;
+﻿
+using FC_EMDB;
+using FC_EMDB.Constants;
+using FitnesClubCL.Classes;
 using GalaSoft.MvvmLight;
 
 namespace FitnesClubCL
 {
-   public class ModelManager : ViewModelBase
-    {
-        #region Конструктора
-
-        static ModelManager()
-        {
-            if (_dataBaseContext == null)
-                _dataBaseContext = new DataBaseFcContext("dbContext");
-        }
-
-
-        protected ModelManager()
+    /// <summary>
+    /// Класс представляет интерфейс для работы с моделью данных
+    /// </summary>
+   public sealed class ModelManager : ViewModelBase
+   {
+    
+       private ModelManager()
        {
-
        }
 
-        #endregion
+       private static ModelManager m_manager;
 
-        #region Поля класса
-        private static ModelManager _manager;
-        private static DataBaseFcContext _dataBaseContext ;
-        #endregion
+       public static ModelManager GetInstance()
+       {
+          return m_manager ?? (m_manager = new ModelManager());
+       }
 
-        public static ModelManager GetInstance()
-        {
-            return _manager ?? (_manager = new ModelManager());
-        }
-
-        public static DataBaseFcContext GetDbContext()
-        {
-            return _dataBaseContext ?? (_dataBaseContext = new DataBaseFcContext("dbContext"));
-        }
+       public void CreateDB()
+       {
+           DbManager.GetInstance().InitializeDatabase();
+       }
 
         /// <summary>
-        /// Метод создает БД
+        /// Аутентификация пользователя в системе
         /// </summary>
-        public void CreateDb()
-        {
-           
-            using (/*_dataBaseContext*/ var unitOfWork = new UnitOfWork(_dataBaseContext))
-            {
-                //TODO: Внимание, для того, чтобы сработала дефолтная инициализация, необходимо прописать тут хоть одну инициализацию
+       public void Autontefication(string strUserName, string strPasswordHash, out eRoles role)
+       {
+           PasswordController.CheckUserNameAndPassword(strUserName, strPasswordHash, out role);
+       }
 
-                #region Тарифы фитнес-клуба
-                //var tarifs = new Tarif(){ TarifName = "Студенческий"};
-                //_dataBaseContext.Tarifs.Add(tarifs);
-                //_dataBaseContext.SaveChanges();
-                #endregion
-                // SQLTools.ConvertToImageFromByteArray(eEntities.eClient, 1); // TODO: отладка для проверки конвертации изображения из БД
-            }
-        }
-
-        
-
-    
-    }
+   }
 }

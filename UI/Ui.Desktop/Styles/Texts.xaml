@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:valueConverters="clr-namespace:FitnessClubMWWM.Ui.Desktop.ValueConverters"
+    xmlns:viewModels="clr-namespace:FitnessClubMWWM.Ui.Desktop.ViewModels"
     mc:Ignorable="d">
 
 
@@ -147,7 +148,7 @@
     <ControlTemplate x:Key="PasswordTextBox" TargetType="{x:Type PasswordBox}">
 
         <ControlTemplate.Resources>
-            <local:PasswordHelper x:Key="PasswordHelper" PasswordString="" />
+            <viewModels:AutorizationPageViewModel x:Key="PasswordHelper"  />
         </ControlTemplate.Resources>
 
         <Border
@@ -194,7 +195,7 @@
                     Background="Transparent"
                     FontSize="{TemplateBinding FontSize}"
                     IsHitTestVisible="False"
-                    Text="{Binding PasswordString}"
+                    Text="{Binding PasswordHash}"
                     Visibility="Collapsed" />
 
 

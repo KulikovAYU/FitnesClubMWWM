@@ -14,7 +14,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ui.Desktop", "UI\Ui.Desktop
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{7511A9F9-71FC-4024-AF9C-5FFD2E1D2D02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnesClubCL", "FitnesClubCL\FitnesClubCL.csproj", "{8F334A6C-671E-4E3C-99D6-2CD3AC072137}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC_Model", "FitnesClubCL\FC_Model.csproj", "{8F334A6C-671E-4E3C-99D6-2CD3AC072137}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC_EMDB", "FC_EMDB\FC_EMDB.csproj", "{E91B2675-74E9-4D8D-8F28-1F5038B2CCFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,10 @@ Global
 		{8F334A6C-671E-4E3C-99D6-2CD3AC072137}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F334A6C-671E-4E3C-99D6-2CD3AC072137}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F334A6C-671E-4E3C-99D6-2CD3AC072137}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E91B2675-74E9-4D8D-8F28-1F5038B2CCFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E91B2675-74E9-4D8D-8F28-1F5038B2CCFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E91B2675-74E9-4D8D-8F28-1F5038B2CCFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E91B2675-74E9-4D8D-8F28-1F5038B2CCFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +43,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8CE6C57A-55CA-48F6-BC6E-79882D9BE877} = {3B0031B5-0346-4102-84F0-43EA4545C5E6}
 		{8F334A6C-671E-4E3C-99D6-2CD3AC072137} = {7511A9F9-71FC-4024-AF9C-5FFD2E1D2D02}
+		{E91B2675-74E9-4D8D-8F28-1F5038B2CCFE} = {7511A9F9-71FC-4024-AF9C-5FFD2E1D2D02}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3207F049-54C9-4877-9F4A-03ADCD79BB3C}

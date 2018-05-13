@@ -499,9 +499,13 @@
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\FitnesClubCL\FitnesClubCL.csproj">
+    <ProjectReference Include="..\..\FC_EMDB\FC_EMDB.csproj">
+      <Project>{E91B2675-74E9-4D8D-8F28-1F5038B2CCFE}</Project>
+      <Name>FC_EMDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FitnesClubCL\FC_Model.csproj">
       <Project>{8f334a6c-671e-4e3c-99d6-2cd3ac072137}</Project>
-      <Name>FitnesClubCL</Name>
+      <Name>FC_Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

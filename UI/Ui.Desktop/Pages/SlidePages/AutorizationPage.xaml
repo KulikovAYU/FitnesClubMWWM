@@ -16,7 +16,7 @@
 
     <Page.Resources>
         <valueConverters:ApplicationPageValueConverter x:Key="ApplicationPageValueConverter" />
-        <userControls:PasswordHelper x:Key="PasswordHelper" PasswordString="" />
+
 
     </Page.Resources>
 
@@ -115,7 +115,8 @@
                                 BorderThickness="2"
                                 FontSize="18"
                                 Tag="Имя пользователя"
-                                Template="{DynamicResource InputTextBox}" />
+                                Template="{DynamicResource InputTextBox}"
+                                Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" />
                         </Border>
 
                         <Border
@@ -125,18 +126,17 @@
                             Height="100">
 
                             <PasswordBox
-                                x:Name="passwordBox"
+                                Name="PasswordBox"
                                 Width="600"
                                 Height="50"
                                 VerticalContentAlignment="Center"
                                 BorderThickness="2"
-                                DataContext="{StaticResource PasswordHelper}"
                                 FontSize="18"
                                 Tag="Пароль"
                                 Template="{DynamicResource PasswordTextBox}">
                                 <i:Interaction.Behaviors>
                                     <valueConverters:DependecyPropertyBehavior
-                                        Binding="{Binding PasswordString}"
+                                        Binding="{Binding PasswordHash}"
                                         UpdateEvent="PasswordChanged"
                                         Property="Password" />
                                 </i:Interaction.Behaviors>
@@ -152,7 +152,6 @@
                             <Button
                                 Width="200"
                                 Height="60"
-                                Click="Button_Click"
                                 Command="{Binding Autentification}"
                                 Content="Войти"
                                 Cursor="Hand"

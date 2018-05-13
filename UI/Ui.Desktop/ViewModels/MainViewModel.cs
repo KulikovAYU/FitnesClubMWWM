@@ -216,7 +216,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             }
 
 
-            ModelManager.GetInstance().CreateDb();
+            ModelManager.GetInstance().CreateDB();
 
             //Application.Current.MainWindow.Initialized += (sender, e) =>
             //  {
@@ -243,8 +243,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
         #endregion
 
-
-
         /// <summary>
         /// Видимость панели о пользователе
         /// </summary>
@@ -253,5 +251,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             get => CurrentPage != ApplicationPage.Login ? Visibility.Visible : Visibility.Hidden;
             set => AboutUserPanelVisibility = value;
         }
+
+
     }
 }

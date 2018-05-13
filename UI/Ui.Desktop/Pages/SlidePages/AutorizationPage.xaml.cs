@@ -70,9 +70,6 @@ namespace FitnessClubMWWM.Ui.Desktop.Pages.SlidePages
         //   AnimatedGrid.BeginAnimation(OpacityProperty, animation);
         //}
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-        //    MessageBox.Show(AutorizationTextBox.InputString);
-        }
+       
     }
 }
