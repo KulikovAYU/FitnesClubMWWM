@@ -15,11 +15,13 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             Accounts = new AccountRepository(m_context);
             Employess = new EmployeeRepository(m_context);
             EmployeRoles = new EmployeeRoleRepository(m_context);
+            EmployeesWorkingStatus = new EmployeeWorkingStatusRepository(m_context);
         }
 
         public IAccountRepository Accounts { get; private set; }
         public IEmployeeRepository Employess { get; private set; }
         public IEmployeeRoleRepository EmployeRoles { get; private set; }
+        public IEmployeeWorkingStatusRepository EmployeesWorkingStatus { get; private set; }
        
 
         public int Complete()

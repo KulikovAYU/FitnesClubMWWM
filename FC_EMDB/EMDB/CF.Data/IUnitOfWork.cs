@@ -8,6 +8,7 @@ namespace FC_EMDB.EMDB.CF.Data
         IAccountRepository Accounts { get;  }
         IEmployeeRepository Employess { get; }
         IEmployeeRoleRepository EmployeRoles { get; }
+        IEmployeeWorkingStatusRepository EmployeesWorkingStatus { get;}
 
         int Complete();
     }

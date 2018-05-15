@@ -72,5 +72,6 @@
                 </TransformGroup>
             </userControls:UCStartPanel.RenderTransform>
         </userControls:UCStartPanel>
+
     </Grid>
 </Page>

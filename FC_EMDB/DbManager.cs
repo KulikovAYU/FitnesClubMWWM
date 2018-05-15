@@ -1,6 +1,8 @@
-﻿using FC_EMDB.Constants;
+﻿using System.Collections.Generic;
+using FC_EMDB.Constants;
 using FC_EMDB.EMDB.CF.DataAccess;
 using FC_EMDB.EMDB.CF.DataAccess.Context;
+using FC_EMDB.Utils;
 
 
 namespace FC_EMDB
@@ -74,40 +76,35 @@ namespace FC_EMDB
         /// </summary>
         /// <param name="strUserName">Имя пользователя</param>
         /// <param name="strPasswordHash">Хэш пароля</param>
-        /// <param name="role">Роль пользователя системы</param>
-        public void GetUserRole(string strUserName, string strPasswordHash, out eRoles role)
+        /// <param name="strRole">Роль пользователя системы</param>
+        public void GetUserRole(string strUserName, string strPasswordHash, out string strRole)
         {
             var employee = unitOfWork.Employess.GetEmployeeByUserNameAndPassword(strUserName, strPasswordHash);
 
             if (employee == null)
             {
-                role = eRoles.eNone;
+                strRole = null;
                 return;
             }
 
-            string strRole = unitOfWork.EmployeRoles.GetRole(employee).EmployeeRoleName;
-            switch (strRole)
-            {
-                case ("Администратор"):
-                    role = eRoles.eAdministrator;
-                    break;
+            strRole = unitOfWork.EmployeRoles.GetRole(employee).EmployeeRoleName;
+        }
 
-                case ("Фитнес-инструктор"):
-                    role = eRoles.eFitnesInstructor;
-                    break;
-
-                case ("Менеджер"):
-                    role = eRoles.eManager;
-                    break;
-
-                case ("Руководитель"):
-                    role = eRoles.eDirector;
-                    break;
-
-                default:
-                    role = eRoles.eNone;
-                    break;
-            }
+        /// <summary>
+        /// Получить данные пользователя для отображения в окне информации
+        /// </summary>
+        /// <param name="userData">Возвращаемые данные пользователя</param>
+        /// <param name="strUserName">Имя пользователя</param>
+        /// <param name="strPasswordHash">Пароль</param>
+        public void GetSystemUserData(string strUserName, string strPasswordHash, Dictionary<string, object> userData)
+        {
+            var employee =  unitOfWork.Employess.GetEmployeeByUserNameAndPassword(strUserName, strPasswordHash);
+            userData.Add("EmployeeLoginName", employee.EmployeeLoginName);
+            userData.Add("EmployeeFirstAndFamilyName", employee.EmployeeFirstName + " " + employee.EmployeeFamilyName);
+            userData.Add("EmployeeRoleName", unitOfWork.EmployeRoles.GetRole(employee).EmployeeRoleName);
+            userData.Add("EmployeeWorkingStatus", unitOfWork.EmployeesWorkingStatus.GetEmployeeWorkingStatus(employee));
+            userData.Add("DateOfBirdth", employee.EmployeeDateOfBirdth);
+            userData.Add("UserImage", unitOfWork.Employess.GetSystemUserPhoto(employee));
         }
     }
 }

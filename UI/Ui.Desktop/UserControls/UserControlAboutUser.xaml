@@ -66,6 +66,9 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Mode="Default" Path="BeginPanelPageViewModelMain" Source="{StaticResource Locator}"/>
+    </UserControl.DataContext>
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="aboutUserButton">
             <BeginStoryboard x:Name="ShowUserLog_BeginStoryboard" Storyboard="{StaticResource ShowUserLog}" />
@@ -155,7 +158,7 @@
                         <TextBlock
                             FontSize="25"
                             FontWeight="ExtraBold"
-                            Text="Антон Куликов"
+                            Text="{Binding UserFullName, UpdateSourceTrigger=PropertyChanged}"
                             TextAlignment="Center" />
                         <TextBlock
                             Margin="5,20,0,15"

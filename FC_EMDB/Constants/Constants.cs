@@ -13,14 +13,16 @@
     /// <summary>
     /// Роли пользователей информационной системы
     /// </summary>
-    public enum eRoles
-    {
-        eNone,
-        eAdministrator,//администратор системы
-        eManager,// Менеджер
-        eDirector,//Руководитель
-        eFitnesInstructor// Фитнес-инструктор
-    }
+    //public enum eRoles
+    //{
+    //    eNone,
+    //    eAdministrator,//администратор системы
+    //    eManager,// Менеджер
+    //    eDirector,//Руководитель
+    //    eFitnesInstructor// Фитнес-инструктор
+    //}
+
+
 
 
     class Constants

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using FC_EMDB.EMDB.CF.Data.Domain;
 using FitnesClubCL.CF_EMDB.Repositories;
 
@@ -33,7 +34,20 @@ namespace FC_EMDB.EMDB.CF.Data.Repositories
         /// <returns>Коллекция работников с определенной ролью</returns>
         IEnumerable<Employee> GetEmployeesWithConcreteRole(string strRole);
 
-
+        /// <summary>
+        /// Получить работника по имени пользователя и паролю
+        /// </summary>
+        /// <param name="strUserName">Имя пользователя</param>
+        /// <param name="strPasswordHash">Хэш пароля</param>
+        /// <returns></returns>
         Employee GetEmployeeByUserNameAndPassword(string strUserName, string strPasswordHash);
+
+
+        /// <summary>
+        /// Получить фото пользователя информационной системы
+        /// </summary>
+        /// <param name="employee">Экземпляр работника</param>
+        /// <returns>Изображение пользователя информационной системы</returns>
+        Image GetSystemUserPhoto(Employee employee);
     }
 }

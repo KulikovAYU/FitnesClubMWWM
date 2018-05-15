@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using GalaSoft.MvvmLight.Command;
 
 //В ЭТОМ КЛАССЕ БУДУТ ОПРЕДЕЛЯТЬСЯ ПОЛЬЗОВАТЕЛЬСКИЕ ЭЛЕМЕНТЫ УПРАВЛЕНИЯ
 
@@ -10,6 +11,14 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
     public class PasswordHelper
     {
         public string PasswordString { get; set; }
+    }
+
+    /// <summary>
+    /// представляет ресурс для кастомного текстбокса (для его очистки при нажатии на крестик)
+    /// </summary>
+    public class TextboxRecource : TextBox
+    {
+        public RelayCommand<TextBox> ClearCommand=> new RelayCommand<TextBox>((textbox) => { textbox.Clear();});
     }
 
     /// <summary>

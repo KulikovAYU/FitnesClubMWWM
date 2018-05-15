@@ -74,13 +74,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\PasswordController.cs" />
+    <Compile Include="Interfaces\ISystemUser.cs" />
     <Compile Include="ModelManager.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>

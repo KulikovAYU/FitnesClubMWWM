@@ -217,6 +217,9 @@
     <Compile Include="UserControls\UCClientPageDetails.xaml.cs">
       <DependentUpon>UCClientPageDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCProgressBar.xaml.cs">
+      <DependentUpon>UCProgressBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCSearchHuman.xaml.cs">
       <DependentUpon>UCSearchHuman.xaml</DependentUpon>
     </Compile>
@@ -387,6 +390,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCClientPageDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCProgressBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

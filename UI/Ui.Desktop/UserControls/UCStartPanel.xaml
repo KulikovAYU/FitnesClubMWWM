@@ -5,12 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:FitnessClubMWWM.Ui.Desktop.ViewModels"
+    DataContext="{Binding BeginPanelPageViewModelMain, Source={StaticResource Locator}}"
     mc:Ignorable="d">
 
-    <UserControl.DataContext>
-        <viewModels:BeginPanelPageViewModel />
-    </UserControl.DataContext>
+
 
     <Border
         x:Name="Border"
@@ -18,12 +16,6 @@
         Height="500"
         HorizontalAlignment="Center"
         VerticalAlignment="Center">
-
-        <Border.Resources>
-            <SolidColorBrush x:Key="BlueColor" Color="#0066CC" />
-        </Border.Resources>
-
-
 
         <UniformGrid
             Margin="50"
@@ -165,10 +157,6 @@
                 GeomPictureWidth="45"
                 RenderTransformOrigin="0.5,0.5"
                 Template="{DynamicResource StartBtnControlTemplate}" />
-
-
         </UniformGrid>
-
     </Border>
-
 </UserControl>

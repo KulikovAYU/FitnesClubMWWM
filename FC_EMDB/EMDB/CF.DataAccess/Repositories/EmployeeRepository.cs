@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using FC_EMDB.EMDB.CF.Data.Domain;
 using FC_EMDB.EMDB.CF.Data.Repositories;
@@ -55,6 +57,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
             //var query = from employee in DataBaseFcContext.EmployeeRoles
             //    where employee.EmployeeRoleName.Equals(strRole)
             //    select employee.ArrEmployees;
+           
             var query = DataBaseFcContext.EmployeeRoles.Where(role => role.EmployeeRoleName == strRole)
                 .Select(emp => emp.ArrEmployees).FirstOrDefault();
 
@@ -66,15 +69,36 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
         /// </summary>
         /// <param name="strUserName">Имя пользователя</param>
         /// <param name="strPasswordHash">Пароль</param>
-        /// <returns></returns>
+        /// <returns>Сущность работника</returns>
         public Employee GetEmployeeByUserNameAndPassword(string strUserName, string strPasswordHash)
         {
-          
-            //var query = DataBaseFcContext.Employees.FirstOrDefault(employee => employee.EmployeeLoginName == strUserName);
-            var query = DataBaseFcContext.Employees
+            
+              //var query = DataBaseFcContext.Employees.FirstOrDefault(employee => employee.EmployeeLoginName == strUserName);
+              var query = DataBaseFcContext.Employees
                 .Where(employee => employee.EmployeeLoginName == strUserName).FirstOrDefault(employee => employee.EmployeePasswordHash == strPasswordHash);
 
             return query;
+        }
+
+        /// <summary>
+        /// Получить фотографию работника
+        /// </summary>
+        /// <param name="employee">Сущность работника</param>
+        /// <returns>Фотографию пользователя информационной системы</returns>
+        public Image GetSystemUserPhoto(Employee employee)
+        {
+            if (employee == null)
+                return null;
+
+            var query = DataBaseFcContext.Employees.Where(empl => empl.EmployeeId == employee.EmployeeId)
+                .Select(img => img.EmployeePhoto);
+            if (query.FirstOrDefault() == null)
+                return null;
+
+            MemoryStream memoryStream = new MemoryStream();
+            memoryStream.Write(query.First(), 0, query.First().Length);
+            Image currentImage = Image.FromStream(memoryStream);
+            return currentImage;
         }
 
         public DataBaseFcContext DataBaseFcContext => m_context as DataBaseFcContext;

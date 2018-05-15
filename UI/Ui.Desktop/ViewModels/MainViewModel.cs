@@ -1,12 +1,15 @@
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows;
+using FC_EMDB.Constants;
 using FitnesClubCL;
 using FitnessClubMWWM.Ui.Desktop.Constants;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
 using FitnessClubMWWM.Ui.Desktop.Pages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace FitnessClubMWWM.Ui.Desktop.ViewModels
@@ -14,7 +17,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
     public class MainViewModel : ViewModelBase
     {
       
-
         #region Private Member
 
        
@@ -126,6 +128,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
         void ProcessMessage(string msg)
         {
+          
             switch (msg)
             {
                 case "LoginPage":
@@ -187,6 +190,11 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             }
         }
 
+
+
+
+      
+
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -205,7 +213,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             }
 
             Messenger.Default.Register(this, new Action<string>(ProcessMessage));
- Messenger.Default.Register(this, new Action<Exception>(ErrorMessage));
+
+            Messenger.Default.Register(this, new Action<Exception>(ErrorMessage));
 
             if (Application.Current.MainWindow != null)
             {

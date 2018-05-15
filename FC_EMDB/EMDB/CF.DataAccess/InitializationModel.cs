@@ -134,7 +134,6 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             context.TrainingLists.AddRange(trainingsLists);
             #endregion
 
-
             #region Добавление статусов тренировки
             ObservableCollection<StatusTraining> statusTrainingLists = new ObservableCollection<StatusTraining>()
             {
@@ -143,7 +142,6 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             };
             context.StatusTrainings.AddRange(statusTrainingLists);
             #endregion
-
 
             #region Добавление статусов аккаунта
             ObservableCollection<AccountStatus> accountStatusList = new ObservableCollection<AccountStatus>()
@@ -216,8 +214,6 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             context.Accounts.AddRange(accounts);
 
             #endregion
-
-
 
             #region Добавление тренировки, которая предстоит
             ObservableCollection<Training> trainings = new ObservableCollection<Training>()
