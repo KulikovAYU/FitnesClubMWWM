@@ -2,11 +2,11 @@
 using System.Drawing;
 using System.Windows;
 using FitnesClubCL;
+using FitnesClubCL.Classes;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using FitnessClubMWWM.Ui.Desktop.Pages;
-using GalaSoft.MvvmLight.Ioc;
 
 namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 {
@@ -14,11 +14,14 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
     {
         public BeginPanelPageViewModel()
         {
+           
+           
             //ButtonClick = new RelayCommand(ExecuteCommand);
-            _strUserRole = SimpleIoc.Default.GetInstance<AutorizationPageViewModel>().StrUserRole;
+            // _strUserRole = SimpleIoc.Default.GetInstance<AutorizationPageViewModel>().StrUserRole;
         }
 
         private readonly string _strUserRole;
+        private string _strPath;
 
 
         #region Команды, отвечающие за показ страниц
@@ -29,26 +32,59 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// Команда показать панель администратора (доступна только для админа)
         /// </summary>
         public RelayCommand ShowAdminPanelCommand => new RelayCommand(() => { Messenger.Default.Send("AdminPage"); },
-            () => _strUserRole != null && _strUserRole.Equals("Администратор"));
+            () => 
+            {
+                if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.AdministrationControls;
+                return false;
+            });
 
-        public RelayCommand ShowWorkingCabinetCommand => new RelayCommand(() =>
-        {
-            Messenger.Default.Send("WorkingCabinetPage");
-        });
+        /// <summary>
+        /// Команда меню "карты" (группа Карты)
+        /// </summary>
+        public RelayCommand ShowWorkingCabinetCommand => new RelayCommand(() =>{ Messenger.Default.Send("WorkingCabinetPage");},
+            () =>
+            {
+                if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.CardsCreate;
+                return false;
+            });
+        
+        /// <summary>
+        /// Команда меню показать клиентов (группа клиенты)
+        /// </summary>
+        public RelayCommand ShowClientPageCommand => new RelayCommand(() => { Messenger.Default.Send("ClientPage"); },
+            () => {
+                if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.ClientsControls;
+                return false;
+            });
 
-        public RelayCommand ShowClientPageCommand => new RelayCommand(() => { Messenger.Default.Send("ClientPage"); });
-
+        /// <summary>
+        /// Команда показать расписание трировок (группа расписание занятий)
+        /// </summary>
         public RelayCommand ShowClassScheduleCommand =>
-            new RelayCommand(() => { Messenger.Default.Send("ClassSchedule"); });
+            new RelayCommand(() => { Messenger.Default.Send("ClassSchedule"); },
+                () =>
+                {
+                    if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.SeeTrainingList;
+                    return false;
+                });
 
+        /// <summary>
+        /// Команда показать информацию о персонале (группа Персонал) - доступна всем, кроме редактирования
+        /// </summary>
         public RelayCommand ShowStaffPageCommand => new RelayCommand(() => { Messenger.Default.Send("StaffPage"); });
 
+        /// <summary>
+        /// Команда управления услуг и залами (группа Финансы, услуги, залы)
+        /// </summary>
         public RelayCommand ShowSelectActionWindowCommand => new RelayCommand(() =>
         {
             Window selectActionWIndow = new SelectActionWindow();
             selectActionWIndow.ShowDialog();
-        }, () => _strUserRole != null && (_strUserRole != null && _strUserRole.Equals("Руководитель") ||
-                                          _strUserRole.Equals("Администратор")));
+        }, () =>
+        {
+            if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.FinanceAndServicesControls;
+            return false;
+        });
 
         #region Окно выбора действия
         /// <summary>
@@ -112,8 +148,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             Messenger.Default.Send("LoginPage");
         }
 
-      
-
         private void AgreeWithExit()
         {
             Messenger.Default.Send("AgreeWithExit");
@@ -125,12 +159,35 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         }
 
 
-        public string UserFullName { get; set; }
-        public string LoginName => (ModelManager.GetInstance() as ISystemUser).LoginName;
-        public DateTime? DateOfBirdth => (ModelManager.GetInstance() as ISystemUser).DateOfBirdth;
-        public string Status => (ModelManager.GetInstance() as ISystemUser).Status;
-        public DateTime TimeInSystem => (ModelManager.GetInstance() as ISystemUser).TimeInSystem;
-        public string VacationStatus => (ModelManager.GetInstance() as ISystemUser).VacationStatus;
-        public Image UserPhoto => (ModelManager.GetInstance() as ISystemUser).UserPhoto;
+        /// <summary>
+        /// Метод обновляет поля информации о пользователе
+        /// </summary>
+        public void SetUserData(UserData? workingUserData)
+        {
+            this.WorkingUserData = workingUserData;
+            if (WorkingUserData != null)
+            {
+                UserFullName = WorkingUserData.Value.UserFullName;
+                LoginName = WorkingUserData.Value.UserLoginName;
+                DateOfBirdth = WorkingUserData.Value.UserDateOfBirdth;
+                Status = WorkingUserData.Value.UserStatus;
+                VacationStatus = WorkingUserData.Value.UserVacationStatus;
+                UserPhoto = WorkingUserData.Value.UserPhoto;
+                StrPath = WorkingUserData.Value.Path;
+            }
+        }
+
+        public string UserFullName { get; private set; } 
+        public string LoginName { get; private set; }
+        public DateTime? DateOfBirdth { get; private set; }
+        public string Status { get; private set; }
+        //public DateTime TimeInSystem => (ModelManager.GetInstance() as ISystemUser).TimeInSystem;
+        public string VacationStatus { get; private set; }
+        public Image UserPhoto { get; private set; }
+        public string StrPath { get; private set; }
+       
+
+        public AutorizationUserData AutorizationUserData { get; }
+        public UserData? WorkingUserData { get; private set; }
     }
 }

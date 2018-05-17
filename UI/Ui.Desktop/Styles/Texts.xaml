@@ -25,7 +25,10 @@
 
 
     <!--  Шаблон текстового поля логина входа  -->
-    <ControlTemplate x:Key="InputTextBox" x:Name="ControlTemplate" TargetType="{x:Type TextBox}">
+    <ControlTemplate
+        x:Key="InputTextBox"
+        x:Name="ControlTemplate"
+        TargetType="{x:Type TextBox}">
         <ControlTemplate.Resources>
             <Storyboard x:Key="OnPreviewMouseLeftButtonUp1">
 
@@ -33,9 +36,9 @@
                     <DiscreteBooleanKeyFrame KeyTime="0" Value="True" />
                     <DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="False" />
                 </BooleanAnimationUsingKeyFrames>
-              
+
             </Storyboard>
-            <local:TextboxRecource x:Key="CustomTextboxRecource"/>
+            <local:TextboxRecource x:Key="CustomTextboxRecource" />
         </ControlTemplate.Resources>
 
         <Border
@@ -140,7 +143,7 @@
             </Trigger>
             <Trigger SourceName="ClearButton" Property="IsClear" Value="True">
                 <Setter Property="Text" Value="" />
-               
+
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

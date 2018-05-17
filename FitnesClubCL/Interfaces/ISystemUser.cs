@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using FitnesClubCL.Classes;
 
 namespace FitnesClubCL
 {
@@ -9,38 +10,14 @@ namespace FitnesClubCL
     public interface ISystemUser
     {
         /// <summary>
-        /// Имя и Отчество пользователя
+        /// Данные пользователя, которые он отправил
         /// </summary>
-        string UserFullName { get; }
+        AutorizationUserData AutorizationUserData { get; }
 
         /// <summary>
-        /// Логин пользователя
+        /// Данные пользователя, которые выернула модель
         /// </summary>
-        string LoginName { get; }
-        
-        /// <summary>
-        /// Дата рождения
-        /// </summary>
-        DateTime? DateOfBirdth { get; }
+        UserData? WorkingUserData { get; }
 
-        /// <summary>
-        /// Статус пользователя системы
-        /// </summary>
-        string Status { get; }
-
-        /// <summary>
-        /// Дата и время
-        /// </summary>
-        DateTime TimeInSystem { get; }
-
-        /// <summary>
-        /// Статус в отпуске или нет
-        /// </summary>
-        string VacationStatus { get; }
-       
-        /// <summary>
-        /// Фотография пользователя
-        /// </summary>
-        Image UserPhoto { get; }
     } 
 }

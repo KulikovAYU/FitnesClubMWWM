@@ -9,12 +9,7 @@
         {
             InitializeComponent();
         }
-        
 
-        ~MainWindow()
-        {
-           
-        }
 
         private void window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

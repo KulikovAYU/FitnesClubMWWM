@@ -49,5 +49,12 @@ namespace FC_EMDB.EMDB.CF.Data.Repositories
         /// <param name="employee">Экземпляр работника</param>
         /// <returns>Изображение пользователя информационной системы</returns>
         Image GetSystemUserPhoto(Employee employee);
+
+        /// <summary>
+        /// Получить изображение в виде массива байтов
+        /// </summary>
+        /// <param name="employee">Экземпляр работника</param>
+        /// <returns>Байты изображения пользователя информационной системы</returns>
+        byte[] GetSystemUserByreArrPhoto(Employee employee);
     }
 }

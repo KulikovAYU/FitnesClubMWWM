@@ -1,8 +1,7 @@
 using System;
-using System.Diagnostics;
-using System.Drawing;
+
 using System.Windows;
-using FC_EMDB.Constants;
+
 using FitnesClubCL;
 using FitnessClubMWWM.Ui.Desktop.Constants;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
@@ -226,23 +225,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
 
             ModelManager.GetInstance().CreateDB();
-
-            //Application.Current.MainWindow.Initialized += (sender, e) =>
-            //  {
-            //      FrameWND.NavigationService.Navigate(new Uri("AutorizationPage.xaml", UriKind.Relative));
-            //  };
-            // listen out for the window resizing
-            //if (Application.Current.MainWindow != null)
-            //    Application.Current.MainWindow.StateChanged +=(sender, e)=>
-            //{
-            //    //Fire off events for all properties thet are affected by a resize
-            //    RaisePropertyChanged(nameof(ResizeBorderThickness));
-            //    RaisePropertyChanged(nameof(OutermarginSize));
-            //    RaisePropertyChanged(nameof(OutermarginSizeThickness));
-            //    RaisePropertyChanged(nameof(WindowRadius));
-            //    RaisePropertyChanged(nameof(WindowCornerRadius));
-            //};
-
         }
 
         private void ErrorMessage(Exception obj)

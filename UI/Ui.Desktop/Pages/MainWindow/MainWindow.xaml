@@ -16,7 +16,6 @@
     AllowsTransparency="True"
     BorderBrush="#FF121DFF"
     BorderThickness="1"
-    Closing="window_Closing"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">

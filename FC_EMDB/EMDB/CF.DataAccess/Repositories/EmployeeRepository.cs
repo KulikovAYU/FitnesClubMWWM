@@ -101,6 +101,21 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
             return currentImage;
         }
 
+        /// <summary>
+        /// Получить фотографию работника в виде массива байт
+        /// </summary>
+        /// <param name="employee">Сущность работника</param>
+        /// <returns>фото пользователя инфосистемы в виде массива байт</returns>
+        public byte[] GetSystemUserByreArrPhoto(Employee employee)
+        {
+            if (employee == null)
+                return null;
+            var query = DataBaseFcContext.Employees.Where(empl => empl.EmployeeId == employee.EmployeeId)
+                .Select(img => img.EmployeePhoto);
+
+            return query.FirstOrDefault();
+        }
+
         public DataBaseFcContext DataBaseFcContext => m_context as DataBaseFcContext;
     }
 }

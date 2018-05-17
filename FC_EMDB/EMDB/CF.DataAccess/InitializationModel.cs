@@ -70,6 +70,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                    EmployeePhoneNumber = "8-920-345-57-57",
                    EmployeeLoginName = "IvanovWorker",
                    EmployeePasswordHash="be50825e1851dfd342ddd6fce6cbd7fa",
+                   EmployeePhoto = SqlTools.ConvertImageToByteArray(@"C:\Users\User\Pictures\Img\men.png"),
                    EmployeeMail ="snHsd@inbox.ru",
                    EmployeeWorkingStatus =  employeeWorkingStatuses[(int)EWorkingStaus.EWorking],
                    EmployeeRole = roles[0]

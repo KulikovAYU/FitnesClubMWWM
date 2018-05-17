@@ -99,6 +99,10 @@ namespace FC_EMDB
         public void GetSystemUserData(string strUserName, string strPasswordHash, Dictionary<string, object> userData)
         {
             var employee =  unitOfWork.Employess.GetEmployeeByUserNameAndPassword(strUserName, strPasswordHash);
+            if (employee == null)
+            {
+                return;
+            }
             userData.Add("EmployeeLoginName", employee.EmployeeLoginName);
             userData.Add("EmployeeFirstAndFamilyName", employee.EmployeeFirstName + " " + employee.EmployeeFamilyName);
             userData.Add("EmployeeRoleName", unitOfWork.EmployeRoles.GetRole(employee).EmployeeRoleName);
