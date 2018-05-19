@@ -18,6 +18,16 @@ namespace FitnesClubCL
         /// Данные пользователя, которые выернула модель
         /// </summary>
         UserData? WorkingUserData { get; }
+    }
 
-    } 
+    /// <summary>
+    /// Интерфейс регистрационных данных клиента
+    /// </summary>
+    public interface IClientRegisterData
+    {
+        NewClientData ClientData { get; set; }
+    }
+
+
+
 }

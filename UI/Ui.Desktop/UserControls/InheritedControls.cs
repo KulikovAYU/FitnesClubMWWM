@@ -2,7 +2,12 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using FitnessClubMWWM.Ui.Desktop.Constants;
+using FitnessClubMWWM.Ui.Desktop.Interfaces;
+using FitnessClubMWWM.Ui.Desktop.Pages;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Win32;
+using static System.String;
 
 //В ЭТОМ КЛАССЕ БУДУТ ОПРЕДЕЛЯТЬСЯ ПОЛЬЗОВАТЕЛЬСКИЕ ЭЛЕМЕНТЫ УПРАВЛЕНИЯ
 
@@ -80,7 +85,7 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
     public static class PasswordBoxAssistant
     {
         public static readonly DependencyProperty BoundPassword =
-            DependencyProperty.RegisterAttached("BoundPassword", typeof(string), typeof(PasswordBoxAssistant), new PropertyMetadata(string.Empty, OnBoundPasswordChanged));
+            DependencyProperty.RegisterAttached("BoundPassword", typeof(string), typeof(PasswordBoxAssistant), new PropertyMetadata(Empty, OnBoundPasswordChanged));
 
         public static readonly DependencyProperty BindPassword = DependencyProperty.RegisterAttached(
             "BindPassword", typeof(bool), typeof(PasswordBoxAssistant), new PropertyMetadata(false, OnBindPasswordChanged));
@@ -264,7 +269,7 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
         }
 
         public static readonly DependencyProperty ButtonCommentProperty =
-            DependencyProperty.Register("ButtonComment", typeof(string), typeof(StartButton), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("ButtonComment", typeof(string), typeof(StartButton), new PropertyMetadata(Empty));
         #endregion
 
         #region Свойство, определяющее цвет шрифта коментария к функции кнопки
@@ -321,11 +326,57 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
     }
 
 
-    //TODO: переписать
-    class CustomDataGrid : DataGrid
+    /// <summary>
+    /// Реализация интерфейса диалоговых окон для загрузки картинок
+    /// </summary>
+    public class DefaultDialogService : IDialogService
     {
+        public string FilePath { get; set; }
 
+        public static IDialogService CreateDialogService => new DefaultDialogService();
+
+        IDialogService IDialogService.CreateDialogService => CreateDialogService;
+
+        public void ShowMessage(string message)
+        {
+            CustomMessageBox.Show(message,Empty,MessageBoxButton.OK,eMessageBoxIcons.eNone);
+        }
+
+        public bool OpenFileDialog(string strDefFileExtention = "", string strDefFileFilters = "")
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            
+            if (strDefFileExtention != Empty)
+            {
+                openFileDialog.DefaultExt = strDefFileExtention;
+            }
+
+            if (strDefFileFilters != Empty )
+            {
+                openFileDialog.Filter = strDefFileFilters;
+            }
+           
+            if (openFileDialog.ShowDialog() == true)
+            {
+                if (!IsNullOrEmpty(openFileDialog.FileName))
+                {
+                    FilePath = openFileDialog.FileName;
+                }
+                return true;
+            }
+         
+            return false;
+        }
+ 
+        public bool SaveFileDialog()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                FilePath = saveFileDialog.FileName;
+                return true;
+            }
+            return false;
+        }
     }
-
-
 }

@@ -318,7 +318,7 @@ namespace FitnesClubCL.Classes
         /// <summary>
         /// Номер телефона
         /// </summary>
-        public string PhoneNumber { get; set; }
+        public string ClientPhoneNumber { get; set; }
         /// <summary>
         /// Пол клиента
         /// </summary>
@@ -340,9 +340,15 @@ namespace FitnesClubCL.Classes
         /// </summary>
         public DateTime ClientPasportDatеOfIssue { get; set; }
         #endregion
+
+        /// <summary>
+        /// Путь к фото клиента
+        /// </summary>
+        public string strImagePath { get; set; }
+
         /// <summary>
         /// Фото клиента
         /// </summary>
-        public byte[] ClientPhoto { get; set; }
+        public byte[] ClientPhoto { get; private set; }
     }
 }

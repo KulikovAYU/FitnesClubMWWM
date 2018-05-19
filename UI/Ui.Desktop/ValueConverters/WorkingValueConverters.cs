@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using FitnesClubCL.Classes;
 using FitnessClubMWWM.Logic.Ui;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages;
 
+ 
 // Вспомогательные конвертеры значений
 namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
 {
@@ -98,7 +91,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
             return (value as string).Length == 0
                 ? "/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/red_gym_icon.ico"
                 : value;
-
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -115,7 +107,15 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
 
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            Tuple<string, string, string> tuple = new Tuple<string, string, string>((string)values[0], (string)values[1], (string)values[2]);
+          //  Tuple<string, DateTime> newtuple = new Tuple<string, DateTime>((string)values[7], (DateTime)values[8]);
+
+            if (values[8] == null)
+                return null;
+            Tuple<string, string, string, bool, string, string, string, Tuple<string, DateTime>> tuple = 
+                new Tuple<string, string, string, bool, string, string, string, Tuple<string, DateTime>>((string)values[0], 
+                (string)values[1], (string)values[2], (bool)values[3],(string)values[4], (string)values[5],
+                (string)values[6], new Tuple<string, DateTime>((string)values[7], (DateTime)values[8]));
+        
             return tuple;
             //NewClientData data = new NewClientData();
             //data.ClientName = values[0] as string;

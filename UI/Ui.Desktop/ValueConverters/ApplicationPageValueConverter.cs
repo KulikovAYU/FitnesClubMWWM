@@ -51,12 +51,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
         #endregion
 
 
-
-        public ApplicationPageValueConverter()
-        {
-         
-        }
-
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             switch ((ApplicationPage)value)

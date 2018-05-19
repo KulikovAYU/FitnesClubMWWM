@@ -8,7 +8,7 @@ namespace FitnesClubCL
     /// <summary>
     /// Класс представляет интерфейс для работы с моделью данных
     /// </summary>
-    public sealed class ModelManager : ViewModelBase, ISystemUser
+    public sealed class ModelManager : ViewModelBase, ISystemUser, IClientRegisterData
     {
     
        private ModelManager()
@@ -46,5 +46,16 @@ namespace FitnesClubCL
 
        public AutorizationUserData AutorizationUserData { get; }
        public UserData? WorkingUserData { get; private set; }
+       public NewClientData ClientData { get; set; }
+
+        /// <summary>
+        /// Зарегистрировать нового клиента
+        /// </summary>
+        /// <param name="clientData">данные клиента</param>
+        public void RegisterNewClient(NewClientData clientData)
+        {
+            //TODO: реализовать
+            throw new System.NotImplementedException();
+        }
     }
 }

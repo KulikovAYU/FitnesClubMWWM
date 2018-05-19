@@ -133,6 +133,7 @@
     </ApplicationDefinition>
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="DataModels\ApplicationPage.cs" />
+    <Compile Include="Interfaces\IDialogService.cs" />
     <Compile Include="local.xaml.cs">
       <DependentUpon>local.xaml</DependentUpon>
     </Compile>
