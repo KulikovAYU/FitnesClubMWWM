@@ -65,6 +65,11 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public DateTime? ClientDateOfBirdth { get; set; }
 
         /// <summary>
+        /// Пол клиента
+        /// </summary>
+        public string ClientGender { get; set; }
+
+        /// <summary>
         /// Адрес клиента
         /// </summary>
         public string ClientAdress { get; set; }

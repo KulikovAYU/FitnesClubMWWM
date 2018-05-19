@@ -3,12 +3,14 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using FitnesClubCL.Classes;
 using FitnessClubMWWM.Logic.Ui;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages;
@@ -84,7 +86,9 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
         }
     }
 
-
+    /// <summary>
+    /// Конвертер для фотографии пользователя
+    /// </summary>
     public class ImageBrushValueConverter : BaseValueConverter<ImageBrushValueConverter>
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -98,6 +102,29 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// Конвертер для команды "сохранить изменения"
+    /// </summary>
+    public class MultiConverter : IMultiValueConverter
+    {
+
+        public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            Tuple<string, string, string> tuple = new Tuple<string, string, string>((string)values[0], (string)values[1], (string)values[2]);
+            return tuple;
+            //NewClientData data = new NewClientData();
+            //data.ClientName = values[0] as string;
+            //data.ClientFamily = values[1] as string;
+            //return data;
+            //return values.ToArray(); //второй вариант
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException();
         }

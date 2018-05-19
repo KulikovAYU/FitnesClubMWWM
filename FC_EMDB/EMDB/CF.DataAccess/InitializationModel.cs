@@ -62,9 +62,9 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             ObservableCollection<Employee> employees = new ObservableCollection<Employee>
             {
                new Employee{
-                   EmployeeFirstName = "Иванов",
-                   EmployeeLastName = "Иван",
-                   EmployeeFamilyName = "Иванович",
+                   EmployeeFirstName = "Антон",
+                   EmployeeLastName = "Юрьевич",
+                   EmployeeFamilyName = "Куликов",
                    EmployeeDateOfBirdth = new DateTime(1989,05,24),
                    EmployeeAdress = "ул. Мальцева, д.5, кв.10",
                    EmployeePhoneNumber = "8-920-345-57-57",
@@ -176,6 +176,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     ClientFirstName = "Антон",
                     ClientLastName = "Юрьевич",
                     ClientFamilyName = "Куликов",
+                    ClientGender="Муж.",
                     ClientDateOfBirdth = DateTime.Parse("27.05.1989"),
                     ClientAdress = "г.Иваново, ул.Бакинский проезд, д.82, кв.11",
                     ClientPhoneNumber = "8-920-672-00-68",
@@ -198,6 +199,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     ClientFirstName = "Николай",
                     ClientLastName = "Викторович",
                     ClientFamilyName = "Савлуков",
+                    ClientGender="Муж.",
                     ClientDateOfBirdth = DateTime.Parse("27.05.1989"),
                     ClientAdress = "г.Иваново, ул.Бакинский проезд, д.82, кв.11",
                     ClientPhoneNumber = "8-920-672-00-68",

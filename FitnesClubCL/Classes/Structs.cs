@@ -298,4 +298,51 @@ namespace FitnesClubCL.Classes
         public bool ClientsControls { get; private set; }
     }
 
+    /// <summary>
+    /// Регистрационные данные новго клиента
+    /// </summary>
+    public struct NewClientData
+    {
+        /// <summary>
+        /// Имя клиента
+        /// </summary>
+        public string ClientName { get; set; }
+        /// <summary>
+        /// Фамилия клиента
+        /// </summary>
+        public string ClientFamily { get; set; }
+        /// <summary>
+        /// Отчество клиента
+        /// </summary>
+        public string ClientLastName { get; set; }
+        /// <summary>
+        /// Номер телефона
+        /// </summary>
+        public string PhoneNumber { get; set; }
+        /// <summary>
+        /// Пол клиента
+        /// </summary>
+        public string ClientGender { get; set; }
+
+        #region Паспортные данные клиента
+        /// Серия
+        public string ClientPasportDataSeries { get; set; }
+        /// <summary>
+        /// Номер
+        /// </summary>
+        public string ClientPasportDataNumber { get; set; }
+        /// <summary>
+        /// Кем выдан
+        /// </summary>
+        public string ClientPasportDataIssuedBy { get; set; }
+        /// <summary>
+        /// Дата выдачи
+        /// </summary>
+        public DateTime ClientPasportDatеOfIssue { get; set; }
+        #endregion
+        /// <summary>
+        /// Фото клиента
+        /// </summary>
+        public byte[] ClientPhoto { get; set; }
+    }
 }

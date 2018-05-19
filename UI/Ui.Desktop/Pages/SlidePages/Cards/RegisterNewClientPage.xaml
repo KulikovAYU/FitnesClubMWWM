@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:valueConverters="clr-namespace:FitnessClubMWWM.Ui.Desktop.ValueConverters"
     Title="RegisterNewClientPage"
     d:DesignHeight="800"
     d:DesignWidth="1000"
@@ -13,6 +14,9 @@
         <StaticResource ResourceKey="PageNextWorkingBaseStyle" />
     </Page.Style>
 
+    <Page.Resources>
+            <valueConverters:MultiConverter x:Key="MultiConverter"/>
+    </Page.Resources>
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -20,7 +24,8 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-
+            
+            <!--Фото клиента-->
             <Ellipse
                 x:Name="Photo"
                 Grid.Row="0"
@@ -29,7 +34,6 @@
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/red_gym_icon.ico" />
                 </Ellipse.Fill>
-
             </Ellipse>
 
             <Button
@@ -54,7 +58,7 @@
                 <StackPanel Width="600" Orientation="Vertical">
 
                     <TextBox
-                        Name="Family"
+                        Name="ClientFamily"
                         Width="600"
                         Height="35"
                         Margin="0,5,0,0"
@@ -124,12 +128,7 @@
                 </StackPanel>
             </GroupBox>
 
-
-
-
-
-
-            <Border Width="700" Height="auto">
+           <Border Width="700" Height="auto">
                 <GroupBox
                     Margin="5"
                     Foreground="Gray"
@@ -222,15 +221,12 @@
                                         Template="{StaticResource InputTextBox}" />
                                 </Grid>
                             </Border>
-
                         </GroupBox>
-
-
                     </StackPanel>
                 </GroupBox>
             </Border>
 
-
+<!--Кновка сохранить изменения-->
             <Button
                 Width="235"
                 Height="40"
@@ -241,7 +237,18 @@
                 Cursor="Hand"
                 FontSize="20"
                 Foreground="White"
-                Template="{StaticResource ButtonBaseControlTemplate}" />
+                Template="{StaticResource ButtonBaseControlTemplate}" 
+                Command="{Binding SaveChanges}">
+                
+                <!--После нажатии кнопку "сохранить изменения" данные пользователя отправляются на сервер-->           
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                        <Binding ElementName="ClientName" Path="Text" />
+                        <Binding ElementName="ClientFamily" Path="Text"/>
+                        <Binding ElementName="SecondFamily" Path="Text"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+                </Button>
         </StackPanel>
     </StackPanel>
 
@@ -250,40 +257,5 @@
 
 
 
-    <!--<Page.Resources>
-        <Storyboard x:Key="OnLoaded2">
-            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="GoHome" Storyboard.TargetProperty="(FrameworkElement.Margin)">
-                <EasingThicknessKeyFrame KeyTime="0" Value="-50,40,0,0" />
-                <EasingThicknessKeyFrame KeyTime="0:0:0.1" Value="-10,40,0,0" />
-                <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="0,40,0,0" />
-            </ThicknessAnimationUsingKeyFrames>
-        </Storyboard>
-    </Page.Resources>
-
-    <Page.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-            <BeginStoryboard Storyboard="{StaticResource OnLoaded2}" />
-        </EventTrigger>
-    </Page.Triggers>
-
-    <Grid >
-        <userControls:ButtonWithPicture
-            x:Name="GoHome"
-            Grid.Row="0"
-            Width="50"
-            Height="40"
-            Margin="-50,40,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Background="{x:Null}"
-            BorderBrush="{x:Null}"
-            Command="{Binding GoHomeCommand, Mode=OneWay}"
-            Cursor="Hand"
-            GeomPicture="{Binding Data, Source={StaticResource GoHome}}"
-            GeomPictureFill="Black"
-            GeomPictureHeight="20"
-            GeomPictureWidth="20"
-            Template="{DynamicResource AboutUserControlTemplate}"
-            ToolTip="На главную страницу" />
-    </Grid>-->
+  
 </Page>

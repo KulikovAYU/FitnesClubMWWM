@@ -14,8 +14,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
     {
         public BeginPanelPageViewModel()
         {
-           
-           
             //ButtonClick = new RelayCommand(ExecuteCommand);
             // _strUserRole = SimpleIoc.Default.GetInstance<AutorizationPageViewModel>().StrUserRole;
         }
@@ -35,7 +33,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             () => 
             {
                 if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.AdministrationControls;
-                return false;
+                //return false;
+                return true;// На момент отладки
             });
 
         /// <summary>
@@ -45,7 +44,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             () =>
             {
                 if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.CardsCreate;
-                return false;
+                // return false;.
+                return true;// На момент отладки
             });
         
         /// <summary>
@@ -54,7 +54,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         public RelayCommand ShowClientPageCommand => new RelayCommand(() => { Messenger.Default.Send("ClientPage"); },
             () => {
                 if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.ClientsControls;
-                return false;
+                // return false;
+                return true;// На момент отладки
             });
 
         /// <summary>
@@ -65,7 +66,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                 () =>
                 {
                     if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.SeeTrainingList;
-                    return false;
+                    //return false;
+                    return true;// На момент отладки
                 });
 
         /// <summary>
@@ -83,7 +85,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         }, () =>
         {
             if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.FinanceAndServicesControls;
-            return false;
+            //return false;
+            return true;// На момент отладки
         });
 
         #region Окно выбора действия
