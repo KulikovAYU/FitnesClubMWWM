@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:valueConverters="clr-namespace:FitnessClubMWWM.Ui.Desktop.ValueConverters"
     Title="RegisterNewClientPage"
-    d:DesignHeight="800"
     d:DesignWidth="1000"
     DataContext="{Binding WorkingCabinetPageViewModel, Source={StaticResource Locator}}"
     mc:Ignorable="d">
@@ -18,185 +17,104 @@
         <valueConverters:MultiConverter x:Key="MultiConverter" />
         <valueConverters:ImageBrushValueConverter x:Key="ImageBrushValueConverter" />
     </Page.Resources>
+    <ScrollViewer
+        Margin="0,50,0,0"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        HorizontalScrollBarVisibility="Auto"
+        VerticalScrollBarVisibility="Auto">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <!--  Фото клиента  -->
-            <Grid>
-                <Ellipse
-                    x:Name="Photo"
-                    Grid.Row="0"
-                    Width="150"
-                    Height="150">
-                    <Ellipse.Fill>
-                        <ImageBrush ImageSource="{Binding StrPath, Converter={StaticResource ImageBrushValueConverter}, IsAsync=True}" />
-                    </Ellipse.Fill>
-                </Ellipse>
-                <Button
-                    Width="60"
-                    Height="30"
-                    Margin="0,0,0,10"
-                    VerticalAlignment="Bottom"
-                    Background="{x:Null}"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding LoadClientPhotoCommand}"
-                    FontWeight="Bold"
-                    Foreground="White"
-                    Template="{DynamicResource ButtonLoadPhotoTemplate}" />
-                <Button
-                    Width="25"
-                    Height="25"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Background="{x:Null}"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding ClearPhotoCommand}"
-                    Content="x"
-                    Cursor="Hand"
-                    FontSize="14"
-                    Foreground="White"
-                    Template="{DynamicResource RemovePictureButtonBaseControlTemplate}"
-                    Visibility="{Binding Visib}" />
+                <!--  Фото клиента  -->
+                <Grid>
+                    <Ellipse
+                        x:Name="Photo"
+                        Grid.Row="0"
+                        Width="150"
+                        Height="150">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding StrPath, Converter={StaticResource ImageBrushValueConverter}, IsAsync=True, Mode=OneWay}" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Button
+                        Width="60"
+                        Height="30"
+                        Margin="0,0,0,10"
+                        VerticalAlignment="Bottom"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding LoadClientPhotoCommand}"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Template="{DynamicResource ButtonLoadPhotoTemplate}" />
+                    <Button
+                        Width="25"
+                        Height="25"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding ClearPhotoCommand}"
+                        Content="x"
+                        Cursor="Hand"
+                        FontSize="14"
+                        Foreground="White"
+                        Template="{DynamicResource RemovePictureButtonBaseControlTemplate}"
+                        Visibility="{Binding Visib}" />
+                </Grid>
             </Grid>
-        </Grid>
 
-        <StackPanel Orientation="Vertical">
-            <GroupBox
-                Margin="1"
-                Foreground="Gray"
-                Header="Клиент">
-                <StackPanel Width="600" Orientation="Vertical">
-
-                    <TextBox
-                        Name="ClientFamily"
-                        Width="600"
-                        Height="35"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        BorderThickness="2"
-                        FontSize="{StaticResource RegularBig}"
-                        Tag="Фамилия"
-                        Template="{StaticResource InputTextBox}" />
-
-                    <TextBox
-                        Name="ClientName"
-                        Width="600"
-                        Height="35"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        BorderThickness="2"
-                        FontSize="{StaticResource RegularBig}"
-                        Tag="Имя"
-                        Template="{StaticResource InputTextBox}" />
-
-                    <TextBox
-                        Name="SecondFamily"
-                        Width="600"
-                        Height="35"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        BorderThickness="2"
-                        FontSize="{StaticResource RegularBig}"
-                        Tag="Отчество"
-                        Template="{StaticResource InputTextBox}" />
-
-                    <GroupBox
-                        Margin="0,5,0,0"
-                        Foreground="Gray"
-                        Header="Пол">
-                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="100" />
-                            </Grid.ColumnDefinitions>
-
-                            <RadioButton
-                                Name="BoyRadioBtn"
-                                Grid.Column="0"
-                                HorizontalAlignment="Center"
-                                Content="Муж."
-                                FontSize="{StaticResource Regular}" />
-                            <RadioButton
-                                Name="GirlRadioBtn"
-                                Grid.Column="1"
-                                HorizontalAlignment="Center"
-                                Content="Жен."
-                                FontSize="{StaticResource Regular}" />
-                        </Grid>
-                    </GroupBox>
-
-                    <TextBox
-                        Name="PhoneNumber"
-                        Width="600"
-                        Height="35"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        BorderThickness="2"
-                        FontSize="{StaticResource RegularBig}"
-                        Tag="Телефон"
-                        Template="{StaticResource InputTextBox}" />
-                </StackPanel>
-            </GroupBox>
-
-            <Border Width="700" Height="auto">
+            <StackPanel Orientation="Vertical">
                 <GroupBox
-                    Margin="5"
+                    Margin="1"
                     Foreground="Gray"
-                    Header="Паспортные данные">
-                    <StackPanel Orientation="Vertical">
-
-                        <StackPanel
-                            Width="600"
-                            Margin="0,10,0,0"
-                            Orientation="Horizontal">
-                            <TextBox
-                                Name="PasportSeries"
-                                Width="150"
-                                Height="35"
-                                Margin="0,0,10,0"
-                                VerticalContentAlignment="Center"
-                                BorderThickness="2"
-                                FontSize="18"
-                                Tag="Серия"
-                                Template="{StaticResource InputTextBox}" />
-
-                            <TextBox
-                                Name="PasportNumber"
-                                Width="440"
-                                Height="35"
-                                HorizontalAlignment="Right"
-                                VerticalContentAlignment="Center"
-                                BorderThickness="2"
-                                FontSize="18"
-                                Tag="Номер"
-                                Template="{StaticResource InputTextBox}" />
-                        </StackPanel>
-
+                    Header="Клиент">
+                    <StackPanel Width="600" Orientation="Vertical">
 
                         <TextBox
-                            Name="PasportGiven"
-                            Grid.ColumnSpan="2"
+                            Name="ClientFamily"
                             Width="600"
                             Height="35"
-                            Margin="0,10,0,0"
+                            Margin="0,5,0,0"
                             VerticalContentAlignment="Center"
                             BorderThickness="2"
-                            FontSize="18"
-                            Tag="Выдан"
+                            FontSize="{StaticResource RegularBig}"
+                            Tag="Фамилия*"
+                            Template="{StaticResource InputTextBox}"
+                            Text="{Binding ClientData.ClientName}" />
+
+                        <TextBox
+                            Name="ClientName"
+                            Width="600"
+                            Height="35"
+                            Margin="0,5,0,0"
+                            VerticalContentAlignment="Center"
+                            BorderThickness="2"
+                            FontSize="{StaticResource RegularBig}"
+                            Tag="Имя*"
                             Template="{StaticResource InputTextBox}" />
+
+                        <TextBox
+                            Name="SecondFamily"
+                            Width="600"
+                            Height="35"
+                            Margin="0,5,0,0"
+                            VerticalContentAlignment="Center"
+                            BorderThickness="2"
+                            FontSize="{StaticResource RegularBig}"
+                            Tag="Отчество*"
+                            Template="{StaticResource InputTextBox}" />
+
                         <GroupBox
                             Width="600"
                             Foreground="Gray"
-                            Header="Дата выдачи">
-                            <Border
-                                Width="600"
-                                Height="50"
-                                Margin="0,5,0,0">
+                            Header="Дата рождения*">
+                            <Border Width="600" Height="40">
                                 <Grid HorizontalAlignment="Center">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
@@ -204,9 +122,9 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <DatePicker
-                                        Name="DatePicker"
+                                        Name="DateOfBirdthPicker"
                                         Width="250"
-                                        Height="50"
+                                        Height="40"
                                         Padding="7,0,0,0"
                                         VerticalContentAlignment="Center"
                                         FontSize="{StaticResource Regular}"
@@ -215,42 +133,178 @@
                                 </Grid>
                             </Border>
                         </GroupBox>
+
+                        <GroupBox
+                            Margin="0,5,0,0"
+                            Foreground="Gray"
+                            Header="Пол">
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+
+                                <RadioButton
+                                    Name="BoyRadioBtn"
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Center"
+                                    Content="Муж."
+                                    FontSize="{StaticResource Regular}"
+                                    IsChecked="True" />
+                                <RadioButton
+                                    Name="GirlRadioBtn"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    Content="Жен."
+                                    FontSize="{StaticResource Regular}" />
+                            </Grid>
+                        </GroupBox>
+                        <TextBlock
+                            Margin="15,0,0,0"
+                            FontWeight="Bold"
+                            Foreground="Gray"
+                            Style="{StaticResource BaseTextBlockStyle}"
+                            Text="Адрес" />
+                        <RichTextBox
+                            Width="600"
+                            Height="100"
+                            VerticalContentAlignment="Center"
+                            AcceptsReturn="True"
+                            AcceptsTab="True"
+                            BorderThickness="2"
+                            FontFamily="{Binding Source={StaticResource BaseRichTextBlockStyle}}"
+                            FontSize="{StaticResource RegularBig}"
+                            Tag="Краткое описание" />
+                        <TextBox
+                            Name="PhoneNumber"
+                            Width="600"
+                            Height="35"
+                            Margin="0,5,0,0"
+                            VerticalContentAlignment="Center"
+                            BorderThickness="2"
+                            FontSize="{StaticResource RegularBig}"
+                            Tag="Телефон*"
+                            Template="{StaticResource InputTextBox}" />
+                        <TextBox
+                            Name="Email"
+                            Width="600"
+                            Height="35"
+                            Margin="0,5,0,0"
+                            VerticalContentAlignment="Center"
+                            BorderThickness="2"
+                            FontSize="{StaticResource RegularBig}"
+                            Tag="e-mail"
+                            Template="{StaticResource InputTextBox}" />
                     </StackPanel>
                 </GroupBox>
-            </Border>
 
-            <!--  Кновка сохранить изменения  -->
-            <Button
-                Width="235"
-                Height="40"
-                Margin="0,5,0,10"
-                HorizontalAlignment="Center"
-                VerticalContentAlignment="Center"
-                Command="{Binding SaveChangesCommand}"
-                Content="Сохранить изменения"
-                Cursor="Hand"
-                FontSize="20"
-                Foreground="White"
-                Template="{StaticResource ButtonBaseControlTemplate}">
+                <Border Width="700" Height="auto">
+                    <GroupBox
+                        Margin="5"
+                        Foreground="Gray"
+                        Header="Паспортные данные">
+                        <StackPanel Orientation="Vertical">
 
-                <!--  После нажатии кнопку "сохранить изменения" данные пользователя отправляются на сервер  -->
-                <Button.CommandParameter>
-                    <MultiBinding Converter="{StaticResource MultiConverter}">
-                        <Binding ElementName="ClientName" Path="Text" />
-                        <Binding ElementName="ClientFamily" Path="Text" />
-                        <Binding ElementName="SecondFamily" Path="Text" />
-                        <Binding ElementName="BoyRadioBtn" Path="IsChecked" />
-                        <Binding ElementName="PhoneNumber" Path="Text" />
-                        <Binding ElementName="PasportSeries" Path="Text" />
-                        <Binding ElementName="PasportNumber" Path="Text" />
-                        <Binding ElementName="PasportGiven" Path="Text" />
-                        <Binding ElementName="DatePicker" Path="SelectedDate" />
-                    </MultiBinding>
-                </Button.CommandParameter>
-            </Button>
+                            <StackPanel
+                                Width="600"
+                                Margin="0,10,0,0"
+                                Orientation="Horizontal">
+                                <TextBox
+                                    Name="PasportSeries"
+                                    Width="150"
+                                    Height="35"
+                                    Margin="0,0,10,0"
+                                    VerticalContentAlignment="Center"
+                                    BorderThickness="2"
+                                    FontSize="18"
+                                    Tag="Серия*"
+                                    Template="{StaticResource InputTextBox}" />
+
+                                <TextBox
+                                    Name="PasportNumber"
+                                    Width="440"
+                                    Height="35"
+                                    HorizontalAlignment="Right"
+                                    VerticalContentAlignment="Center"
+                                    BorderThickness="2"
+                                    FontSize="18"
+                                    Tag="Номер*"
+                                    Template="{StaticResource InputTextBox}" />
+                            </StackPanel>
+
+
+                            <TextBox
+                                Name="PasportGiven"
+                                Grid.ColumnSpan="2"
+                                Width="600"
+                                Height="35"
+                                Margin="0,10,0,0"
+                                VerticalContentAlignment="Center"
+                                BorderThickness="2"
+                                FontSize="18"
+                                Tag="Выдан*"
+                                Template="{StaticResource InputTextBox}" />
+                            <GroupBox
+                                Width="600"
+                                Foreground="Gray"
+                                Header="Дата выдачи*">
+                                <Border Width="600" Height="40">
+                                    <Grid HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <DatePicker
+                                            Name="DatePicker"
+                                            Width="250"
+                                            Height="40"
+                                            Padding="7,0,0,0"
+                                            VerticalContentAlignment="Center"
+                                            FontSize="{StaticResource Regular}"
+                                            Foreground="Gray"
+                                            Style="{StaticResource BaseStyle}" />
+                                    </Grid>
+                                </Border>
+                            </GroupBox>
+                        </StackPanel>
+                    </GroupBox>
+                </Border>
+
+                <!--  Кновка сохранить изменения  -->
+                <Button
+                    Width="235"
+                    Height="40"
+                    Margin="0,5,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding SaveChangesCommand}"
+                    Content="Сохранить изменения"
+                    Cursor="Hand"
+                    FontSize="20"
+                    Foreground="White"
+                    Template="{StaticResource ButtonBaseControlTemplate}">
+
+                    <!--  После нажатии кнопку "сохранить изменения" данные пользователя отправляются на сервер  -->
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource MultiConverter}">
+                            <Binding ElementName="ClientName" Path="Text" />
+                            <Binding ElementName="ClientFamily" Path="Text" />
+                            <Binding ElementName="SecondFamily" Path="Text" />
+                            <Binding ElementName="BoyRadioBtn" Path="IsChecked" />
+                            <Binding ElementName="PhoneNumber" Path="Text" />
+                            <Binding ElementName="PasportSeries" Path="Text" />
+                            <Binding ElementName="PasportNumber" Path="Text" />
+                            <Binding ElementName="PasportGiven" Path="Text" />
+                            <Binding ElementName="DatePicker" Path="SelectedDate" />
+                            <Binding ElementName="Email" Path="Text" />
+                            <Binding ElementName="DateOfBirdthPicker" Path="SelectedDate" />
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+            </StackPanel>
         </StackPanel>
-    </StackPanel>
-
+    </ScrollViewer>
 
 
 

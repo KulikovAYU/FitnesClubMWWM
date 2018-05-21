@@ -116,7 +116,7 @@
                                 FontSize="18"
                                 Tag="Имя пользователя"
                                 Template="{DynamicResource InputTextBox}"
-                                Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                Text="{Binding AutorizationUserData.UserLoginName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                         </Border>
 
                         <Border
@@ -136,7 +136,7 @@
                                 Template="{DynamicResource PasswordTextBox}">
                                 <i:Interaction.Behaviors>
                                     <valueConverters:DependecyPropertyBehavior
-                                        Binding="{Binding PasswordString}"
+                                        Binding="{Binding  AutorizationUserData.PasswordString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                         UpdateEvent="PasswordChanged"
                                         Property="Password" />
                                 </i:Interaction.Behaviors>

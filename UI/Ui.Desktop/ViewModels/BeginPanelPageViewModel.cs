@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows;
+using FC_EMDB.Classes;
 using FitnesClubCL;
 using FitnesClubCL.Classes;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using FitnessClubMWWM.Ui.Desktop.Pages;
+using GalaSoft.MvvmLight.Ioc;
 
 namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 {
@@ -32,9 +34,10 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         public RelayCommand ShowAdminPanelCommand => new RelayCommand(() => { Messenger.Default.Send("AdminPage"); },
             () => 
             {
-                if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.AdministrationControls;
-                //return false;
                 return true;// На момент отладки
+               // return WorkingUserData.GetAcsessRigths.AdministrationControls;
+                //return false;
+               
             });
 
         /// <summary>
@@ -43,9 +46,10 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         public RelayCommand ShowWorkingCabinetCommand => new RelayCommand(() =>{ Messenger.Default.Send("WorkingCabinetPage");},
             () =>
             {
-                if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.CardsCreate;
+                return true;
+               // return WorkingUserData.GetAcsessRigths.CardsCreate;
                 // return false;.
-                return true;// На момент отладки
+              
             });
         
         /// <summary>
@@ -53,9 +57,9 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// </summary>
         public RelayCommand ShowClientPageCommand => new RelayCommand(() => { Messenger.Default.Send("ClientPage"); },
             () => {
-                if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.ClientsControls;
-                // return false;
                 return true;// На момент отладки
+               // return WorkingUserData.GetAcsessRigths.ClientsControls;
+                
             });
 
         /// <summary>
@@ -65,9 +69,9 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             new RelayCommand(() => { Messenger.Default.Send("ClassSchedule"); },
                 () =>
                 {
-                    if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.SeeTrainingList;
-                    //return false;
                     return true;// На момент отладки
+                //    return WorkingUserData.GetAcsessRigths.SeeTrainingList;
+                   
                 });
 
         /// <summary>
@@ -84,9 +88,9 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             selectActionWIndow.ShowDialog();
         }, () =>
         {
-            if (WorkingUserData.HasValue) return WorkingUserData.Value.GetAcsessRigths.Value.FinanceAndServicesControls;
-            //return false;
             return true;// На момент отладки
+           // return WorkingUserData.GetAcsessRigths.FinanceAndServicesControls;
+           
         });
 
         #region Окно выбора действия
@@ -165,32 +169,25 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// <summary>
         /// Метод обновляет поля информации о пользователе
         /// </summary>
-        public void SetUserData(UserData? workingUserData)
+        public void SetUserData(UserData workingUserData)
         {
-            this.WorkingUserData = workingUserData;
-            if (WorkingUserData != null)
+            if (workingUserData == null)
             {
-                UserFullName = WorkingUserData.Value.UserFullName;
-                LoginName = WorkingUserData.Value.UserLoginName;
-                DateOfBirdth = WorkingUserData.Value.UserDateOfBirdth;
-                Status = WorkingUserData.Value.UserStatus;
-                VacationStatus = WorkingUserData.Value.UserVacationStatus;
-                UserPhoto = WorkingUserData.Value.UserPhoto;
-                StrPath = WorkingUserData.Value.Path;
+                return;
             }
+            WorkingUserData = workingUserData;
         }
+     
 
-        public string UserFullName { get; private set; } 
-        public string LoginName { get; private set; }
-        public DateTime? DateOfBirdth { get; private set; }
-        public string Status { get; private set; }
-        //public DateTime TimeInSystem => (ModelManager.GetInstance() as ISystemUser).TimeInSystem;
-        public string VacationStatus { get; private set; }
-        public Image UserPhoto { get; private set; }
-        public string StrPath { get; private set; }
-       
-
+        /// <summary>
+        /// Авторизационные данные пользователя
+        /// </summary>
         public AutorizationUserData AutorizationUserData { get; }
-        public UserData? WorkingUserData { get; private set; }
+
+        /// <summary>
+        /// Рабочие данные пользователя
+        /// </summary>
+        public UserData WorkingUserData { get; private set; }
+           
     }
 }

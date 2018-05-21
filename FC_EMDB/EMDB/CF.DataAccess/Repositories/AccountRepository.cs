@@ -58,6 +58,22 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
             return query;
         }
 
+        /// <summary>
+        /// Найти аккаунт с определенными данными
+        /// </summary>
+        /// <param name="clientData"> Данные по которым будет производиться выборка</param>
+        /// <returns></returns>
+        public Account FindAccountWithSameData(Account clientData)
+        {
+            var query = DataBaseFcContext.Accounts.FirstOrDefault(acc => acc.ClientFirstName == clientData.ClientFirstName && acc.ClientLastName ==
+                                                                                                                  clientData.ClientLastName
+                                                                                                                           && acc.ClientFamilyName ==
+                                                                                                                  clientData.ClientFamilyName &&
+                                                                                                                  acc.ClientDateOfBirdth ==
+                                                                                                                           clientData.ClientDateOfBirdth);
+            return query;
+        }
+
         public DataBaseFcContext DataBaseFcContext => m_context as DataBaseFcContext;
     }
 }

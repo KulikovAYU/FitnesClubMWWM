@@ -109,12 +109,12 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
         {
           //  Tuple<string, DateTime> newtuple = new Tuple<string, DateTime>((string)values[7], (DateTime)values[8]);
 
-            if (values[8] == null)
+            if (values[8] == null || values[10] == null)
                 return null;
-            Tuple<string, string, string, bool, string, string, string, Tuple<string, DateTime>> tuple = 
-                new Tuple<string, string, string, bool, string, string, string, Tuple<string, DateTime>>((string)values[0], 
+            Tuple<string, string, string, bool, string, string, string, Tuple<string, DateTime, string, DateTime>> tuple = 
+                new Tuple<string, string, string, bool, string, string, string, Tuple<string, DateTime, string, DateTime>>((string)values[0], 
                 (string)values[1], (string)values[2], (bool)values[3],(string)values[4], (string)values[5],
-                (string)values[6], new Tuple<string, DateTime>((string)values[7], (DateTime)values[8]));
+                (string)values[6], new Tuple<string, DateTime, string, DateTime>((string)values[7], (DateTime)values[8], (string)values[9], (DateTime)values[10]));
         
             return tuple;
             //NewClientData data = new NewClientData();

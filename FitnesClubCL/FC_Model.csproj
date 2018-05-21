@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\NewDataStruct.cs" />
     <Compile Include="Classes\PasswordController.cs" />
     <Compile Include="Classes\Structs.cs" />
     <Compile Include="Interfaces\ISystemUser.cs" />

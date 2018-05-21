@@ -1,31 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Security.Cryptography;
 using System.Text;
 using FC_EMDB;
+using FC_EMDB.Classes;
+using FitnesClubCL.Annotations;
 
 namespace FitnesClubCL.Classes
 {
     /// <summary>
-    /// класс для управления паролями пользователей
+    /// класс для управления авторизацией пользователя в инфосистеме
     /// </summary>
- static class PasswordController
+    static class PasswordController
     {
-        /// <summary>
-        /// Метод запрашивает данные из БД и возвращает роль пользователя в случае успеха
-        /// </summary>
-        /// <param name="datasAutorizationUserData">Авторизационные данные пользователя</param>
-        public static void CheckUserNameAndPassword(AutorizationUserData datasAutorizationUserData)
-       {
-        
-      //     DbManager.GetInstance().GetUserRole(strUserName, strPasswordHash, out strRole); //TODO: допилисть
-       }
 
         /// <summary>
         /// Метод генерирует хэш пароля
         /// </summary>
         /// <param name="password">строка(хэш) пароля</param>
-        public static string GeneratePasswordHash(string password)
+        private static string GeneratePasswordHash(string password)
         {
             using (MD5 md5Hash = MD5.Create())
             {
@@ -61,7 +55,14 @@ namespace FitnesClubCL.Classes
             // Return the hexadecimal string.
             return sBuilder.ToString();
         }
-
+       
+        /// <summary>
+        /// Проверка хэш пароля
+        /// </summary>
+        /// <param name="md5Hash"></param>
+        /// <param name="input"></param>
+        /// <param name="hash"></param>
+        /// <returns></returns>
         private static bool VerifyMd5Hash(MD5 md5Hash, string input, string hash)
         {
             // Hash the input.
@@ -81,15 +82,28 @@ namespace FitnesClubCL.Classes
         /// <summary>
         /// Метод подгружает данные пользователя из БД
         /// </summary>
-        /// <param name="datasAutorizationUserData">Данные для авторизации</param>
-        /// <param name="userData">Список данных пользователя</param>
-        public static void GetSystemUserData(AutorizationUserData datasAutorizationUserData, Dictionary<string, object> userData)
+        /// <param name="datAutorizationUserData">Данные для авторизации</param>
+        /// <param name="userData">Данные пользователя, который прошел авторизацию</param>
+        public static void GetSystemUserData([CanBeNull]AutorizationUserData datAutorizationUserData, out UserData userData)
         {
-            if (string.IsNullOrEmpty(datasAutorizationUserData.UserLoginName) || string.IsNullOrEmpty(datasAutorizationUserData.PasswordString))
-                     return;
-  
-            DbManager.GetInstance().GetSystemUserData(datasAutorizationUserData.UserLoginName, datasAutorizationUserData.PasswordHash, userData);
+            if (string.IsNullOrEmpty(datAutorizationUserData?.UserLoginName) ||
+                string.IsNullOrEmpty(datAutorizationUserData.PasswordString))
+            {
+                userData = null;
+                return;
+            }
+            //устанавливаем хэш пароля
+            datAutorizationUserData.SetPasswordHash (GeneratePasswordHash(datAutorizationUserData.PasswordString));
+          
+            DbManager.GetInstance().GetSystemUserData(datAutorizationUserData, out userData);
         }
+    }
 
+    /// <summary>
+    /// Класс, который осуществляет все вспомогательные операции при работе с клиентами
+    /// </summary>
+    static class ClientsHelper
+    {
+       
     }
 }

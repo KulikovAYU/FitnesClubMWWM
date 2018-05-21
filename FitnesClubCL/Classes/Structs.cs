@@ -10,174 +10,19 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FC_EMDB.EMDB.CF.Data.Domain;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace FitnesClubCL.Classes
 {
-    /// <summary>
-    /// Структура "Авторизационный данные пользователя"
-    /// </summary>
-    public struct AutorizationUserData
-    {
-        public AutorizationUserData(string userLoginName, string passwordString)
-        {
-            this.UserLoginName = userLoginName;
-            this.PasswordString = passwordString;
-            PasswordHash = PasswordController.GeneratePasswordHash(PasswordString);
-        }
- 
-        public string UserLoginName { get; private set; }
-        public string PasswordString { get; private set; }
-        public string PasswordHash{get;private set;}
-    }
+   
 
-    /// <summary>
-    /// Структура: данные пользователя после авторизации
-    /// </summary>
-    public struct UserData 
-    {
-        static UserData()
-        {
-
-        }
-
-        /// <summary>
-        /// Конструктор
-        /// </summary>
-        /// <param name="userData">данные пользователя</param>
-        public UserData(Dictionary<string, object> userData)
-        {
-            if (userData.Count == 0)
-            {
-                this.userData = null;
-                UserLoginName = null;
-                UserFullName = null;
-                UserStatus = null;
-                UserVacationStatus = null;
-                UserDateOfBirdth = null;
-                UserPhoto = null;
-                Path = null;
-                GetAcsessRigths = new AcsessRigths();
-                return;
-            }
-            this.userData = userData;
-            GetAcsessRigths = null;
-            UserLoginName = userData["EmployeeLoginName"] as string;
-            UserFullName = userData["EmployeeFirstAndFamilyName"] as string;
-            UserStatus = userData["EmployeeRoleName"] as string;
-            UserVacationStatus = userData["EmployeeWorkingStatus"] as string;
-            UserDateOfBirdth = userData["DateOfBirdth"] as DateTime?;
-            UserPhoto = userData["UserImage"] as Image;
-            Path = string.Empty;
-            SetAcsessRigths();
-            Save();
-        }
-
-        void SetAcsessRigths()
-        {
-            Dictionary<string, object> _userData = userData;
-            var outerNew = Task<AcsessRigths?>.Factory.StartNew(() => new AcsessRigths(_userData["EmployeeRoleName"] as string));
-            outerNew.Wait();
-            GetAcsessRigths = outerNew.Result;
-        }
-
-        /// <summary>
-        /// Метод сохраняет изображение в текущей папке
-        /// </summary>
-        void Save()
-        {
-            UserData tmpThis = this;
-
-            var outerNew =  Task<string>.Factory.StartNew(() =>
-            {
-                string strFileName = tmpThis.UserFullName + "_" + tmpThis.UserLoginName;
-                DirectoryInfo directoryInfo = Directory.CreateDirectory(Environment.CurrentDirectory + @"\Temp");
-                var localFilePath = Environment.CurrentDirectory + @"\Temp\" + strFileName+ ".JPEG";
-
-                if (!File.Exists(localFilePath))
-                {
-                     tmpThis.UserPhoto.Save(directoryInfo.ToString() + @"\" + strFileName + ".JPEG", System.Drawing.Imaging.ImageFormat.Jpeg);
-                tmpThis.UserPhoto.Dispose();
-                }
-
-                tmpThis.Path = localFilePath;
-                return localFilePath;
-            });
-            outerNew.Wait();
-            Path = outerNew.Result;
-        }
-
-        /// <summary>
-        /// Ссылка пользовательские данные
-        /// </summary>
-        private Dictionary<string, object> userData;
-
-        /// <summary>
-        /// Логин пользователя
-        /// </summary>
-        public string UserLoginName
-        {
-            get;
-            private set;
-        }
-
-        public string Path { get; private set; }
-
-        /// <summary>
-        /// Имя , Фамилия пользователя
-        /// </summary>
-        public string UserFullName
-        {
-            get;
-            private set;
-        }
-
-        ///// <summary>
-        ///// Статус пользователя
-        ///// </summary>
-        public string UserStatus
-        {
-            get;
-            private set ;
-        }
-
-        ///// <summary>
-        ///// Статус (в отпуске или нет)
-        ///// </summary>
-        public string UserVacationStatus
-        {
-            get;
-            private set;
-        }
-
-        ///// <summary>
-        ///// Дата рождения
-        ///// </summary>
-        public DateTime? UserDateOfBirdth
-        {
-            get;
-            private set;
-        }
-
-        ///// <summary>
-        ///// Фото пользователя
-        ///// </summary>
-        public Image UserPhoto
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Права доступа пользователя
-        /// </summary>
-        public AcsessRigths? GetAcsessRigths { get; private set; }
-    }
+  
 
     /// <summary>
     /// Права доступа пользователя
     /// </summary>
-    public struct AcsessRigths
+    public class AcsessRigths
     {
         static AcsessRigths()
         {
@@ -198,7 +43,9 @@ namespace FitnesClubCL.Classes
             GetRights();
         }
 
-      
+        public AcsessRigths()
+        {
+        }
 
         /// <summary>
         /// Метод задает права пользователям
@@ -301,8 +148,9 @@ namespace FitnesClubCL.Classes
     /// <summary>
     /// Регистрационные данные новго клиента
     /// </summary>
-    public struct NewClientData
+    public class NewClientData 
     {
+       
         /// <summary>
         /// Имя клиента
         /// </summary>
@@ -310,7 +158,7 @@ namespace FitnesClubCL.Classes
         /// <summary>
         /// Фамилия клиента
         /// </summary>
-        public string ClientFamily { get; set; }
+        public string ClientFamilyName { get; set; }
         /// <summary>
         /// Отчество клиента
         /// </summary>
@@ -323,6 +171,8 @@ namespace FitnesClubCL.Classes
         /// Пол клиента
         /// </summary>
         public string ClientGender { get; set; }
+
+        public DateTime? ClientDateOfBirdth { get; set; }
 
         #region Паспортные данные клиента
         /// Серия
@@ -338,17 +188,80 @@ namespace FitnesClubCL.Classes
         /// <summary>
         /// Дата выдачи
         /// </summary>
-        public DateTime ClientPasportDatеOfIssue { get; set; }
+        public DateTime? ClientPasportDatеOfIssue { get; set; }
         #endregion
+
+        /// <summary>
+        /// Е-мейл клиента
+        /// </summary>
+        public string ClientEmail { get; set; }
 
         /// <summary>
         /// Путь к фото клиента
         /// </summary>
-        public string strImagePath { get; set; }
 
+        string ConvertImage()
+        {
+            NewClientData tmpThis = this;
+
+            var outerNew = Task<string>.Factory.StartNew(() =>
+            {
+                string strFileName = tmpThis.ClientName + "_" + tmpThis.ClientFamilyName + "_" + tmpThis.ClientLastName;
+                DirectoryInfo directoryInfo = Directory.CreateDirectory(Environment.CurrentDirectory + @"\Temp");
+                var localFilePath = Environment.CurrentDirectory + @"\Temp\" + strFileName + ".JPEG";
+
+                if (!File.Exists(localFilePath))
+                {
+                    tmpThis.ClientPhoto.Save(directoryInfo.ToString() + @"\" + strFileName + ".JPEG", System.Drawing.Imaging.ImageFormat.Jpeg);
+                    tmpThis.ClientPhoto.Dispose();
+                }
+
+                //tmpThis.ClientPhotoPath = localFilePath;
+                return localFilePath;
+            });
+            outerNew.Wait();
+            return outerNew.Result;
+        }
+
+      
         /// <summary>
         /// Фото клиента
         /// </summary>
-        public byte[] ClientPhoto { get; private set; }
+        public Image ClientPhoto { get; set; }
+
+        /// <summary>
+        /// Путь к фото пользователя
+        /// </summary>
+        public string ClientPhotoPath
+        {
+            get => ClientPhoto != null ? ConvertImage() : string.Empty;
+            set => ClientPhotoPath = value;
+        }
+
+        public string GetPath()
+        {
+            NewClientData tmpThis = this;
+
+            var outerNew = Task<string>.Factory.StartNew(() =>
+            {
+                string strFileName = tmpThis.ClientName + "_" + tmpThis.ClientFamilyName + "_" + tmpThis.ClientLastName;
+                DirectoryInfo directoryInfo = Directory.CreateDirectory(Environment.CurrentDirectory + @"\Temp");
+                var localFilePath = Environment.CurrentDirectory + @"\Temp\" + strFileName + ".JPEG";
+
+                if (!File.Exists(localFilePath))
+                {
+                    tmpThis.ClientPhoto.Save(directoryInfo.ToString() + @"\" + strFileName + ".JPEG", System.Drawing.Imaging.ImageFormat.Jpeg);
+                    tmpThis.ClientPhoto.Dispose();
+                }
+
+              //  tmpThis.ClientPhotoPath = localFilePath;
+                return localFilePath;
+            });
+            outerNew.Wait();
+            return outerNew.Result;
+        }
+
+        public bool IsExistClient { get; set; }
     }
+    
 }

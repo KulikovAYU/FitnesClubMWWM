@@ -8,7 +8,7 @@
     x:Name="MessageBoxWindow"
     Title="CustomMessageBox"
     Width="600"
-    Height="320"
+    Height="350"
     AllowsTransparency="True"
     Background="White"
     WindowStartupLocation="CenterScreen"
@@ -146,12 +146,12 @@
                     Fill="#FF000000"
                     Stretch="Fill" />
                 <TextBlock
-                    Margin="0,10,0,0"
+                    Margin="0,0,0,0"
                     Style="{StaticResource ErrormessageStyle}"
                     Text="{Binding strMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
 
-                <Grid x:Name="StackPanelCollection" Margin="0">
+                <Grid x:Name="StackPanelCollection" Margin="0 40 0 0">
                     <!--  Кнопки ОК и нет (по умолчанию скрыта)  -->
                     <StackPanel
                         x:Name="YesNo"

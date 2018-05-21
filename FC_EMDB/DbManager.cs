@@ -1,5 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Threading.Tasks;
+using FC_EMDB.Classes;
 using FC_EMDB.Constants;
+using FC_EMDB.EMDB.CF.Data.Domain;
 using FC_EMDB.EMDB.CF.DataAccess;
 using FC_EMDB.EMDB.CF.DataAccess.Context;
 using FC_EMDB.Utils;
@@ -79,7 +85,7 @@ namespace FC_EMDB
         /// <param name="strRole">Роль пользователя системы</param>
         public void GetUserRole(string strUserName, string strPasswordHash, out string strRole)
         {
-            var employee = unitOfWork.Employess.GetEmployeeByUserNameAndPassword(strUserName, strPasswordHash);
+            var employee = unitOfWork.Employess.GetEmployeeByAutorizationUserData(strUserName, strPasswordHash);
 
             if (employee == null)
             {
@@ -93,22 +99,77 @@ namespace FC_EMDB
         /// <summary>
         /// Получить данные пользователя для отображения в окне информации
         /// </summary>
-        /// <param name="userData">Возвращаемые данные пользователя</param>
-        /// <param name="strUserName">Имя пользователя</param>
-        /// <param name="strPasswordHash">Пароль</param>
-        public void GetSystemUserData(string strUserName, string strPasswordHash, Dictionary<string, object> userData)
+        /// <param name="datAutorizationUserData">Регистрационные данные пользователя</param>
+        /// <param name="userData">Данные пользователя</param>
+        public void GetSystemUserData(AutorizationUserData datAutorizationUserData, out UserData userData)
         {
-            var employee =  unitOfWork.Employess.GetEmployeeByUserNameAndPassword(strUserName, strPasswordHash);
-            if (employee == null)
+            if (datAutorizationUserData == null)
             {
-                return;
+               userData = null;
+               return;
             }
-            userData.Add("EmployeeLoginName", employee.EmployeeLoginName);
-            userData.Add("EmployeeFirstAndFamilyName", employee.EmployeeFirstName + " " + employee.EmployeeFamilyName);
-            userData.Add("EmployeeRoleName", unitOfWork.EmployeRoles.GetRole(employee).EmployeeRoleName);
-            userData.Add("EmployeeWorkingStatus", unitOfWork.EmployeesWorkingStatus.GetEmployeeWorkingStatus(employee));
-            userData.Add("DateOfBirdth", employee.EmployeeDateOfBirdth);
-            userData.Add("UserImage", unitOfWork.Employess.GetSystemUserPhoto(employee));
+
+           var employee = unitOfWork.Employess.GetEmployeeByAutorizationUserData(datAutorizationUserData.UserLoginName, datAutorizationUserData.PasswordHash);
+
+            // В отдельном потоке загрузим роль работника
+            var outerNew = Task<EmployeeRole>.Factory.StartNew(() => unitOfWork.EmployeRoles.GetRole(employee));
+            outerNew.Wait();
+            var roleEmployee = outerNew.Result;
+
+            //В отдельнгом потоке загрузим статус работника
+            var outerNew1 = Task<string>.Factory.StartNew(() => unitOfWork.EmployeesWorkingStatus.GetEmployeeWorkingStatus(employee));
+            outerNew1.Wait();
+            var workingStatusEmployee = outerNew1.Result;
+
+
+           userData = new UserData(employee.EmployeeId, employee.EmployeeFirstName, employee.EmployeeLastName, employee.EmployeeFamilyName,
+             employee.EmployeeDateOfBirdth,   employee.EmployeeAdress, employee.EmployeeLoginName, employee.EmployeePasswordHash,employee.EmployeeMail,
+               employee.EmployeePhoneNumber, roleEmployee, workingStatusEmployee, employee.EmployeePhoto);
+        }
+
+        public void RegisterNewClient(Dictionary<string, object> clientData)
+        {
+
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Метод проверяет данные клиента, а также заполнение обязательных полей и в случае, если данные клиента совпадают с БД, то возвращает успех, а также новый массив с данними о клиенте
+        /// </summary>
+        /// <param name="arrclientData"> данные клиента</param>
+        public bool IsExistClient(Dictionary<string, object> arrclientData)
+        {
+           Account acc = new Account()
+           {
+               ClientFirstName = arrclientData["ClientFirstName"] as string,
+               ClientLastName = arrclientData["ClientLastName"] as string,
+               ClientFamilyName = arrclientData["ClientFamilyName"] as string,
+               ClientDateOfBirdth = arrclientData["ClientDateOfBirdth"] as DateTime?,
+               ClientPhoneNumber = arrclientData["ClientPhoneNumber"] as string,
+               ClientPasportDataSeries = arrclientData["ClientPasportDataSeries"] as string,
+               ClientPasportDataNumber = arrclientData["ClientPasportDataNumber"] as string,
+               ClientPasportDataIssuedBy = arrclientData["ClientPasportDataIssuedBy"] as string,
+               ClientPasportDatеOfIssue = arrclientData["ClientPasportDatеOfIssue"] as DateTime?
+           };
+            arrclientData.Clear();
+            Account newAcc =   unitOfWork.Accounts.FindAccountWithSameData(acc);
+
+            if (newAcc != null)
+            {
+                //Соберем найденные данные в случае успеха и вернем в массив arrclientData
+                arrclientData["ClientFirstName"] = newAcc.ClientFirstName;
+                arrclientData["ClientLastName"] = newAcc.ClientLastName;
+                arrclientData["ClientFamilyName"] = newAcc.ClientFamilyName;
+                arrclientData["ClientDateOfBirdth"] = newAcc.ClientDateOfBirdth;
+                arrclientData["ClientPhoneNumber"] = newAcc.ClientPhoneNumber;
+                arrclientData["ClientPasportDataSeries"] = newAcc.ClientPasportDataSeries;
+                arrclientData["ClientPasportDataNumber"] = newAcc.ClientPasportDataNumber;
+                arrclientData["ClientPasportDataIssuedBy"] = newAcc.ClientPasportDataIssuedBy;
+                arrclientData["ClientPasportDatеOfIssue"] = newAcc.ClientPasportDatеOfIssue;
+                arrclientData["ClientEmail"] = newAcc.ClientMail;
+                arrclientData["ClientPhoto"] = Image.FromStream(new MemoryStream(newAcc.ClientPhoto));
+            }
+           return newAcc != null;
         }
     }
 }

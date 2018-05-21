@@ -40,7 +40,7 @@ namespace FC_EMDB.EMDB.CF.Data.Repositories
         /// <param name="strUserName">Имя пользователя</param>
         /// <param name="strPasswordHash">Хэш пароля</param>
         /// <returns></returns>
-        Employee GetEmployeeByUserNameAndPassword(string strUserName, string strPasswordHash);
+        Employee GetEmployeeByAutorizationUserData(string strUserName, string strPasswordHash);
 
 
         /// <summary>

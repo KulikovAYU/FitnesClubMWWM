@@ -22,10 +22,17 @@ namespace FC_EMDB.EMDB.CF.Data.Repositories
         IEnumerable<Account> GetAccountsWritingOnTraining(int nTrainingId);
 
         /// <summary>
-        /// Получить список аакаунтов с истекшим абонементом
+        /// Получить список акаунтов с истекшим абонементом
         /// </summary>
         /// <returns></returns>
         IEnumerable<Account> GetAccountsWichHasExpiredSubscription();
+
+        /// <summary>
+        /// Найти аккаунт с определенными данными
+        /// </summary>
+        /// <param name="clientData"> Данные по которым будет производиться выборка</param>
+        /// <returns>Аккаунт</returns>
+        Account FindAccountWithSameData(Account clientData);
 
     }
 }

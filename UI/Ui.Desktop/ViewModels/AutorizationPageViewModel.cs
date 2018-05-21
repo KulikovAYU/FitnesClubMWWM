@@ -1,7 +1,6 @@
 ﻿using System.Windows;
-using CommonServiceLocator;
+using FC_EMDB.Classes;
 using FitnesClubCL;
-using FitnesClubCL.Classes;
 using FitnessClubMWWM.Ui.Desktop.Constants;
 using FitnessClubMWWM.Ui.Desktop.Pages;
 using GalaSoft.MvvmLight;
@@ -30,58 +29,47 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         {
             _commandStarted = true;// TODO: пока сделал костыль. Если будет время, то подумать
 
-            if (UserName == string.Empty && PasswordString == string.Empty)
+            if (string.IsNullOrEmpty(AutorizationUserData.UserLoginName) && string.IsNullOrEmpty(AutorizationUserData.PasswordString))
             {
                 MessageBoxResult res = CustomMessageBox.Show("Не заполнены поля имя пользователя и пароль", "Ошибка авторизации", MessageBoxButton.OK, eMessageBoxIcons.eWarning);
                 _commandStarted = false;
                 return;
             }
 
-            AutorizationUserData = new AutorizationUserData(UserName, PasswordString);
+            //Аутентификация
             ModelManager.GetInstance().Autontefication(AutorizationUserData);
-
-            WorkingUserData = (ModelManager.GetInstance() as ISystemUser).WorkingUserData;
-
-            if (WorkingUserData == null)
+           
+            if (ModelManager.GetInstance().WorkingUserData != null)
+            {
+                WorkingUserData = ModelManager.GetInstance().WorkingUserData;//данные пользователя в случае успеха
+                SimpleIoc.Default.GetInstance<BeginPanelPageViewModel>().SetUserData(WorkingUserData);
+                Messenger.Default.Send("MainPage");
+            }
+            else
             {
                 MessageBoxResult res = CustomMessageBox.Show("Неверное имя пользователя или пароль", "Ошибка авторизации", MessageBoxButton.OK, eMessageBoxIcons.eWarning);
                 _commandStarted = false;
                 return;
             }
-          
-            SimpleIoc.Default.GetInstance<BeginPanelPageViewModel>().SetUserData(WorkingUserData);
-            Messenger.Default.Send("MainPage");
 
             _commandStarted = false;
-            _strPassword = string.Empty;
         }
 
         private bool _commandStarted = false;
         /// <summary>
         /// Имя пользователя
         /// </summary>
-        public string UserName { get; set; }
+      
 
         /// <summary>
-        /// Хэш пароля
+        /// Авторизационные данные пользователя
         /// </summary>
-        public string PasswordString
-        {
-            get => _strPassword;
-            set
-            {
-                if (!_commandStarted)
-                {
-                    _strPassword = value;
-                }
-            }
-        }
-        /// <summary>
-        /// Строка пароля
-        /// </summary>
-        private string _strPassword;
+        public AutorizationUserData AutorizationUserData { get;  private set; } = new AutorizationUserData();
 
-        public AutorizationUserData AutorizationUserData { get; private set; }
-        public UserData? WorkingUserData { get; private set; }
+
+        /// <summary>
+        /// Данные пользователя, которые вернула модель
+        /// </summary>
+        public UserData WorkingUserData { get; private set; }
     }
 }

@@ -105,7 +105,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         /// <summary>
         /// Дата выдачи
         /// </summary>
-        public DateTime ClientPasportDatеOfIssue { get; set; }
+        public DateTime? ClientPasportDatеOfIssue { get; set; }
         #endregion
 
         #region Связи между сущностями 1 Employee to 0...* Account

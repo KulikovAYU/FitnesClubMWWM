@@ -200,7 +200,7 @@
                     Background="Transparent"
                     FontSize="{TemplateBinding FontSize}"
                     IsHitTestVisible="False"
-                    Text="{Binding PasswordString}"
+                    Text="{Binding AutorizationUserData.PasswordString}"
                     Visibility="Collapsed" />
 
 

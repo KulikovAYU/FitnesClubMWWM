@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using FC_EMDB;
+using FC_EMDB.Classes;
+using FitnesClubCL.Annotations;
 using FitnesClubCL.Classes;
 using GalaSoft.MvvmLight;
 
@@ -28,34 +30,59 @@ namespace FitnesClubCL
            DbManager.GetInstance().InitializeDatabase();
        }
 
+
+        #region Методы и поля, связанные с пользователями информационной системы 
         /// <summary>
         /// Аутентификация пользоватля в системе
         /// </summary>
-        /// <param name="datasAutorizationUserData">Данные пользователя для аутентификации</param>
-        public void Autontefication(AutorizationUserData datasAutorizationUserData)
+        /// <param name="datAutorizationUserData">Данные пользователя для аутентификации</param>
+        public void Autontefication([CanBeNull] AutorizationUserData datAutorizationUserData)
         {
-            if (datasAutorizationUserData.UserLoginName == null || datasAutorizationUserData.PasswordString == null)
+            if (string.IsNullOrEmpty(datAutorizationUserData?.UserLoginName) ||
+                string.IsNullOrEmpty(datAutorizationUserData.PasswordString))
+            {
                 return;
+            }
 
-            PasswordController.CheckUserNameAndPassword(datasAutorizationUserData);
+            AutorizationUserData = datAutorizationUserData;
             //При авторизации также получим данные пользователя
-            Dictionary<string, object> arrUserData = new Dictionary<string, object>();
-            PasswordController.GetSystemUserData(datasAutorizationUserData,arrUserData);
-            WorkingUserData = arrUserData.Count == 0 ? (UserData?) null : new UserData(arrUserData);
+            PasswordController.GetSystemUserData(AutorizationUserData, out UserData userData);
+            //Вернем данные пользователя
+            WorkingUserData = userData;
         }
 
-       public AutorizationUserData AutorizationUserData { get; }
-       public UserData? WorkingUserData { get; private set; }
-       public NewClientData ClientData { get; set; }
+        /// <summary>
+        /// Указатель на данные пользователя
+        /// </summary>
+        [CanBeNull] public AutorizationUserData AutorizationUserData { get; private set; }
+
+        /// <summary>
+        /// Экземпляр данных работника
+        /// </summary>
+        [CanBeNull] public UserData WorkingUserData { get; private set; }
+        #endregion
+
+
+
+
+
+
+
+
+
+        public NewClientData ClientData { get; set; }
 
         /// <summary>
         /// Зарегистрировать нового клиента
         /// </summary>
         /// <param name="clientData">данные клиента</param>
-        public void RegisterNewClient(NewClientData clientData)
+        public void RegisterNewClient(ref NewClientData clientData)
         {
-            //TODO: реализовать
-            throw new System.NotImplementedException();
+           
+          
+
         }
+
+      
     }
 }

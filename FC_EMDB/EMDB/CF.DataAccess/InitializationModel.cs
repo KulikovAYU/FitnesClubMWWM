@@ -24,7 +24,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
         {
             EWorking, ESick, EVacation
         }
-        delegate int MyDelegate(DataBaseFcContext context);
+
         /// <summary>
         /// Метод переопределяется с целью фактического добавления данных в конекст для заполнения начальными значениями
         /// </summary>
@@ -196,15 +196,15 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     TrainingCount = 15,
                     VisitedTrainingCount = 5,
                     TotalCost = 3000.0m, //сделать вычисляемым полем
-                    ClientFirstName = "Николай",
-                    ClientLastName = "Викторович",
-                    ClientFamilyName = "Савлуков",
-                    ClientGender="Муж.",
+                    ClientFirstName = "Анастасия",
+                    ClientLastName = "Николаевна",
+                    ClientFamilyName = "Смирнова",
+                    ClientGender="Жен.",
                     ClientDateOfBirdth = DateTime.Parse("27.05.1989"),
                     ClientAdress = "г.Иваново, ул.Бакинский проезд, д.82, кв.11",
                     ClientPhoneNumber = "8-920-672-00-68",
                     ClientMail = "tosha37@inbox.ru",
-                    /* ClientPhoto = ImageSQLController.ConvertToByteArray()*/ //реализовать
+                    ClientPhoto = SqlTools.ConvertImageToByteArray(@"C:\Users\User\Pictures\Img\girl.jpg"),
                     ClientPasportDataSeries = "2409",
                     ClientPasportDataNumber = "460870",
                     ClientPasportDataIssuedBy = "ОУФМС РОССИИ",

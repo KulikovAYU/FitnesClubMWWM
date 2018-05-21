@@ -70,7 +70,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
         /// <param name="strUserName">Имя пользователя</param>
         /// <param name="strPasswordHash">Пароль</param>
         /// <returns>Сущность работника</returns>
-        public Employee GetEmployeeByUserNameAndPassword(string strUserName, string strPasswordHash)
+        public Employee GetEmployeeByAutorizationUserData(string strUserName, string strPasswordHash)
         {
             
               //var query = DataBaseFcContext.Employees.FirstOrDefault(employee => employee.EmployeeLoginName == strUserName);
