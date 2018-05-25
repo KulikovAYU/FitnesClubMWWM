@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Documents;
+using FC_EMDB.Classes;
 using FitnessClubMWWM.Logic.Ui;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages;
@@ -129,4 +131,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
             throw new NotImplementedException();
         }
     }
+
+    
+
+
 }

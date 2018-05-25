@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FC_EMDB.Classes;
-using FC_EMDB.Constants;
 using FC_EMDB.EMDB.CF.Data.Domain;
 using FC_EMDB.EMDB.CF.DataAccess;
 using FC_EMDB.EMDB.CF.DataAccess.Context;
+using FC_EMDB.Interfaces;
 using FC_EMDB.Utils;
 
 
@@ -122,54 +118,42 @@ namespace FC_EMDB
             var workingStatusEmployee = outerNew1.Result;
 
 
-           userData = new UserData(employee.EmployeeId, employee.EmployeeFirstName, employee.EmployeeLastName, employee.EmployeeFamilyName,
-             employee.EmployeeDateOfBirdth,   employee.EmployeeAdress, employee.EmployeeLoginName, employee.EmployeePasswordHash,employee.EmployeeMail,
-               employee.EmployeePhoneNumber, roleEmployee, workingStatusEmployee, employee.EmployeePhoto);
-        }
-
-        public void RegisterNewClient(Dictionary<string, object> clientData)
-        {
-
-            throw new System.NotImplementedException();
+           userData = new UserData( employee.EmployeeFirstName, employee.EmployeeLastName, employee.EmployeeFamilyName,
+             employee.EmployeeDateOfBirdth,  string.Empty , employee.EmployeeId, employee.EmployeeAdress, employee.EmployeePhoneNumber, employee.EmployeeMail, employee.EmployeePhoto, employee.EmployeeLoginName, employee.EmployeePasswordHash,
+                roleEmployee, workingStatusEmployee);
+            SqlTools.SavePhoto(ref userData);
         }
 
         /// <summary>
-        /// Метод проверяет данные клиента, а также заполнение обязательных полей и в случае, если данные клиента совпадают с БД, то возвращает успех, а также новый массив с данними о клиенте
+        /// Получить запись по заполненным данным
         /// </summary>
-        /// <param name="arrclientData"> данные клиента</param>
-        public bool IsExistClient(Dictionary<string, object> arrclientData)
+        /// <param name="recordData">Данные</param>
+        public void GetRecord<T>(ref T recordData)  where  T : class 
         {
-           Account acc = new Account()
-           {
-               ClientFirstName = arrclientData["ClientFirstName"] as string,
-               ClientLastName = arrclientData["ClientLastName"] as string,
-               ClientFamilyName = arrclientData["ClientFamilyName"] as string,
-               ClientDateOfBirdth = arrclientData["ClientDateOfBirdth"] as DateTime?,
-               ClientPhoneNumber = arrclientData["ClientPhoneNumber"] as string,
-               ClientPasportDataSeries = arrclientData["ClientPasportDataSeries"] as string,
-               ClientPasportDataNumber = arrclientData["ClientPasportDataNumber"] as string,
-               ClientPasportDataIssuedBy = arrclientData["ClientPasportDataIssuedBy"] as string,
-               ClientPasportDatеOfIssue = arrclientData["ClientPasportDatеOfIssue"] as DateTime?
-           };
-            arrclientData.Clear();
-            Account newAcc =   unitOfWork.Accounts.FindAccountWithSameData(acc);
-
-            if (newAcc != null)
+            if (recordData is NewClientData)
             {
-                //Соберем найденные данные в случае успеха и вернем в массив arrclientData
-                arrclientData["ClientFirstName"] = newAcc.ClientFirstName;
-                arrclientData["ClientLastName"] = newAcc.ClientLastName;
-                arrclientData["ClientFamilyName"] = newAcc.ClientFamilyName;
-                arrclientData["ClientDateOfBirdth"] = newAcc.ClientDateOfBirdth;
-                arrclientData["ClientPhoneNumber"] = newAcc.ClientPhoneNumber;
-                arrclientData["ClientPasportDataSeries"] = newAcc.ClientPasportDataSeries;
-                arrclientData["ClientPasportDataNumber"] = newAcc.ClientPasportDataNumber;
-                arrclientData["ClientPasportDataIssuedBy"] = newAcc.ClientPasportDataIssuedBy;
-                arrclientData["ClientPasportDatеOfIssue"] = newAcc.ClientPasportDatеOfIssue;
-                arrclientData["ClientEmail"] = newAcc.ClientMail;
-                arrclientData["ClientPhoto"] = Image.FromStream(new MemoryStream(newAcc.ClientPhoto));
+                SqlTools.ConvertImageToByteArray( recordData);
+                recordData = unitOfWork.Accounts.FindAccountWithSameData(recordData as NewClientData) as T;
+                if (recordData != null)
+                {
+                    SqlTools.SavePhoto(ref recordData);
+                }
             }
-           return newAcc != null;
+        }
+
+        /// <summary>
+        /// Обновить поля регистриации нового клиента
+        /// </summary>
+        /// <typeparam name="T">Шаблон</typeparam>
+        /// <param name="recordData">Данные для записи</param>
+        public void UpdateFields<T>(T recordData) where  T : class 
+        {
+            if (recordData is NewClientData)
+            {
+                unitOfWork.Accounts.UpdateFields(recordData as NewClientData);
+            }
+
+          
         }
     }
 }

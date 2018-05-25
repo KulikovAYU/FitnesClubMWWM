@@ -10,7 +10,7 @@
 
     public enum eMessageBoxIcons
     {
-        eNone, eWarning, eAsk
+        eNone, eWarning, eAsk, eSucsess
     }
 
 }

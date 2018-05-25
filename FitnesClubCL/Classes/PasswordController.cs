@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Security.Cryptography;
 using System.Text;
 using FC_EMDB;
@@ -104,6 +102,28 @@ namespace FitnesClubCL.Classes
     /// </summary>
     static class ClientsHelper
     {
-       
+        /// <summary>
+        /// Метод проверяет запись на признак существования
+        /// </summary>
+        /// <param name="recordData">Запись</param>
+        public static void IsExistRecord<T>(ref T recordData) where T : class
+        {
+            if (recordData == null)
+                return;
+
+            DbManager.GetInstance().GetRecord(ref recordData);
+        }
+
+        /// <summary>
+        /// Метод обновляет запись в бд
+        /// </summary>
+        /// <param name="data">Данные с формы</param>
+        public static void UpdateFields<T>(T data) where T : class
+        {
+            if (data == null)
+                return;
+
+             DbManager.GetInstance().UpdateFields<T>(data);
+        }
     }
 }

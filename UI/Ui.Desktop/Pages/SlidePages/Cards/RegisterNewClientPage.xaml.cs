@@ -11,5 +11,8 @@ namespace FitnessClubMWWM.Ui.Desktop.Pages.SlidePages
         {
             InitializeComponent();
         }
+
+
+       
     }
 }

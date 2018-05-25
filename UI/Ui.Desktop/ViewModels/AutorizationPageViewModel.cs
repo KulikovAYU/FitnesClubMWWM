@@ -37,11 +37,11 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             }
 
             //Аутентификация
-            ModelManager.GetInstance().Autontefication(AutorizationUserData);
+            ModelManager.GetInstance.Autontefication(AutorizationUserData);
            
-            if (ModelManager.GetInstance().WorkingUserData != null)
+            if (ModelManager.GetInstance.WorkingUserData != null)
             {
-                WorkingUserData = ModelManager.GetInstance().WorkingUserData;//данные пользователя в случае успеха
+                WorkingUserData = ModelManager.GetInstance.WorkingUserData;//данные пользователя в случае успеха
                 SimpleIoc.Default.GetInstance<BeginPanelPageViewModel>().SetUserData(WorkingUserData);
                 Messenger.Default.Send("MainPage");
             }

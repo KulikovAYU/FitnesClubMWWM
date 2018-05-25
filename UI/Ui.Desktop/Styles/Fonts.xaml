@@ -20,10 +20,16 @@
     </Style>
 
 
+
     <Style x:Key="BaseTextBlockStyle" TargetType="{x:Type TextBlock}">
         <!--<Setter Property="FontFamily" Value="{StaticResource TitilliumWebRegular}" />-->
         <Setter Property="FontFamily" Value="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz " />
     </Style>
+
+    <Style x:Key="BaseTextBloxStyle"   TargetType="{x:Type TextBox}">
+        <Setter Property="FontFamily" Value="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz " />
+    </Style>
+
 
     <Style x:Key="BaseRichTextBlockStyle" TargetType="{x:Type RichTextBox}">
         <!--<Setter Property="FontFamily" Value="{StaticResource TitilliumWebRegular}" />-->

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using FitnesClubCL.CF_EMDB.Repositories;
+using FC_EMDB.EMDB.CF.Data.Repositories;
 
 namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
 {

@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
+using FC_EMDB.Classes;
 using FC_EMDB.EMDB.CF.Data.Domain;
 using FC_EMDB.EMDB.CF.Data.Repositories;
 using FC_EMDB.EMDB.CF.DataAccess.Context;
+using FC_EMDB.Interfaces;
+using FC_EMDB.Utils;
 
 namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
 {
@@ -58,20 +63,57 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
             return query;
         }
 
+        public Account FindAccountWithSameData(Account clientData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+
         /// <summary>
         /// Найти аккаунт с определенными данными
         /// </summary>
         /// <param name="clientData"> Данные по которым будет производиться выборка</param>
         /// <returns></returns>
-        public Account FindAccountWithSameData(Account clientData)
+        public NewClientData FindAccountWithSameData(NewClientData clientData)
         {
-            var query = DataBaseFcContext.Accounts.FirstOrDefault(acc => acc.ClientFirstName == clientData.ClientFirstName && acc.ClientLastName ==
-                                                                                                                  clientData.ClientLastName
+            var query = DataBaseFcContext.Accounts.FirstOrDefault(acc => acc.ClientFirstName == clientData.PersonFirstName && acc.ClientLastName ==
+                                                                                                                  clientData.PersonLastName
                                                                                                                            && acc.ClientFamilyName ==
-                                                                                                                  clientData.ClientFamilyName &&
+                                                                                                                  clientData.PersonFamilyName &&
                                                                                                                   acc.ClientDateOfBirdth ==
-                                                                                                                           clientData.ClientDateOfBirdth);
-            return query;
+                                                                                                                           clientData.PersonDateOfBirdth);
+            return query != null
+                ? new NewClientData(true)
+                {
+                    PersonRole = "Клиент",
+                    PersonFirstName = query.ClientFirstName,
+                    PersonLastName =  query.ClientLastName,
+                    PersonFamilyName = query.ClientFamilyName,
+                    PersonDateOfBirdth = query.ClientDateOfBirdth,
+                    PersonGender = query.ClientGender,
+                    PersonId = query.ClientId,
+                    PersonAdress = query.ClientAdress,
+                    PersonPhoneNumber = query.ClientPhoneNumber,
+                    PersonMail = query.ClientMail,
+                    PersonPhoto =query.ClientPhoto,
+                    ClientPasportDataSeries = query.ClientPasportDataSeries,
+                    ClientPasportDataNumber = query.ClientPasportDataNumber,
+                    ClientPasportDataIssuedBy = query.ClientPasportDataIssuedBy,
+                    ClientPasportDatеOfIssue = query.ClientPasportDatеOfIssue
+
+                } : null;
+        }
+
+        public void UpdateFields(NewClientData clientData)
+        {
+           var _clientData = DataBaseFcContext.Accounts.Find(clientData.PersonId);
+
+            if (_clientData == null)
+                return;
+
+            SqlTools.Convert(ref _clientData, clientData);
+            DataBaseFcContext.Accounts.AddOrUpdate(_clientData);
+            DataBaseFcContext.SaveChanges();
         }
 
         public DataBaseFcContext DataBaseFcContext => m_context as DataBaseFcContext;

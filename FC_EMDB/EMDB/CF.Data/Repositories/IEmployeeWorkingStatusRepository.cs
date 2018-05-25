@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FC_EMDB.EMDB.CF.Data.Domain;
-using FitnesClubCL.CF_EMDB.Repositories;
 
 namespace FC_EMDB.EMDB.CF.Data.Repositories
 {

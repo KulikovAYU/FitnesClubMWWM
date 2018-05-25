@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace FitnesClubCL.CF_EMDB.Repositories
+namespace FC_EMDB.EMDB.CF.Data.Repositories
 {
     /// <summary>
     /// Представляет базовый интерфейс паттерна репозиторий для работы с Entities

@@ -7,7 +7,7 @@
     xmlns:viewModels="clr-namespace:FitnessClubMWWM.Ui.Desktop.ViewModels"
     x:Name="MessageBoxWindow"
     Title="CustomMessageBox"
-    Width="600"
+    Width="650"
     Height="350"
     AllowsTransparency="True"
     Background="White"
@@ -74,11 +74,12 @@
         </Grid.RenderTransform>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="210*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Image
-            Grid.RowSpan="2"
+            Grid.RowSpan="3"
             Panel.ZIndex="0"
             Opacity="0.35"
             Source="/FitnessClubMWWM.Ui.Desktop;component/Images/DialogPictures/BackgroundDialogWindow.jpg"
@@ -86,7 +87,7 @@
 
         <Rectangle
             Grid.Row="0"
-            Grid.RowSpan="2"
+            Grid.RowSpan="3"
             Panel.ZIndex="1"
             StrokeThickness="1">
             <Rectangle.Stroke>
@@ -146,108 +147,118 @@
                     Fill="#FF000000"
                     Stretch="Fill" />
                 <TextBlock
-                    Margin="0,0,0,0"
+                    Margin="20"
+                    HorizontalAlignment="Center"
                     Style="{StaticResource ErrormessageStyle}"
-                    Text="{Binding strMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding strMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    TextAlignment="Center" />
+            </StackPanel>
+        </Grid>
 
 
-                <Grid x:Name="StackPanelCollection" Margin="0 40 0 0">
-                    <!--  Кнопки ОК и нет (по умолчанию скрыта)  -->
-                    <StackPanel
-                        x:Name="YesNo"
-                        HorizontalAlignment="Center"
-                        d:IsHidden="True"
-                        Orientation="Horizontal">
+        <Grid
+            x:Name="StackPanelCollection"
+            Grid.Row="2"
+            Height="50"
+            Margin="20">
+            <!--  Кнопки ОК и нет (по умолчанию скрыта)  -->
+            <StackPanel
+                x:Name="YesNo"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                d:IsHidden="False"
+                Orientation="Horizontal">
 
-                        <Button
-                            Name="OKk"
-                            Width="150"
-                            Height="50"
-                            Command="{Binding YesPressCommand}"
-                            CommandParameter="{Binding ElementName=MessageBoxWindow}"
-                            Content="{Binding LeftButtonCaption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            FontSize="{StaticResource Regular}"
-                            Foreground="White"
-                            Style="{StaticResource ErrormessageButtonStyle}"
-                            Template="{DynamicResource ButtonBaseControlTemplate}" />
-                        <Button
-                            Name="No"
-                            Width="150"
-                            Height="50"
-                            Margin="20"
-                            Command="{Binding NoPressCommand}"
-                            CommandParameter="{Binding ElementName=MessageBoxWindow}"
-                            Content="{Binding RightButtonCaption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            FontSize="{StaticResource Regular}"
-                            Foreground="White"
-                            Style="{StaticResource ErrormessageButtonStyle}"
-                            Template="{DynamicResource ButtonBaseControlTemplate}" />
+                <Button
+                    Name="OKk"
+                    Width="150"
+                    Height="50"
+                    Margin="0,0,10,0"
+                    Command="{Binding YesPressCommand}"
+                    CommandParameter="{Binding ElementName=MessageBoxWindow}"
+                    Content="{Binding LeftButtonCaption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    FontSize="{StaticResource Regular}"
+                    Foreground="White"
+                    Style="{StaticResource ErrormessageButtonStyle}"
+                    Template="{DynamicResource ButtonBaseControlTemplate}" />
+                <Button
+                    Name="No"
+                    Width="150"
+                    Height="50"
+                    Margin="10,0,0,0"
+                    Command="{Binding NoPressCommand}"
+                    CommandParameter="{Binding ElementName=MessageBoxWindow}"
+                    Content="{Binding RightButtonCaption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    FontSize="{StaticResource Regular}"
+                    Foreground="White"
+                    Style="{StaticResource ErrormessageButtonStyle}"
+                    Template="{DynamicResource ButtonBaseControlTemplate}" />
 
-                    </StackPanel>
+            </StackPanel>
 
-                    <!--  Кнопка ОК  (по умолчанию скрыта)  -->
-                    <StackPanel
-                        Name="Ok"
-                        HorizontalAlignment="Center"
-                        d:IsHidden="True"
-                        Orientation="Horizontal">
-                        <Button
-                            Width="150"
-                            Height="50"
-                            Command="{Binding OkPressCommand}"
-                            CommandParameter="{Binding ElementName=MessageBoxWindow}"
-                            Content="{Binding LeftButtonCaption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            FontSize="{StaticResource Regular}"
-                            Foreground="White"
-                            Style="{StaticResource ErrormessageButtonStyle}"
-                            Template="{DynamicResource ButtonBaseControlTemplate}" />
+            <!--  Кнопка ОК  (по умолчанию скрыта)  -->
+            <StackPanel
+                Name="Ok"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                d:IsHidden="True"
+                Orientation="Horizontal">
+                <Button
+                    Width="150"
+                    Height="50"
+                    Command="{Binding OkPressCommand}"
+                    CommandParameter="{Binding ElementName=MessageBoxWindow}"
+                    Content="{Binding LeftButtonCaption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    FontSize="{StaticResource Regular}"
+                    Foreground="White"
+                    Style="{StaticResource ErrormessageButtonStyle}"
+                    Template="{DynamicResource ButtonBaseControlTemplate}" />
 
-                    </StackPanel>
+            </StackPanel>
 
-                    <!--  Кнопки Да ,нет , отмена  (по умолчанию показываются)  -->
-                    <StackPanel
-                        x:Name="YesNoCancel"
-                        HorizontalAlignment="Center"
-                        d:IsHidden="False"
-                        Orientation="Horizontal">
-                        <Button
-                            Name="Yes"
-                            Width="150"
-                            Height="50"
-                            Margin="20"
-                            Command="{Binding YesPressCommand}"
-                            CommandParameter="{Binding ElementName=MessageBoxWindow}"
-                            Content="{Binding LeftButtonCaption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            FontSize="{StaticResource Regular}"
-                            Foreground="White"
-                            Style="{StaticResource ErrormessageButtonStyle}"
-                            Template="{DynamicResource ButtonBaseControlTemplate}" />
-                        <Button
-                            Name="Noo"
-                            Width="150"
-                            Height="50"
-                            Margin="20"
-                            Command="{Binding NoPressCommand}"
-                            CommandParameter="{Binding ElementName=MessageBoxWindow}"
-                            Content="{Binding RightButtonCaption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            FontSize="{StaticResource Regular}"
-                            Foreground="White"
-                            Style="{StaticResource ErrormessageButtonStyle}"
-                            Template="{DynamicResource ButtonBaseControlTemplate}" />
-                        <Button
-                            Name="Cancel"
-                            Width="150"
-                            Height="50"
-                            Margin="20"
-                            Command="{Binding CancelPressCommand}"
-                            CommandParameter="{Binding ElementName=MessageBoxWindow}"
-                            Content="{Binding CancelButtonCaption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            FontSize="{StaticResource Regular}"
-                            Foreground="White"
-                            Style="{StaticResource ErrormessageButtonStyle}"
-                            Template="{DynamicResource ButtonBaseControlTemplate}" />
-                    </StackPanel>
-                </Grid>
+            <!--  Кнопки Да ,нет , отмена  (по умолчанию показываются)  -->
+            <StackPanel
+                x:Name="YesNoCancel"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                d:IsHidden="True"
+                Orientation="Horizontal">
+                <Button
+                    Name="Yes"
+                    Width="150"
+                    Height="50"
+                    Margin="20"
+                    Command="{Binding YesPressCommand}"
+                    CommandParameter="{Binding ElementName=MessageBoxWindow}"
+                    Content="{Binding LeftButtonCaption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    FontSize="{StaticResource Regular}"
+                    Foreground="White"
+                    Style="{StaticResource ErrormessageButtonStyle}"
+                    Template="{DynamicResource ButtonBaseControlTemplate}" />
+                <Button
+                    Name="Noo"
+                    Width="150"
+                    Height="50"
+                    Margin="20"
+                    Command="{Binding NoPressCommand}"
+                    CommandParameter="{Binding ElementName=MessageBoxWindow}"
+                    Content="{Binding RightButtonCaption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    FontSize="{StaticResource Regular}"
+                    Foreground="White"
+                    Style="{StaticResource ErrormessageButtonStyle}"
+                    Template="{DynamicResource ButtonBaseControlTemplate}" />
+                <Button
+                    Name="Cancel"
+                    Width="150"
+                    Height="50"
+                    Margin="20"
+                    Command="{Binding CancelPressCommand}"
+                    CommandParameter="{Binding ElementName=MessageBoxWindow}"
+                    Content="{Binding CancelButtonCaption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    FontSize="{StaticResource Regular}"
+                    Foreground="White"
+                    Style="{StaticResource ErrormessageButtonStyle}"
+                    Template="{DynamicResource ButtonBaseControlTemplate}" />
             </StackPanel>
         </Grid>
     </Grid>

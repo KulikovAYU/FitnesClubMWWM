@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using FC_EMDB.EMDB.CF.Data.Domain;
 
 namespace FC_EMDB.Classes
 {
+
     /// <summary>
     /// "Авторизационные данные пользователя"
     /// </summary>
@@ -42,136 +38,183 @@ namespace FC_EMDB.Classes
             }
         }
     }
-    
+
     /// <summary>
-    /// данные пользователя после авторизации
+    /// Класс описывает основные данные для любого человека
     /// </summary>
-    public class UserData
+    public class PersonData
     {
-        public UserData()
-        {
+        private string personPhoto;
 
+        public PersonData()
+        {
+            
+        }
+
+        private PersonData(string personFirstName, string personLastName,
+            string personFamilyName, DateTime? personDateOfBirdth, string personGender, int personId = 0)
+        {
+            PersonFirstName = personFirstName;
+            PersonLastName = personLastName;
+            PersonFamilyName = personFamilyName;
+            PersonDateOfBirdth = personDateOfBirdth;
+            PersonGender = personGender;
+            PersonId = personId;
+        }
+
+        public PersonData(string personFirstName, string personLastName, 
+            string personFamilyName, DateTime? personDateOfBirdth, string personGender, int personId, string personAdress, string personPhoneNumber, string personMail, byte[] personPhoto, bool isExistPerson) : 
+            this( personFirstName, personLastName, personFamilyName, personDateOfBirdth, personGender, personId)
+        {
+            PersonAdress = personAdress;
+            PersonPhoneNumber = personPhoneNumber;
+            PersonMail = personMail;
+            PersonPhoto = personPhoto;
+            IsExistPerson = isExistPerson;
         }
 
         /// <summary>
-        /// Конструктор основных личных данных работника
+        /// Имя клиента
         /// </summary>
-        /// <param name="employeeId">Id работника</param>
-        /// <param name="employeeFirstName">Имя работника</param>
-        /// <param name="employeeLastName">Отчество работника</param>
-        /// <param name="employeeFamilyName">Фамилия работника</param>
-        /// <param name="employeeDateOfBirdth">Дата рождения работника</param>
-        /// <param name="employeeAdress">Адрес работника</param>
-        private UserData(int employeeId, string employeeFirstName, string employeeLastName, string employeeFamilyName, DateTime employeeDateOfBirdth, string employeeAdress)
-        {
-            EmployeeId = employeeId;
-            EmployeeFirstName = employeeFirstName;
-            EmployeeLastName = employeeLastName;
-            EmployeeFamilyName = employeeFamilyName;
-            EmployeeDateOfBirdth = employeeDateOfBirdth;
-            EmployeeAdress = employeeAdress;
-        }
+        public string PersonFirstName { get; set; }
+       
+        /// <summary>
+        /// Фамилия клиента
+        /// </summary>
+        public string PersonFamilyName { get; set; }
+       
+        /// <summary>
+        /// Отчетство клиента
+        /// </summary>
+        public string PersonLastName { get; set; }
 
         /// <summary>
-        /// Конструктор
+        /// Роль человека
         /// </summary>
-        /// <param name="employeeId">Id работника</param>
-        /// <param name="employeeFirstName">Имя работника</param>
-        /// <param name="employeeLastName">Отчество работника</param>
-        /// <param name="employeeFamilyName">Фамилия работника</param>
-        /// <param name="employeeDateOfBirdth">Дата рождения работника</param>
-        /// <param name="employeeAdress">Адрес проживания работника</param>
-        /// <param name="employeeLoginName">Логин работника</param>
-        /// <param name="employeePasswordHash">Хэш пароля работника</param>
-        /// <param name="employeeMail">Мейл работника</param>
-        /// <param name="employeePhoneNumber">Телефон работника</param>
-        /// <param name="employeeRole">Роль работника</param>
-        /// <param name="employeeWorkingStatus">Рабочий статус работника</param>
-        /// <param name="employeePhoto">Фотография работника</param>
-        public UserData(int employeeId, string employeeFirstName, string employeeLastName, string employeeFamilyName, DateTime employeeDateOfBirdth, string employeeAdress, 
-                string employeeLoginName, string employeePasswordHash, string employeeMail, string employeePhoneNumber, EmployeeRole employeeRole, string employeeWorkingStatus, 
-                byte[] employeePhoto) : this(employeeId, employeeFirstName,  employeeLastName,  employeeFamilyName, employeeDateOfBirdth, employeeAdress)
+        public string PersonRole { get; set; }
+
+        /// <summary>
+        /// Дата рождения
+        /// </summary>
+        public DateTime? PersonDateOfBirdth { get;  set; }
+
+        /// <summary>
+        /// Id человека
+        /// </summary>
+        public int PersonId { get; set; }
+
+        /// <summary>
+        /// Фото человека
+        /// </summary>
+        public byte[] PersonPhoto { get; set; }
+
+        /// <summary>
+        /// Путь к фотографии человека
+        /// </summary>
+        public string PathPersonPhoto { get; set; }
+
+        /// <summary>
+        /// Номер телефона
+        /// </summary>
+        public string PersonPhoneNumber { get;  set; }
+
+        /// <summary>
+        /// Мейл
+        /// </summary>
+        public string PersonMail { get;  set; }
+
+        /// <summary>
+        /// Адрес человека
+        /// </summary>
+        public string PersonAdress { get; set; }
+
+        /// <summary>
+        /// Признак существования человека(записи) в БД 
+        /// </summary>
+        public bool IsExistPerson { get; protected set; }
+        /// <summary>
+        /// Пол человека
+        /// </summary>
+        public string PersonGender { get;  set; }
+    }
+
+    /// <summary>
+    /// Класс описывает данные пользователя информационной системы
+    /// </summary>
+    public class UserData : PersonData
+    {
+        public UserData( string employeeFirstName, string employeeLastName, string employeeFamilyName, DateTime? employeeDateOfBirdth, string personGender, int employeeId,
+            string employeeAdress, string employeePhoneNumber, string employeeMail, byte[] employeePhoto, string employeeLoginName, string employeePasswordHash, 
+            EmployeeRole employeeRole, string employeeWorkingStatus, bool isExistPerson = false) : 
+            base( employeeFirstName, employeeLastName, employeeFamilyName, employeeDateOfBirdth, personGender, employeeId, employeeAdress, employeePhoneNumber, employeeMail, employeePhoto, isExistPerson)
         {
-            EmployeeLoginName = employeeLoginName;
             EmployeePasswordHash = employeePasswordHash;
-            EmployeeMail = employeeMail;
-            EmployeePhoneNumber = employeePhoneNumber;
-            EmployeRole= employeeRole;
+            EmployeeLoginName = employeeLoginName;
             EmployeWorkingStatus = employeeWorkingStatus;
-            EmployeePhoto = employeePhoto;
-            SavePhoto();
+            EmployeRole = employeeRole;
+          //  base.SavePhoto();
         }
 
-
-        public string EmployeeAdress { get; private set; }
-
-        public DateTime EmployeeDateOfBirdth { get; private set; }
-
-        public string EmployeeFamilyName { get; private set; }
-
-        public string EmployeeLastName { get; private set; }
-
-        public string EmployeeFirstName { get; private set; }
-
-        public int EmployeeId { get; private set; }
-
-        public byte[] EmployeePhoto { get; private set; }
-
-        public string EmployeWorkingStatus { get; private set; }
-
-        public EmployeeRole EmployeRole { get; private set; }
-
-        public string EmployeePhoneNumber { get; private set; }
-
-        public string EmployeeMail { get; private set; }
-
+        /// <summary>
+        /// Хэш пароля
+        /// </summary>
         public string EmployeePasswordHash { get; private set; }
 
+        /// <summary>
+        /// логин
+        /// </summary>
         public string EmployeeLoginName { get; private set; }
 
         /// <summary>
+        /// статус работника
+        /// </summary>
+        public string EmployeWorkingStatus { get; private set; }
+        
+        /// <summary>
+        /// Роль работника
+        /// </summary>
+        public EmployeeRole EmployeRole { get; private set; }
+      
+        /// <summary>
         /// ФИО пользователя
         /// </summary>
-        public string EmployeeFullName => EmployeeFirstName+" "+EmployeeLastName+" "+EmployeeFamilyName;
+        public string EmployeeFullName => PersonFirstName+" " + PersonLastName + " " + PersonFamilyName;
+    }
 
-        ///// <summary>
-        ///// Фото пользователя
-        ///// </summary>
-        public Image UserPhoto { get; private set; }
+    /// <summary>
+    /// Класс описывает данные клиента
+    /// </summary>
+    public class NewClientData : PersonData
+    {
 
-        /// <summary>
-        /// Путь к фотографии пользователя системы
-        /// </summary>
-        public string PathPhoto { get; private set; }
-
-        /// <summary>
-        /// Метод сохраняет изображение в текущей папке
-        /// </summary>
-        void SavePhoto()
+        public NewClientData(bool bIsnewClient = false) : base()
         {
-            UserData tmpThis = this;
-
-            var outerNew = Task<string>.Factory.StartNew(() =>
-            {
-                string strFileName = tmpThis.EmployeeFirstName + "_" + tmpThis.EmployeeLastName +"_"+tmpThis.EmployeeId;
-                string savePathFolder = $@"{Environment.CurrentDirectory}\{"Temp"}\{tmpThis.EmployeRole.EmployeeRoleName}";
-                DirectoryInfo directoryInfo = Directory.CreateDirectory(savePathFolder);
-                string localFilePath = $@"{savePathFolder}\{strFileName}.{"JPEG"}";
-
-                if (!File.Exists(localFilePath))
-                {
-                    MemoryStream memoryStream = new MemoryStream();
-                    memoryStream.Write(EmployeePhoto, 0, EmployeePhoto.Length);
-                    UserPhoto = Image.FromStream(memoryStream);
-                    tmpThis.UserPhoto.Save(localFilePath, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    memoryStream.Dispose();
-                    tmpThis.UserPhoto.Dispose();
-                }
-
-                return localFilePath;
-            });
-            outerNew.Wait();
-            PathPhoto = outerNew.Result;
+            IsExistPerson = bIsnewClient;
         }
+        /// <summary>
+        /// Паспортные данные клиента
+        /// </summary>
+        /// Серия
+        public string ClientPasportDataSeries { get;set; }
+        /// <summary>
+        /// Номер
+        /// </summary>
+        public string ClientPasportDataNumber { get; set; }
+        /// <summary>
+        /// Кем выдан
+        /// </summary>
+        public string ClientPasportDataIssuedBy { get; set; }
+        /// <summary>
+        /// Дата выдачи
+        /// </summary>
+        public DateTime? ClientPasportDatеOfIssue { get;  set; }
+        /// <summary>
+        /// Номер абонемента
+        /// </summary>
+        public int NumberSubscription { get; private set; }
+        /// <summary>
+        /// Когда зарегистрирован абонемент
+        /// </summary>
+        public DateTime? AccountregistrationDate { get; private set; } = DateTime.Now;
     }
 }

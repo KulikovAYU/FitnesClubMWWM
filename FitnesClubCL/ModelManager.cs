@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FC_EMDB;
+﻿using FC_EMDB;
 using FC_EMDB.Classes;
 using FitnesClubCL.Annotations;
 using FitnesClubCL.Classes;
@@ -10,7 +9,7 @@ namespace FitnesClubCL
     /// <summary>
     /// Класс представляет интерфейс для работы с моделью данных
     /// </summary>
-    public sealed class ModelManager : ViewModelBase, ISystemUser, IClientRegisterData
+    public sealed class ModelManager : ViewModelBase, ISystemUser
     {
     
        private ModelManager()
@@ -20,12 +19,9 @@ namespace FitnesClubCL
 
        private static ModelManager _mManager;
 
-       public static ModelManager GetInstance()
-       {
-          return _mManager ?? (_mManager = new ModelManager());
-       }
+        public static ModelManager GetInstance => _mManager ?? (_mManager = new ModelManager());
 
-       public void CreateDB()
+        public void CreateDB()
        {
            DbManager.GetInstance().InitializeDatabase();
        }
@@ -63,26 +59,25 @@ namespace FitnesClubCL
         #endregion
 
 
-
-
-
-
-
-
-
-        public NewClientData ClientData { get; set; }
+    
 
         /// <summary>
-        /// Зарегистрировать нового клиента
+        /// Проверить запись на существование
         /// </summary>
-        /// <param name="clientData">данные клиента</param>
-        public void RegisterNewClient(ref NewClientData clientData)
+        /// <typeparam name="T">Шаблон параметра</typeparam>
+        /// <param name="recordData">данные записи</param>
+        public void CheckRecord<T>(ref T recordData) where T : class
         {
-           
-          
-
+            if (recordData == null)
+                return;
+            ClientsHelper.IsExistRecord<T>(ref recordData);
         }
 
-      
+        public void UpdateRecord<T>(T clientData) where T : class
+        {
+            if (clientData == null)
+                return;
+            ClientsHelper.UpdateFields<T>(clientData);
+        }
     }
 }

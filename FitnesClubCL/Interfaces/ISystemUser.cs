@@ -20,15 +20,4 @@ namespace FitnesClubCL
         /// </summary>
         UserData WorkingUserData { get; }
     }
-
-    /// <summary>
-    /// Интерфейс регистрационных данных клиента
-    /// </summary>
-    public interface IClientRegisterData
-    {
-        NewClientData ClientData { get; set; }
-    }
-
-
-
 }

@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using FC_EMDB.Classes;
 using FC_EMDB.EMDB.CF.Data.Domain;
-using FitnesClubCL.CF_EMDB.Repositories;
+using FC_EMDB.Interfaces;
 
 
 namespace FC_EMDB.EMDB.CF.Data.Repositories
@@ -32,7 +33,12 @@ namespace FC_EMDB.EMDB.CF.Data.Repositories
         /// </summary>
         /// <param name="clientData"> Данные по которым будет производиться выборка</param>
         /// <returns>Аккаунт</returns>
-        Account FindAccountWithSameData(Account clientData);
+        NewClientData FindAccountWithSameData(NewClientData clientData);
 
+        /// <summary>
+        /// Обновить поля (запись) клиента в БД
+        /// </summary>
+        /// <param name="clientData">Данные клиента</param>
+        void UpdateFields(NewClientData clientData);
     }
 }

@@ -2,6 +2,9 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using FC_EMDB.Classes;
+using FC_EMDB.EMDB.CF.Data.Domain;
 using FC_EMDB.EMDB.CF.DataAccess.Context;
 
 namespace FC_EMDB.Utils
@@ -94,59 +97,168 @@ namespace FC_EMDB.Utils
         /// <returns>byte[]</returns>
         public static byte[] ConvertImageToByteArray(string fileName)
         {
+            if (string.IsNullOrEmpty(fileName))
+                return null;
             return File.ReadAllBytes(Path.GetFullPath(fileName));
         }
 
-        ///// <summary>
-        ///// Метод конвертирует изображение из БД
-        ///// </summary>
-        ///// <param name="entitity">сущность</param>
-        ///// <param name="nIdHuman">id шник</param>
-        ///// <returns></returns>
-        //public static Image ConvertToImageFromByteArray(eEntities entitity, int nIdHuman)
-        //{
-        //    DataBaseFcContext context = DbManager.GetDbContext();
+        /// <summary>
+        /// Метод конвертирует изображение в массив битов для последующего сохранения его в базе данных
+        /// </summary>
+        public static byte[] ConvertImageToByteArray<Template>( Template data) where Template : class
+        {
+            if (data is NewClientData)
+            {
+                var clientData = data as NewClientData;
+                if (string.IsNullOrEmpty(clientData.PathPersonPhoto))
+                    return null;
 
-        //    switch (entitity)
-        //    {
-        //        case eEntities.eNone:
-        //            break;
-        //        case eEntities.eEmployee:
-        //            //var queryGetEmployees = from arrByte in context.Employees where arrByte.EmployeeId == myIntVariable select arrByte;
-        //            var queryGetHumanE = from arrByte in context.Accounts where arrByte.ClientId == nIdHuman select arrByte; //запрос на получение коллекции работников
-        //            var queryGetPhotoE = from arrByte in queryGetHumanE select arrByte.ClientPhoto; // запрос на получение фотографии пользователя
+                return File.ReadAllBytes(Path.GetFullPath(clientData.PathPersonPhoto));
+            }
+            return null;
+        }
 
-        //            MemoryStream memoryStreamE = new MemoryStream();
-        //            memoryStreamE.Write(queryGetPhotoE.First(), 0, queryGetPhotoE.First().Length);
-        //            Image currentImageE = Image.FromStream(memoryStreamE);
-        //            return currentImageE;
+        /// <summary>
+        /// Метод конвертирует изображение из БД и устанавливает путь сохранения
+        /// </summary>
+        /// <typeparam name="Template">Тип данных клиента или пользователя системы</typeparam>
+        /// <param name="data">Данные клиента или пользователя системы</param>
+        public static void SavePhoto<Template>(ref Template data) where Template : class
+        {
+            PersonData personData = null;
+            //Если это пользователь системы
+            if (data is UserData)
+            {
+                 personData = data as UserData;
+                if (personData.PersonPhoto == null)
+                    return;
+            }
 
-        //        case eEntities.eClient:
+            //Если это клиент
+            if (data is NewClientData)
+            {
+                 personData = data as NewClientData;
+                if (personData.PersonPhoto == null)
+                    return;
+            }
 
-        //            var queryGetHumanC = from arrByte in context.Accounts where arrByte.ClientId == nIdHuman select arrByte; //запрос на получение коллекции клиентов
-        //            var queryGetPhotoC = from arrByte in queryGetHumanC select arrByte.ClientPhoto; // запрос на получение фотографии пользователя
-        //            //var queryGetName = from name in queryGetHuman let fullName = name.NumberSubscription + "_" + name.ClientFirstName + "_" + name.ClientLastName
-        //            //    select fullName;
+            if (personData == null)
+                return;
 
-        //            MemoryStream memoryStream = new MemoryStream();
+            var outerNew = Task<string>.Factory.StartNew(() =>
+            {
+                string strFileName = personData.PersonFirstName + "_" + personData.PersonLastName + "_" + personData.PersonId;
+                string savePathFolder = $@"{Environment.CurrentDirectory}\{"Temp"}\{personData.PersonRole}";
+                string localFilePath = $@"{savePathFolder}\{strFileName}.{"JPEG"}";
 
-        //            memoryStream.Write(queryGetPhotoC.First(), 0, queryGetPhotoC.First().Length);
-        //            Image currentImage = Image.FromStream(memoryStream);
-        //            //Учатсток кода для сохранения
-        //            //DirectoryInfo directoryInfo = Directory.CreateDirectory(Environment.CurrentDirectory + @"\Temp");
-        //            //currentImage.Save(directoryInfo.ToString()+ @"\"+queryGetName.First()+".BMP", System.Drawing.Imaging.ImageFormat.Bmp);
-        //            //memoryStream.Dispose();
-        //            //currentImage.Dispose();
-        //            return currentImage;
+                if (!File.Exists(localFilePath))
+                {
+                    Stream myStream;
+                    using (myStream = File.Open(localFilePath, FileMode.OpenOrCreate, FileAccess.Write))
+                    {
+                        myStream.Write(personData.PersonPhoto, 0, personData.PersonPhoto.Length);
+                        myStream.FlushAsync();
+                    }
+                }
+                return localFilePath;
+            });
+            outerNew.Wait();
+            personData.PathPersonPhoto = outerNew.Result;
+            outerNew.Dispose();
+        }
 
-        //        default:
-        //            throw new ArgumentOutOfRangeException(nameof(entitity), entitity, null);
-        //    }
-        //    return null;
-        //}
+        /// <summary>
+        /// Метод перезаписывает изображение в случае его изменения
+        /// </summary>
+        /// <typeparam name="Template"></typeparam>
+        /// <param name="data">Данные для определения имени файла(оставил старые данные, чтобы нашел имя файла) </param>
+        /// <param name="PersonPhoto">Массив байтов фото</param>
+        public static void UpdatePhoto<Template>(ref Template data, byte[] PersonPhoto) where Template : class
+        {
+           
 
-        #endregion
+            if (data is Account)
+            {
 
+                var clientData = data as Account;
 
+                bool isEquals = true;
+
+                if (PersonPhoto != null && clientData.ClientPhoto != null)
+                {
+                    isEquals = (BitConverter.ToInt32(PersonPhoto, 0) ^ BitConverter.ToInt32(clientData.ClientPhoto, 0)) != 0;
+                }
+
+                if (PersonPhoto == null && clientData.ClientPhoto!=null)
+                {
+                    PersonPhoto = clientData.ClientPhoto;
+                }
+
+                if (clientData.ClientPhoto == null && PersonPhoto!=null)
+                {
+                    clientData.ClientPhoto = PersonPhoto;
+                    isEquals = false;
+                }
+
+                var outerNew = Task.Factory.StartNew(() =>
+                {
+                    string strFileName = clientData.ClientFirstName + "_" + clientData.ClientLastName + "_" + clientData.ClientId;
+                    string savePathFolder = $@"{Environment.CurrentDirectory}\{"Temp"}\Клиент";
+                    DirectoryInfo directoryInfo = Directory.CreateDirectory(savePathFolder);
+                    string localFilePath = $@"{savePathFolder}\{strFileName}.{"JPEG"}";
+                  
+                  
+                    if (File.Exists(localFilePath) && !isEquals)
+                    {
+                        Stream myStream;
+                        using (myStream = File.Open(localFilePath, FileMode.OpenOrCreate, FileAccess.Write))
+                        {
+                          myStream.Write(PersonPhoto, 0, PersonPhoto.Length);
+                            myStream.FlushAsync();
+                        }
+                    }
+                });
+                outerNew.Wait();
+            }
+        }
+
+        /// <summary>
+        /// Метод преобразует данные из val2 в val1
+        /// </summary>
+        /// <typeparam name="Temp1">Шаблон val1</typeparam>
+        /// <typeparam name="Temp2">Шаблон val2</typeparam>
+        /// <param name="val1">Выходное значение</param>
+        /// <param name="val2">Преобразуемое значение</param>
+        public static void Convert<Temp1, Temp2>(ref Temp1 val1, Temp2 val2) where Temp1 : class where Temp2 : class
+        {
+            if (val1 == null || val2 == null)
+                return;
+
+            if (val1 is Account && val2 is NewClientData)
+            {
+                var account = (val1 as Account);
+                var newClientData = (val2 as NewClientData);
+              
+                SqlTools.UpdatePhoto(ref account, SqlTools.ConvertImageToByteArray(newClientData));
+                
+                account.ClientFirstName = newClientData.PersonFirstName;
+                account.ClientLastName = newClientData.PersonLastName;
+                account.ClientFamilyName = newClientData.PersonFamilyName;
+                account.ClientAdress = newClientData.PersonAdress;
+                account.ClientDateOfBirdth = newClientData.PersonDateOfBirdth;
+                account.ClientGender = newClientData.PersonGender;
+                //account.ClientId = newClientData.PersonId;
+                account.ClientMail = newClientData.PersonMail;
+                account.ClientPasportDataSeries = newClientData.ClientPasportDataSeries;
+                account.ClientPasportDataNumber = newClientData.ClientPasportDataNumber;
+                account.ClientPasportDataIssuedBy = newClientData.ClientPasportDataIssuedBy;
+                account.ClientPhoneNumber = newClientData.PersonPhoneNumber;
+              
+               account.ClientPhoto = SqlTools.ConvertImageToByteArray(newClientData); //запишем фотографию
+                
+             
+            }
+        }
     }
 }
+#endregion

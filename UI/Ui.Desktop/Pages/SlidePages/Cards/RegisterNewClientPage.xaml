@@ -2,9 +2,12 @@
     x:Class="FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.RegisterNewClientPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:command="http://www.galasoft.ch/mvvmlight"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:valueConverters="clr-namespace:FitnessClubMWWM.Ui.Desktop.ValueConverters"
+    xmlns:viewModels="clr-namespace:FitnessClubMWWM.Ui.Desktop.ViewModels"
     Title="RegisterNewClientPage"
     d:DesignWidth="1000"
     DataContext="{Binding WorkingCabinetPageViewModel, Source={StaticResource Locator}}"
@@ -16,6 +19,7 @@
     <Page.Resources>
         <valueConverters:MultiConverter x:Key="MultiConverter" />
         <valueConverters:ImageBrushValueConverter x:Key="ImageBrushValueConverter" />
+
     </Page.Resources>
     <ScrollViewer
         Margin="0,50,0,0"
@@ -24,6 +28,7 @@
         HorizontalScrollBarVisibility="Auto"
         VerticalScrollBarVisibility="Auto">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -86,7 +91,7 @@
                             FontSize="{StaticResource RegularBig}"
                             Tag="Фамилия*"
                             Template="{StaticResource InputTextBox}"
-                            Text="{Binding ClientData.ClientName}" />
+                            Text="{Binding ClientFamilyName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" />
 
                         <TextBox
                             Name="ClientName"
@@ -97,7 +102,8 @@
                             BorderThickness="2"
                             FontSize="{StaticResource RegularBig}"
                             Tag="Имя*"
-                            Template="{StaticResource InputTextBox}" />
+                            Template="{StaticResource InputTextBox}"
+                            Text="{Binding ClientFirstName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" />
 
                         <TextBox
                             Name="SecondFamily"
@@ -108,7 +114,8 @@
                             BorderThickness="2"
                             FontSize="{StaticResource RegularBig}"
                             Tag="Отчество*"
-                            Template="{StaticResource InputTextBox}" />
+                            Template="{StaticResource InputTextBox}"
+                            Text="{Binding ClientLastName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" />
 
                         <GroupBox
                             Width="600"
@@ -129,7 +136,8 @@
                                         VerticalContentAlignment="Center"
                                         FontSize="{StaticResource Regular}"
                                         Foreground="Gray"
-                                        Style="{StaticResource BaseStyle}" />
+                                        SelectedDate="{Binding ClientDateOfBirdth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                        Style="{DynamicResource DatePickerStyle1}" />
                                 </Grid>
                             </Border>
                         </GroupBox>
@@ -165,16 +173,17 @@
                             Foreground="Gray"
                             Style="{StaticResource BaseTextBlockStyle}"
                             Text="Адрес" />
-                        <RichTextBox
+                        <TextBox
                             Width="600"
                             Height="100"
                             VerticalContentAlignment="Center"
                             AcceptsReturn="True"
                             AcceptsTab="True"
                             BorderThickness="2"
-                            FontFamily="{Binding Source={StaticResource BaseRichTextBlockStyle}}"
                             FontSize="{StaticResource RegularBig}"
-                            Tag="Краткое описание" />
+                            Style="{StaticResource BaseTextBloxStyle}"
+                            Text="{Binding ClientAdress}"
+                            TextWrapping="Wrap" />
                         <TextBox
                             Name="PhoneNumber"
                             Width="600"
@@ -184,7 +193,8 @@
                             BorderThickness="2"
                             FontSize="{StaticResource RegularBig}"
                             Tag="Телефон*"
-                            Template="{StaticResource InputTextBox}" />
+                            Template="{StaticResource InputTextBox}"
+                            Text="{Binding ClientPhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                         <TextBox
                             Name="Email"
                             Width="600"
@@ -194,7 +204,8 @@
                             BorderThickness="2"
                             FontSize="{StaticResource RegularBig}"
                             Tag="e-mail"
-                            Template="{StaticResource InputTextBox}" />
+                            Template="{StaticResource InputTextBox}"
+                            Text="{Binding ClientMail}" />
                     </StackPanel>
                 </GroupBox>
 
@@ -218,7 +229,8 @@
                                     BorderThickness="2"
                                     FontSize="18"
                                     Tag="Серия*"
-                                    Template="{StaticResource InputTextBox}" />
+                                    Template="{StaticResource InputTextBox}"
+                                    Text="{Binding ClientPasportDataSeries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                                 <TextBox
                                     Name="PasportNumber"
@@ -229,7 +241,8 @@
                                     BorderThickness="2"
                                     FontSize="18"
                                     Tag="Номер*"
-                                    Template="{StaticResource InputTextBox}" />
+                                    Template="{StaticResource InputTextBox}"
+                                    Text="{Binding ClientPasportDataNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                             </StackPanel>
 
 
@@ -243,7 +256,8 @@
                                 BorderThickness="2"
                                 FontSize="18"
                                 Tag="Выдан*"
-                                Template="{StaticResource InputTextBox}" />
+                                Template="{StaticResource InputTextBox}"
+                                Text="{Binding ClientPasportDataIssuedBy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                             <GroupBox
                                 Width="600"
                                 Foreground="Gray"
@@ -263,7 +277,8 @@
                                             VerticalContentAlignment="Center"
                                             FontSize="{StaticResource Regular}"
                                             Foreground="Gray"
-                                            Style="{StaticResource BaseStyle}" />
+                                            SelectedDate="{Binding ClientPasportDatеOfIssue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                            Style="{StaticResource DatePickerStyle1}" />
                                     </Grid>
                                 </Border>
                             </GroupBox>
@@ -279,6 +294,7 @@
                     HorizontalAlignment="Center"
                     VerticalContentAlignment="Center"
                     Command="{Binding SaveChangesCommand}"
+                    CommandParameter="{Binding ElementName=BoyRadioBtn, Path=IsChecked}"
                     Content="Сохранить изменения"
                     Cursor="Hand"
                     FontSize="20"
@@ -286,7 +302,7 @@
                     Template="{StaticResource ButtonBaseControlTemplate}">
 
                     <!--  После нажатии кнопку "сохранить изменения" данные пользователя отправляются на сервер  -->
-                    <Button.CommandParameter>
+                    <!--<Button.CommandParameter>
                         <MultiBinding Converter="{StaticResource MultiConverter}">
                             <Binding ElementName="ClientName" Path="Text" />
                             <Binding ElementName="ClientFamily" Path="Text" />
@@ -300,7 +316,7 @@
                             <Binding ElementName="Email" Path="Text" />
                             <Binding ElementName="DateOfBirdthPicker" Path="SelectedDate" />
                         </MultiBinding>
-                    </Button.CommandParameter>
+                    </Button.CommandParameter>-->
                 </Button>
             </StackPanel>
         </StackPanel>

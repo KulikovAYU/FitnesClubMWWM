@@ -13,10 +13,6 @@ using static System.String;
 
 namespace FitnessClubMWWM.Ui.Desktop.UserControls
 {
-    public class PasswordHelper
-    {
-        public string PasswordString { get; set; }
-    }
 
     /// <summary>
     /// представляет ресурс для кастомного текстбокса (для его очистки при нажатии на крестик)
@@ -345,7 +341,6 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
         public bool OpenFileDialog(string strDefFileExtention = "", string strDefFileFilters = "")
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            
             if (strDefFileExtention != Empty)
             {
                 openFileDialog.DefaultExt = strDefFileExtention;
@@ -355,7 +350,7 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
             {
                 openFileDialog.Filter = strDefFileFilters;
             }
-           
+
             if (openFileDialog.ShowDialog() == true)
             {
                 if (!IsNullOrEmpty(openFileDialog.FileName))
@@ -364,7 +359,6 @@ namespace FitnessClubMWWM.Ui.Desktop.UserControls
                 }
                 return true;
             }
-         
             return false;
         }
  

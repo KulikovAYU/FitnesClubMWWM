@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FC_EMDB.Interfaces;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
 {
@@ -20,7 +21,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         /// <summary>
         /// Дата регистрации
         /// </summary>
-        public DateTime AccountregistrationDate { get; set; }
+        public DateTime? AccountregistrationDate { get; set; }
 
         /// <summary>
         ///Количество тренировок 
@@ -128,5 +129,6 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
          public AccountStatus AccountStatus { get; set; }
 
         #endregion
+
     }
 }

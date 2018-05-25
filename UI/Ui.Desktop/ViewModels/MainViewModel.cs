@@ -224,7 +224,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             }
 
 
-            ModelManager.GetInstance().CreateDB();
+            ModelManager.GetInstance.CreateDB();
         }
 
         private void ErrorMessage(Exception obj)
