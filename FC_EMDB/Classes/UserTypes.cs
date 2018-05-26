@@ -190,6 +190,11 @@ namespace FC_EMDB.Classes
         public NewClientData(bool bIsnewClient = false) : base()
         {
             IsExistPerson = bIsnewClient;
+
+            if (bIsnewClient) // в случае если это новый клиент, добавляем время регистрации
+            {
+                AccountregistrationDate = DateTime.Now;
+            }
         }
         /// <summary>
         /// Паспортные данные клиента
@@ -211,10 +216,10 @@ namespace FC_EMDB.Classes
         /// <summary>
         /// Номер абонемента
         /// </summary>
-        public int NumberSubscription { get; private set; }
+        public int NumberSubscription { get;  set; }
         /// <summary>
         /// Когда зарегистрирован абонемент
         /// </summary>
-        public DateTime? AccountregistrationDate { get; private set; } = DateTime.Now;
+        public DateTime? AccountregistrationDate { get; private set; } 
     }
 }

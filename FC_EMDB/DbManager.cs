@@ -3,7 +3,6 @@ using FC_EMDB.Classes;
 using FC_EMDB.EMDB.CF.Data.Domain;
 using FC_EMDB.EMDB.CF.DataAccess;
 using FC_EMDB.EMDB.CF.DataAccess.Context;
-using FC_EMDB.Interfaces;
 using FC_EMDB.Utils;
 
 
@@ -150,7 +149,17 @@ namespace FC_EMDB
         {
             if (recordData is NewClientData)
             {
-                unitOfWork.Accounts.UpdateFields(recordData as NewClientData);
+                var _data = recordData as NewClientData;
+
+                if (_data.NumberSubscription != 0)// в случае, если это существующая запись
+                {
+                    unitOfWork.Accounts.UpdateFields(_data);
+                }
+                else
+                {
+                    unitOfWork.Accounts.CreateRecord(_data);
+                }
+              
             }
 
           

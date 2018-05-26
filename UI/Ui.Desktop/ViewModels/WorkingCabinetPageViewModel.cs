@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Controls;
 using FC_EMDB.Classes;
-using FC_EMDB.Utils;
 using FitnesClubCL;
-using FitnesClubCL.Classes;
 using FitnessClubMWWM.Ui.Desktop.Constants;
 using FitnessClubMWWM.Ui.Desktop.Interfaces;
 using FitnessClubMWWM.Ui.Desktop.Pages;
@@ -98,6 +94,34 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                                 break;
                         }
                     }
+                    else
+                    {
+                        _clientData = new NewClientData(true)
+                        {
+                            PersonRole = "Клиент",
+                            PersonFirstName = ClientFirstName,
+                            PersonLastName = ClientLastName,
+                            PersonFamilyName = ClientFamilyName,
+                            PersonDateOfBirdth = ClientDateOfBirdth,
+                            PersonGender = obj ? "Муж." : "Жен.",
+                            PersonAdress = ClientAdress,
+                            PersonPhoneNumber = ClientPhoneNumber,
+                            PersonMail = ClientMail,
+                            PathPersonPhoto = StrPath,
+                            ClientPasportDataSeries = this.ClientPasportDataSeries,
+                            ClientPasportDataNumber = this.ClientPasportDataNumber,
+                            ClientPasportDataIssuedBy = this.ClientPasportDataIssuedBy,
+                            ClientPasportDatеOfIssue = this.ClientPasportDatеOfIssue
+                            
+                        };
+                        _modelManager.CreateOrUpdateRecord<NewClientData>(_clientData);
+                        CustomMessageBox.Show(
+                            "Новая учетная запись успешно создана",
+                            "Регистрация нового пользователя",
+                            MessageBoxButton.OK, eMessageBoxIcons.eSucsess);
+                        ClearFields();
+                        _clientData = null;
+                    }
                 }
                 else
                 {
@@ -113,13 +137,13 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                     _clientData.PathPersonPhoto = StrPath;
                     _clientData.PersonAdress = ClientAdress;
                     _clientData.PersonMail = ClientMail;
-                    _modelManager.UpdateRecord<NewClientData>(_clientData);
+                    _modelManager.CreateOrUpdateRecord<NewClientData>(_clientData);
                     CustomMessageBox.Show(
                         "Обновление записи успешно завершено",
                         "Регистрация нового пользователя",
                         MessageBoxButton.OK, eMessageBoxIcons.eSucsess);
-                   // ClearFields();
-                    _clientData = null;
+                    ClearFields();
+                   _clientData = null;
                 }
             }
         

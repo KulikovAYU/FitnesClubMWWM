@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using FC_EMDB.Classes;
 using FC_EMDB.EMDB.CF.Data.Domain;
 using FC_EMDB.EMDB.CF.Data.Repositories;
 using FC_EMDB.EMDB.CF.DataAccess.Context;
-using FC_EMDB.Interfaces;
 using FC_EMDB.Utils;
 
 namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
@@ -99,7 +97,8 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
                     ClientPasportDataSeries = query.ClientPasportDataSeries,
                     ClientPasportDataNumber = query.ClientPasportDataNumber,
                     ClientPasportDataIssuedBy = query.ClientPasportDataIssuedBy,
-                    ClientPasportDatеOfIssue = query.ClientPasportDatеOfIssue
+                    ClientPasportDatеOfIssue = query.ClientPasportDatеOfIssue,
+                    NumberSubscription = query.NumberSubscription
 
                 } : null;
         }
@@ -114,6 +113,23 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
             SqlTools.Convert(ref _clientData, clientData);
             DataBaseFcContext.Accounts.AddOrUpdate(_clientData);
             DataBaseFcContext.SaveChanges();
+        }
+
+        public void CreateRecord(NewClientData data)
+        {
+            //проверим еще раз, что такой записи нет
+            var _clientData = DataBaseFcContext.Accounts.Find(data.PersonId);
+
+            if (_clientData == null)
+            {
+                _clientData = new Account {NumberSubscription = AbonementGenerator.CreateNumberSubscription()};
+                //сгенерируем номер абонемента
+                SqlTools.Convert(ref _clientData, data);
+            }
+
+            DataBaseFcContext.Accounts.Add(_clientData);
+            DataBaseFcContext.SaveChanges();
+        
         }
 
         public DataBaseFcContext DataBaseFcContext => m_context as DataBaseFcContext;

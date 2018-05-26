@@ -73,10 +73,16 @@ namespace FitnesClubCL
             ClientsHelper.IsExistRecord<T>(ref recordData);
         }
 
-        public void UpdateRecord<T>(T clientData) where T : class
+        /// <summary>
+        /// Метод обновляет запись либо создает новую запись в БД
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="clientData"></param>
+        public void CreateOrUpdateRecord<T>(T clientData) where T : class
         {
             if (clientData == null)
                 return;
+            
             ClientsHelper.UpdateFields<T>(clientData);
         }
     }

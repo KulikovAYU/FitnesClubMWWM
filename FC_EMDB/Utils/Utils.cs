@@ -24,7 +24,7 @@ namespace FC_EMDB.Utils
         /// <summary>
         /// Функция генерирует номер абонемента
         /// </summary>
-        /// <param name="context">контекст БД</param>
+     
         /// <returns>Уникальный номер абонемента</returns>
         public static int CreateNumberSubscription()
         {
@@ -252,11 +252,11 @@ namespace FC_EMDB.Utils
                 account.ClientPasportDataSeries = newClientData.ClientPasportDataSeries;
                 account.ClientPasportDataNumber = newClientData.ClientPasportDataNumber;
                 account.ClientPasportDataIssuedBy = newClientData.ClientPasportDataIssuedBy;
+                account.ClientPasportDatеOfIssue = newClientData.ClientPasportDatеOfIssue;
                 account.ClientPhoneNumber = newClientData.PersonPhoneNumber;
-              
-               account.ClientPhoto = SqlTools.ConvertImageToByteArray(newClientData); //запишем фотографию
-                
-             
+                account.AccountregistrationDate = newClientData.AccountregistrationDate;
+                account.ClientAdress = newClientData.PersonAdress;
+                account.ClientPhoto = SqlTools.ConvertImageToByteArray(newClientData); //запишем фотографию
             }
         }
     }

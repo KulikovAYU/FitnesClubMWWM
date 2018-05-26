@@ -40,5 +40,11 @@ namespace FC_EMDB.EMDB.CF.Data.Repositories
         /// </summary>
         /// <param name="clientData">Данные клиента</param>
         void UpdateFields(NewClientData clientData);
+
+        /// <summary>
+        /// Создать гновую запись в БД
+        /// </summary>
+        /// <param name="data">данные</param>
+        void CreateRecord(NewClientData data);
     }
 }
