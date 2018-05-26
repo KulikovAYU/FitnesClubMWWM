@@ -68,6 +68,9 @@
     <Compile Include="EMDB\CF.DataAccess\Repositories\EmployeeRoleRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\EmployeeWorkingStatusRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\Repository.cs" />
+    <Compile Include="EMDB\CF.DataAccess\Repositories\ServiceRepository.cs" />
+    <Compile Include="EMDB\CF.DataAccess\Repositories\TarifRepository.cs" />
+    <Compile Include="EMDB\CF.DataAccess\Repositories\TrainingListRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\UnitOfWork.cs" />
     <Compile Include="EMDB\CF.Data\Domain\Account.cs" />
     <Compile Include="EMDB\CF.Data\Domain\AccountStatus.cs" />
@@ -88,6 +91,9 @@
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="DbManager.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\IEmployeeRoleRepository.cs" />
+    <Compile Include="EMDB\CF.Data\Repositories\IServiceRepository.cs" />
+    <Compile Include="EMDB\CF.Data\Repositories\ITarifRepository.cs" />
+    <Compile Include="EMDB\CF.Data\Repositories\ITrainingListRepository.cs" />
     <Compile Include="Interfaces\IHaveAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Utils.cs" />

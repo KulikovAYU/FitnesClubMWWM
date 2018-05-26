@@ -4,7 +4,7 @@ using FC_EMDB.EMDB.CF.Data.Domain;
 namespace FC_EMDB.EMDB.CF.DataAccess.Configuration
 {
     /// <summary>
-    /// Данный класс представляет конфигурацию сущности "Training", предоставляемый Fluent API
+    /// Данный класс представляет конфигурацию сущности "TrainingList", предоставляемый Fluent API
     /// </summary>
     class TrainingListConfig : EntityTypeConfiguration<TrainingList>
     {

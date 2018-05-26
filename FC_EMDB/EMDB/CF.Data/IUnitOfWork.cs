@@ -9,6 +9,7 @@ namespace FC_EMDB.EMDB.CF.Data
         IEmployeeRepository Employess { get; }
         IEmployeeRoleRepository EmployeRoles { get; }
         IEmployeeWorkingStatusRepository EmployeesWorkingStatus { get;}
+        ITrainingListRepository TrainingList { get;}
 
         int Complete();
     }

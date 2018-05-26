@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using FC_EMDB.Classes;
 using FC_EMDB.EMDB.CF.Data.Domain;
 using FC_EMDB.EMDB.CF.DataAccess;
@@ -161,8 +163,44 @@ namespace FC_EMDB
                 }
               
             }
+        }
 
-          
+        /// <summary>
+        /// Получить все зарегестрированные записи клментов
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>Зарегистриорванные записи клиентов</returns>
+        public ObservableCollection<T> GetAllClients<T>() where T : class
+        {
+            return new ObservableCollection<T>(unitOfWork.Accounts.GetAll().Cast<T>()); 
+        }
+
+        /// <summary>
+        /// Метод предоставляет спрачоные данны из бл
+        /// </summary>
+        /// <typeparam name="T">тип сущности</typeparam>
+        /// <returns>коллекцию сущноситей конкретного типа</returns>
+        public ObservableCollection<T> GetReferenceData<T>() where T : class 
+        {
+            if (typeof(T) == typeof(Tarif))
+            {
+                return new ObservableCollection<T>(unitOfWork.Tarif.GetAll().Cast<T>());
+            }
+
+            if (typeof(T) == typeof(Service))
+            {
+                return new ObservableCollection<T>(unitOfWork.Services.GetAll().Cast<T>());
+            }
+
+            if (typeof(T) == typeof(TrainingList))
+            {
+                var  test = new ObservableCollection<T>(unitOfWork.TrainingList.GetAll().Cast<T>());
+                return test;
+            }
+
+            return null;
+
+
         }
     }
 }

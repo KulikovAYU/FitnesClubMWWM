@@ -259,6 +259,47 @@ namespace FC_EMDB.Utils
                 account.ClientPhoto = SqlTools.ConvertImageToByteArray(newClientData); //запишем фотографию
             }
         }
+
+
+
+        public static string SavePhoto<Template>(Template data) where Template : class
+        {
+            Account personData = null;
+            string PersonRole = String.Empty;
+            
+            //Если это пользователь системы
+            if (data is Account)
+            {
+                personData = data as Account;
+                if (personData.ClientPhoto == null)
+                    return string.Empty;
+                PersonRole = "Клиент";
+            }
+
+  
+
+            var outerNew = Task<string>.Factory.StartNew(() =>
+            {
+                string strFileName = personData.ClientFirstName + "_" + personData.ClientLastName + "_" + personData.ClientId;
+                string savePathFolder = $@"{Environment.CurrentDirectory}\{"Temp"}\{PersonRole}";
+                string localFilePath = $@"{savePathFolder}\{strFileName}.{"JPEG"}";
+
+                if (!File.Exists(localFilePath))
+                {
+                    Stream myStream;
+                    using (myStream = File.Open(localFilePath, FileMode.OpenOrCreate, FileAccess.Write))
+                    {
+                        myStream.Write(personData.ClientPhoto, 0, personData.ClientPhoto.Length);
+                        myStream.FlushAsync();
+                    }
+                }
+                return localFilePath;
+            });
+            outerNew.Wait();
+            
+            outerNew.Dispose();
+            return outerNew.Result;
+        }
     }
 }
 #endregion

@@ -1,5 +1,7 @@
-﻿using FC_EMDB;
+﻿using System.Collections.ObjectModel;
+using FC_EMDB;
 using FC_EMDB.Classes;
+using FC_EMDB.EMDB.CF.Data.Domain;
 using FitnesClubCL.Annotations;
 using FitnesClubCL.Classes;
 using GalaSoft.MvvmLight;
@@ -84,6 +86,32 @@ namespace FitnesClubCL
                 return;
             
             ClientsHelper.UpdateFields<T>(clientData);
+        }
+
+        /// <summary>
+        /// Метод возвращает коллекцию людей (работников, клиентов...)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>коллекция данных</returns>
+        public static ObservableCollection<T> GetAllPersons<T>() where T : class
+        {
+            if (typeof(T) == typeof(Account)) //если запросили коллекцию работников
+            {
+              return  ClientsHelper.GetAllClients<T>();
+            }
+
+            return null;
+        }
+
+
+        /// <summary>
+        /// Метод предоставляет спрачоные данны из бд
+        /// </summary>
+        /// <typeparam name="Template">тип сущности</typeparam>
+        /// <returns>коллекцию сущноситей конкретного типа</returns>
+        public static ObservableCollection<Template> GetReferenceData<Template>() where Template : class 
+        {
+            return Assistiant.GetReferenceData<Template>();
         }
     }
 }

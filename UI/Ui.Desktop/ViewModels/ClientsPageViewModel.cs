@@ -1,7 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using FC_EMDB.EMDB.CF.Data.Domain;
+using FitnesClubCL;
 using FitnessClubMWWM.Ui.Desktop.Pages;
+using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -11,6 +15,25 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
     public class ClientsPageViewModel : ViewModelBase
     {
 
+        public Account _Account { get; private set; }
+
+        private readonly ObservableCollection<Tarif> _tarifsList = null;
+        public ObservableCollection<Tarif> TarifsList => _tarifsList ?? ModelManager.GetReferenceData<Tarif>();
+
+        private readonly ObservableCollection<TrainingList> _trainingLists = null;
+
+        public ObservableCollection<TrainingList> TrainingLists => _trainingLists ?? ModelManager.GetReferenceData<TrainingList>();
+
+        private  ObservableCollection<Service> _serviceLists = null;
+
+        public ObservableCollection<Service> ServiceLists => _serviceLists ?? ModelManager.GetReferenceData<Service>();
+
+
+        public RelayCommand<Account> SellNewAbonementCommand => new RelayCommand<Account>((item) => {
+            Window selectActionWIndow = new PayAbonement();
+            _Account = item;
+            selectActionWIndow.ShowDialog();
+        });
 
         public RelayCommand RegisterNewClientCommand => new RelayCommand(() => { Messenger.Default.Send("RegisterNewClientPage"); });
 
@@ -87,6 +110,21 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
 
         private ObservableCollection<Clients> clientsList = null;
+
+        private ObservableCollection<Account> _clientsList = null;
+
+        public ObservableCollection<Account> _ClientsList
+        {
+            get
+            {
+                if (_clientsList != null)
+                    return _clientsList;
+
+                _clientsList = ModelManager.GetAllPersons<Account>();
+              
+                return _clientsList;
+            }
+        }
 
         public ObservableCollection<Clients> ClientsList
         {

@@ -10,6 +10,11 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <Binding Path="ClientsPageViewModel" Source="{StaticResource Locator}" />
+    </Page.DataContext>
+
     <Page.InputBindings>
         <KeyBinding
             Key="F"
@@ -78,7 +83,7 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-
+        <converter:ImageBrushValueConverter x:Key="ImageBrushValueConverter" />
     </Page.Resources>
     <Page.Triggers>
         <EventTrigger RoutedEvent="FrameworkElement.Loaded">
@@ -90,9 +95,7 @@
 
 
 
-    <Page.DataContext>
-        <Binding Path="ClientsPageViewModel" Source="{StaticResource Locator}" />
-    </Page.DataContext>
+
 
     <Page.Style>
         <StaticResource ResourceKey="PageNextWorkingBaseStyle" />
@@ -146,7 +149,7 @@
             HeadersVisibility="Column"
             HorizontalScrollBarVisibility="Auto"
             IsReadOnly="True"
-            ItemsSource="{Binding ClientsList}"
+            ItemsSource="{Binding _ClientsList}"
             MinColumnWidth="50"
             RenderTransformOrigin="0.5,0.5"
             SelectionMode="Extended"
@@ -187,51 +190,337 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border Margin="2">
-                                <Rectangle
-                                    Width="30"
-                                    Height="30"
-                                    Fill="#FFEA1B1B" />
+                                <Rectangle Width="30" Height="30">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="{Binding StrPathPhoto, Converter={StaticResource ImageBrushValueConverter}, IsAsync=True, Mode=OneWay}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
                 <DataGridTextColumn
-                    Width="150"
-                    Binding="{Binding FirstName}"
+                    Width="100*"
+                    Binding="{Binding ClientFamilyName}"
                     CellStyle="{StaticResource StyleCenter}"
                     Header="Фамилия" />
 
                 <DataGridTextColumn
-                    Width="150"
-                    Binding="{Binding LastName}"
+                    Width="100*"
+                    Binding="{Binding ClientFirstName}"
                     CellStyle="{StaticResource StyleCenter}"
                     Header="Имя" />
 
                 <DataGridTextColumn
-                    Width="120"
-                    Binding="{Binding FatherName}"
+                    Width="100*"
+                    Binding="{Binding ClientLastName}"
                     CellStyle="{StaticResource StyleCenter}"
                     Header="Отчество" />
 
                 <DataGridTextColumn
-                    Width="120"
-                    Binding="{Binding TypeAbonement}"
+                    Width="150*"
+                    Binding="{Binding StrTypeAbonement}"
                     CellStyle="{StaticResource StyleCenter}"
                     Header="Тип абонемента" />
 
                 <DataGridTextColumn
                     Width="120*"
-                    Binding="{Binding PhoneNumber}"
+                    Binding="{Binding ClientPhoneNumber}"
                     CellStyle="{StaticResource StyleCenter}"
                     Header="Телефон" />
             </DataGrid.Columns>
 
 
             <DataGrid.RowDetailsTemplate>
+
+
                 <DataTemplate>
+                    <DataTemplate.Resources>
+                        <!--  Шаблон стандартной кнопки  -->
+                        <Style x:Key="ButtonWidthPictureIsNotPressed" TargetType="{x:Type userControls:ButtonWithPicture}">
+                            <Setter Property="Background" Value="White" />
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="GeomPictureHeight" Value="20" />
+                            <Setter Property="GeomPictureWidth" Value="20" />
+                            <Setter Property="FontWeight" Value="Normal" />
+                            <Setter Property="Margin" Value="0" />
+                            <Setter Property="GeomPictureMargin" Value="3" />
+                            <Setter Property="Cursor" Value="Hand" />
+                        </Style>
+                    </DataTemplate.Resources>
                     <Border Margin="10" VerticalAlignment="Center">
-                        <userControls:UCClientPageDetails />
+                        <TabControl
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Top"
+                            Style="{DynamicResource TabControlStyle}">
+                            <TabItem
+                                Height="25"
+                                Margin="0,0,0,0"
+                                Header="Информация"
+                                Style="{DynamicResource TabItemStyle}">
+                                <Grid Background="White">
+                                    <Grid Margin="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Grid.Row="0" Grid.Column="0">
+                                            <Rectangle
+                                                Width="100"
+                                                Height="{Binding Width, RelativeSource={RelativeSource Self}}"
+                                                Margin="10,10,10,10"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Stroke="#FF9C9C9C">
+                                                <Rectangle.Fill>
+                                                    <ImageBrush ImageSource="{Binding StrPathPhoto, Converter={StaticResource ImageBrushValueConverter}, IsAsync=True}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                            <userControls:ButtonWithPicture
+                                                Background="{StaticResource BackgroundButtonBlue}"
+                                                Content="Редактировать профиль"
+                                                Foreground="White"
+                                                GeomPicture="{Binding Source={StaticResource Tools}, Path=Data}"
+                                                GeomPictureFill="White"
+                                                Style="{StaticResource ButtonWidthPictureIsNotPressed}"
+                                                Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
+                                        </StackPanel>
+                                        <StackPanel
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Left">
+                                            <StackPanel Margin="0,10,0,0" Orientation="Vertical">
+                                                <Grid Height="20">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock
+                                                        Grid.Column="0"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Center"
+                                                        FontWeight="Bold"
+                                                        Foreground="Black"
+                                                        Text="Фамилия:" />
+                                                    <TextBlock
+                                                        Grid.Column="1"
+                                                        Margin="5,0,0,0"
+                                                        VerticalAlignment="Center"
+                                                        FontWeight="Normal"
+                                                        Foreground="Black"
+                                                        Text="{Binding ClientFamilyName}" />
+                                                </Grid>
+                                                <Grid Height="20">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock
+                                                        Grid.Column="0"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Center"
+                                                        FontWeight="Bold"
+                                                        Foreground="Black"
+                                                        Text="Имя:" />
+                                                    <TextBlock
+                                                        Grid.Column="1"
+                                                        Margin="5.2,0,-0.2,3"
+                                                        VerticalAlignment="Bottom"
+                                                        FontWeight="Normal"
+                                                        Foreground="Black"
+                                                        Text="{Binding ClientFirstName}" />
+                                                </Grid>
+                                                <Grid Height="20">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock
+                                                        Grid.Column="0"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Center"
+                                                        FontWeight="Bold"
+                                                        Foreground="Black"
+                                                        Text="Отчество:" />
+                                                    <TextBlock
+                                                        Grid.Column="1"
+                                                        Margin="5,0,0,0"
+                                                        VerticalAlignment="Center"
+                                                        FontWeight="Normal"
+                                                        Foreground="Black"
+                                                        Text="{Binding ClientLastName}" />
+                                                </Grid>
+                                                <Grid Height="20">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock
+                                                        Grid.Column="0"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Center"
+                                                        FontWeight="Bold"
+                                                        Foreground="Black"
+                                                        Text="Дата рождения:" />
+                                                    <TextBlock
+                                                        Grid.Column="1"
+                                                        Margin="5,0,0,0"
+                                                        VerticalAlignment="Center"
+                                                        FontWeight="Normal"
+                                                        Foreground="Black"
+                                                        Text="{Binding ClientDateOfBirdth}" />
+                                                </Grid>
+                                                <Grid Height="20">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock
+                                                        Grid.Column="0"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Center"
+                                                        FontWeight="Bold"
+                                                        Foreground="Black"
+                                                        Text="Телефон:" />
+                                                    <TextBlock
+                                                        Grid.Column="1"
+                                                        Margin="5,0,0,0"
+                                                        VerticalAlignment="Center"
+                                                        FontWeight="Normal"
+                                                        Foreground="Black"
+                                                        Text="{Binding ClientPhoneNumber}" />
+                                                </Grid>
+
+                                                <Grid Height="20">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock
+                                                        Grid.Column="0"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Center"
+                                                        FontWeight="Bold"
+                                                        Foreground="Black"
+                                                        Text="e-mail:" />
+                                                    <TextBlock
+                                                        Grid.Column="1"
+                                                        Margin="5,0,0,0"
+                                                        VerticalAlignment="Center"
+                                                        FontWeight="Normal"
+                                                        Foreground="Black"
+                                                        Text="{Binding ClientMail}" />
+                                                </Grid>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </TabItem>
+                            <TabItem
+                                Height="25"
+                                Margin="0,0,0,0"
+                                Header="Абонемент"
+                                Style="{DynamicResource TabItemStyle}">
+                                <Grid Background="White">
+                                    <Border>
+                                        <StackPanel Margin="10,10,10,10" Orientation="Vertical">
+                                            <Grid Height="30" d:DataContext="{Binding Source={StaticResource Locator}}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <userControls:ButtonWithPicture
+                                                    Grid.Column="0"
+                                                    Command="{Binding SellNewAbonementCommand}"
+                                                    CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}"
+                                                    Content="Продать абонемент"
+                                                    GeomPicture="{Binding Source={StaticResource SellAbonement}, Path=Data}"
+                                                    GeomPictureFill="Black"
+                                                    Style="{StaticResource ButtonWidthPictureIsNotPressed}"
+                                                    Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}">
+                                                    <userControls:ButtonWithPicture.DataContext>
+                                                        <Binding Path="ClientsPageViewModel" Source="{StaticResource Locator}" />
+                                                    </userControls:ButtonWithPicture.DataContext>
+
+                                                </userControls:ButtonWithPicture>
+                                                <GridSplitter
+                                                    Grid.Column="1"
+                                                    Width="2"
+                                                    Margin="4,0,4,0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Stretch"
+                                                    Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
+                                                <userControls:ButtonWithPicture
+                                                    Grid.Column="2"
+                                                    Margin="0,0,0,0"
+                                                    Content="Активировать"
+                                                    GeomPicture="{Binding Source={StaticResource ActivateAbonement}, Path=Data}"
+                                                    GeomPictureFill="Black"
+                                                    Style="{StaticResource ButtonWidthPictureIsNotPressed}"
+                                                    Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
+                                                <GridSplitter
+                                                    Grid.Column="3"
+                                                    Width="2"
+                                                    Margin="4,0,4,0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Stretch"
+                                                    Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
+                                                <userControls:ButtonWithPicture
+                                                    Grid.Column="4"
+                                                    Margin="0,0,0,0"
+                                                    Content="Продлить"
+                                                    GeomPicture="{Binding Source={StaticResource UpAbonement}, Path=Data}"
+                                                    GeomPictureFill="Black"
+                                                    Style="{StaticResource ButtonWidthPictureIsNotPressed}"
+                                                    Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
+                                                <GridSplitter
+                                                    Grid.Column="5"
+                                                    Width="2"
+                                                    Margin="4,0,4,0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Stretch"
+                                                    Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
+                                                <userControls:ButtonWithPicture
+                                                    Grid.Column="6"
+                                                    Margin="0,0,0,0"
+                                                    Content="Заморозить"
+                                                    GeomPicture="{Binding Source={StaticResource FreezeAbonement}, Path=Data}"
+                                                    GeomPictureFill="Black"
+                                                    Style="{StaticResource ButtonWidthPictureIsNotPressed}"
+                                                    Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
+                                            </Grid>
+
+                                            <DataGrid
+                                                Name="Abonement"
+                                                Height="50"
+                                                Margin="0,10,0,0"
+                                                AutoGenerateColumns="False"
+                                                CanUserAddRows="False"
+                                                IsReadOnly="True"
+                                                ItemsSource="{Binding GetAbonement}">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Binding="{Binding m_nNumber}" Header="Номер абонемента" />
+                                                    <DataGridTextColumn Binding="{Binding m_strStatus}" Header="Статус" />
+                                                    <DataGridTextColumn Binding="{Binding m_strService}" Header="Услуга" />
+                                                    <DataGridTextColumn Binding="{Binding m_strTariff}" Header="Тариф" />
+                                                    <DataGridTextColumn Binding="{Binding m_nAllCntTrainings}" Header="Куплено тренировок" />
+                                                    <DataGridTextColumn Binding="{Binding m_nRemainedTrainings}" Header="Осталось тренировок" />
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
+
                     </Border>
 
                 </DataTemplate>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FC_EMDB.Interfaces;
+using FC_EMDB.Utils;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
 {
@@ -10,7 +12,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public Account()
         {
             ArrTrainings = new HashSet<Training>();
-            ArrTrainingsList =new HashSet<TrainingList>();
+            //ArrTrainingsList =new HashSet<TrainingList>();
         }
         #region Описание самого аккаунта (абонемента)
         /// <summary>
@@ -91,6 +93,11 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public byte[] ClientPhoto { get; set; }
 
         /// <summary>
+        /// Путь к фотографии (в сохранении БД не участвует)
+        /// </summary>
+        public string StrPathPhoto => ClientPhoto != null ? SqlTools.SavePhoto(this) : string.Empty;
+
+        /// <summary>
         /// Паспортные данные клиента
         /// </summary>
         /// Серия
@@ -109,18 +116,25 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public DateTime? ClientPasportDatеOfIssue { get; set; }
         #endregion
 
+        /// <summary>
+        /// Тип Абонемента
+        /// </summary>
+        public string StrTypeAbonement => TypeAbonement.TrainingListName.ServiceName;
+
+        public string StrFullName => ClientFamilyName + " " + ClientFirstName + " " + ClientLastName;
+
         #region Связи между сущностями 1 Employee to 0...* Account
         public Employee Employee { get; set; }
         #endregion
 
-        #region Связи между сущностями 1...* Account to 1...* TrainingList
-        public ICollection<TrainingList> ArrTrainingsList { get; set; }
+        #region Связи между сущностями 1...1 Account to 1...* TrainingList
+        public virtual TrainingList TypeAbonement { get; set; }
         #endregion
 
 
         #region Связи между сущностями 0...* Account to 0...* Training
 
-        public ICollection<Training> ArrTrainings { get; set; }
+        public virtual ICollection<Training> ArrTrainings { get; set; }
 
         #endregion
 

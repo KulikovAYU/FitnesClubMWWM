@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Security.Cryptography;
 using System.Text;
 using FC_EMDB;
 using FC_EMDB.Classes;
+using FC_EMDB.EMDB.CF.Data.Domain;
 using FitnesClubCL.Annotations;
 
 namespace FitnesClubCL.Classes
@@ -124,6 +126,27 @@ namespace FitnesClubCL.Classes
                 return;
 
              DbManager.GetInstance().UpdateFields<T>(data);
+        }
+
+        public static ObservableCollection<T> GetAllClients<T>() where T : class
+        {
+          return  DbManager.GetInstance().GetAllClients<T>();
+        }
+    }
+
+    /// <summary>
+    /// Класс выполняет операции - справочного характера
+    /// </summary>
+    static class Assistiant
+    {
+        /// <summary>
+        /// Метод предоставляет спрачоные данны из бд
+        /// </summary>
+        /// <typeparam name="T">тип сущности</typeparam>
+        /// <returns>коллекцию сущноситей конкретного типа</returns>
+        public static ObservableCollection<T> GetReferenceData<T>() where T : class 
+        {
+          return DbManager.GetInstance().GetReferenceData<T>();
         }
     }
 }

@@ -200,6 +200,9 @@
     <Compile Include="Pages\Wind\GymWindow.xaml.cs">
       <DependentUpon>GymWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Wind\PayAbonement.xaml.cs">
+      <DependentUpon>PayAbonement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Wind\SalariesEmployeesWindow.xaml.cs">
       <DependentUpon>SalariesEmployeesWindow.xaml</DependentUpon>
     </Compile>
@@ -334,6 +337,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Wind\GymWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Wind\PayAbonement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

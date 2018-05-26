@@ -1131,7 +1131,7 @@
 
     <!--  Шаблон кнопки удаления изображения  -->
     <ControlTemplate x:Key="RemovePictureButtonBaseControlTemplate" TargetType="{x:Type ButtonBase}">
-      <Grid>
+        <Grid>
             <Ellipse Name="Ellipse" Fill="Red" />
             <Border
                 x:Name="border"

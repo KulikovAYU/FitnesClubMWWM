@@ -187,7 +187,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     ClientPasportDataIssuedBy = "ОУФМС РОССИИ",
                     ClientPasportDatеOfIssue = new DateTime(2009,05,04),
                     Employee = employees[0],
-                    ArrTrainingsList = new ObservableCollection<TrainingList>{ trainingsLists[0], trainingsLists[2] },
+                    TypeAbonement = trainingsLists[0],
                     AccountStatus = accountStatusList[0] 
                 },
                 new Account{
@@ -210,6 +210,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     ClientPasportDataIssuedBy = "ОУФМС РОССИИ",
                     ClientPasportDatеOfIssue = new DateTime(2009,05,04),
                     Employee = employees[0],
+                    TypeAbonement = trainingsLists[2],
                     AccountStatus = accountStatusList[0]
                 },
             };

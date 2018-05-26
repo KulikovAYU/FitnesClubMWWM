@@ -12,6 +12,7 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
+        <valueConverters:ImageBrushValueConverter x:Key="ImageBrushValueConverter" />
         <!--  Шаблон стандартной кнопки  -->
         <Style x:Key="ButtonWidthPictureIsNotPressed" TargetType="{x:Type local:ButtonWithPicture}">
             <Setter Property="Background" Value="White" />
@@ -48,8 +49,11 @@
                             Margin="10,10,10,10"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Fill="{Binding Source={StaticResource BlueDataGridRowDetailsViewColor}}"
-                            Stroke="#FF9C9C9C" />
+                            Stroke="#FF9C9C9C">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding _ClientsList/StrPathPhoto, Converter={StaticResource ImageBrushValueConverter}, IsAsync=True, RelativeSource={RelativeSource PreviousData}}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
                         <local:ButtonWithPicture
                             Background="{StaticResource BackgroundButtonBlue}"
                             Content="Редактировать профиль"
@@ -82,7 +86,7 @@
                                     VerticalAlignment="Center"
                                     FontWeight="Normal"
                                     Foreground="Black"
-                                    Text="Тут должна быть фамилия" />
+                                    Text="{Binding _ClientsList/ClientFirstName}" />
                             </Grid>
                             <Grid Height="20">
                                 <Grid.ColumnDefinitions>

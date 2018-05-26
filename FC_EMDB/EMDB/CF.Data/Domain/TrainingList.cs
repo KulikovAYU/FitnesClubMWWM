@@ -31,11 +31,11 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         #endregion
 
         #region Связи между сущностями 1 TrainingList to 1 Service
-        public Service TrainingListName { get; set; }
+        public virtual Service TrainingListName { get; set; }
         #endregion
 
         #region Связи между сущностями 0...* Accounts to 0...* TrainingList
-        public ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<Account> Accounts { get; set; }
         #endregion
     }
 }

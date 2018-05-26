@@ -22,6 +22,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public string ServiceName { get; set; }
 
       
-        public ICollection<Training> Trainings { get; set; }
+        public virtual ICollection<Training> Trainings { get; set; }
+
     }
 }

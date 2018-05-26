@@ -26,7 +26,7 @@
         <Setter Property="FontFamily" Value="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz " />
     </Style>
 
-    <Style x:Key="BaseTextBloxStyle"   TargetType="{x:Type TextBox}">
+    <Style x:Key="BaseTextBloxStyle" TargetType="{x:Type TextBox}">
         <Setter Property="FontFamily" Value="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz " />
     </Style>
 

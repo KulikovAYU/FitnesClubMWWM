@@ -43,7 +43,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
 
         #region Связи между сущностями 0...* Training to 1 Service
 
-        public Service Service { get; set; }
+        public virtual Service Service { get; set; }
 
         #endregion
 

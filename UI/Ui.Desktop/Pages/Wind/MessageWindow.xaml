@@ -8,7 +8,7 @@
     x:Name="MessageBoxWindow"
     Title="CustomMessageBox"
     Width="650"
-    Height="350"
+    Height="390"
     AllowsTransparency="True"
     Background="White"
     WindowStartupLocation="CenterScreen"
@@ -74,7 +74,7 @@
         </Grid.RenderTransform>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition Height="210*" />
+            <RowDefinition Height="240*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
@@ -137,9 +137,13 @@
 
         <Grid Grid.Row="1">
 
-            <StackPanel Margin="0" Orientation="Vertical">
+            <Grid Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <Path
-                    x:Name="Image"
+                    x:Name="Image" Grid.Row="0"
                     Width="120"
                     Height="120"
                     Margin="10"
@@ -147,12 +151,13 @@
                     Fill="#FF000000"
                     Stretch="Fill" />
                 <TextBlock
-                    Margin="20"
-                    HorizontalAlignment="Center"
+                    Margin="10"
+                    Grid.Row="1"
+                    VerticalAlignment="Center"
                     Style="{StaticResource ErrormessageStyle}"
                     Text="{Binding strMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextAlignment="Center" />
-            </StackPanel>
+            </Grid>
         </Grid>
 
 
