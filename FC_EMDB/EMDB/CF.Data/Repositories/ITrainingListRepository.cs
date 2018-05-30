@@ -2,7 +2,7 @@
 
 namespace FC_EMDB.EMDB.CF.Data.Repositories
 {
-  public  interface ITrainingListRepository : IRepository<TrainingList>
+  public  interface ITrainingListRepository : IRepository<PriceTrainingList>
     {
     }
 }

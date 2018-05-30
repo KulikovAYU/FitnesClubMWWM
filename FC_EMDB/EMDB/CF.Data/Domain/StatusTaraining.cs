@@ -6,7 +6,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
     {
         public StatusTraining()
         {
-            Trainings = new HashSet<Training>();
+            Trainings = new HashSet<UpcomingTraining>();
         }
         /// <summary>
         /// Id статуса тренировки
@@ -19,6 +19,6 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public string StatusName { get; set; }
 
 
-        public ICollection<Training> Trainings { get; set; }
+        public ICollection<UpcomingTraining> Trainings { get; set; }
     }
 }

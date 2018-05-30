@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Drawing;
+using System.Web.UI.WebControls;
 using System.Windows;
+using System.Windows.Media.Animation;
 using FC_EMDB.Classes;
 using FitnesClubCL;
-using FitnesClubCL.Classes;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using FitnessClubMWWM.Ui.Desktop.Pages;
-using GalaSoft.MvvmLight.Ioc;
 
 namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 {
@@ -32,34 +31,36 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// Команда показать панель администратора (доступна только для админа)
         /// </summary>
         public RelayCommand ShowAdminPanelCommand => new RelayCommand(() => { Messenger.Default.Send("AdminPage"); },
-            () => 
+            () =>
             {
-                return true;// На момент отладки
-               // return WorkingUserData.GetAcsessRigths.AdministrationControls;
+                return true; // На момент отладки
+                // return WorkingUserData.GetAcsessRigths.AdministrationControls;
                 //return false;
-               
+
             });
 
         /// <summary>
         /// Команда меню "карты" (группа Карты)
         /// </summary>
-        public RelayCommand ShowWorkingCabinetCommand => new RelayCommand(() =>{ Messenger.Default.Send("WorkingCabinetPage");},
+        public RelayCommand ShowWorkingCabinetCommand => new RelayCommand(
+            () => { Messenger.Default.Send("WorkingCabinetPage"); },
             () =>
             {
                 return true;
-               // return WorkingUserData.GetAcsessRigths.CardsCreate;
+                // return WorkingUserData.GetAcsessRigths.CardsCreate;
                 // return false;.
-              
+
             });
-        
+
         /// <summary>
         /// Команда меню показать клиентов (группа клиенты)
         /// </summary>
         public RelayCommand ShowClientPageCommand => new RelayCommand(() => { Messenger.Default.Send("ClientPage"); },
-            () => {
-                return true;// На момент отладки
-               // return WorkingUserData.GetAcsessRigths.ClientsControls;
-                
+            () =>
+            {
+                return true; // На момент отладки
+                // return WorkingUserData.GetAcsessRigths.ClientsControls;
+
             });
 
         /// <summary>
@@ -69,9 +70,9 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             new RelayCommand(() => { Messenger.Default.Send("ClassSchedule"); },
                 () =>
                 {
-                    return true;// На момент отладки
-                //    return WorkingUserData.GetAcsessRigths.SeeTrainingList;
-                   
+                    return true; // На момент отладки
+                    //    return WorkingUserData.GetAcsessRigths.SeeTrainingList;
+
                 });
 
         /// <summary>
@@ -88,12 +89,13 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             selectActionWIndow.ShowDialog();
         }, () =>
         {
-            return true;// На момент отладки
-           // return WorkingUserData.GetAcsessRigths.FinanceAndServicesControls;
-           
+            return true; // На момент отладки
+            // return WorkingUserData.GetAcsessRigths.FinanceAndServicesControls;
+
         });
 
         #region Окно выбора действия
+
         /// <summary>
         /// Команда закрытия диалогового окна
         /// </summary>
@@ -101,15 +103,16 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             new RelayCommand<Window>((window) => { window?.Close(); });
 
         private delegate void ShowPages(Window wind, string strPageName);
+
         /// <summary>
         /// Показать страницу с установкой окладов работникам
         /// </summary>
         public RelayCommand<Window> ShowSalaryPageCommand { get; set; } = new RelayCommand<Window>(
-            delegate (Window wind)
+            delegate(Window wind)
             {
                 ShowPages del = InvokeShowPages;
                 del(wind, "PayPage");
-           
+
             });
 
 
@@ -127,7 +130,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// Показать страницу со списком залов
         /// </summary>
         public RelayCommand<Window> ShowGymsPageCommand { get; set; } = new RelayCommand<Window>(
-            delegate (Window wind)
+            delegate(Window wind)
             {
                 ShowPages del = InvokeShowPages;
                 del(wind, "GymPage");
@@ -175,9 +178,10 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             {
                 return;
             }
+
             WorkingUserData = workingUserData;
         }
-     
+
 
         /// <summary>
         /// Авторизационные данные пользователя
@@ -188,6 +192,11 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// Рабочие данные пользователя
         /// </summary>
         public UserData WorkingUserData { get; private set; }
-           
+
+        /// <summary>
+        /// Команда скрывает боковую панель игнформации
+        /// </summary>
+        public RelayCommand<Storyboard> HiddenInfoPanelCommand =>
+            new RelayCommand<Storyboard>((btn) => { (btn as Storyboard).Begin(); });
     }
 }

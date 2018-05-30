@@ -137,6 +137,18 @@
     <Compile Include="local.xaml.cs">
       <DependentUpon>local.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SlidePages\AbonementInfoPages\AbonementInformationPage.xaml.cs">
+      <DependentUpon>AbonementInformationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SlidePages\AbonementInfoPages\LongAbonementPage.xaml.cs">
+      <DependentUpon>LongAbonementPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SlidePages\AbonementInfoPages\PayTrainingOrServicePage.xaml.cs">
+      <DependentUpon>PayTrainingOrServicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SlidePages\AbonementInfoPages\TrainingAndServiceList.xaml.cs">
+      <DependentUpon>TrainingAndServiceList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SlidePages\AdminPanelPages\AddNewUserPage.xaml.cs">
       <DependentUpon>AddNewUserPage.xaml</DependentUpon>
     </Compile>
@@ -184,6 +196,9 @@
     </Compile>
     <Compile Include="Pages\SlidePages\Cards\WorkingCabinetPage.xaml.cs">
       <DependentUpon>WorkingCabinetPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wind\AbonementInfo\AbonementInfo.xaml.cs">
+      <DependentUpon>AbonementInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Wind\AddNewTrainingWindow.xaml.cs">
       <DependentUpon>AddNewTrainingWindow.xaml</DependentUpon>
@@ -241,6 +256,7 @@
     <Compile Include="ValueConverters\DependecyPropertyBehavior.cs" />
     <Compile Include="ValueConverters\WorkingValueConverters.cs" />
     <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="ViewModels\AbonementInfoViewModel.cs" />
     <Compile Include="ViewModels\AdminPageViewModel.cs" />
     <Compile Include="ViewModels\AutorizationPageViewModel.cs" />
     <Compile Include="ViewModels\BeginPanelPageViewModel.cs" />
@@ -255,6 +271,22 @@
     <Page Include="local.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\SlidePages\AbonementInfoPages\AbonementInformationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SlidePages\AbonementInfoPages\LongAbonementPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SlidePages\AbonementInfoPages\PayTrainingOrServicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SlidePages\AbonementInfoPages\TrainingAndServiceList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SlidePages\AdminPanelPages\AddNewUserPage.xaml">
       <SubType>Designer</SubType>
@@ -317,6 +349,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SlidePages\Cards\WorkingCabinetPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Wind\AbonementInfo\AbonementInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

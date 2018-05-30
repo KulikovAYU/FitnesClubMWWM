@@ -47,6 +47,7 @@ namespace FitnessClubMWWM.Ui.Desktop
                 SimpleIoc.Default.Register<StaffPaymentViewModel>();
                 SimpleIoc.Default.Register<GymPageViewModel>();
                 SimpleIoc.Default.Register<PriceAbonementPageViewModel>();
+                SimpleIoc.Default.Register<AbonementInfoViewModel>();
             }
        
         }
@@ -68,6 +69,8 @@ namespace FitnessClubMWWM.Ui.Desktop
         public GymPageViewModel GymPageViewModel => ServiceLocator.Current.GetInstance<GymPageViewModel>();
         public PriceAbonementPageViewModel PricePageViewModel => ServiceLocator.Current.GetInstance<PriceAbonementPageViewModel>();
 
+        public AbonementInfoViewModel AbonementInfoViewModel =>
+            ServiceLocator.Current.GetInstance<AbonementInfoViewModel>();
 
         public static void Cleanup()
         {

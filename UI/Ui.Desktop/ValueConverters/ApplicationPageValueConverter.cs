@@ -4,6 +4,7 @@ using System.Globalization;
 using FitnessClubMWWM.Logic.Ui;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages;
+using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AbonementInfoPages;
 using BeginPanelPage = FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.BeginPanelPage;
 using TheConfrimLogout = FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.TheConfrimLogout;
 

@@ -126,6 +126,9 @@
                 <Setter TargetName="Hint" Property="Visibility" Value="Visible" />
                 <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
             </MultiTrigger>
+            <Trigger Property="IsReadOnly" Value="True">
+                <Setter TargetName="ClearButton" Property="Visibility" Value="Hidden" />
+            </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter TargetName="border" Property="Opacity" Value="0.56" />
             </Trigger>

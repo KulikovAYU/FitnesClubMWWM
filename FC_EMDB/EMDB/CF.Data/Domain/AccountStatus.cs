@@ -24,7 +24,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
 
         #region Связи между сущностями 0...* Account to 1 AccountStatus
 
-        public ICollection<Account> ArrAccounts { get; set; }
+        public virtual ICollection<Account> ArrAccounts { get; set; }
 
         #endregion
 

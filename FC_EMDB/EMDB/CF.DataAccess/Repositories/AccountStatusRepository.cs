@@ -4,11 +4,11 @@ using FC_EMDB.EMDB.CF.DataAccess.Context;
 
 namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
 {
-    public class TrainingListRepository : Repository<PriceTrainingList>, ITrainingListRepository
+    class AccountStatusRepository : Repository<AccountStatus>, IAccountStatusRepository
     {
-        public TrainingListRepository(DataBaseFcContext context) : base(context)
+        public AccountStatusRepository(DataBaseFcContext context) : base(context)
         {
-            
+
         }
 
         public DataBaseFcContext DataBaseFcContext => m_context as DataBaseFcContext;

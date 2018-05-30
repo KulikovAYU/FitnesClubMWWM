@@ -4,8 +4,10 @@ using System.Windows;
 using System.Windows.Controls;
 using FC_EMDB.EMDB.CF.Data.Domain;
 using FitnesClubCL;
+using FitnessClubMWWM.Ui.Desktop.Constants;
 using FitnessClubMWWM.Ui.Desktop.Pages;
 using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
+using FitnessClubMWWM.Ui.Desktop.Pages.Wind.AbonementInfo;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -15,23 +17,74 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
     public class ClientsPageViewModel : ViewModelBase
     {
 
+
+       
         public Account _Account { get; private set; }
+
+        public ServicesInSubscription _SiInSubscription { get; private set; }  = new ServicesInSubscription();
 
         private readonly ObservableCollection<Tarif> _tarifsList = null;
         public ObservableCollection<Tarif> TarifsList => _tarifsList ?? ModelManager.GetReferenceData<Tarif>();
 
-        private readonly ObservableCollection<TrainingList> _trainingLists = null;
+        private readonly ObservableCollection<PriceTrainingList> _trainingLists = null;
 
-        public ObservableCollection<TrainingList> TrainingLists => _trainingLists ?? ModelManager.GetReferenceData<TrainingList>();
+        public ObservableCollection<PriceTrainingList> TrainingLists => _trainingLists ?? ModelManager.GetReferenceData<PriceTrainingList>();
+
+     
 
         private  ObservableCollection<Service> _serviceLists = null;
 
         public ObservableCollection<Service> ServiceLists => _serviceLists ?? ModelManager.GetReferenceData<Service>();
 
+        public ObservableCollection<AccountStatus> _accountStatuses = null;
 
+        public ObservableCollection<AccountStatus> AccountStatuses
+        {
+            get
+            {
+                if (_accountStatuses != null)
+                    return _accountStatuses;
+
+                _accountStatuses = ModelManager.GetReferenceData<AccountStatus>();
+
+                return _accountStatuses;
+            }
+        }
+
+        /// <summary>
+        /// Команда продать абонемент (от окна)
+        /// </summary>
+        public RelayCommand<Tuple<Decimal, Window>> SellNewTrainingCommand => new RelayCommand<Tuple<Decimal, Window>>((objects) =>
+        {
+            
+            if (_Account == null) return;
+
+            _Account.TotalCost  = objects.Item1;
+           
+            ModelManager.AddData<Account,ServicesInSubscription>(_Account, _SiInSubscription);
+
+            objects.Item2.Close();
+            CustomMessageBox.Show("К абонементу была успешно добавлена новая услуга", "Продажа абонемента",
+                MessageBoxButton.OK, eMessageBoxIcons.eSucsess);
+      
+        });
+
+        /// <summary>
+        /// Крманда продать абонемент (из таблицы)
+        /// </summary>
         public RelayCommand<Account> SellNewAbonementCommand => new RelayCommand<Account>((item) => {
             Window selectActionWIndow = new PayAbonement();
             _Account = item;
+            selectActionWIndow.ShowDialog();
+        });
+
+
+        /// <summary>
+        /// Крманда продать абонемент (из таблицы)
+        /// </summary>
+        public RelayCommand<Account> ShowAbonementInfoCommand => new RelayCommand<Account>((item) => {
+            Window selectActionWIndow = new AbonementInfo();
+            //_Account = item;
             selectActionWIndow.ShowDialog();
         });
 
@@ -71,27 +124,16 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                 }));
 
 
-        //public RelayCommand ShowClientInfoPageCommand { get; set; } =
-        //    new RelayCommand (() => { Messenger.Default.Send("ClientPageDetails"); });
+        private static bool _isAv { get; set; }
+
+        public RelayCommand<bool> ActivateRelayCommand { get; set; } =
+        new RelayCommand<bool>((ob) => { _isAv = ob;  }, _isAv);
+
+      
 
 
-        //void ProcessMessage(string msg)
-        //{
-        //    switch (msg)
-        //    {
-        //        case "ClientPageDetails":
-        //            CurrentPage = ApplicationPage.ClientPageDetails;
-        //            break;
-
-        //        case "AbonementControlPage":
-        //            CurrentPage = ApplicationPage.ClientAccountControl;
-        //            break;
-        //    }
-        //}
-
-
-
-        public class Clients
+       
+        public class Clients //Отладка
         {
             ///Пока просто для отладки
             public Image Photo { get; set; }
@@ -109,16 +151,19 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
 
 
-        private ObservableCollection<Clients> clientsList = null;
+        private ObservableCollection<Clients> clientsList = null; //Отладка
 
         private ObservableCollection<Account> _clientsList = null;
 
+        /// <summary>
+        /// Список клиентов
+        /// </summary>
         public ObservableCollection<Account> _ClientsList
         {
             get
             {
-                if (_clientsList != null)
-                    return _clientsList;
+                //if (_clientsList != null)
+                //    return _clientsList;
 
                 _clientsList = ModelManager.GetAllPersons<Account>();
               
@@ -282,26 +327,16 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                 };
                 return clientsList;
             }
-        }
+        } //Отладка
 
         /// <summary>
         /// абонемент клиенгта
         /// </summary>
-       public class Abonement
+        public class Abonement//Отладка
         {
             public Abonement()
             {
                 m_nNumber++;
-            }
-
-            public Abonement(string strStatus, string strService,string strTariff,int nAllCntTrainings, int nRemainedTrainings) : this()
-            {
-               
-                m_strStatus = strStatus;
-                m_strService = strService;
-                m_strTariff = strTariff;
-                m_nAllCntTrainings = nAllCntTrainings;
-                m_nRemainedTrainings = nRemainedTrainings;
             }
 
             public static int m_nNumber { get; set; } = 0;//номер абонемента
@@ -312,9 +347,10 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             public int m_nRemainedTrainings { get; set; }//осталось трениовок
         }
 
-        private ObservableCollection<Abonement> m_abonementList = null;
+       
+        private ObservableCollection<Abonement> m_abonementList = null; //Отладка
 
-        public ObservableCollection<Abonement> GetAbonement
+        public ObservableCollection<Abonement> GetAbonement //Отладка
         {
             get
             {
@@ -335,6 +371,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                 return m_abonementList;
             }
         }
+
+
 
     }
 }

@@ -5,9 +5,9 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
     /// <summary>
     /// Сущность  список тренировок и услуг(прайс-лист)
     /// </summary>
-    public class TrainingList
+    public class PriceTrainingList
     {
-        public TrainingList()
+        public PriceTrainingList()
         {
             Accounts = new HashSet<Account>();
         }
@@ -16,16 +16,16 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         /// </summary>
         public int TrainingListId { get; set; }
 
-        /// <summary>
-        /// Количество тренировок или услуг
-        /// </summary>
-        public int CountTrainingList { get; set; }
+        ///// <summary>
+        ///// Количество тренировок или услуг
+        ///// </summary>
+        //public int CountTrainingList { get; set; }
 
         /// <summary>
         /// Стоимость тренировки
         /// </summary>
         public decimal TrainingCurrentCost { get; set; }
-        
+
         #region Связи между сущностями 0...* TrainingList to 1 Tarif
         public Tarif Tarifs { get; set; }
         #endregion

@@ -19,6 +19,8 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             TrainingList = new TrainingListRepository(m_context);
             Tarif = new TarifRepository(m_context);
             Services = new ServiceRepository(m_context);
+            AccountStatus = new AccountStatusRepository(m_context);
+            ServicesInSubscription = new SiSRepository(m_context);
         }
 
         public IAccountRepository Accounts { get; private set; }
@@ -28,6 +30,8 @@ namespace FC_EMDB.EMDB.CF.DataAccess
         public ITrainingListRepository TrainingList { get; private set; }
         public ITarifRepository Tarif { get; private set; }
         public IServiceRepository Services { get; private set; }
+        public IAccountStatusRepository AccountStatus { get; private set; }
+        public ISiSRepository ServicesInSubscription { get; private set; }
 
 
 

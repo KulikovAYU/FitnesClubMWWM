@@ -102,6 +102,12 @@
             RenderTransformOrigin="0.5,0.5"
             Style="{DynamicResource StartPos}"
             Visibility="Visible">
+            <Border.InputBindings>
+                <MouseBinding
+                    Command="{Binding HiddenInfoPanelCommand}"
+                    CommandParameter="{Binding ElementName=OnClick_Hidden_BeginStoryboard, Path=Storyboard}"
+                    Gesture="LeftClick" />
+            </Border.InputBindings>
 
 
             <Border.Resources>

@@ -39,7 +39,10 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Configuration
                 .HasColumnName("ClientPasportDataIssuedBy");
             Property(account => account.ClientPasportDatеOfIssue).IsRequired().HasColumnName("ClientPasportDatеOfIssue").HasColumnType("datetime2");
             Property(account => account.ClientGender).IsOptional().HasColumnName("ClientGender").HasMaxLength(15);
-          ToTable("Account");
+            Property(trainingList => trainingList.CountDays).HasColumnName("CountDays").IsOptional();
+            Property(trainingList => trainingList.AbonementActivationDateTime).HasColumnName("AbonementActivationDateTime").IsOptional()
+                .HasColumnType("datetime2");
+            ToTable("Account");
         }
     }
 }

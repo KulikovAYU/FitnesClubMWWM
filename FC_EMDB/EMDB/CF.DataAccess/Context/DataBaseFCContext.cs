@@ -42,8 +42,9 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Context
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<StatusTraining> StatusTrainings { get; set; }
         public virtual DbSet<Tarif> Tarifs { get; set; }
-        public virtual DbSet<Training> Trainings { get; set; }
-        public virtual DbSet<TrainingList> TrainingLists { get; set; }
+        public virtual DbSet<UpcomingTraining> Trainings { get; set; }
+        public virtual DbSet<PriceTrainingList> TrainingLists { get; set; }
+        public virtual DbSet<ServicesInSubscription> ServicesInSubscription { get; set; }
         #endregion
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -60,6 +61,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Context
             modelBuilder.Configurations.Add(new TarifConfig());
             modelBuilder.Configurations.Add(new TrainingConfig());
             modelBuilder.Configurations.Add(new TrainingListConfig());
+            modelBuilder.Configurations.Add(new SiSConfig());
         }
     }
 }

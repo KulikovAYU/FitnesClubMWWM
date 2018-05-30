@@ -5,7 +5,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Configuration
 { /// <summary>
   /// Данный класс представляет конфигурацию сущности "Training", предоставляемый Fluent API
   /// </summary>
-    class TrainingConfig : EntityTypeConfiguration<Training>
+    class TrainingConfig : EntityTypeConfiguration<UpcomingTraining>
     {
         /// <summary>
         /// Конфигурация

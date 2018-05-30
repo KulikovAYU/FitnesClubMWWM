@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using FC_EMDB.Interfaces;
 using FC_EMDB.Utils;
@@ -11,9 +12,11 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
     {
         public Account()
         {
-            ArrTrainings = new HashSet<Training>();
+            ArrTrainings = new HashSet<UpcomingTraining>();
             //ArrTrainingsList =new HashSet<TrainingList>();
+            ArrServicesInSubscription = new HashSet<ServicesInSubscription>();
         }
+
         #region Описание самого аккаунта (абонемента)
         /// <summary>
         /// Номер абонемента
@@ -34,11 +37,33 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         /// Количество посещенных тренировок
         /// </summary>
         public int VisitedTrainingCount { get; set; }
-        
+
         /// <summary>
         /// Общая стоимость
         /// </summary>
-        public Decimal TotalCost { get; set; }
+        public Decimal TotalCost { get; set; } = 100;
+
+        /// <summary>
+        /// Тип Абонемента
+        /// </summary>
+        public string StrTypeAbonement => TypeAbonement?.TrainingListName.ServiceName;
+
+        /// <summary>
+        /// Срок действия абонемена (дни)
+        /// </summary>
+        public int CountDays { get; set; }
+
+        /// <summary>
+        /// Дата активации абонемента
+        /// </summary>
+        public DateTime? AbonementActivationDateTime { get; set; } = DateTime.Now;
+
+        /// <summary>
+        /// Полное ФИО
+        /// </summary>
+        public string StrFullName => $"{ClientFamilyName} {ClientFirstName} {ClientLastName}";
+
+
         #endregion
 
         #region Описание личных данных клиента
@@ -116,33 +141,39 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public DateTime? ClientPasportDatеOfIssue { get; set; }
         #endregion
 
-        /// <summary>
-        /// Тип Абонемента
-        /// </summary>
-        public string StrTypeAbonement => TypeAbonement.TrainingListName.ServiceName;
 
-        public string StrFullName => ClientFamilyName + " " + ClientFirstName + " " + ClientLastName;
-
+     
         #region Связи между сущностями 1 Employee to 0...* Account
         public Employee Employee { get; set; }
         #endregion
 
         #region Связи между сущностями 1...1 Account to 1...* TrainingList
-        public virtual TrainingList TypeAbonement { get; set; }
+        public virtual PriceTrainingList TypeAbonement { get; set; }
         #endregion
 
 
         #region Связи между сущностями 0...* Account to 0...* Training
 
-        public virtual ICollection<Training> ArrTrainings { get; set; }
+        public virtual ICollection<UpcomingTraining> ArrTrainings { get; set; }
 
         #endregion
 
         #region Связи между сущностями 0...* Account to 1 AccountStatus
 
-         public AccountStatus AccountStatus { get; set; }
+         public virtual AccountStatus AccountStatus { get; set; }
 
         #endregion
 
+        #region Связи между сущностями 0...* Account to 0...* Training
+        /// <summary>
+        /// Количество купленных занятий
+        /// </summary>
+        public virtual ICollection<ServicesInSubscription> ArrServicesInSubscription { get; set; }
+
+        #endregion
+
+      //  public ObservableCollection<ServicesInSubscription> OcAccounts  => new ObservableCollection<ServicesInSubscription>(ArrServicesInSubscription.Cast<ServicesInSubscription>());
+
+     
     }
 }

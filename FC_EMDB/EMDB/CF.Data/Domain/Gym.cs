@@ -9,7 +9,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
     {
         public Gym()
         {
-            ArrTrainings = new HashSet<Training>();
+            ArrTrainings = new HashSet<UpcomingTraining>();
         }
         /// <summary>
         /// Id зала
@@ -28,7 +28,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
 
         #region Связи между сущностями 0...* Training to 1 Gym
 
-        public virtual ICollection<Training> ArrTrainings { get; set; }
+        public virtual ICollection<UpcomingTraining> ArrTrainings { get; set; }
 
         #endregion
     }

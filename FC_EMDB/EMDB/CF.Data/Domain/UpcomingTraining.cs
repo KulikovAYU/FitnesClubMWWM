@@ -6,9 +6,9 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
     /// <summary>
     /// Описание сущности "тренировка", которая предстоит
     /// </summary>
-    public class Training
+    public class UpcomingTraining
     {
-        public Training()
+        public UpcomingTraining()
         {
             ArrAccounts = new HashSet<Account>();
         }

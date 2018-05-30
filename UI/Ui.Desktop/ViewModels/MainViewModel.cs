@@ -122,6 +122,10 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
         #endregion
 
+        /// <summary>
+        /// Закрыть дочерние диалоговые окна
+        /// </summary>
+        public RelayCommand<Window> CloseChildWindowsCommand => new RelayCommand<Window>((window)=> window?.Close());
 
         #endregion
 
@@ -185,7 +189,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                     CurrentPage = ApplicationPage.GymPage;
                     break;
 
-               
             }
         }
 

@@ -4,10 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:valueConverters="clr-namespace:FitnessClubMWWM.Ui.Desktop.ValueConverters"
     xmlns:viewModels="clr-namespace:FitnessClubMWWM.Ui.Desktop.ViewModels"
+    Name="Window"
     Title="PayAbonement"
-    Width="750"
-    Height="650"
+    Width="650"
+    Height="450"
     AllowsTransparency="True"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
@@ -26,7 +28,6 @@
 
     <Window.Style>
         <Style TargetType="{x:Type Window}">
-
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
             <Setter Property="WindowChrome.CaptionHeight" Value="20" />
@@ -145,7 +146,7 @@
                                         FontSize="20"
                                         FontWeight="Bold"
                                         Foreground="Gray"
-                                        Text="Продажа абонемента"
+                                        Text="Новая услуга"
                                         TextAlignment="Center" />
                                 </Grid>
                                 <!--  Панель с созданием нового расписания  -->
@@ -228,6 +229,7 @@
                                                     Text="Вид услуги" />
 
                                                 <ComboBox
+                                                    Name="TypeOfService"
                                                     Grid.Column="1"
                                                     Width="350"
                                                     Height="40"
@@ -236,11 +238,12 @@
                                                     BorderThickness="2"
                                                     FontSize="{StaticResource RegularBig}"
                                                     IsReadOnly="True"
-                                                    ItemsSource="{Binding ServiceLists}"
-                                                    SelectedIndex="0">
+                                                    ItemsSource="{Binding TrainingLists}"
+                                                    SelectedIndex="0"
+                                                    SelectedItem="{Binding _SiInSubscription.PriceType}">
                                                     <ComboBox.ItemTemplate>
                                                         <DataTemplate>
-                                                            <TextBlock Text="{Binding ServiceName, BindsDirectlyToSource=True, StringFormat=\{0:C\}}" />
+                                                            <TextBlock Text="{Binding TrainingListName.ServiceName, BindsDirectlyToSource=True}" />
                                                         </DataTemplate>
                                                     </ComboBox.ItemTemplate>
                                                 </ComboBox>
@@ -261,6 +264,7 @@
                                                     Text="Тариф" />
 
                                                 <ComboBox
+                                                    Name="Tarif"
                                                     Grid.Column="1"
                                                     Width="350"
                                                     Height="40"
@@ -270,7 +274,8 @@
                                                     FontSize="{StaticResource RegularBig}"
                                                     IsReadOnly="True"
                                                     ItemsSource="{Binding TarifsList}"
-                                                    SelectedIndex="0">
+                                                    SelectedIndex="0"
+                                                    SelectedItem="{Binding _SiInSubscription.PriceType.Tarifs}">
                                                     <ComboBox.ItemTemplate>
                                                         <DataTemplate>
                                                             <TextBlock Text="{Binding TarifName}" />
@@ -294,6 +299,7 @@
                                                     Text="Количество тренировок" />
 
                                                 <TextBox
+                                                    Name="TrainingCount"
                                                     Grid.Column="1"
                                                     Width="350"
                                                     Height="40"
@@ -302,7 +308,8 @@
                                                     BorderThickness="2"
                                                     FontSize="{StaticResource RegularBig}"
                                                     Tag="Количество тренировок"
-                                                    Template="{StaticResource InputTextBox}" />
+                                                    Template="{StaticResource InputTextBox}"
+                                                    Text="{Binding _SiInSubscription.SiSTrainingCount, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                                             </Grid>
 
 
@@ -322,88 +329,7 @@
                                                     Text="Цена" />
 
                                                 <TextBox
-                                                    Grid.Column="1"
-                                                    Width="350"
-                                                    Height="40"
-                                                    Margin="5"
-                                                    VerticalContentAlignment="Center"
-                                                    BorderThickness="2"
-                                                    FontSize="{StaticResource RegularBig}"
-                                                    Tag="Цена"
-                                                    Template="{StaticResource InputTextBox}" />
-                                            </Grid>
-
-                                            <!--  Срок действия  -->
-                                            <Grid Style="{StaticResource BaseGridStyle}">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="200" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
-
-                                                <TextBlock
-                                                    Grid.Column="0"
-                                                    VerticalAlignment="Center"
-                                                    FontSize="{StaticResource Regular}"
-                                                    FontWeight="Bold"
-                                                    Foreground="Gray"
-                                                    Text="Срок действия " />
-
-                                                <TextBox
-                                                    Grid.Column="1"
-                                                    Width="350"
-                                                    Height="40"
-                                                    Margin="5"
-                                                    VerticalContentAlignment="Center"
-                                                    BorderThickness="2"
-                                                    FontSize="{StaticResource RegularBig}"
-                                                    Tag="Срок действия "
-                                                    Template="{StaticResource InputTextBox}" />
-                                            </Grid>
-
-
-                                            <!--  Дата активации  -->
-                                            <Grid Style="{StaticResource BaseGridStyle}">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="200" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
-
-                                                <TextBlock
-                                                    Grid.Column="0"
-                                                    VerticalAlignment="Center"
-                                                    FontSize="{StaticResource Regular}"
-                                                    FontWeight="Bold"
-                                                    Foreground="Gray"
-                                                    Text="Дата активации" />
-
-                                                <DatePicker
-                                                    Grid.Column="1"
-                                                    Width="350"
-                                                    Height="40"
-                                                    Margin="5"
-                                                    VerticalContentAlignment="Center"
-                                                    BorderThickness="2"
-                                                    FontSize="{StaticResource RegularBig}"
-                                                    Tag="Дата активации " />
-                                            </Grid>
-
-
-                                            <!--  Состояние карты  -->
-                                            <Grid Style="{StaticResource BaseGridStyle}">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="200" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
-
-                                                <TextBlock
-                                                    Grid.Column="0"
-                                                    VerticalAlignment="Center"
-                                                    FontSize="{StaticResource Regular}"
-                                                    FontWeight="Bold"
-                                                    Foreground="Gray"
-                                                    Text=" Состояние карты" />
-
-                                                <ComboBox
+                                                    Name="TotalCost"
                                                     Grid.Column="1"
                                                     Width="350"
                                                     Height="40"
@@ -412,30 +338,66 @@
                                                     BorderThickness="2"
                                                     FontSize="{StaticResource RegularBig}"
                                                     IsReadOnly="True"
-                                                    Tag=" Состояние карты" />
+                                                    Tag="Цена"
+                                                    Template="{StaticResource InputTextBox}">
+                                                    <TextBox.Resources>
+                                                        <valueConverters:MultiPriceValueConverter x:Key="MultiPriceValueConverter" />
+                                                    </TextBox.Resources>
+                                                    <TextBox.Text>
+                                                        <MultiBinding Converter="{StaticResource MultiPriceValueConverter}" UpdateSourceTrigger="PropertyChanged">
+                                                            <Binding ElementName="TypeOfService" Path="SelectedItem" />
+                                                            <Binding ElementName="Tarif" Path="SelectedItem" />
+                                                            <Binding ElementName="TrainingCount" Path="Text" />
+                                                            <Binding Path="TotalCost" />
+                                                        </MultiBinding>
+                                                    </TextBox.Text>
+                                                </TextBox>
                                             </Grid>
+
+
+
 
                                         </StackPanel>
 
                                         <Grid HorizontalAlignment="Center">
+
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
+                                            <Grid.Resources>
+                                                <valueConverters:TotalCostValueConverter x:Key="TotalCostValueConverter" />
+                                                <valueConverters:MultiSellValueConverter x:Key="MultiSellValueConverter" />
+                                            </Grid.Resources>
                                             <Button
                                                 Grid.Column="0"
                                                 Width="200"
                                                 Height="50"
                                                 Margin="0,15,10,15"
+                                                Command="{Binding SellNewTrainingCommand}"
                                                 Content="Продать"
                                                 FontSize="{StaticResource Regular}"
                                                 Foreground="White"
-                                                Template="{DynamicResource ButtonBaseControlTemplate}" />
+                                                Template="{DynamicResource ButtonBaseControlTemplate}">
+                                                <Button.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource MultiSellValueConverter}">
+                                                        <Binding
+                                                            Converter="{StaticResource TotalCostValueConverter}"
+                                                            ElementName="TotalCost"
+                                                            Path="Text" />
+                                                        <Binding ElementName="Window" />
+                                                        <Binding Converter="{StaticResource TotalCostValueConverter}" Path="_SiInSubscription.TotalCost" />
+                                                    </MultiBinding>
+                                                </Button.CommandParameter>
+
+                                            </Button>
                                             <Button
                                                 Grid.Column="1"
                                                 Width="200"
                                                 Height="50"
                                                 Margin="10,15,0,15"
+                                                Command="{Binding CloseCommand, Mode=OneWay, Source={StaticResource ViewModel}}"
+                                                CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
                                                 Content="Назад"
                                                 FontSize="{StaticResource Regular}"
                                                 Foreground="White"

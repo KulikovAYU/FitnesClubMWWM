@@ -77,9 +77,29 @@
         PriceAbonementPage = 13,
 
         /// <summary>
-        /// Страница для оедактирования информации о залах
+        /// Страница для редактирования информации о залах
         /// </summary>
         GymPage = 14,
+
+        /// <summary>
+        /// Страница для получении и управлении информации об абонементе
+        /// </summary>
+        AbonementInfoDetails = 15,
+
+        /// <summary>
+        /// Страница для получении информации о доступных и записанных тренировок
+        /// </summary>
+        TrainingAndServiceList = 16,
+
+        /// <summary>
+        /// Страница для продления абонемента
+        /// </summary>
+        LongAbonement = 17,
+
+        /// <summary>
+        /// Страница для продажи услуги
+        /// </summary>
+        PayServicesAndTrainings = 18,
 
     }
 }

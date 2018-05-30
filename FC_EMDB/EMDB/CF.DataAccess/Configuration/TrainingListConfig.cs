@@ -6,7 +6,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Configuration
     /// <summary>
     /// Данный класс представляет конфигурацию сущности "TrainingList", предоставляемый Fluent API
     /// </summary>
-    class TrainingListConfig : EntityTypeConfiguration<TrainingList>
+    class TrainingListConfig : EntityTypeConfiguration<PriceTrainingList>
     {
         /// <summary>
         /// Конфигурация
@@ -15,9 +15,11 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Configuration
         {
             HasKey(trainingList => trainingList.TrainingListId);
             Property(trainingList => trainingList.TrainingCurrentCost).HasColumnName("TrainingCurrentCost")
-                .IsRequired();
-            Property(trainingList => trainingList.CountTrainingList).HasColumnName("CountTrainingList")
                 .IsRequired().HasColumnType("money");
+         
+            //Property(trainingList => trainingList.CountTrainingList).HasColumnName("CountTrainingList")
+            //    .IsRequired().HasColumnType("money");
+          
 
             ToTable("TrainingList");
         }

@@ -12,7 +12,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public Employee()
         {
             ArrAccounts = new HashSet<Account>();
-            ArrTrainings = new HashSet<Training>();
+            ArrTrainings = new HashSet<UpcomingTraining>();
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         /// <summary>
         /// Свойство навигации (Virtual ->Lazy Load)
         /// </summary>
-         public ICollection<Training> ArrTrainings { get; set; } //Отладка
+         public ICollection<UpcomingTraining> ArrTrainings { get; set; } //Отладка
         #endregion
 
     }

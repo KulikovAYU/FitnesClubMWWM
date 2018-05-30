@@ -9,7 +9,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
     {
         public Service()
         {
-            Trainings = new HashSet<Training>();
+            Trainings = new HashSet<UpcomingTraining>();
         }
         /// <summary>
         /// Id услуги
@@ -22,7 +22,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public string ServiceName { get; set; }
 
       
-        public virtual ICollection<Training> Trainings { get; set; }
+        public virtual ICollection<UpcomingTraining> Trainings { get; set; }
 
     }
 }

@@ -4,10 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="clr-namespace:FitnessClubMWWM.Ui.Desktop.ValueConverters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:domain="clr-namespace:FC_EMDB.EMDB.CF.Data.Domain;assembly=FC_EMDB"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:userControls="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
+    xmlns:viewModels="clr-namespace:FitnessClubMWWM.Ui.Desktop.ViewModels"
     Title="ClientPage"
-    d:DesignHeight="450"
+    d:DesignHeight="500"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
@@ -249,11 +252,14 @@
                             <Setter Property="Cursor" Value="Hand" />
                         </Style>
                     </DataTemplate.Resources>
-                    <Border Margin="10" VerticalAlignment="Center">
+
+                    <Border Margin="0" VerticalAlignment="Center">
                         <TabControl
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Top"
+                            DataContext="{Binding Mode=OneWay}"
                             Style="{DynamicResource TabControlStyle}">
+
                             <TabItem
                                 Height="25"
                                 Margin="0,0,0,0"
@@ -424,99 +430,272 @@
                                 Header="Абонемент"
                                 Style="{DynamicResource TabItemStyle}">
                                 <Grid Background="White">
-                                    <Border>
-                                        <StackPanel Margin="10,10,10,10" Orientation="Vertical">
-                                            <Grid Height="30" d:DataContext="{Binding Source={StaticResource Locator}}">
+
+                                    <StackPanel Margin="10,10,10,10" Orientation="Vertical">
+
+                                        <Grid>
+                                            <Grid.Resources>
+                                                <domain:Account x:Key="Account" />
+                                            </Grid.Resources>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <StackPanel
+                                                Grid.Row="0"
+                                                Margin="0,0,0,0"
+                                                HorizontalAlignment="Center"
+                                                Orientation="Horizontal">
+                                                <TextBlock
+                                                    FontSize="{Binding Source={StaticResource Higth}}"
+                                                    FontWeight="Bold"
+                                                    Foreground="Black"
+                                                    Text="Абонемент N "
+                                                    TextAlignment="Center" />
+                                                <TextBlock
+                                                    FontSize="{Binding Source={StaticResource Higth}}"
+                                                    FontWeight="Bold"
+                                                    Foreground="Black"
+                                                    Text="{Binding NumberSubscription}"
+                                                    TextAlignment="Center" />
+                                            </StackPanel>
+
+                                            <Grid Grid.Row="1">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="20" />
+                                                    <RowDefinition Height="20" />
+                                                    <RowDefinition Height="20" />
+                                                    <RowDefinition Height="20" />
+                                                    <RowDefinition Height="10" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="auto" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="auto" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="auto" />
-                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
                                                 </Grid.ColumnDefinitions>
-
-                                                <userControls:ButtonWithPicture
+                                                <Grid.Resources>
+                                                    <Style x:Key="StyleLeftTb" TargetType="TextBlock">
+                                                        <Setter Property="Foreground" Value="Black" />
+                                                        <Setter Property="TextAlignment" Value="Left" />
+                                                        <Setter Property="Margin" Value="0,0,5,0" />
+                                                        <Setter Property="FontSize" Value="{StaticResource Regular}" />
+                                                    </Style>
+                                                    <Style x:Key="StyleRightTb" TargetType="TextBlock">
+                                                        <Setter Property="Foreground" Value="Black" />
+                                                        <Setter Property="TextAlignment" Value="Left" />
+                                                        <Setter Property="Margin" Value="5,0,0,0" />
+                                                        <Setter Property="FontSize" Value="{StaticResource Regular}" />
+                                                    </Style>
+                                                    <converter:DateTimeToDateConverter x:Key="DateTimeToDateConverter" />
+                                                    <converter:ActivateAccountConverter x:Key="ActivateAccountConverter" />
+                                                    <viewModels:ClientsPageViewModel x:Key="ClientsPageViewModel" />
+                                                </Grid.Resources>
+                                                <TextBlock
+                                                    Grid.Row="0"
                                                     Grid.Column="0"
-                                                    Command="{Binding SellNewAbonementCommand}"
-                                                    CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}"
-                                                    Content="Продать абонемент"
-                                                    GeomPicture="{Binding Source={StaticResource SellAbonement}, Path=Data}"
-                                                    GeomPictureFill="Black"
-                                                    Style="{StaticResource ButtonWidthPictureIsNotPressed}"
-                                                    Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}">
-                                                    <userControls:ButtonWithPicture.DataContext>
-                                                        <Binding Path="ClientsPageViewModel" Source="{StaticResource Locator}" />
-                                                    </userControls:ButtonWithPicture.DataContext>
-
-                                                </userControls:ButtonWithPicture>
-                                                <GridSplitter
+                                                    Style="{Binding Source={StaticResource StyleLeftTb}}"
+                                                    Text="Общая стоимость" />
+                                                <TextBlock
+                                                    Grid.Row="0"
                                                     Grid.Column="1"
-                                                    Width="2"
-                                                    Margin="4,0,4,0"
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Stretch"
-                                                    Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
-                                                <userControls:ButtonWithPicture
-                                                    Grid.Column="2"
-                                                    Margin="0,0,0,0"
-                                                    Content="Активировать"
-                                                    GeomPicture="{Binding Source={StaticResource ActivateAbonement}, Path=Data}"
-                                                    GeomPictureFill="Black"
-                                                    Style="{StaticResource ButtonWidthPictureIsNotPressed}"
-                                                    Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
-                                                <GridSplitter
-                                                    Grid.Column="3"
-                                                    Width="2"
-                                                    Margin="4,0,4,0"
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Stretch"
-                                                    Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
-                                                <userControls:ButtonWithPicture
-                                                    Grid.Column="4"
-                                                    Margin="0,0,0,0"
-                                                    Content="Продлить"
-                                                    GeomPicture="{Binding Source={StaticResource UpAbonement}, Path=Data}"
-                                                    GeomPictureFill="Black"
-                                                    Style="{StaticResource ButtonWidthPictureIsNotPressed}"
-                                                    Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
-                                                <GridSplitter
-                                                    Grid.Column="5"
-                                                    Width="2"
-                                                    Margin="4,0,4,0"
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Stretch"
-                                                    Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
-                                                <userControls:ButtonWithPicture
-                                                    Grid.Column="6"
-                                                    Margin="0,0,0,0"
-                                                    Content="Заморозить"
-                                                    GeomPicture="{Binding Source={StaticResource FreezeAbonement}, Path=Data}"
-                                                    GeomPictureFill="Black"
-                                                    Style="{StaticResource ButtonWidthPictureIsNotPressed}"
-                                                    Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
+                                                    Style="{Binding Source={StaticResource StyleRightTb}}"
+                                                    Text="{Binding StringFormat={}{0}₽, Path=TotalCost}" />
+                                                <Rectangle
+                                                    Grid.Row="0"
+                                                    Grid.Column="0"
+                                                    Grid.ColumnSpan="2"
+                                                    Height="1"
+                                                    VerticalAlignment="Bottom"
+                                                    Fill="{StaticResource BlueDataGridRowDetailsViewColor}" />
+                                                <TextBlock
+                                                    Grid.Row="1"
+                                                    Grid.Column="0"
+                                                    Style="{Binding Source={StaticResource StyleLeftTb}}"
+                                                    Text="Срок действия абонемента" />
+                                                <Rectangle
+                                                    Grid.Row="1"
+                                                    Grid.Column="0"
+                                                    Grid.ColumnSpan="2"
+                                                    Height="1"
+                                                    VerticalAlignment="Bottom"
+                                                    Fill="{StaticResource BlueDataGridRowDetailsViewColor}" />
+                                                <TextBlock
+                                                    Grid.Row="1"
+                                                    Grid.Column="1"
+                                                    Style="{Binding Source={StaticResource StyleRightTb}}"
+                                                    Text="{Binding StringFormat={}{0} дней, Path=CountDays}" />
+                                                <Rectangle
+                                                    Grid.Row="2"
+                                                    Grid.Column="0"
+                                                    Grid.ColumnSpan="2"
+                                                    Height="1"
+                                                    VerticalAlignment="Bottom"
+                                                    Fill="{StaticResource BlueDataGridRowDetailsViewColor}" />
+                                                <TextBlock
+                                                    Grid.Row="2"
+                                                    Grid.Column="1"
+                                                    Style="{Binding Source={StaticResource StyleRightTb}}"
+                                                    Text="{Binding AbonementActivationDateTime, Converter={StaticResource DateTimeToDateConverter}}" />
+                                                <TextBlock
+                                                    Grid.Row="2"
+                                                    Grid.Column="0"
+                                                    Style="{Binding Source={StaticResource StyleLeftTb}}"
+                                                    Text="Дата активации" />
+                                                <TextBlock
+                                                    Grid.Row="3"
+                                                    Grid.Column="1"
+                                                    Style="{Binding Source={StaticResource StyleRightTb}}"
+                                                    Text="{Binding AccountStatus.AccountStatusName}" />
+                                                <TextBlock
+                                                    Grid.Row="3"
+                                                    Grid.Column="0"
+                                                    Style="{Binding Source={StaticResource StyleLeftTb}}"
+                                                    Text="Статус абонемента" />
+                                                <Rectangle
+                                                    Grid.Row="3"
+                                                    Grid.Column="0"
+                                                    Grid.ColumnSpan="2"
+                                                    Height="1"
+                                                    VerticalAlignment="Bottom"
+                                                    Fill="{StaticResource BlueDataGridRowDetailsViewColor}" />
+
+                                                <Grid
+                                                    Grid.Row="5"
+                                                    Grid.Column="0"
+                                                    Grid.ColumnSpan="2"
+                                                    Height="30"
+                                                    HorizontalAlignment="Center">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <userControls:ButtonWithPicture
+                                                        Grid.Column="0"
+                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}, Path=DataContext.ShowAbonementInfoCommand}"
+                                                        CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}"
+                                                        Content="Детали"
+                                                        GeomPicture="{Binding Source={StaticResource Details}, Path=Data}"
+                                                        GeomPictureFill="Black"
+                                                        Style="{StaticResource ButtonWidthPictureIsNotPressed}"
+                                                        Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
+                                                    <GridSplitter
+                                                        Grid.Column="1"
+                                                        Width="2"
+                                                        Margin="4,0,4,0"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Stretch"
+                                                        Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
+                                                    <userControls:ButtonWithPicture
+                                                        Grid.Column="2"
+                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}, Path=DataContext.SellNewAbonementCommand}"
+                                                        CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}"
+                                                        Content="Продать услугу"
+                                                        GeomPicture="{Binding Source={StaticResource SellAbonement}, Path=Data}"
+                                                        GeomPictureFill="Black"
+                                                        Style="{StaticResource ButtonWidthPictureIsNotPressed}"
+                                                        Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}">
+                                                        <!--<userControls:ButtonWithPicture.DataContext>
+                                                            <Binding Path="ClientsPageViewModel" Source="{StaticResource Locator}" />
+                                                        </userControls:ButtonWithPicture.DataContext>-->
+
+                                                    </userControls:ButtonWithPicture>
+                                                    <GridSplitter
+                                                        Grid.Column="3"
+                                                        Width="2"
+                                                        Margin="4,0,4,0"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Stretch"
+                                                        Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
+                                                    <userControls:ButtonWithPicture
+                                                        Grid.Column="4"
+                                                        Margin="0,0,0,0"
+                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}, Path=DataContext.ActivateRelayCommand}"
+                                                        Content="Активировать"
+                                                        GeomPicture="{Binding Source={StaticResource ActivateAbonement}, Path=Data}"
+                                                        GeomPictureFill="Black"
+                                                        IsEnabled="{Binding AccountStatus, Converter={StaticResource ActivateAccountConverter}}"
+                                                        Style="{StaticResource ButtonWidthPictureIsNotPressed}"
+                                                        Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
+                                                    <GridSplitter
+                                                        Grid.Column="5"
+                                                        Width="2"
+                                                        Margin="4,0,4,0"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Stretch"
+                                                        Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
+                                                    <userControls:ButtonWithPicture
+                                                        Grid.Column="6"
+                                                        Margin="0,0,0,0"
+                                                        Content="Продлить"
+                                                        GeomPicture="{Binding Source={StaticResource UpAbonement}, Path=Data}"
+                                                        GeomPictureFill="Black"
+                                                        Style="{StaticResource ButtonWidthPictureIsNotPressed}"
+                                                        Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
+                                                    <GridSplitter
+                                                        Grid.Column="7"
+                                                        Width="2"
+                                                        Margin="4,0,4,0"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Stretch"
+                                                        Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
+                                                    <userControls:ButtonWithPicture
+                                                        Grid.Column="8"
+                                                        Margin="0,0,0,0"
+                                                        Content="Заморозить"
+                                                        GeomPicture="{Binding Source={StaticResource FreezeAbonement}, Path=Data}"
+                                                        GeomPictureFill="Black"
+                                                        Style="{StaticResource ButtonWidthPictureIsNotPressed}"
+                                                        Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
+
+                                                </Grid>
+
+
                                             </Grid>
 
-                                            <DataGrid
+
+
+
+                                        </Grid>
+
+
+
+                                        <!--<DataGrid
                                                 Name="Abonement"
                                                 Height="50"
                                                 Margin="0,10,0,0"
                                                 AutoGenerateColumns="False"
                                                 CanUserAddRows="False"
                                                 IsReadOnly="True"
-                                                ItemsSource="{Binding GetAbonement}">
+                                                ItemsSource="{Binding OcAccounts}"
+                                                DataContext="{Binding Path=ClientsPageViewModel.OcAccounts, Source=StaticResource Locator}"
+
+
+                                              >
+
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Binding="{Binding m_nNumber}" Header="Номер абонемента" />
-                                                    <DataGridTextColumn Binding="{Binding m_strStatus}" Header="Статус" />
-                                                    <DataGridTextColumn Binding="{Binding m_strService}" Header="Услуга" />
-                                                    <DataGridTextColumn Binding="{Binding m_strTariff}" Header="Тариф" />
-                                                    <DataGridTextColumn Binding="{Binding m_nAllCntTrainings}" Header="Куплено тренировок" />
-                                                    <DataGridTextColumn Binding="{Binding m_nRemainedTrainings}" Header="Осталось тренировок" />
+
+                                                    <DataGridTextColumn Binding="{Binding SiSVisitedTrainingCount}"  Header="Услуга" />
+
                                                 </DataGrid.Columns>
-                                            </DataGrid>
-                                        </StackPanel>
-                                    </Border>
+                                            </DataGrid>-->
+
+
+
+
+                                    </StackPanel>
+
                                 </Grid>
                             </TabItem>
                         </TabControl>

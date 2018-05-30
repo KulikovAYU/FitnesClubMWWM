@@ -57,6 +57,7 @@
     <Compile Include="EMDB\CF.DataAccess\Configuration\EmployeeWorkingStatusConfig.cs" />
     <Compile Include="EMDB\CF.DataAccess\Configuration\GymConfig.cs" />
     <Compile Include="EMDB\CF.DataAccess\Configuration\ServiceConfig.cs" />
+    <Compile Include="EMDB\CF.DataAccess\Configuration\SiSConfig.cs" />
     <Compile Include="EMDB\CF.DataAccess\Configuration\StatusTrainingConfig.cs" />
     <Compile Include="EMDB\CF.DataAccess\Configuration\TarifConfig.cs" />
     <Compile Include="EMDB\CF.DataAccess\Configuration\TrainingConfig.cs" />
@@ -64,11 +65,13 @@
     <Compile Include="EMDB\CF.DataAccess\Context\DataBaseFCContext.cs" />
     <Compile Include="EMDB\CF.DataAccess\InitializationModel.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\AccountRepository.cs" />
+    <Compile Include="EMDB\CF.DataAccess\Repositories\AccountStatusRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\EmployeeRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\EmployeeRoleRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\EmployeeWorkingStatusRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\Repository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\ServiceRepository.cs" />
+    <Compile Include="EMDB\CF.DataAccess\Repositories\SiSRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\TarifRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\TrainingListRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\UnitOfWork.cs" />
@@ -79,12 +82,14 @@
     <Compile Include="EMDB\CF.Data\Domain\EmployeeWorkingStatus.cs" />
     <Compile Include="EMDB\CF.Data\Domain\Gym.cs" />
     <Compile Include="EMDB\CF.Data\Domain\Service.cs" />
+    <Compile Include="EMDB\CF.Data\Domain\ServicesInSubscription.cs" />
     <Compile Include="EMDB\CF.Data\Domain\StatusTaraining.cs" />
     <Compile Include="EMDB\CF.Data\Domain\Tarif.cs" />
-    <Compile Include="EMDB\CF.Data\Domain\Training.cs" />
-    <Compile Include="EMDB\CF.Data\Domain\TrainingList.cs" />
+    <Compile Include="EMDB\CF.Data\Domain\UpcomingTraining.cs" />
+    <Compile Include="EMDB\CF.Data\Domain\PriceTrainingList.cs" />
     <Compile Include="EMDB\CF.Data\IUnitOfWork.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\IAccountRepository.cs" />
+    <Compile Include="EMDB\CF.Data\Repositories\IAccountStatusRepository.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\IEmployeeRepository.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\IEmployeeWorkingStatusRepository.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\IRepository.cs" />
@@ -92,6 +97,7 @@
     <Compile Include="DbManager.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\IEmployeeRoleRepository.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\IServiceRepository.cs" />
+    <Compile Include="EMDB\CF.Data\Repositories\ISiSRepository.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\ITarifRepository.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\ITrainingListRepository.cs" />
     <Compile Include="Interfaces\IHaveAccount.cs" />

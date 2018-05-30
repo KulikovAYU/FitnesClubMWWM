@@ -37,6 +37,8 @@ namespace FC_EMDB
         #region Поля класса
         private static readonly DbManager _manager;
         private static readonly DataBaseFcContext _dataBaseContext;
+       
+
         #endregion
 
         public static DbManager GetInstance()
@@ -118,8 +120,14 @@ namespace FC_EMDB
             outerNew1.Wait();
             var workingStatusEmployee = outerNew1.Result;
 
+            if (employee == null)
+            {
+                userData = null;
+                return;
 
-           userData = new UserData( employee.EmployeeFirstName, employee.EmployeeLastName, employee.EmployeeFamilyName,
+            }
+
+            userData = new UserData( employee.EmployeeFirstName, employee.EmployeeLastName, employee.EmployeeFamilyName,
              employee.EmployeeDateOfBirdth,  string.Empty , employee.EmployeeId, employee.EmployeeAdress, employee.EmployeePhoneNumber, employee.EmployeeMail, employee.EmployeePhoto, employee.EmployeeLoginName, employee.EmployeePasswordHash,
                 roleEmployee, workingStatusEmployee);
             SqlTools.SavePhoto(ref userData);
@@ -192,15 +200,48 @@ namespace FC_EMDB
                 return new ObservableCollection<T>(unitOfWork.Services.GetAll().Cast<T>());
             }
 
-            if (typeof(T) == typeof(TrainingList))
+            if (typeof(T) == typeof(PriceTrainingList))
             {
-                var  test = new ObservableCollection<T>(unitOfWork.TrainingList.GetAll().Cast<T>());
-                return test;
+                return new ObservableCollection<T>(unitOfWork.TrainingList.GetAll().Cast<T>());
+            }
+
+            if (typeof(T) == typeof(AccountStatus))
+            {
+                return new ObservableCollection<T>(unitOfWork.AccountStatus.GetAll().Cast<T>());
             }
 
             return null;
 
 
+        }
+
+        /// <summary>
+        /// Сохранить данные
+        /// </summary>
+        /// <typeparam name="T">тип параметра</typeparam>
+        public void SaveData<T>(T data) where T : class
+        {
+            if (data is Account)
+            {
+                unitOfWork.Accounts.AppentRecordToExistAccount(data as Account);
+            }
+        }
+
+        public void AddData<T1, T2>(T1 data1, T2 data2) where T1 : class where T2 : class
+        {
+            if (data1  is Account && data2 is ServicesInSubscription)
+            {
+                unitOfWork.Accounts.Get((data1 as Account).ClientId).ArrServicesInSubscription.Add( new ServicesInSubscription(data1 as Account)
+                    {
+                        SiSTrainingCount = (data2 as ServicesInSubscription).SiSTrainingCount,
+                        SiSVisitedTrainingCount = 0,
+                        TotalCost = (data2 as ServicesInSubscription).TotalCost,
+                        PriceType = (data2 as ServicesInSubscription).PriceType
+                }    
+                );
+                unitOfWork.Complete();
+                //unitOfWork.Accounts.AddServicesInSubscription(nId, data as ServicesInSubscription);
+            }
         }
     }
 }

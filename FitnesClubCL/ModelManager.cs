@@ -113,5 +113,15 @@ namespace FitnesClubCL
         {
             return Assistiant.GetReferenceData<Template>();
         }
+
+        public static void SaveData<T>(T data) where T : class
+        {
+            Assistiant.SaveData<T>(data);
+        }
+
+        public static void AddData<T1, T2>(T1 data1, T2 data2) where T1 : class where T2 : class
+        {
+            Assistiant.AddData<T1, T2>(data1, data2);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using FC_EMDB.EMDB.CF.Data.Domain;
+using FC_EMDB.EMDB.CF.DataAccess.Configuration;
 using FC_EMDB.EMDB.CF.DataAccess.Context;
 using FC_EMDB.Utils;
 
@@ -126,11 +127,11 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             #endregion
 
             #region Добавление списка видов тренировок и услуг (прайс - лист)
-            ObservableCollection<TrainingList> trainingsLists = new ObservableCollection<TrainingList>()
+            ObservableCollection<PriceTrainingList> trainingsLists = new ObservableCollection<PriceTrainingList>()
             {
-                new TrainingList{ CountTrainingList = 1,TrainingListName=services[0],TrainingCurrentCost =200.0m, Tarifs = tarifs[0]},
-                new TrainingList{ CountTrainingList = 2,TrainingListName=services[0],TrainingCurrentCost =400.0m, Tarifs = tarifs[0]},
-                new TrainingList{ CountTrainingList = 3,TrainingListName=services[0],TrainingCurrentCost =600.0m, Tarifs = tarifs[1]},
+                new PriceTrainingList{ TrainingListName=services[0],TrainingCurrentCost =200.0m, Tarifs = tarifs[0]},
+                new PriceTrainingList{ TrainingListName=services[1],TrainingCurrentCost =400.0m, Tarifs = tarifs[0]},
+                new PriceTrainingList{ TrainingListName=services[2],TrainingCurrentCost =600.0m, Tarifs = tarifs[1]},
             };
             context.TrainingLists.AddRange(trainingsLists);
             #endregion
@@ -185,10 +186,17 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     ClientPasportDataSeries = "2409",
                     ClientPasportDataNumber = "460870",
                     ClientPasportDataIssuedBy = "ОУФМС РОССИИ",
-                    ClientPasportDatеOfIssue = new DateTime(2009,05,04),
+                    ClientPasportDatеOfIssue =  DateTime.Parse("04.05.2009"),
                     Employee = employees[0],
                     TypeAbonement = trainingsLists[0],
-                    AccountStatus = accountStatusList[0] 
+                    AccountStatus = accountStatusList[0],
+                    CountDays = 30,
+                    AbonementActivationDateTime = DateTime.Parse("24.03.2018"),
+                    //ArrServicesInSubscription = new ObservableCollection<ServicesInSubscription>()
+                    //{
+                    //    new ServicesInSubscription(){ SiSTrainingCount = 5, SiSVisitedTrainingCount=3, TotalCost = 2000.0m, arrPriceType =trainingsLists[0] },
+                    //    new ServicesInSubscription(){ SiSTrainingCount = 15, SiSVisitedTrainingCount=5, TotalCost = 2000.0m, arrPriceType =trainingsLists[1] }
+                    //}
                 },
                 new Account{
                     NumberSubscription = AbonementGenerator.CreateNumberSubscription(),
@@ -200,7 +208,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     ClientLastName = "Николаевна",
                     ClientFamilyName = "Смирнова",
                     ClientGender="Жен.",
-                    ClientDateOfBirdth = DateTime.Parse("27.05.1989"),
+                    ClientDateOfBirdth = DateTime.Parse("24.03.2000"),
                     ClientAdress = "г.Иваново, ул.Бакинский проезд, д.82, кв.11",
                     ClientPhoneNumber = "8-920-672-00-68",
                     ClientMail = "tosha37@inbox.ru",
@@ -208,10 +216,17 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     ClientPasportDataSeries = "2409",
                     ClientPasportDataNumber = "460870",
                     ClientPasportDataIssuedBy = "ОУФМС РОССИИ",
-                    ClientPasportDatеOfIssue = new DateTime(2009,05,04),
+                    ClientPasportDatеOfIssue =  DateTime.Parse("04.05.2012"),
                     Employee = employees[0],
                     TypeAbonement = trainingsLists[2],
-                    AccountStatus = accountStatusList[0]
+                    AccountStatus = accountStatusList[0],
+                    CountDays = 25,
+                    AbonementActivationDateTime = DateTime.Parse("20.01.2018"),
+                    //ArrServicesInSubscription = new ObservableCollection<ServicesInSubscription>()
+                    //{
+                    //    new ServicesInSubscription(){ SiSTrainingCount = 3, SiSVisitedTrainingCount=3, TotalCost = 1200.0m, arrPriceType =trainingsLists[1] },
+                    //    new ServicesInSubscription(){ SiSTrainingCount = 8, SiSVisitedTrainingCount=5, TotalCost = 2040.0m, arrPriceType =trainingsLists[2] }
+                    //}
                 },
             };
 
@@ -220,9 +235,9 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             #endregion
 
             #region Добавление тренировки, которая предстоит
-            ObservableCollection<Training> trainings = new ObservableCollection<Training>()
+            ObservableCollection<UpcomingTraining> trainings = new ObservableCollection<UpcomingTraining>()
             {
-                new Training
+                new UpcomingTraining
                 {
                     TrainingDateTime = new DateTime(2018,05,24,15,30,00),
                     NumberOfSeats =10,
@@ -234,7 +249,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     Employee = employees[2]
                 },
 
-                new Training
+                new UpcomingTraining
                 {
                     TrainingDateTime = new DateTime(2018,05,24,16,30,00),
                     NumberOfSeats =10,
@@ -246,6 +261,10 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                 },
             };
             context.Trainings.AddRange(trainings);
+
+            ObservableCollection<ServicesInSubscription> _collectionSiS = new ObservableCollection<ServicesInSubscription>();
+            context.ServicesInSubscription.AddRange(_collectionSiS);
+
             #endregion
             context.SaveChanges();
         }

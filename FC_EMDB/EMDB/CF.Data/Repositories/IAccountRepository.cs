@@ -46,5 +46,16 @@ namespace FC_EMDB.EMDB.CF.Data.Repositories
         /// </summary>
         /// <param name="data">данные</param>
         void CreateRecord(NewClientData data);
+
+        /// <summary>
+        /// Добавить запись к существующему аккаунту
+        /// </summary>
+        /// <param name="nNumberSubscription"> Номер абонемента</param>
+        void AppentRecordToExistAccount(Account nNumberSubscription);
+        void AddTraining(Account account);
+
+        //void AddServicesInSubscription(int nId, ServicesInSubscription service);
     }
+
+
 }

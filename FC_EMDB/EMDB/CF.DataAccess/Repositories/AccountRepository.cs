@@ -25,12 +25,8 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
         /// <returns>Аккаунт</returns>
         public Account GetAccountForNumberSubscription(int nNumberSubscription)
         {
-            //var queryGetAccountForNumberSubscription = from account in DataBaseFcContext.Accounts
-            //    where account.NumberSubscription == nNumberSubscription
-            //    select account;
-            var query = DataBaseFcContext.Accounts.FirstOrDefault(account => account.NumberSubscription == nNumberSubscription);
-
-            return query;
+            return DataBaseFcContext.Accounts.FirstOrDefault(account => account.NumberSubscription == nNumberSubscription);
+          
         }
 
         /// <summary>
@@ -130,6 +126,20 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
             DataBaseFcContext.Accounts.Add(_clientData);
             DataBaseFcContext.SaveChanges();
         
+        }
+
+        public void AppentRecordToExistAccount(Account acc)
+        {
+            DataBaseFcContext.Accounts.AddOrUpdate(acc);
+            DataBaseFcContext.SaveChanges();
+        }
+
+        public void AddTraining(Account account)
+        {
+         var res =   DataBaseFcContext.Accounts.Find(account.ClientId);
+
+            res.ArrServicesInSubscription.Add(account.ArrServicesInSubscription.First());
+            DataBaseFcContext.SaveChanges();
         }
 
         public DataBaseFcContext DataBaseFcContext => m_context as DataBaseFcContext;
