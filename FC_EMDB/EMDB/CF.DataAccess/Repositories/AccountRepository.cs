@@ -65,7 +65,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
                                                                           &&
                                                                           (acc.HumanPasportDataNumber == clientData.HumanPasportDataNumber)
                 ));
-            SqlTools.SavePhoto(query);
+            query.StrPathPhoto = SqlTools.SavePhoto(query);
             return query;
         }
 
@@ -75,49 +75,49 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
         /// </summary>
         /// <param name="clientData"> Данные по которым будет производиться выборка</param>
         /// <returns></returns>
-        public NewClientData FindAccountWithSameData(NewClientData clientData)
-        {
-            //var query = DataBaseFcContext.Accounts.FirstOrDefault(acc => acc.ClientFirstName == clientData.PersonFirstName && acc.ClientLastName ==
-            //                                                                                                      clientData.PersonLastName
-            //                                                                                                               && acc.ClientFamilyName ==
-            //                                                                                                      clientData.PersonFamilyName &&
-            //                                                                                                      acc.ClientDateOfBirdth ==
-            //                                                                                                               clientData.PersonDateOfBirdth);
+        //public NewClientData FindAccountWithSameData(NewClientData clientData)
+        //{
+        //    //var query = DataBaseFcContext.Accounts.FirstOrDefault(acc => acc.ClientFirstName == clientData.PersonFirstName && acc.ClientLastName ==
+        //    //                                                                                                      clientData.PersonLastName
+        //    //                                                                                                               && acc.ClientFamilyName ==
+        //    //                                                                                                      clientData.PersonFamilyName &&
+        //    //                                                                                                      acc.ClientDateOfBirdth ==
+        //    //                                                                                                               clientData.PersonDateOfBirdth);
 
-        var query = DataBaseFcContext.Accounts.FirstOrDefault(acc => ((acc.HumanFirstName == clientData.PersonFirstName)
-                                                                          &&
-                                                                         (acc.HumanLastName == clientData.PersonLastName)
-                                                                          &&
-                                                                          (acc.HumanFamilyName == clientData.PersonFamilyName)
-                                                                          &&
-                                                                          (acc.HumanPasportDataSeries == clientData.ClientPasportDataSeries)
-                                                                          &&
-                                                                          (acc.HumanPasportDataNumber == clientData.ClientPasportDataNumber)
-                                                                          ));
+        //var query = DataBaseFcContext.Accounts.FirstOrDefault(acc => ((acc.HumanFirstName == clientData.PersonFirstName)
+        //                                                                  &&
+        //                                                                 (acc.HumanLastName == clientData.PersonLastName)
+        //                                                                  &&
+        //                                                                  (acc.HumanFamilyName == clientData.PersonFamilyName)
+        //                                                                  &&
+        //                                                                  (acc.HumanPasportDataSeries == clientData.ClientPasportDataSeries)
+        //                                                                  &&
+        //                                                                  (acc.HumanPasportDataNumber == clientData.ClientPasportDataNumber)
+        //                                                                  ));
 
 
-            return query != null
-                ? new NewClientData(true)
-                {
-                    PersonRole = "Клиент",
-                    PersonFirstName = query.HumanFirstName,
-                    PersonLastName =  query.HumanLastName,
-                    PersonFamilyName = query.HumanFamilyName,
-                    PersonDateOfBirdth = query.HumanDateOfBirdth,
-                    PersonGender = query.HumanGender,
-                    PersonId = query.HumanId,
-                    PersonAdress = query.HumanAdress,
-                    PersonPhoneNumber = query.HumanPhoneNumber,
-                    PersonMail = query.HumanMail,
-                    PersonPhoto =query.HumanPhoto,
-                    ClientPasportDataSeries = query.HumanPasportDataSeries,
-                    ClientPasportDataNumber = query.HumanPasportDataNumber,
-                    ClientPasportDataIssuedBy = query.HumanPasportDataIssuedBy,
-                    ClientPasportDatеOfIssue = query.HumanPasportDatеOfIssue,
-                    NumberSubscription = query.Abonement.NumberSubscription
+        //    return query != null
+        //        ? new NewClientData(true)
+        //        {
+        //            PersonRole = "Клиент",
+        //            PersonFirstName = query.HumanFirstName,
+        //            PersonLastName =  query.HumanLastName,
+        //            PersonFamilyName = query.HumanFamilyName,
+        //            PersonDateOfBirdth = query.HumanDateOfBirdth,
+        //            PersonGender = query.HumanGender,
+        //            PersonId = query.HumanId,
+        //            PersonAdress = query.HumanAdress,
+        //            PersonPhoneNumber = query.HumanPhoneNumber,
+        //            PersonMail = query.HumanMail,
+        //            PersonPhoto =query.HumanPhoto,
+        //            ClientPasportDataSeries = query.HumanPasportDataSeries,
+        //            ClientPasportDataNumber = query.HumanPasportDataNumber,
+        //            ClientPasportDataIssuedBy = query.HumanPasportDataIssuedBy,
+        //            ClientPasportDatеOfIssue = query.HumanPasportDatеOfIssue,
+        //            NumberSubscription = query.Abonement.NumberSubscription
 
-                } : null;
-        }
+        //        } : null;
+        //}
 
         public void UpdateFields(Account clientData)
         {
@@ -125,8 +125,8 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
 
             if (_clientData == null)
                 return;
-
-            //SqlTools.Convert(ref _clientData, clientData);
+           // SqlTools.SavePhoto(ref clientData);
+            SqlTools.UpdatePhoto(ref _clientData, clientData.StrPathPhoto);
             DataBaseFcContext.Accounts.AddOrUpdate(_clientData);
             DataBaseFcContext.SaveChanges();
         }

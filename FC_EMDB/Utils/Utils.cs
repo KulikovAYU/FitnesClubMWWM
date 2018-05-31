@@ -33,9 +33,6 @@ namespace FC_EMDB.Utils
             try
             {
                 Generate(ref number, context);
-                ////бросим исключение в случае нулевого значения номера абонемента
-                //if (number == 0)
-                //    throw new Exception("Клиенту фитнес-клуба не был присвоен номер абонемента"); ;
             }
             catch (Exception e)
             {
@@ -102,21 +99,6 @@ namespace FC_EMDB.Utils
             return File.ReadAllBytes(Path.GetFullPath(fileName));
         }
 
-        /// <summary>
-        /// Метод конвертирует изображение в массив битов для последующего сохранения его в базе данных
-        /// </summary>
-        public static byte[] ConvertImageToByteArray<Template>( Template data) where Template : class
-        {
-            if (data is NewClientData)
-            {
-                var clientData = data as NewClientData;
-                if (string.IsNullOrEmpty(clientData.PathPersonPhoto))
-                    return null;
-
-                return File.ReadAllBytes(Path.GetFullPath(clientData.PathPersonPhoto));
-            }
-            return null;
-        }
 
         /// <summary>
         /// Метод конвертирует изображение из БД и устанавливает путь сохранения
@@ -125,53 +107,54 @@ namespace FC_EMDB.Utils
         /// <param name="data">Данные клиента или пользователя системы</param>
         public static void SavePhoto<Template>(ref Template data) where Template : class
         {
-            PersonData personData = null;
+            Human personData = null;
+            string PersonRole = null;
             //Если это пользователь системы
-            if (data is UserData)
+            if (data is Employee)
             {
-                 personData = data as UserData;
-                if (personData.PersonPhoto == null)
+                 personData = data as Employee;
+                if (personData.HumanPhoto == null)
                     return;
+                PersonRole = "Пользователь";
             }
 
-            //Если это клиент
-            if (data is NewClientData)
+
+            //Если это пользователь системы
+            if (data is Account)
             {
-                 personData = data as NewClientData;
-                if (personData.PersonPhoto == null)
+                personData = data as Account;
+                if (personData.HumanPhoto == null)
                     return;
+                PersonRole  = "Клиент";
             }
 
-            //Если это клиент
-            //if (data is Account)
-            //{
-            //    personData = data as Account;
-            //    if (personData.PersonPhoto == null)
-            //        return;
-            //}
+            if(string.IsNullOrEmpty(PersonRole))
+                return;
+            
 
             if (personData == null)
                 return;
 
             var outerNew = Task<string>.Factory.StartNew(() =>
             {
-                string strFileName = personData.PersonFirstName + "_" + personData.PersonLastName + "_" + personData.PersonId;
-                string savePathFolder = $@"{Environment.CurrentDirectory}\{"Temp"}\{personData.PersonRole}";
+                string strFileName = personData.HumanFirstName + "_" + personData.HumanLastName + "_" + personData.HumanId;
+                string savePathFolder = $@"{Environment.CurrentDirectory}\{"Temp"}\{PersonRole}";
                 string localFilePath = $@"{savePathFolder}\{strFileName}.{"JPEG"}";
-
-                if (!File.Exists(localFilePath))
-                {
+                DirectoryInfo directoryInfo = Directory.CreateDirectory(savePathFolder);
+               
+                //if (!File.Exists(localFilePath))
+                //{
                     Stream myStream;
                     using (myStream = File.Open(localFilePath, FileMode.OpenOrCreate, FileAccess.Write))
                     {
-                        myStream.Write(personData.PersonPhoto, 0, personData.PersonPhoto.Length);
-                        myStream.FlushAsync();
+                        myStream.Write(personData.HumanPhoto, 0, personData.HumanPhoto.Length);
+                        myStream.Dispose();
                     }
-                }
+               // }
                 return localFilePath;
             });
             outerNew.Wait();
-            personData.PathPersonPhoto = outerNew.Result;
+            personData.StrPathPhoto = outerNew.Result;
             outerNew.Dispose();
         }
 
@@ -181,92 +164,18 @@ namespace FC_EMDB.Utils
         /// <typeparam name="Template"></typeparam>
         /// <param name="data">Данные для определения имени файла(оставил старые данные, чтобы нашел имя файла) </param>
         /// <param name="PersonPhoto">Массив байтов фото</param>
-        public static void UpdatePhoto<Template>(ref Template data, byte[] PersonPhoto) where Template : class
+        public static void UpdatePhoto<Template>(ref Template data, string strPersonPhoto) where Template : class
         {
-           
 
-            if (data is Account)
-            {
+           byte[] personPhoto = ConvertImageToByteArray(strPersonPhoto);
 
-                var clientData = data as Account;
-
-                bool isEquals = true;
-
-                if (PersonPhoto != null && clientData.HumanPhoto != null)
-                {
-                    isEquals = (BitConverter.ToInt32(PersonPhoto, 0) ^ BitConverter.ToInt32(clientData.HumanPhoto, 0)) != 0;
-                }
-
-                if (PersonPhoto == null && clientData.HumanPhoto != null)
-                {
-                    PersonPhoto = clientData.HumanPhoto;
-                }
-
-                if (clientData.HumanPhoto == null && PersonPhoto!=null)
-                {
-                    clientData.HumanPhoto = PersonPhoto;
-                    isEquals = false;
-                }
-
-                var outerNew = Task.Factory.StartNew(() =>
-                {
-                    string strFileName = clientData.HumanFirstName + "_" + clientData.HumanLastName + "_" + clientData.HumanId;
-                    string savePathFolder = $@"{Environment.CurrentDirectory}\{"Temp"}\Клиент";
-                    DirectoryInfo directoryInfo = Directory.CreateDirectory(savePathFolder);
-                    string localFilePath = $@"{savePathFolder}\{strFileName}.{"JPEG"}";
-                  
-                  
-                    if (File.Exists(localFilePath) && !isEquals)
-                    {
-                        Stream myStream;
-                        using (myStream = File.Open(localFilePath, FileMode.OpenOrCreate, FileAccess.Write))
-                        {
-                          myStream.Write(PersonPhoto, 0, PersonPhoto.Length);
-                            myStream.FlushAsync();
-                        }
-                    }
-                });
-                outerNew.Wait();
-            }
-        }
-
-        /// <summary>
-        /// Метод преобразует данные из val2 в val1
-        /// </summary>
-        /// <typeparam name="Temp1">Шаблон val1</typeparam>
-        /// <typeparam name="Temp2">Шаблон val2</typeparam>
-        /// <param name="val1">Выходное значение</param>
-        /// <param name="val2">Преобразуемое значение</param>
-        public static void Convert<Temp1, Temp2>(ref Temp1 val1, Temp2 val2) where Temp1 : class where Temp2 : class
-        {
-            if (val1 == null || val2 == null)
+            if (personPhoto == null || data== null)
                 return;
 
-            if (val1 is Account && val2 is NewClientData)
-            {
-                var account = (val1 as Account);
-                var newClientData = (val2 as NewClientData);
-              
-                SqlTools.UpdatePhoto(ref account, SqlTools.ConvertImageToByteArray(newClientData));
-                
-                account.HumanFirstName = newClientData.PersonFirstName;
-                account.HumanLastName = newClientData.PersonLastName;
-                account.HumanFamilyName = newClientData.PersonFamilyName;
-                account.HumanAdress = newClientData.PersonAdress;
-                account.HumanDateOfBirdth = newClientData.PersonDateOfBirdth;
-                account.HumanGender = newClientData.PersonGender;
-                //account.ClientId = newClientData.PersonId;
-                account.HumanMail = newClientData.PersonMail;
-                account.HumanPasportDataSeries = newClientData.ClientPasportDataSeries;
-                account.HumanPasportDataNumber = newClientData.ClientPasportDataNumber;
-                account.HumanPasportDataIssuedBy = newClientData.ClientPasportDataIssuedBy;
-                account.HumanPasportDatеOfIssue = newClientData.ClientPasportDatеOfIssue;
-                account.HumanPhoneNumber = newClientData.PersonPhoneNumber;
-                //account.AccountregistrationDate = newClientData.AccountregistrationDate;
-                account.HumanAdress = newClientData.PersonAdress;
-                account.HumanPhoto = SqlTools.ConvertImageToByteArray(newClientData); //запишем фотографию
-            }
+            (data as Account).HumanPhoto = personPhoto;
+            
         }
+
 
 
 
@@ -284,23 +193,19 @@ namespace FC_EMDB.Utils
                 PersonRole = "Клиент";
             }
 
-  
-
             var outerNew = Task<string>.Factory.StartNew(() =>
             {
                 string strFileName = personData.HumanFirstName + "_" + personData.HumanLastName + "_" + personData.HumanId;
                 string savePathFolder = $@"{Environment.CurrentDirectory}\{"Temp"}\{PersonRole}";
                 string localFilePath = $@"{savePathFolder}\{strFileName}.{"JPEG"}";
+                Directory.CreateDirectory(savePathFolder);
 
-                if (!File.Exists(localFilePath))
-                {
                     Stream myStream;
-                    using (myStream = File.Open(localFilePath, FileMode.OpenOrCreate, FileAccess.Write))
+                    using (myStream = File.Open(localFilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                     {
                         myStream.Write(personData.HumanPhoto, 0, personData.HumanPhoto.Length);
                         myStream.FlushAsync();
                     }
-                }
                 return localFilePath;
             });
             outerNew.Wait();

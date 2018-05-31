@@ -45,7 +45,7 @@ namespace FitnesClubCL
 
             AutorizationUserData = datAutorizationUserData;
             //При авторизации также получим данные пользователя
-            PasswordController.GetSystemUserData(AutorizationUserData, out UserData userData);
+            PasswordController.GetSystemUserData(AutorizationUserData, out Employee userData);
             //Вернем данные пользователя
             WorkingUserData = userData;
         }
@@ -58,7 +58,7 @@ namespace FitnesClubCL
         /// <summary>
         /// Экземпляр данных работника
         /// </summary>
-        [CanBeNull] public UserData WorkingUserData { get; private set; }
+        [CanBeNull] public Employee WorkingUserData { get; private set; }
         #endregion
 
 
@@ -73,7 +73,7 @@ namespace FitnesClubCL
         {
             if (recordData == null)
                 return null;
-            return ClientsHelper.IsExistRecord<T>(recordData);
+            return ClientsHelper.CheckRecord<T>(recordData);
         }
 
         /// <summary>

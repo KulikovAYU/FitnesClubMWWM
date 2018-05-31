@@ -100,7 +100,7 @@ namespace FC_EMDB
         /// </summary>
         /// <param name="datAutorizationUserData">Регистрационные данные пользователя</param>
         /// <param name="userData">Данные пользователя</param>
-        public void GetSystemUserData(AutorizationUserData datAutorizationUserData, out UserData userData)
+        public void GetSystemUserData(AutorizationUserData datAutorizationUserData, out Employee userData)
         {
             if (datAutorizationUserData == null)
             {
@@ -127,10 +127,11 @@ namespace FC_EMDB
 
             }
 
-            userData = new UserData( employee.HumanFirstName, employee.HumanLastName, employee.HumanFamilyName,
-             employee.HumanDateOfBirdth,  string.Empty , employee.HumanId, employee.HumanAdress, employee.HumanPhoneNumber, employee.HumanMail, employee.HumanPhoto, employee.EmployeeLoginName, employee.EmployeePasswordHash,
-                roleEmployee, workingStatusEmployee);
-            SqlTools.SavePhoto(ref userData);
+            //userData = new UserData( employee.HumanFirstName, employee.HumanLastName, employee.HumanFamilyName,
+            // employee.HumanDateOfBirdth,  string.Empty , employee.HumanId, employee.HumanAdress, employee.HumanPhoneNumber, employee.HumanMail, employee.HumanPhoto, employee.EmployeeLoginName, employee.EmployeePasswordHash,
+            //    roleEmployee, workingStatusEmployee);
+            SqlTools.SavePhoto(ref employee);
+            userData = employee;
         }
 
         /// <summary>
@@ -139,17 +140,19 @@ namespace FC_EMDB
         /// <param name="recordData">Данные</param>
         public T GetRecord<T>( T recordData)  where  T : class 
         {
-            if (recordData is Account )
-            {
 
-                return unitOfWork.Accounts.FindAccountWithSameData(recordData as Account) as T;
-                //if (recordData != null)
-                //{
-                //    SqlTools.SavePhoto(ref recordData);
-                //}
-            }
+            recordData = unitOfWork.Accounts.FindAccountWithSameData(recordData as Account) as T;
+           
 
-            return null;
+            return recordData;
+
+            //if (recordData != null)
+            //{
+            //    SqlTools.SavePhoto(ref recordData);
+            //}
+
+
+
 
             //if (recordData is NewClientData)
             //{
@@ -169,20 +172,21 @@ namespace FC_EMDB
         /// <param name="recordData">Данные для записи</param>
         public void UpdateFields<T>(T recordData) where  T : class 
         {
-            //if (recordData is Account)
-            //{
-            //    var _data = recordData as Account;
+            if (recordData is Account)
+            {
+                var _data = recordData as Account;
 
-            //    if (_data.NumberSubscription != 0)// в случае, если это существующая запись
-            //    {
-            //        unitOfWork.Accounts.UpdateFields(_data);
-            //    }
-            //    else
-            //    {
-            //        unitOfWork.Accounts.CreateRecord(_data);
-            //    }
-              
-            //}
+                if (_data.Abonement.NumberSubscription != 0)// в случае, если это существующая запись
+                {
+                    unitOfWork.Accounts.UpdateFields(_data);
+                }
+                else //TODO: проверить
+                {
+                    unitOfWork.Accounts.CreateRecord(_data);
+                }
+
+
+            }
         }
 
         /// <summary>

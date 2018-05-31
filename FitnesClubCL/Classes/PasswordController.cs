@@ -84,7 +84,7 @@ namespace FitnesClubCL.Classes
         /// </summary>
         /// <param name="datAutorizationUserData">Данные для авторизации</param>
         /// <param name="userData">Данные пользователя, который прошел авторизацию</param>
-        public static void GetSystemUserData([CanBeNull]AutorizationUserData datAutorizationUserData, out UserData userData)
+        public static void GetSystemUserData([CanBeNull]AutorizationUserData datAutorizationUserData, out Employee userData)
         {
             if (string.IsNullOrEmpty(datAutorizationUserData?.UserLoginName) ||
                 string.IsNullOrEmpty(datAutorizationUserData.PasswordString))
@@ -108,7 +108,7 @@ namespace FitnesClubCL.Classes
         /// Метод проверяет запись на признак существования
         /// </summary>
         /// <param name="recordData">Запись</param>
-        public static T IsExistRecord<T>(T recordData) where T : class
+        public static T CheckRecord<T>(T recordData) where T : class
         {
             if (recordData == null)
                 return null;

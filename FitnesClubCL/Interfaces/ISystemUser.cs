@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using FC_EMDB.Classes;
+using FC_EMDB.EMDB.CF.Data.Domain;
 using FitnesClubCL.Classes;
 
 namespace FitnesClubCL
@@ -18,6 +19,6 @@ namespace FitnesClubCL
         /// <summary>
         /// Данные пользователя, которые выернула модель
         /// </summary>
-        UserData WorkingUserData { get; }
+        Employee WorkingUserData { get; }
     }
 }

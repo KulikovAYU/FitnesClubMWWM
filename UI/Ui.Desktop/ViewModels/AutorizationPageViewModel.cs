@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using FC_EMDB.Classes;
+using FC_EMDB.EMDB.CF.Data.Domain;
 using FitnesClubCL;
 using FitnessClubMWWM.Ui.Desktop.Constants;
 using FitnessClubMWWM.Ui.Desktop.Pages;
@@ -70,6 +71,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// <summary>
         /// Данные пользователя, которые вернула модель
         /// </summary>
-        public UserData WorkingUserData { get; private set; }
+        public Employee WorkingUserData { get; private set; }
     }
 }

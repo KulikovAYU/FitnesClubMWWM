@@ -1,8 +1,7 @@
-﻿using System;
-using System.Web.UI.WebControls;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media.Animation;
 using FC_EMDB.Classes;
+using FC_EMDB.EMDB.CF.Data.Domain;
 using FitnesClubCL;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -172,7 +171,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// <summary>
         /// Метод обновляет поля информации о пользователе
         /// </summary>
-        public void SetUserData(UserData workingUserData)
+        public void SetUserData(Employee workingUserData)
         {
             if (workingUserData == null)
             {
@@ -191,7 +190,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// <summary>
         /// Рабочие данные пользователя
         /// </summary>
-        public UserData WorkingUserData { get; private set; }
+        public Employee WorkingUserData { get; private set; }
 
         /// <summary>
         /// Команда скрывает боковую панель игнформации

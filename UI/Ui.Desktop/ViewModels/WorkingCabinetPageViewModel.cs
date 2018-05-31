@@ -22,7 +22,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
     /// <summary>
     /// Зарегистрировать нового клиента
     /// </summary>
-    public class WorkingCabinetPageViewModel : ViewModelBase, IDataErrorInfo, IClient
+    public class WorkingCabinetPageViewModel : ViewModelBase, IDataErrorInfo
     {
         private readonly ModelManager _modelManager;
         public WorkingCabinetPageViewModel()
@@ -92,6 +92,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                         switch (result)
                         {
                             case MessageBoxResult.Yes:
+                                this.StrPath = string.Empty;
                                 UpdatePageFields(_clientData);// обновляем форму
                                 return;
 
@@ -149,7 +150,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                         "Регистрация нового пользователя",
                         MessageBoxButton.OK, eMessageBoxIcons.eSucsess);
                     bIsExistPerson = false;
-                    ClearFields();
+                    //ClearFields();
                    _clientData = null;
                 }
             }
