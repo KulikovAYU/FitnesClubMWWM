@@ -45,10 +45,11 @@ namespace FC_EMDB.Classes
     public class PersonData
     {
         private string personPhoto;
+        private DateTime? _personDateOfBirdth;
 
         public PersonData()
         {
-            
+
         }
 
         private PersonData(string personFirstName, string personLastName,
@@ -62,9 +63,9 @@ namespace FC_EMDB.Classes
             PersonId = personId;
         }
 
-        public PersonData(string personFirstName, string personLastName, 
-            string personFamilyName, DateTime? personDateOfBirdth, string personGender, int personId, string personAdress, string personPhoneNumber, string personMail, byte[] personPhoto, bool isExistPerson) : 
-            this( personFirstName, personLastName, personFamilyName, personDateOfBirdth, personGender, personId)
+        public PersonData(string personFirstName, string personLastName,
+            string personFamilyName, DateTime? personDateOfBirdth, string personGender, int personId, string personAdress, string personPhoneNumber, string personMail, byte[] personPhoto, bool isExistPerson) :
+            this(personFirstName, personLastName, personFamilyName, personDateOfBirdth, personGender, personId)
         {
             PersonAdress = personAdress;
             PersonPhoneNumber = personPhoneNumber;
@@ -77,12 +78,12 @@ namespace FC_EMDB.Classes
         /// Имя клиента
         /// </summary>
         public string PersonFirstName { get; set; }
-       
+
         /// <summary>
         /// Фамилия клиента
         /// </summary>
         public string PersonFamilyName { get; set; }
-       
+
         /// <summary>
         /// Отчетство клиента
         /// </summary>
@@ -96,7 +97,9 @@ namespace FC_EMDB.Classes
         /// <summary>
         /// Дата рождения
         /// </summary>
-        public DateTime? PersonDateOfBirdth { get;  set; }
+        public DateTime? PersonDateOfBirdth
+        {
+            get => DateTime.Parse(_personDateOfBirdth?.ToString("dd.MM.yyyy")); set => _personDateOfBirdth = value; }
 
         /// <summary>
         /// Id человека
@@ -116,12 +119,12 @@ namespace FC_EMDB.Classes
         /// <summary>
         /// Номер телефона
         /// </summary>
-        public string PersonPhoneNumber { get;  set; }
+        public string PersonPhoneNumber { get; set; }
 
         /// <summary>
         /// Мейл
         /// </summary>
-        public string PersonMail { get;  set; }
+        public string PersonMail { get; set; }
 
         /// <summary>
         /// Адрес человека
@@ -135,7 +138,7 @@ namespace FC_EMDB.Classes
         /// <summary>
         /// Пол человека
         /// </summary>
-        public string PersonGender { get;  set; }
+        public string PersonGender { get; set; }
     }
 
     /// <summary>

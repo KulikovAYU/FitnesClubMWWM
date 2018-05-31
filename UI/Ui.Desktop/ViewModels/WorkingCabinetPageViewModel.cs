@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using FC_EMDB.Classes;
+using FC_EMDB.EMDB.CF.Data.Domain;
 using FitnesClubCL;
 using FitnessClubMWWM.Ui.Desktop.Constants;
 using FitnessClubMWWM.Ui.Desktop.Interfaces;
@@ -42,42 +43,47 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// Команда зарегистрировать нового клиента
         /// </summary>
         public RelayCommand RegisterNewClientCommand => new RelayCommand(() => { Messenger.Default.Send("RegisterNewClientPage"); });
-       
+
         /// <summary>
         /// Данные нового зарегистрированного клиента
         /// </summary>
-        private NewClientData _clientData;
-       
-    
+        //public NewClientData _clientData;
+        public Account _clientData1 { get; set; }
+
+        private bool bIsExistPerson = false;
+        Account _clientData = null;
         /// <summary>
         /// Команда "сохранить изменения" после заполнения формы
         /// </summary>
         public RelayCommand<bool> SaveChangesCommand => new RelayCommand<bool>((obj) =>{
             {
-                if (_clientData == null || !_clientData.IsExistPerson )
+            
+                if (_clientData == null || !bIsExistPerson)
                 {
-                    _clientData = new NewClientData()
+                    var x = this.StrPath;
+                    _clientData = new Account()
                     {
-                        PersonRole = "Клиент",
-                        PersonFirstName = ClientFirstName,
-                        PersonLastName = ClientLastName,
-                        PersonFamilyName = ClientFamilyName,
-                        PersonDateOfBirdth = ClientDateOfBirdth,
-                        PersonGender = obj ? "Муж." : "Жен.",
-                        PersonAdress = ClientAdress,
-                        PersonPhoneNumber = ClientPhoneNumber,
-                        PersonMail = ClientMail,
-                        PathPersonPhoto = StrPath,
-                        ClientPasportDataSeries = this.ClientPasportDataSeries,
-                        ClientPasportDataNumber = this.ClientPasportDataNumber,
-                        ClientPasportDataIssuedBy = this.ClientPasportDataIssuedBy,
-                        ClientPasportDatеOfIssue = this.ClientPasportDatеOfIssue
+                        HumanFirstName = this.ClientFirstName,
+                        HumanLastName = this.ClientLastName,
+                        HumanFamilyName = this.ClientFamilyName,
+                        HumanDateOfBirdth = this.ClientDateOfBirdth,
+                        HumanGender = obj ? "Муж." : "Жен.",
+                        HumanAdress = this.ClientAdress,
+                        HumanPhoneNumber = this.ClientPhoneNumber,
+                        HumanMail = this.ClientMail,
+                        StrPathPhoto = this.StrPath,
+                        HumanPasportDataSeries = this.ClientPasportDataSeries,
+                        HumanPasportDataNumber = this.ClientPasportDataNumber,
+                        HumanPasportDataIssuedBy = this.ClientPasportDataIssuedBy,
+                        HumanPasportDatеOfIssue = this.ClientPasportDatеOfIssue
                     };
-                    _modelManager.CheckRecord(ref _clientData);
+
+                    _clientData = _modelManager.CheckRecord(_clientData);
 
                     // В случае если запись в БД существует
                     if (_clientData != null)
                     {
+                        bIsExistPerson = true;
                         MessageBoxResult result = CustomMessageBox.Show(
                             "Данный клиент зарегистрирован в системе.\nЗагрузить существующие данные для\nдальнейшего внесения изменений?",
                             "Регистрация нового пользователя",
@@ -96,52 +102,53 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                     }
                     else
                     {
-                        _clientData = new NewClientData(true)
-                        {
-                            PersonRole = "Клиент",
-                            PersonFirstName = ClientFirstName,
-                            PersonLastName = ClientLastName,
-                            PersonFamilyName = ClientFamilyName,
-                            PersonDateOfBirdth = ClientDateOfBirdth,
-                            PersonGender = obj ? "Муж." : "Жен.",
-                            PersonAdress = ClientAdress,
-                            PersonPhoneNumber = ClientPhoneNumber,
-                            PersonMail = ClientMail,
-                            PathPersonPhoto = StrPath,
-                            ClientPasportDataSeries = this.ClientPasportDataSeries,
-                            ClientPasportDataNumber = this.ClientPasportDataNumber,
-                            ClientPasportDataIssuedBy = this.ClientPasportDataIssuedBy,
-                            ClientPasportDatеOfIssue = this.ClientPasportDatеOfIssue
+                        //_clientData = new NewClientData(true)
+                        //{
+                        //    PersonRole = "Клиент",
+                        //    PersonFirstName = ClientFirstName,
+                        //    PersonLastName = ClientLastName,
+                        //    PersonFamilyName = ClientFamilyName,
+                        //    PersonDateOfBirdth = ClientDateOfBirdth,
+                        //    PersonGender = obj ? "Муж." : "Жен.",
+                        //    PersonAdress = ClientAdress,
+                        //    PersonPhoneNumber = ClientPhoneNumber,
+                        //    PersonMail = ClientMail,
+                        //    PathPersonPhoto = StrPath,
+                        //    ClientPasportDataSeries = this.ClientPasportDataSeries,
+                        //    ClientPasportDataNumber = this.ClientPasportDataNumber,
+                        //    ClientPasportDataIssuedBy = this.ClientPasportDataIssuedBy,
+                        //    ClientPasportDatеOfIssue = this.ClientPasportDatеOfIssue
                             
-                        };
-                        _modelManager.CreateOrUpdateRecord<NewClientData>(_clientData);
-                        CustomMessageBox.Show(
-                            "Новая учетная запись успешно создана",
-                            "Регистрация нового пользователя",
-                            MessageBoxButton.OK, eMessageBoxIcons.eSucsess);
-                        ClearFields();
-                        _clientData = null;
+                        //};
+                        //_modelManager.CreateOrUpdateRecord<NewClientData>(_clientData);
+                        //CustomMessageBox.Show(
+                        //    "Новая учетная запись успешно создана",
+                        //    "Регистрация нового пользователя",
+                        //    MessageBoxButton.OK, eMessageBoxIcons.eSucsess);
+                        //ClearFields();
+                        //_clientData = null;
                     }
                 }
                 else
                 {
-                    _clientData.PersonFirstName = ClientFirstName;
-                    _clientData.PersonFamilyName = ClientFamilyName;
-                    _clientData.PersonLastName = ClientLastName;
-                    _clientData.PersonDateOfBirdth = ClientDateOfBirdth;
-                    _clientData.PersonPhoneNumber = ClientPhoneNumber;
-                    _clientData.ClientPasportDataSeries = ClientPasportDataSeries;
-                    _clientData.ClientPasportDataNumber = ClientPasportDataNumber;
-                    _clientData.ClientPasportDataIssuedBy = ClientPasportDataIssuedBy;
-                    _clientData.ClientPasportDatеOfIssue = ClientPasportDatеOfIssue;
-                    _clientData.PathPersonPhoto = StrPath;
-                    _clientData.PersonAdress = ClientAdress;
-                    _clientData.PersonMail = ClientMail;
-                    _modelManager.CreateOrUpdateRecord<NewClientData>(_clientData);
+                    _clientData.HumanFirstName = this.ClientFirstName;
+                    _clientData.HumanFamilyName = this.ClientFamilyName;
+                    _clientData.HumanLastName = this.ClientLastName;
+                    _clientData.HumanDateOfBirdth = this.ClientDateOfBirdth;
+                    _clientData.HumanPhoneNumber = this.ClientPhoneNumber;
+                    _clientData.HumanPasportDataSeries = this.ClientPasportDataSeries;
+                    _clientData.HumanPasportDataNumber = this.ClientPasportDataNumber;
+                    _clientData.HumanPasportDataIssuedBy = this.ClientPasportDataIssuedBy;
+                    _clientData.HumanPasportDatеOfIssue = this.ClientPasportDatеOfIssue;
+                    _clientData.StrPathPhoto = this.StrPath;
+                    _clientData.HumanAdress = this.ClientAdress;
+                    _clientData.HumanMail = this.ClientMail;
+                    _modelManager.CreateOrUpdateRecord<Account>(_clientData);
                     CustomMessageBox.Show(
                         "Обновление записи успешно завершено",
                         "Регистрация нового пользователя",
                         MessageBoxButton.OK, eMessageBoxIcons.eSucsess);
+                    bIsExistPerson = false;
                     ClearFields();
                    _clientData = null;
                 }
@@ -150,24 +157,42 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
         }, (obj) =>  IsOk);
 
+        public RelayCommand<string> FindClientForNumberSubsription => new RelayCommand<string>((number) =>
+        {
+           var account = _modelManager.FindPersonForNumberSubsription(Int32.Parse(number as string));
+
+            if (account != null)
+            {
+                Messenger.Default.Send("RegisterNewClientPage");
+                //TODO: написать автозаполнение полей
+            }
+            else
+            {
+                CustomMessageBox.Show(
+                    $"Клиента с номером абонемента {number} не найдено",
+                    "Регистрация нового пользователя",
+                    MessageBoxButton.OK, eMessageBoxIcons.eWarning);
+            }
+        });
+
         /// <summary>
         /// Обновление полей
         /// </summary>
         /// <param name="clientData">данные клиента</param>
-        private void UpdatePageFields(NewClientData clientData)
+        private void UpdatePageFields(Account clientData)
         {
-            ClientFirstName = clientData.PersonFirstName;
-            ClientFamilyName = clientData.PersonFamilyName;
-            ClientLastName = clientData.PersonLastName;
-            ClientDateOfBirdth = clientData.PersonDateOfBirdth;
-            ClientPhoneNumber = clientData.PersonPhoneNumber;
-            ClientPasportDataSeries = clientData.ClientPasportDataSeries;
-            ClientPasportDataNumber = clientData.ClientPasportDataNumber;
-            ClientPasportDataIssuedBy = clientData.ClientPasportDataIssuedBy;
-            ClientPasportDatеOfIssue = clientData.ClientPasportDatеOfIssue;
-            StrPath = clientData.PathPersonPhoto;
-            ClientAdress = clientData.PersonAdress;
-            ClientMail = clientData.PersonMail;
+            this.ClientFirstName = clientData.HumanFirstName;
+            this.ClientFamilyName = clientData.HumanFamilyName;
+            this.ClientLastName = clientData.HumanLastName;
+            this.ClientDateOfBirdth = clientData.HumanDateOfBirdth;
+            this.ClientPhoneNumber = clientData.HumanPhoneNumber;
+            this.ClientPasportDataSeries = clientData.HumanPasportDataSeries;
+            this.ClientPasportDataNumber = clientData.HumanPasportDataNumber;
+            this.ClientPasportDataIssuedBy = clientData.HumanPasportDataIssuedBy;
+            this.ClientPasportDatеOfIssue = clientData.HumanPasportDatеOfIssue;
+            this.StrPath = clientData.StrPathPhoto;
+            this.ClientAdress = clientData.HumanAdress;
+            this.ClientMail = clientData.HumanMail;
         }
 
         /// <summary>

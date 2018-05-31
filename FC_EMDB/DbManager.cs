@@ -127,8 +127,8 @@ namespace FC_EMDB
 
             }
 
-            userData = new UserData( employee.EmployeeFirstName, employee.EmployeeLastName, employee.EmployeeFamilyName,
-             employee.EmployeeDateOfBirdth,  string.Empty , employee.EmployeeId, employee.EmployeeAdress, employee.EmployeePhoneNumber, employee.EmployeeMail, employee.EmployeePhoto, employee.EmployeeLoginName, employee.EmployeePasswordHash,
+            userData = new UserData( employee.HumanFirstName, employee.HumanLastName, employee.HumanFamilyName,
+             employee.HumanDateOfBirdth,  string.Empty , employee.HumanId, employee.HumanAdress, employee.HumanPhoneNumber, employee.HumanMail, employee.HumanPhoto, employee.EmployeeLoginName, employee.EmployeePasswordHash,
                 roleEmployee, workingStatusEmployee);
             SqlTools.SavePhoto(ref userData);
         }
@@ -137,17 +137,29 @@ namespace FC_EMDB
         /// Получить запись по заполненным данным
         /// </summary>
         /// <param name="recordData">Данные</param>
-        public void GetRecord<T>(ref T recordData)  where  T : class 
+        public T GetRecord<T>( T recordData)  where  T : class 
         {
-            if (recordData is NewClientData)
+            if (recordData is Account )
             {
-                SqlTools.ConvertImageToByteArray( recordData);
-                recordData = unitOfWork.Accounts.FindAccountWithSameData(recordData as NewClientData) as T;
-                if (recordData != null)
-                {
-                    SqlTools.SavePhoto(ref recordData);
-                }
+
+                return unitOfWork.Accounts.FindAccountWithSameData(recordData as Account) as T;
+                //if (recordData != null)
+                //{
+                //    SqlTools.SavePhoto(ref recordData);
+                //}
             }
+
+            return null;
+
+            //if (recordData is NewClientData)
+            //{
+            //    SqlTools.ConvertImageToByteArray( recordData);
+            //    recordData = unitOfWork.Accounts.FindAccountWithSameData(recordData as NewClientData) as T;
+            //    if (recordData != null)
+            //    {
+            //        SqlTools.SavePhoto(ref recordData);
+            //    }
+            //}
         }
 
         /// <summary>
@@ -157,20 +169,20 @@ namespace FC_EMDB
         /// <param name="recordData">Данные для записи</param>
         public void UpdateFields<T>(T recordData) where  T : class 
         {
-            if (recordData is NewClientData)
-            {
-                var _data = recordData as NewClientData;
+            //if (recordData is Account)
+            //{
+            //    var _data = recordData as Account;
 
-                if (_data.NumberSubscription != 0)// в случае, если это существующая запись
-                {
-                    unitOfWork.Accounts.UpdateFields(_data);
-                }
-                else
-                {
-                    unitOfWork.Accounts.CreateRecord(_data);
-                }
+            //    if (_data.NumberSubscription != 0)// в случае, если это существующая запись
+            //    {
+            //        unitOfWork.Accounts.UpdateFields(_data);
+            //    }
+            //    else
+            //    {
+            //        unitOfWork.Accounts.CreateRecord(_data);
+            //    }
               
-            }
+            //}
         }
 
         /// <summary>
@@ -229,19 +241,23 @@ namespace FC_EMDB
 
         public void AddData<T1, T2>(T1 data1, T2 data2) where T1 : class where T2 : class
         {
-            if (data1  is Account && data2 is ServicesInSubscription)
-            {
-                unitOfWork.Accounts.Get((data1 as Account).ClientId).ArrServicesInSubscription.Add( new ServicesInSubscription(data1 as Account)
-                    {
-                        SiSTrainingCount = (data2 as ServicesInSubscription).SiSTrainingCount,
-                        SiSVisitedTrainingCount = 0,
-                        TotalCost = (data2 as ServicesInSubscription).TotalCost,
-                        PriceType = (data2 as ServicesInSubscription).PriceType
-                }    
-                );
-                unitOfWork.Complete();
-                //unitOfWork.Accounts.AddServicesInSubscription(nId, data as ServicesInSubscription);
-            }
+            //if (data1  is Account && data2 is ServicesInSubscription)
+            //{
+            //    unitOfWork.Accounts.Get((data1 as Account).HumanId).ArrServicesInSubscription.Add( new ServicesInSubscription(data1 as Account)
+            //        {
+            //            SiSTrainingCount = (data2 as ServicesInSubscription).SiSTrainingCount,
+            //            SiSVisitedTrainingCount = 0,
+            //            TotalCost = (data2 as ServicesInSubscription).TotalCost,
+            //            PriceType = (data2 as ServicesInSubscription).PriceType
+            //    }    
+            //    );
+            //    unitOfWork.Complete();
+            //}
+        }
+
+        public Account FindPersonForNumberSubsription(int numberSubscription) 
+        {
+            return unitOfWork.Accounts.GetAccountForNumberSubscription(numberSubscription);
         }
     }
 }

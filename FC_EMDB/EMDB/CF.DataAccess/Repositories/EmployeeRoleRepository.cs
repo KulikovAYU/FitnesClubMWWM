@@ -15,7 +15,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
         {
             if (employee == null)
                 return null;
-            var query = DataBaseFcContext.Employees.Where(emp => emp.EmployeeId == employee.EmployeeId)
+            var query = DataBaseFcContext.Employees.Where(emp => emp.HumanId == employee.HumanId)
                 .Select(role => role.EmployeeRole).FirstOrDefault();
             return query;
         }
@@ -24,7 +24,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
         {
             if (employee == null)
                 return null;
-            var query = DataBaseFcContext.Employees.Where(emp => emp.EmployeeId == employee.EmployeeId)
+            var query = DataBaseFcContext.Employees.Where(emp => emp.HumanId == employee.HumanId)
                 .Select(role => role.EmployeeRole.EmployeeRoleName).FirstOrDefault();
             return query;
         }

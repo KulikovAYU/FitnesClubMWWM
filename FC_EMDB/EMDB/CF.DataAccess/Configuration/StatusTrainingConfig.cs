@@ -10,6 +10,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Configuration
             HasKey(statusTraining => statusTraining.StatusTarainingId);
             Property(statusTraining => statusTraining.StatusName).IsOptional().HasColumnName("statusTraining")
                 .HasMaxLength(50);
+            ToTable("StatusTrainingConfig");
         }
     }
 }

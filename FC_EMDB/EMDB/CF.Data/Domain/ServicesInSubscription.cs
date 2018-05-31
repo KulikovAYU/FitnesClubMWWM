@@ -10,14 +10,10 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
     {
         public ServicesInSubscription()
         {
-            arrAccount = new HashSet<Account>();
+            ArrAbonements = new HashSet<Abonement>();
         }
 
-        public ServicesInSubscription(Account acc) : this()
-
-        {
-            arrAccount.Add(acc);
-        }
+      
         /// <summary>
         /// Id
         /// </summary>
@@ -51,8 +47,8 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public virtual PriceTrainingList PriceType { get; set; } //Вид услуги, Тариф
         #endregion
 
-        public virtual ICollection<Account> arrAccount { get; set; }
+        //public virtual ICollection<Account> arrAccount { get; set; }
+        public virtual ICollection<Abonement> ArrAbonements { get; set; }
 
-    
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using FC_EMDB;
 using FC_EMDB.Classes;
 using FC_EMDB.EMDB.CF.Data.Domain;
@@ -68,11 +69,11 @@ namespace FitnesClubCL
         /// </summary>
         /// <typeparam name="T">Шаблон параметра</typeparam>
         /// <param name="recordData">данные записи</param>
-        public void CheckRecord<T>(ref T recordData) where T : class
+        public T CheckRecord<T>(T recordData) where T : class
         {
             if (recordData == null)
-                return;
-            ClientsHelper.IsExistRecord<T>(ref recordData);
+                return null;
+            return ClientsHelper.IsExistRecord<T>(recordData);
         }
 
         /// <summary>
@@ -87,6 +88,18 @@ namespace FitnesClubCL
             
             ClientsHelper.UpdateFields<T>(clientData);
         }
+
+
+        public Account FindPersonForNumberSubsription(int numberSubscription) 
+        {
+            if (string.IsNullOrEmpty(numberSubscription.ToString()) )
+            {
+                return null;
+            }
+
+           return ClientsHelper.FindPersonForNumberSubsription(numberSubscription);
+        }
+
 
         /// <summary>
         /// Метод возвращает коллекцию людей (работников, клиентов...)
@@ -123,5 +136,7 @@ namespace FitnesClubCL
         {
             Assistiant.AddData<T1, T2>(data1, data2);
         }
+
+       
     }
 }

@@ -90,8 +90,8 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
             if (employee == null)
                 return null;
 
-            var query = DataBaseFcContext.Employees.Where(empl => empl.EmployeeId == employee.EmployeeId)
-                .Select(img => img.EmployeePhoto);
+            var query = DataBaseFcContext.Employees.Where(empl => empl.HumanId == employee.HumanId)
+                .Select(img => img.HumanPhoto);
             if (query.FirstOrDefault() == null)
                 return null;
 
@@ -110,8 +110,8 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
         {
             if (employee == null)
                 return null;
-            var query = DataBaseFcContext.Employees.Where(empl => empl.EmployeeId == employee.EmployeeId)
-                .Select(img => img.EmployeePhoto);
+            var query = DataBaseFcContext.Employees.Where(empl => empl.HumanId == employee.HumanId)
+                .Select(img => img.HumanPhoto);
 
             return query.FirstOrDefault();
         }

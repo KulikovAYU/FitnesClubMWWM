@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\UserTypes.cs" />
+    <Compile Include="EMDB\CF.DataAccess\Configuration\AbonementConfig.cs" />
+    <Compile Include="EMDB\CF.DataAccess\Configuration\AbonementStatusConfig.cs" />
     <Compile Include="EMDB\CF.DataAccess\Configuration\AccountConfig.cs" />
     <Compile Include="EMDB\CF.DataAccess\Configuration\AccountStatusConfig.cs" />
     <Compile Include="EMDB\CF.DataAccess\Configuration\EmployeeConfig.cs" />
@@ -60,8 +62,8 @@
     <Compile Include="EMDB\CF.DataAccess\Configuration\SiSConfig.cs" />
     <Compile Include="EMDB\CF.DataAccess\Configuration\StatusTrainingConfig.cs" />
     <Compile Include="EMDB\CF.DataAccess\Configuration\TarifConfig.cs" />
-    <Compile Include="EMDB\CF.DataAccess\Configuration\TrainingConfig.cs" />
-    <Compile Include="EMDB\CF.DataAccess\Configuration\TrainingListConfig.cs" />
+    <Compile Include="EMDB\CF.DataAccess\Configuration\PriceTrainingListConfig.cs" />
+    <Compile Include="EMDB\CF.DataAccess\Configuration\UpcomingTrainingConfig.cs" />
     <Compile Include="EMDB\CF.DataAccess\Context\DataBaseFCContext.cs" />
     <Compile Include="EMDB\CF.DataAccess\InitializationModel.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\AccountRepository.cs" />
@@ -75,12 +77,15 @@
     <Compile Include="EMDB\CF.DataAccess\Repositories\TarifRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\TrainingListRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\UnitOfWork.cs" />
+    <Compile Include="EMDB\CF.Data\Domain\Abonement.cs" />
+    <Compile Include="EMDB\CF.Data\Domain\AbonementStatus.cs" />
     <Compile Include="EMDB\CF.Data\Domain\Account.cs" />
     <Compile Include="EMDB\CF.Data\Domain\AccountStatus.cs" />
     <Compile Include="EMDB\CF.Data\Domain\Employee.cs" />
     <Compile Include="EMDB\CF.Data\Domain\EmployeeRole.cs" />
     <Compile Include="EMDB\CF.Data\Domain\EmployeeWorkingStatus.cs" />
     <Compile Include="EMDB\CF.Data\Domain\Gym.cs" />
+    <Compile Include="EMDB\CF.Data\Domain\Human.cs" />
     <Compile Include="EMDB\CF.Data\Domain\Service.cs" />
     <Compile Include="EMDB\CF.Data\Domain\ServicesInSubscription.cs" />
     <Compile Include="EMDB\CF.Data\Domain\StatusTaraining.cs" />

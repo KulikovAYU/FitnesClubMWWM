@@ -64,7 +64,7 @@ namespace FC_EMDB.Utils
             else
             {
                 //Получим номера абонементов всех клиеннтов
-                var query = from numberSubscription in context.Accounts select numberSubscription.NumberSubscription;
+                var query = from numberSubscription in context.Accounts select numberSubscription.Abonement.NumberSubscription;
                 //сгенерировали номер абонемента
                 m_next = m_rnd.Next(MinValue, MaxValue);
                 if (query.ToList().Contains(m_next))
@@ -142,6 +142,14 @@ namespace FC_EMDB.Utils
                     return;
             }
 
+            //Если это клиент
+            //if (data is Account)
+            //{
+            //    personData = data as Account;
+            //    if (personData.PersonPhoto == null)
+            //        return;
+            //}
+
             if (personData == null)
                 return;
 
@@ -184,25 +192,25 @@ namespace FC_EMDB.Utils
 
                 bool isEquals = true;
 
-                if (PersonPhoto != null && clientData.ClientPhoto != null)
+                if (PersonPhoto != null && clientData.HumanPhoto != null)
                 {
-                    isEquals = (BitConverter.ToInt32(PersonPhoto, 0) ^ BitConverter.ToInt32(clientData.ClientPhoto, 0)) != 0;
+                    isEquals = (BitConverter.ToInt32(PersonPhoto, 0) ^ BitConverter.ToInt32(clientData.HumanPhoto, 0)) != 0;
                 }
 
-                if (PersonPhoto == null && clientData.ClientPhoto!=null)
+                if (PersonPhoto == null && clientData.HumanPhoto != null)
                 {
-                    PersonPhoto = clientData.ClientPhoto;
+                    PersonPhoto = clientData.HumanPhoto;
                 }
 
-                if (clientData.ClientPhoto == null && PersonPhoto!=null)
+                if (clientData.HumanPhoto == null && PersonPhoto!=null)
                 {
-                    clientData.ClientPhoto = PersonPhoto;
+                    clientData.HumanPhoto = PersonPhoto;
                     isEquals = false;
                 }
 
                 var outerNew = Task.Factory.StartNew(() =>
                 {
-                    string strFileName = clientData.ClientFirstName + "_" + clientData.ClientLastName + "_" + clientData.ClientId;
+                    string strFileName = clientData.HumanFirstName + "_" + clientData.HumanLastName + "_" + clientData.HumanId;
                     string savePathFolder = $@"{Environment.CurrentDirectory}\{"Temp"}\Клиент";
                     DirectoryInfo directoryInfo = Directory.CreateDirectory(savePathFolder);
                     string localFilePath = $@"{savePathFolder}\{strFileName}.{"JPEG"}";
@@ -241,22 +249,22 @@ namespace FC_EMDB.Utils
               
                 SqlTools.UpdatePhoto(ref account, SqlTools.ConvertImageToByteArray(newClientData));
                 
-                account.ClientFirstName = newClientData.PersonFirstName;
-                account.ClientLastName = newClientData.PersonLastName;
-                account.ClientFamilyName = newClientData.PersonFamilyName;
-                account.ClientAdress = newClientData.PersonAdress;
-                account.ClientDateOfBirdth = newClientData.PersonDateOfBirdth;
-                account.ClientGender = newClientData.PersonGender;
+                account.HumanFirstName = newClientData.PersonFirstName;
+                account.HumanLastName = newClientData.PersonLastName;
+                account.HumanFamilyName = newClientData.PersonFamilyName;
+                account.HumanAdress = newClientData.PersonAdress;
+                account.HumanDateOfBirdth = newClientData.PersonDateOfBirdth;
+                account.HumanGender = newClientData.PersonGender;
                 //account.ClientId = newClientData.PersonId;
-                account.ClientMail = newClientData.PersonMail;
-                account.ClientPasportDataSeries = newClientData.ClientPasportDataSeries;
-                account.ClientPasportDataNumber = newClientData.ClientPasportDataNumber;
-                account.ClientPasportDataIssuedBy = newClientData.ClientPasportDataIssuedBy;
-                account.ClientPasportDatеOfIssue = newClientData.ClientPasportDatеOfIssue;
-                account.ClientPhoneNumber = newClientData.PersonPhoneNumber;
-                account.AccountregistrationDate = newClientData.AccountregistrationDate;
-                account.ClientAdress = newClientData.PersonAdress;
-                account.ClientPhoto = SqlTools.ConvertImageToByteArray(newClientData); //запишем фотографию
+                account.HumanMail = newClientData.PersonMail;
+                account.HumanPasportDataSeries = newClientData.ClientPasportDataSeries;
+                account.HumanPasportDataNumber = newClientData.ClientPasportDataNumber;
+                account.HumanPasportDataIssuedBy = newClientData.ClientPasportDataIssuedBy;
+                account.HumanPasportDatеOfIssue = newClientData.ClientPasportDatеOfIssue;
+                account.HumanPhoneNumber = newClientData.PersonPhoneNumber;
+                //account.AccountregistrationDate = newClientData.AccountregistrationDate;
+                account.HumanAdress = newClientData.PersonAdress;
+                account.HumanPhoto = SqlTools.ConvertImageToByteArray(newClientData); //запишем фотографию
             }
         }
 
@@ -271,7 +279,7 @@ namespace FC_EMDB.Utils
             if (data is Account)
             {
                 personData = data as Account;
-                if (personData.ClientPhoto == null)
+                if (personData.HumanPhoto == null)
                     return string.Empty;
                 PersonRole = "Клиент";
             }
@@ -280,7 +288,7 @@ namespace FC_EMDB.Utils
 
             var outerNew = Task<string>.Factory.StartNew(() =>
             {
-                string strFileName = personData.ClientFirstName + "_" + personData.ClientLastName + "_" + personData.ClientId;
+                string strFileName = personData.HumanFirstName + "_" + personData.HumanLastName + "_" + personData.HumanId;
                 string savePathFolder = $@"{Environment.CurrentDirectory}\{"Temp"}\{PersonRole}";
                 string localFilePath = $@"{savePathFolder}\{strFileName}.{"JPEG"}";
 
@@ -289,7 +297,7 @@ namespace FC_EMDB.Utils
                     Stream myStream;
                     using (myStream = File.Open(localFilePath, FileMode.OpenOrCreate, FileAccess.Write))
                     {
-                        myStream.Write(personData.ClientPhoto, 0, personData.ClientPhoto.Length);
+                        myStream.Write(personData.HumanPhoto, 0, personData.HumanPhoto.Length);
                         myStream.FlushAsync();
                     }
                 }

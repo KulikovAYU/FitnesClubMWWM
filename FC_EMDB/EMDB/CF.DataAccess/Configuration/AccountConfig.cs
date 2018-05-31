@@ -13,35 +13,39 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Configuration
         /// </summary>
         public AccountConfig()
         {
-            HasKey(account => account.ClientId);
-            Property(account => account.AccountregistrationDate).IsRequired().HasColumnName("AccountregistrationDate").
-                HasColumnType("datetime2");
-
-            Property(account => account.TrainingCount).IsOptional().HasColumnName("TrainingCount");
-            Property(account => account.VisitedTrainingCount).IsOptional().HasColumnName("VisitedTrainingCount");
-            Property(account => account.TotalCost).IsOptional().HasColumnName("TotalCost").HasColumnType("money"); ;
-            Property(account => account.NumberSubscription).IsRequired().HasColumnName("NumberSubscription");
-            Property(account => account.ClientFirstName).IsRequired().HasColumnName("ClientFirstName").HasMaxLength(50);
-            Property(account => account.ClientLastName).IsRequired().HasColumnName("ClientLastName").HasMaxLength(50);
-            Property(account => account.ClientFamilyName).IsRequired().HasColumnName("ClientFamilyName")
+            HasKey(account => account.HumanId);
+            Property(account => account.HumanFirstName).IsRequired().HasColumnName("AccountFirstName").HasMaxLength(50);
+            Property(account => account.HumanLastName).IsRequired().HasColumnName("AccountLastName").HasMaxLength(50);
+            Property(account => account.HumanFamilyName).IsRequired().HasColumnName("AccountFamilyName")
                 .HasMaxLength(50);
-            Property(account => account.ClientDateOfBirdth).IsRequired().HasPrecision(15)
+            Property(account => account.HumanDateOfBirdth).IsRequired().HasPrecision(15)
                 .HasColumnName("ClientDateOfBirdth");
-            Property(account => account.ClientAdress).IsOptional().HasColumnName("ClientAdress").HasMaxLength(100);
-            Property(account => account.ClientPhoneNumber).IsRequired().HasColumnName("ClientPhoneNumber")
+            Property(account => account.HumanGender).IsOptional().HasColumnName("AccountGender").HasMaxLength(15);
+            Property(account => account.HumanAdress).IsOptional().HasColumnName("AccountAdress").HasMaxLength(100);
+            Property(account => account.HumanPhoneNumber).IsRequired().HasColumnName("AccountPhoneNumber")
                 .HasMaxLength(20);
-            Property(account => account.ClientMail).IsOptional().HasColumnName("ClientMail").HasMaxLength(30);
-            Property(account => account.ClientPhoto).IsOptional().HasColumnName("ClientPhoto");
-            Property(account => account.ClientPasportDataSeries).IsRequired().HasMaxLength(10).HasColumnName("ClientPasportDataSeries");
-            Property(account => account.ClientPasportDataNumber).IsRequired().HasMaxLength(10)
-                .HasColumnName("ClientPasportDataNumber");
-            Property(account => account.ClientPasportDataIssuedBy).IsRequired().HasMaxLength(30)
-                .HasColumnName("ClientPasportDataIssuedBy");
-            Property(account => account.ClientPasportDatеOfIssue).IsRequired().HasColumnName("ClientPasportDatеOfIssue").HasColumnType("datetime2");
-            Property(account => account.ClientGender).IsOptional().HasColumnName("ClientGender").HasMaxLength(15);
-            Property(trainingList => trainingList.CountDays).HasColumnName("CountDays").IsOptional();
-            Property(trainingList => trainingList.AbonementActivationDateTime).HasColumnName("AbonementActivationDateTime").IsOptional()
-                .HasColumnType("datetime2");
+            Property(account => account.HumanMail).IsOptional().HasColumnName("AccountMail").HasMaxLength(30);
+            Property(account => account.HumanPhoto).IsOptional().HasColumnName("AccountPhoto");
+            Property(account => account.HumanPasportDataSeries).IsRequired().HasMaxLength(10).HasColumnName("AccountPasportDataSeries");
+            Property(account => account.HumanPasportDataNumber).IsRequired().HasMaxLength(10)
+                .HasColumnName("HumanPasportDataNumber");
+            Property(account => account.HumanPasportDataIssuedBy).IsRequired().HasMaxLength(30)
+                .HasColumnName("HumanPasportDataIssuedBy");
+            Property(account => account.HumanPasportDatеOfIssue).IsRequired().HasColumnName("AccountPasportDatеOfIssue").HasColumnType("datetime2");
+            HasRequired(acc => acc.Abonement);
+            
+
+            //Property(account => account.AccountregistrationDate).IsRequired().HasColumnName("AccountregistrationDate").
+            //    HasColumnType("datetime2");
+
+            //Property(account => account.TrainingCount).IsOptional().HasColumnName("TrainingCount");
+            //Property(account => account.VisitedTrainingCount).IsOptional().HasColumnName("VisitedTrainingCount");
+            //Property(account => account.TotalCost).IsOptional().HasColumnName("TotalCost").HasColumnType("money"); ;
+            //Property(account => account.NumberSubscription).IsRequired().HasColumnName("NumberSubscription");
+
+            //Property(trainingList => trainingList.CountDays).HasColumnName("CountDays").IsOptional();
+            //Property(trainingList => trainingList.AbonementActivationDateTime).HasColumnName("AbonementActivationDateTime").IsOptional()
+            //    .HasColumnType("datetime2");
             ToTable("Account");
         }
     }

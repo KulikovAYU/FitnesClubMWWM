@@ -7,7 +7,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
     /// <summary>
     /// Сущность работника
     /// </summary>
-   public class Employee
+   public class Employee : Human
     {
         public Employee()
         {
@@ -15,40 +15,40 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
             ArrTrainings = new HashSet<UpcomingTraining>();
         }
 
-        /// <summary>
-        /// Id работника
-        /// </summary>
-        public int EmployeeId { get; set; }
+        ///// <summary>
+        ///// Id работника
+        ///// </summary>
+        //public int EmployeeId { get; set; }
 
-        /// <summary>
-        /// имя работника
-        /// </summary>
-        public string EmployeeFirstName { get; set; }
+        ///// <summary>
+        ///// имя работника
+        ///// </summary>
+        //public string EmployeeFirstName { get; set; }
 
-        /// <summary>
-        /// Отчетство работника
-        /// </summary>
-        public string EmployeeLastName { get; set; }
+        ///// <summary>
+        ///// Отчетство работника
+        ///// </summary>
+        //public string EmployeeLastName { get; set; }
 
-        /// <summary>
-        /// Фамилия работника
-        /// </summary>
-        public string EmployeeFamilyName { get; set; }
+        ///// <summary>
+        ///// Фамилия работника
+        ///// </summary>
+        //public string EmployeeFamilyName { get; set; }
 
-        /// <summary>
-        /// Дата рождения
-        /// </summary>
-        public DateTime EmployeeDateOfBirdth { get; set; }
+        ///// <summary>
+        ///// Дата рождения
+        ///// </summary>
+        //public DateTime EmployeeDateOfBirdth { get; set; }
 
-        /// <summary>
-        /// Адрес работника
-        /// </summary>
-        public string EmployeeAdress { get; set; }
+        ///// <summary>
+        ///// Адрес работника
+        ///// </summary>
+        //public string EmployeeAdress { get; set; }
 
-        /// <summary>
-        /// Номер телефона работника
-        /// </summary>
-        public string EmployeePhoneNumber { get; set; }
+        ///// <summary>
+        ///// Номер телефона работника
+        ///// </summary>
+        //public string EmployeePhoneNumber { get; set; }
 
         /// <summary>
         /// Имя пользователя
@@ -60,22 +60,22 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         /// </summary>
         public string EmployeePasswordHash { get; set; }
 
-        /// <summary>
-        /// е-мэйл работника
-        /// </summary>
-        public string EmployeeMail { get; set; }
+        ///// <summary>
+        ///// е-мэйл работника
+        ///// </summary>
+        //public string EmployeeMail { get; set; }
 
-        /// <summary>
-        /// Фото работника
-        /// </summary>
-        public byte[] EmployeePhoto { get; set; }
+        ///// <summary>
+        ///// Фото работника
+        ///// </summary>
+        //public byte[] EmployeePhoto { get; set; }
 
        
         #region Связи между сущностями 1 Employee to 0...* Account
         /// <summary>
         /// Свойство навигации (Virtual ->Lazy Load)
         /// </summary>
-        public ICollection<Account> ArrAccounts { get; set; }
+        public virtual ICollection<Account> ArrAccounts { get; set; }
 
         #endregion
 
@@ -84,17 +84,17 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         /// <summary>
         /// Статус работника (в отпуске или нет)
         /// </summary>
-        public EmployeeWorkingStatus EmployeeWorkingStatus { get; set; }
+        public virtual EmployeeWorkingStatus EmployeeWorkingStatus { get; set; }
 
         #endregion
 
-        public EmployeeRole EmployeeRole { get; set; }
+        public virtual EmployeeRole EmployeeRole { get; set; }
         #region Связи между сущностями 0..1 Employee to 0...* Training
 
         /// <summary>
         /// Свойство навигации (Virtual ->Lazy Load)
         /// </summary>
-         public ICollection<UpcomingTraining> ArrTrainings { get; set; } //Отладка
+         public virtual ICollection<UpcomingTraining> ArrTrainings { get; set; } //Отладка
         #endregion
 
     }

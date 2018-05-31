@@ -17,7 +17,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
         {
             if (employee == null)
                 return null;
-            var query = DataBaseFcContext.Employees.Where(emp => emp.EmployeeId == employee.EmployeeId)
+            var query = DataBaseFcContext.Employees.Where(emp => emp.HumanId == employee.HumanId)
                 .Select(workingStatus => workingStatus.EmployeeWorkingStatus.EmployeeWorkingStatusName)
                 .FirstOrDefault();
             return query;

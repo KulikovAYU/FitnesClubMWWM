@@ -33,19 +33,19 @@ namespace FC_EMDB.EMDB.CF.Data.Repositories
         /// </summary>
         /// <param name="clientData"> Данные по которым будет производиться выборка</param>
         /// <returns>Аккаунт</returns>
-        NewClientData FindAccountWithSameData(NewClientData clientData);
+        Account FindAccountWithSameData(Account clientData);
 
         /// <summary>
         /// Обновить поля (запись) клиента в БД
         /// </summary>
         /// <param name="clientData">Данные клиента</param>
-        void UpdateFields(NewClientData clientData);
+        void UpdateFields(Account clientData);
 
         /// <summary>
         /// Создать гновую запись в БД
         /// </summary>
         /// <param name="data">данные</param>
-        void CreateRecord(NewClientData data);
+        void CreateRecord(Account data);
 
         /// <summary>
         /// Добавить запись к существующему аккаунту

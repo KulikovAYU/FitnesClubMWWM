@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using FC_EMDB.Classes;
@@ -25,8 +26,8 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
         /// <returns>Аккаунт</returns>
         public Account GetAccountForNumberSubscription(int nNumberSubscription)
         {
-            return DataBaseFcContext.Accounts.FirstOrDefault(account => account.NumberSubscription == nNumberSubscription);
-          
+            //return DataBaseFcContext.Accounts.FirstOrDefault(account => account.NumberSubscription == nNumberSubscription);
+            return null;
         }
 
         /// <summary>
@@ -36,12 +37,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
         /// <returns> Коллекция аккаунтов, записанных на конкретную тренировку</returns>
         public IEnumerable<Account> GetAccountsWritingOnTraining(int nTrainingId)
         {
-            var query = DataBaseFcContext.Trainings.Where(training => training.TrainingId == nTrainingId).Select(training=> training.ArrAccounts).FirstOrDefault();
-
-            //var queryGetAccountsWritingOnTraining = from training in DataBaseFcContext.Trainings
-            //    where training.TrainingId == nTrainingId
-            //    select training.ArrAccounts.FirstOrDefault();
-            return query;
+            return null;
         }
 
         /// <summary>
@@ -50,16 +46,27 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
         /// <returns>Коллекция аккаунтов с истекшими абонементами</returns>
         public IEnumerable<Account> GetAccountsWichHasExpiredSubscription()
         {
-            var query= DataBaseFcContext.Accounts.Where(acc => acc.TrainingCount == 0).ToList();
-            //var queryGetAccountsWichHasExpiredSubscription = from account in DataBaseFcContext.Accounts
-            //    where account.TrainingCount == 0
-            //    select account;
-            return query;
+
+            return null;
+            //var query= DataBaseFcContext.Accounts.Where(acc => acc.TrainingCount == 0).ToList();
+
+            //return query;
         }
 
         public Account FindAccountWithSameData(Account clientData)
         {
-            throw new System.NotImplementedException();
+            var query = DataBaseFcContext.Accounts.FirstOrDefault(acc => ((acc.HumanFirstName == clientData.HumanFirstName)
+                                                                          &&
+                                                                          (acc.HumanLastName == clientData.HumanLastName)
+                                                                          &&
+                                                                          (acc.HumanFamilyName == clientData.HumanFamilyName)
+                                                                          &&
+                                                                          (acc.HumanPasportDataSeries == clientData.HumanPasportDataSeries)
+                                                                          &&
+                                                                          (acc.HumanPasportDataNumber == clientData.HumanPasportDataNumber)
+                ));
+            SqlTools.SavePhoto(query);
+            return query;
         }
 
 
@@ -70,57 +77,70 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
         /// <returns></returns>
         public NewClientData FindAccountWithSameData(NewClientData clientData)
         {
-            var query = DataBaseFcContext.Accounts.FirstOrDefault(acc => acc.ClientFirstName == clientData.PersonFirstName && acc.ClientLastName ==
-                                                                                                                  clientData.PersonLastName
-                                                                                                                           && acc.ClientFamilyName ==
-                                                                                                                  clientData.PersonFamilyName &&
-                                                                                                                  acc.ClientDateOfBirdth ==
-                                                                                                                           clientData.PersonDateOfBirdth);
+            //var query = DataBaseFcContext.Accounts.FirstOrDefault(acc => acc.ClientFirstName == clientData.PersonFirstName && acc.ClientLastName ==
+            //                                                                                                      clientData.PersonLastName
+            //                                                                                                               && acc.ClientFamilyName ==
+            //                                                                                                      clientData.PersonFamilyName &&
+            //                                                                                                      acc.ClientDateOfBirdth ==
+            //                                                                                                               clientData.PersonDateOfBirdth);
+
+        var query = DataBaseFcContext.Accounts.FirstOrDefault(acc => ((acc.HumanFirstName == clientData.PersonFirstName)
+                                                                          &&
+                                                                         (acc.HumanLastName == clientData.PersonLastName)
+                                                                          &&
+                                                                          (acc.HumanFamilyName == clientData.PersonFamilyName)
+                                                                          &&
+                                                                          (acc.HumanPasportDataSeries == clientData.ClientPasportDataSeries)
+                                                                          &&
+                                                                          (acc.HumanPasportDataNumber == clientData.ClientPasportDataNumber)
+                                                                          ));
+
+
             return query != null
                 ? new NewClientData(true)
                 {
                     PersonRole = "Клиент",
-                    PersonFirstName = query.ClientFirstName,
-                    PersonLastName =  query.ClientLastName,
-                    PersonFamilyName = query.ClientFamilyName,
-                    PersonDateOfBirdth = query.ClientDateOfBirdth,
-                    PersonGender = query.ClientGender,
-                    PersonId = query.ClientId,
-                    PersonAdress = query.ClientAdress,
-                    PersonPhoneNumber = query.ClientPhoneNumber,
-                    PersonMail = query.ClientMail,
-                    PersonPhoto =query.ClientPhoto,
-                    ClientPasportDataSeries = query.ClientPasportDataSeries,
-                    ClientPasportDataNumber = query.ClientPasportDataNumber,
-                    ClientPasportDataIssuedBy = query.ClientPasportDataIssuedBy,
-                    ClientPasportDatеOfIssue = query.ClientPasportDatеOfIssue,
-                    NumberSubscription = query.NumberSubscription
+                    PersonFirstName = query.HumanFirstName,
+                    PersonLastName =  query.HumanLastName,
+                    PersonFamilyName = query.HumanFamilyName,
+                    PersonDateOfBirdth = query.HumanDateOfBirdth,
+                    PersonGender = query.HumanGender,
+                    PersonId = query.HumanId,
+                    PersonAdress = query.HumanAdress,
+                    PersonPhoneNumber = query.HumanPhoneNumber,
+                    PersonMail = query.HumanMail,
+                    PersonPhoto =query.HumanPhoto,
+                    ClientPasportDataSeries = query.HumanPasportDataSeries,
+                    ClientPasportDataNumber = query.HumanPasportDataNumber,
+                    ClientPasportDataIssuedBy = query.HumanPasportDataIssuedBy,
+                    ClientPasportDatеOfIssue = query.HumanPasportDatеOfIssue,
+                    NumberSubscription = query.Abonement.NumberSubscription
 
                 } : null;
         }
 
-        public void UpdateFields(NewClientData clientData)
+        public void UpdateFields(Account clientData)
         {
-           var _clientData = DataBaseFcContext.Accounts.Find(clientData.PersonId);
+           var _clientData = DataBaseFcContext.Accounts.Find(clientData.HumanId);
 
             if (_clientData == null)
                 return;
 
-            SqlTools.Convert(ref _clientData, clientData);
+            //SqlTools.Convert(ref _clientData, clientData);
             DataBaseFcContext.Accounts.AddOrUpdate(_clientData);
             DataBaseFcContext.SaveChanges();
         }
 
-        public void CreateRecord(NewClientData data)
+        public void CreateRecord(Account data)
         {
             //проверим еще раз, что такой записи нет
-            var _clientData = DataBaseFcContext.Accounts.Find(data.PersonId);
+            var _clientData = DataBaseFcContext.Accounts.Find(data.HumanId);
 
             if (_clientData == null)
             {
-                _clientData = new Account {NumberSubscription = AbonementGenerator.CreateNumberSubscription()};
-                //сгенерируем номер абонемента
-                SqlTools.Convert(ref _clientData, data);
+                //_clientData = new Account {NumberSubscription = AbonementGenerator.CreateNumberSubscription()};
+                ////сгенерируем номер абонемента
+                //SqlTools.Convert(ref _clientData, data);
             }
 
             DataBaseFcContext.Accounts.Add(_clientData);
@@ -136,10 +156,10 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
 
         public void AddTraining(Account account)
         {
-         var res =   DataBaseFcContext.Accounts.Find(account.ClientId);
+         var res =   DataBaseFcContext.Accounts.Find(account.HumanId);
 
-            res.ArrServicesInSubscription.Add(account.ArrServicesInSubscription.First());
-            DataBaseFcContext.SaveChanges();
+            //res.ArrServicesInSubscription.Add(account.ArrServicesInSubscription.First());
+            //DataBaseFcContext.SaveChanges();
         }
 
         public DataBaseFcContext DataBaseFcContext => m_context as DataBaseFcContext;

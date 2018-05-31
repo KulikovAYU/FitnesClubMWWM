@@ -35,6 +35,8 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Context
         #region Свойства доступа к полям БД
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AccountStatus> AccountStatuses { get; set; }
+        public virtual DbSet<Abonement> Abonements { get; set; }
+        public virtual DbSet<AbonementStatus> AbonementStatuses { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeeRole> EmployeeRoles { get; set; }
         public virtual DbSet<EmployeeWorkingStatus> EmployeeWorkingStatuses { get; set; }
@@ -52,6 +54,8 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Context
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new AccountConfig());
             modelBuilder.Configurations.Add(new AccountStatusConfig());
+            modelBuilder.Configurations.Add(new AbonementConfig());
+            modelBuilder.Configurations.Add(new AbonementStatusConfig());
             modelBuilder.Configurations.Add(new EmployeeConfig());
             modelBuilder.Configurations.Add(new EmployeeRoleConfig());
             modelBuilder.Configurations.Add(new EmployeeWorkingStatusConfig());
@@ -59,8 +63,8 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Context
             modelBuilder.Configurations.Add(new ServiceConfig());
             modelBuilder.Configurations.Add(new StatusTrainingConfig());
             modelBuilder.Configurations.Add(new TarifConfig());
-            modelBuilder.Configurations.Add(new TrainingConfig());
-            modelBuilder.Configurations.Add(new TrainingListConfig());
+            modelBuilder.Configurations.Add(new UpcomingTrainingConfig());
+            modelBuilder.Configurations.Add(new PriceTrainingListConfig());
             modelBuilder.Configurations.Add(new SiSConfig());
         }
     }

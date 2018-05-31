@@ -10,7 +10,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
     {
         public UpcomingTraining()
         {
-            ArrAccounts = new HashSet<Account>();
+            Abonements = new HashSet<Abonement>();
         }
         /// <summary>
         /// Id тренировки
@@ -32,14 +32,10 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         /// Статус трениорвки: Закончена или идет запись, группа набрана
         /// </summary>
         #region Связи между сущностями 1...1 StatusTraining to 0...* Training
-        public StatusTraining StatusTraining { get; set; }
+        public virtual StatusTraining StatusTraining { get; set; }
         #endregion
 
-        #region Связи между сущностями 0...* Account to 0...* Training
-
-        public ICollection<Account> ArrAccounts { get; set; }
-
-        #endregion
+      
 
         #region Связи между сущностями 0...* Training to 1 Service
 
@@ -49,7 +45,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
 
         #region Связи между сущностями 0...* Training to 1 Gym
 
-        public Gym Gym { get; set; }
+        public virtual Gym Gym { get; set; }
 
         #endregion
 
@@ -58,7 +54,9 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         /// <summary>
         /// Свойство навигации (Virtual ->Lazy Load)
         /// </summary>
-        public Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
         #endregion
+
+        public virtual ICollection<Abonement> Abonements { get; set; }
     }
 }

@@ -108,12 +108,12 @@ namespace FitnesClubCL.Classes
         /// Метод проверяет запись на признак существования
         /// </summary>
         /// <param name="recordData">Запись</param>
-        public static void IsExistRecord<T>(ref T recordData) where T : class
+        public static T IsExistRecord<T>(T recordData) where T : class
         {
             if (recordData == null)
-                return;
+                return null;
 
-            DbManager.GetInstance().GetRecord(ref recordData);
+           return DbManager.GetInstance().GetRecord(recordData);
         }
 
         /// <summary>
@@ -131,6 +131,17 @@ namespace FitnesClubCL.Classes
         public static ObservableCollection<T> GetAllClients<T>() where T : class
         {
           return  DbManager.GetInstance().GetAllClients<T>();
+        }
+
+        public static Account FindPersonForNumberSubsription(int numberSubscription)
+        {
+           
+           
+        return DbManager.GetInstance().FindPersonForNumberSubsription(numberSubscription);
+        
+
+        
+
         }
     }
 

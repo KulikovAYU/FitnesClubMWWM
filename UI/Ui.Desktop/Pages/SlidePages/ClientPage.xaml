@@ -205,31 +205,31 @@
 
                 <DataGridTextColumn
                     Width="100*"
-                    Binding="{Binding ClientFamilyName}"
+                    Binding="{Binding HumanFamilyName}"
                     CellStyle="{StaticResource StyleCenter}"
                     Header="Фамилия" />
 
                 <DataGridTextColumn
                     Width="100*"
-                    Binding="{Binding ClientFirstName}"
+                    Binding="{Binding HumanFirstName}"
                     CellStyle="{StaticResource StyleCenter}"
                     Header="Имя" />
 
                 <DataGridTextColumn
                     Width="100*"
-                    Binding="{Binding ClientLastName}"
+                    Binding="{Binding HumanLastName}"
                     CellStyle="{StaticResource StyleCenter}"
                     Header="Отчество" />
 
                 <DataGridTextColumn
                     Width="150*"
-                    Binding="{Binding StrTypeAbonement}"
+                    Binding="{Binding Abonement.NumberSubscription}"
                     CellStyle="{StaticResource StyleCenter}"
                     Header="Тип абонемента" />
 
                 <DataGridTextColumn
                     Width="120*"
-                    Binding="{Binding ClientPhoneNumber}"
+                    Binding="{Binding HumanPhoneNumber}"
                     CellStyle="{StaticResource StyleCenter}"
                     Header="Телефон" />
             </DataGrid.Columns>
@@ -316,7 +316,7 @@
                                                         VerticalAlignment="Center"
                                                         FontWeight="Normal"
                                                         Foreground="Black"
-                                                        Text="{Binding ClientFamilyName}" />
+                                                        Text="{Binding HumanFamilyName}" />
                                                 </Grid>
                                                 <Grid Height="20">
                                                     <Grid.ColumnDefinitions>
@@ -336,7 +336,7 @@
                                                         VerticalAlignment="Bottom"
                                                         FontWeight="Normal"
                                                         Foreground="Black"
-                                                        Text="{Binding ClientFirstName}" />
+                                                        Text="{Binding HumanFirstName}" />
                                                 </Grid>
                                                 <Grid Height="20">
                                                     <Grid.ColumnDefinitions>
@@ -356,7 +356,7 @@
                                                         VerticalAlignment="Center"
                                                         FontWeight="Normal"
                                                         Foreground="Black"
-                                                        Text="{Binding ClientLastName}" />
+                                                        Text="{Binding HumanLastName}" />
                                                 </Grid>
                                                 <Grid Height="20">
                                                     <Grid.ColumnDefinitions>
@@ -376,7 +376,7 @@
                                                         VerticalAlignment="Center"
                                                         FontWeight="Normal"
                                                         Foreground="Black"
-                                                        Text="{Binding ClientDateOfBirdth}" />
+                                                        Text="{Binding HumanDateOfBirdth}" />
                                                 </Grid>
                                                 <Grid Height="20">
                                                     <Grid.ColumnDefinitions>
@@ -396,7 +396,7 @@
                                                         VerticalAlignment="Center"
                                                         FontWeight="Normal"
                                                         Foreground="Black"
-                                                        Text="{Binding ClientPhoneNumber}" />
+                                                        Text="{Binding HumanPhoneNumber}" />
                                                 </Grid>
 
                                                 <Grid Height="20">
@@ -417,7 +417,7 @@
                                                         VerticalAlignment="Center"
                                                         FontWeight="Normal"
                                                         Foreground="Black"
-                                                        Text="{Binding ClientMail}" />
+                                                        Text="{Binding HumanMail}" />
                                                 </Grid>
                                             </StackPanel>
                                         </StackPanel>
@@ -458,7 +458,6 @@
                                                     FontSize="{Binding Source={StaticResource Higth}}"
                                                     FontWeight="Bold"
                                                     Foreground="Black"
-                                                    Text="{Binding NumberSubscription}"
                                                     TextAlignment="Center" />
                                             </StackPanel>
 

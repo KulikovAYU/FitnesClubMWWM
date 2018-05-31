@@ -59,7 +59,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             
             if (_Account == null) return;
 
-            _Account.TotalCost  = objects.Item1;
+            //_Account.TotalCost  = objects.Item1;
            
             ModelManager.AddData<Account,ServicesInSubscription>(_Account, _SiInSubscription);
 
