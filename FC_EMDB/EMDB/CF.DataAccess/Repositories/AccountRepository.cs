@@ -65,8 +65,13 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
                                                                           &&
                                                                           (acc.HumanPasportDataNumber == clientData.HumanPasportDataNumber)
                 ));
-            query.StrPathPhoto = SqlTools.SavePhoto(query);
-            return query;
+            if (query != null)
+            {
+                query.StrPathPhoto = SqlTools.SavePhoto(query);
+                return query;
+            }
+
+            return null;
         }
 
 
@@ -131,21 +136,22 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
             DataBaseFcContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Создать запись клиента в БД
+        /// </summary>
+        /// <param name="data">Регистрационные данные клиента</param>
         public void CreateRecord(Account data)
         {
             //проверим еще раз, что такой записи нет
-            var _clientData = DataBaseFcContext.Accounts.Find(data.HumanId);
+            var clientData = DataBaseFcContext.Accounts.Find(data.HumanId);
 
-            if (_clientData == null)
+            if (clientData == null)
             {
-                //_clientData = new Account {NumberSubscription = AbonementGenerator.CreateNumberSubscription()};
-                ////сгенерируем номер абонемента
-                //SqlTools.Convert(ref _clientData, data);
+                data.Abonement = new Abonement(){};
+                data.HumanPhoto = SqlTools.ConvertImageToByteArray(data.StrPathPhoto);
             }
-
-            DataBaseFcContext.Accounts.Add(_clientData);
+            DataBaseFcContext.Accounts.AddOrUpdate(data);
             DataBaseFcContext.SaveChanges();
-        
         }
 
         public void AppentRecordToExistAccount(Account acc)

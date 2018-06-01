@@ -130,10 +130,7 @@ namespace FC_EMDB.Utils
 
             if(string.IsNullOrEmpty(PersonRole))
                 return;
-            
 
-            if (personData == null)
-                return;
 
             var outerNew = Task<string>.Factory.StartNew(() =>
             {
@@ -163,20 +160,16 @@ namespace FC_EMDB.Utils
         /// </summary>
         /// <typeparam name="Template"></typeparam>
         /// <param name="data">Данные для определения имени файла(оставил старые данные, чтобы нашел имя файла) </param>
-        /// <param name="PersonPhoto">Массив байтов фото</param>
+        /// <param name="strPersonPhoto">Путь к фото пользователя</param>
         public static void UpdatePhoto<Template>(ref Template data, string strPersonPhoto) where Template : class
         {
-
            byte[] personPhoto = ConvertImageToByteArray(strPersonPhoto);
 
             if (personPhoto == null || data== null)
                 return;
-
+            // ReSharper disable once PossibleNullReferenceException
             (data as Account).HumanPhoto = personPhoto;
-            
         }
-
-
 
 
         public static string SavePhoto<Template>(Template data) where Template : class
@@ -192,6 +185,9 @@ namespace FC_EMDB.Utils
                     return string.Empty;
                 PersonRole = "Клиент";
             }
+
+            if (personData == null)
+                return string.Empty;
 
             var outerNew = Task<string>.Factory.StartNew(() =>
             {

@@ -8,6 +8,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
     {
         public Account()
         {
+          //  Abonement = new Abonement();
             //ArrTrainings = new HashSet<UpcomingTraining>();
             //ArrTrainingsList =new HashSet<TrainingList>();
             //ArrServicesInSubscription = new HashSet<ServicesInSubscription>();
@@ -54,10 +55,10 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         ///// </summary>
         //public DateTime? AbonementActivationDateTime { get; set; } = DateTime.Now;
 
-        /// <summary>
-        /// Полное ФИО (в сохранении бд не участвует)
-        /// </summary>
-        public string StrFullName => $"{HumanFamilyName} {HumanFirstName} {HumanLastName}";
+        ///// <summary>
+        ///// Полное ФИО (в сохранении бд не участвует)
+        ///// </summary>
+        //public string StrFullName => $"{HumanFamilyName} {HumanFirstName} {HumanLastName}";
 
 
 
@@ -169,8 +170,8 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
 
         //#endregion
 
-      //  public ObservableCollection<ServicesInSubscription> OcAccounts  => new ObservableCollection<ServicesInSubscription>(ArrServicesInSubscription.Cast<ServicesInSubscription>());
+        //  public ObservableCollection<ServicesInSubscription> OcAccounts  => new ObservableCollection<ServicesInSubscription>(ArrServicesInSubscription.Cast<ServicesInSubscription>());
 
-     
+        public bool bIsExistPerson => Abonement != null;
     }
 }

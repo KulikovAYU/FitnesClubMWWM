@@ -43,9 +43,7 @@ namespace FC_EMDB
 
         public static DbManager GetInstance()
         {
-
             return _manager ?? new DbManager();
-            
         }
 
         public static DataBaseFcContext GetDbContext()
@@ -77,25 +75,6 @@ namespace FC_EMDB
         }
 
         /// <summary>
-        /// Метод возвращает роль пользователя или eNone, если имя пользователя и пароль не совпадают с находящимися в БД
-        /// </summary>
-        /// <param name="strUserName">Имя пользователя</param>
-        /// <param name="strPasswordHash">Хэш пароля</param>
-        /// <param name="strRole">Роль пользователя системы</param>
-        public void GetUserRole(string strUserName, string strPasswordHash, out string strRole)
-        {
-            var employee = unitOfWork.Employess.GetEmployeeByAutorizationUserData(strUserName, strPasswordHash);
-
-            if (employee == null)
-            {
-                strRole = null;
-                return;
-            }
-
-            strRole = unitOfWork.EmployeRoles.GetRole(employee).EmployeeRoleName;
-        }
-
-        /// <summary>
         /// Получить данные пользователя для отображения в окне информации
         /// </summary>
         /// <param name="datAutorizationUserData">Регистрационные данные пользователя</param>
@@ -109,27 +88,13 @@ namespace FC_EMDB
             }
 
            var employee = unitOfWork.Employess.GetEmployeeByAutorizationUserData(datAutorizationUserData.UserLoginName, datAutorizationUserData.PasswordHash);
-
-            // В отдельном потоке загрузим роль работника
-            var outerNew = Task<EmployeeRole>.Factory.StartNew(() => unitOfWork.EmployeRoles.GetRole(employee));
-            outerNew.Wait();
-            var roleEmployee = outerNew.Result;
-
-            //В отдельнгом потоке загрузим статус работника
-            var outerNew1 = Task<string>.Factory.StartNew(() => unitOfWork.EmployeesWorkingStatus.GetEmployeeWorkingStatus(employee));
-            outerNew1.Wait();
-            var workingStatusEmployee = outerNew1.Result;
-
+ 
             if (employee == null)
             {
                 userData = null;
                 return;
-
             }
 
-            //userData = new UserData( employee.HumanFirstName, employee.HumanLastName, employee.HumanFamilyName,
-            // employee.HumanDateOfBirdth,  string.Empty , employee.HumanId, employee.HumanAdress, employee.HumanPhoneNumber, employee.HumanMail, employee.HumanPhoto, employee.EmployeeLoginName, employee.EmployeePasswordHash,
-            //    roleEmployee, workingStatusEmployee);
             SqlTools.SavePhoto(ref employee);
             userData = employee;
         }
@@ -140,29 +105,7 @@ namespace FC_EMDB
         /// <param name="recordData">Данные</param>
         public T GetRecord<T>( T recordData)  where  T : class 
         {
-
-            recordData = unitOfWork.Accounts.FindAccountWithSameData(recordData as Account) as T;
-           
-
-            return recordData;
-
-            //if (recordData != null)
-            //{
-            //    SqlTools.SavePhoto(ref recordData);
-            //}
-
-
-
-
-            //if (recordData is NewClientData)
-            //{
-            //    SqlTools.ConvertImageToByteArray( recordData);
-            //    recordData = unitOfWork.Accounts.FindAccountWithSameData(recordData as NewClientData) as T;
-            //    if (recordData != null)
-            //    {
-            //        SqlTools.SavePhoto(ref recordData);
-            //    }
-            //}
+            return  unitOfWork.Accounts.FindAccountWithSameData(recordData as Account) as T;
         }
 
         /// <summary>
@@ -176,16 +119,14 @@ namespace FC_EMDB
             {
                 var _data = recordData as Account;
 
-                if (_data.Abonement.NumberSubscription != 0)// в случае, если это существующая запись
+                if (_data.Abonement != null && _data.Abonement.NumberSubscription != 0)// в случае, если это существующая запись
                 {
                     unitOfWork.Accounts.UpdateFields(_data);
                 }
-                else //TODO: проверить
+                else
                 {
                     unitOfWork.Accounts.CreateRecord(_data);
                 }
-
-
             }
         }
 
@@ -227,7 +168,6 @@ namespace FC_EMDB
             }
 
             return null;
-
 
         }
 

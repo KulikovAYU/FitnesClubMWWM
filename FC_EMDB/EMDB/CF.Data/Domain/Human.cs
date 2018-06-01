@@ -77,5 +77,9 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         /// </summary>
         public DateTime? HumanPasportDatеOfIssue { get; set; }
 
+        /// <summary>
+        /// Полное имя (в БД не участвует)
+        /// </summary>
+        public string HumanFullName => $"{HumanFamilyName} {HumanFirstName} {HumanLastName}";
     }
 }

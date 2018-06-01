@@ -81,7 +81,7 @@ namespace FitnesClubCL
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="clientData"></param>
-        public void CreateOrUpdateRecord<T>(T clientData) where T : class
+        public void CreateRecord<T>(T clientData) where T : class
         {
             if (clientData == null)
                 return;

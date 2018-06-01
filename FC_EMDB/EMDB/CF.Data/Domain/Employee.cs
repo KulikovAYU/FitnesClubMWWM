@@ -15,41 +15,6 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
             ArrTrainings = new HashSet<UpcomingTraining>();
         }
 
-        ///// <summary>
-        ///// Id работника
-        ///// </summary>
-        //public int EmployeeId { get; set; }
-
-        ///// <summary>
-        ///// имя работника
-        ///// </summary>
-        //public string EmployeeFirstName { get; set; }
-
-        ///// <summary>
-        ///// Отчетство работника
-        ///// </summary>
-        //public string EmployeeLastName { get; set; }
-
-        ///// <summary>
-        ///// Фамилия работника
-        ///// </summary>
-        //public string EmployeeFamilyName { get; set; }
-
-        ///// <summary>
-        ///// Дата рождения
-        ///// </summary>
-        //public DateTime EmployeeDateOfBirdth { get; set; }
-
-        ///// <summary>
-        ///// Адрес работника
-        ///// </summary>
-        //public string EmployeeAdress { get; set; }
-
-        ///// <summary>
-        ///// Номер телефона работника
-        ///// </summary>
-        //public string EmployeePhoneNumber { get; set; }
-
         /// <summary>
         /// Имя пользователя
         /// </summary>
@@ -60,17 +25,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         /// </summary>
         public string EmployeePasswordHash { get; set; }
 
-        ///// <summary>
-        ///// е-мэйл работника
-        ///// </summary>
-        //public string EmployeeMail { get; set; }
-
-        ///// <summary>
-        ///// Фото работника
-        ///// </summary>
-        //public byte[] EmployeePhoto { get; set; }
-
-       
+      
         #region Связи между сущностями 1 Employee to 0...* Account
         /// <summary>
         /// Свойство навигации (Virtual ->Lazy Load)
