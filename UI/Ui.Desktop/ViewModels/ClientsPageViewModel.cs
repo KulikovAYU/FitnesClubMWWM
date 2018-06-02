@@ -153,23 +153,28 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
         private ObservableCollection<Clients> clientsList = null; //Отладка
 
-        private ObservableCollection<Account> _clientsList = null;
+        public ObservableCollection<Account> _clientsList { get; set; } = null;
 
+        public ObservableCollection<Account> GetClientsList()
+        {
+            _clientsList = ModelManager.GetAllPersons<Account>();
+            return _clientsList;
+        }
         /// <summary>
         /// Список клиентов
         /// </summary>
-        public ObservableCollection<Account> _ClientsList
-        {
-            get
-            {
-                //if (_clientsList != null)
-                //    return _clientsList;
+        //public ObservableCollection<Account> _ClientsList
+        //{
+        //    get
+        //    {
+        //        //if (_clientsList != null)
+        //        //    return _clientsList;
 
-                _clientsList = ModelManager.GetAllPersons<Account>();
+        //        _clientsList = ModelManager.GetAllPersons<Account>();
               
-                return _clientsList;
-            }
-        }
+        //        return _clientsList;
+        //    }
+        //}
 
         public ObservableCollection<Clients> ClientsList
         {
@@ -372,7 +377,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             }
         }
 
-
-
+ 
     }
 }

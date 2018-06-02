@@ -17,7 +17,7 @@
 
     <Page.Resources>
         <valueConverters:MultiConverter x:Key="MultiConverter" />
-        <valueConverters:ImageBrushValueConverter x:Key="ImageBrushValueConverter" />
+        <valueConverters:ImageBrushValueConverter1 x:Key="ImageBrushValueConverter" />
 
     </Page.Resources>
     <ScrollViewer
@@ -294,7 +294,7 @@
                     VerticalContentAlignment="Center"
                     Command="{Binding SaveChangesCommand}"
                     CommandParameter="{Binding ElementName=BoyRadioBtn, Path=IsChecked}"
-                    Content="Сохранить изменения"
+                    Content="Создать новую запись"
                     Cursor="Hand"
                     FontSize="20"
                     Foreground="White"

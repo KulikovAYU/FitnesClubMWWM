@@ -11,6 +11,8 @@ namespace FC_EMDB.EMDB.CF.Data
         IEmployeeWorkingStatusRepository EmployeesWorkingStatus { get;}
         ITrainingListRepository TrainingList { get;}
 
+        IAbonementRepository Abonements { get; }
+
         int Complete();
     }
 }

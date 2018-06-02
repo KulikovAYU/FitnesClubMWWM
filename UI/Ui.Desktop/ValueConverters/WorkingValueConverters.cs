@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media.Imaging;
 using FC_EMDB.EMDB.CF.Data.Domain;
+using FC_EMDB.Utils;
 using FitnessClubMWWM.Logic.Ui;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages;
@@ -124,11 +127,29 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is string))
-                return "/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/red_gym_icon.ico";
-            return (value as string).Length == 0
-                ? "/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/red_gym_icon.ico"
-                : value;
+            if (value == null)
+                return null;
+
+            if (value is byte[] _val)
+            {
+                MemoryStream ms = new MemoryStream(_val);
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.StreamSource = ms;
+                bi.CacheOption = BitmapCacheOption.OnLoad;
+                bi.EndInit();
+                bi.Freeze();
+                return bi;
+            }
+
+             //new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\" + (string) value));
+            return System.IO.Directory.GetCurrentDirectory() + "\\" + (string) value;
+            //if (!(value is string))
+            //    return "/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/red_gym_icon.ico";
+            //return (value as string).Length == 0
+            //    ? "/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/red_gym_icon.ico"
+            //    : value;
+            //return string.Empty;
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -136,6 +157,33 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
             throw new NotImplementedException();
         }
     }
+
+
+    public class ImageBrushValueConverter1 : BaseValueConverter<ImageBrushValueConverter1>
+    {
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+          
+           if (!(value is string))
+               return "/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/red_gym_icon.ico";
+           return (value as string).Length == 0
+               ? "/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/red_gym_icon.ico"
+               : value;
+         
+        }
+
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+
+
+
+
+
 
     /// <summary>
     /// Конвертер для команды "сохранить изменения"
@@ -304,6 +352,10 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+            {
+                return null;
+            }
             if (parameter != null && parameter.ToString() == "EN")
                 return ((DateTime) value).ToString("MM-dd-yyyy");
 
@@ -338,5 +390,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
         }
     }
 
-  
+
+   
+
+
 }

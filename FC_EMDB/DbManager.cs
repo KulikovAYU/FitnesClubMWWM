@@ -137,7 +137,14 @@ namespace FC_EMDB
         /// <returns>Зарегистриорванные записи клиентов</returns>
         public ObservableCollection<T> GetAllClients<T>() where T : class
         {
-            return new ObservableCollection<T>(unitOfWork.Accounts.GetAll().Cast<T>()); 
+            var res = new ObservableCollection<T>(unitOfWork.Accounts.GetAll().Cast<T>());
+            //foreach (var acc in res)
+            //{
+            //    var acc1 = acc;
+            //    SqlTools.SavePhoto(ref acc1);
+            //}
+
+            return res;
         }
 
         /// <summary>
@@ -199,9 +206,11 @@ namespace FC_EMDB
             //}
         }
 
-        public Account FindPersonForNumberSubsription(int numberSubscription) 
+        public Account FindPersonForNumberSubsription(int numberSubscription)
         {
-            return unitOfWork.Accounts.GetAccountForNumberSubscription(numberSubscription);
+            return unitOfWork.Abonements.GetAccountForNumberSubscription(numberSubscription);
+           
+            //return unitOfWork.Accounts.GetAccountForNumberSubscription(numberSubscription);
         }
     }
 }

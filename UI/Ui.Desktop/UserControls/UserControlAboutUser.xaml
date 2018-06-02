@@ -12,7 +12,7 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <ValueConverters:DateTimeValueConverter x:Key="DateTimeValueConverter" />
-        <ValueConverters:ImageBrushValueConverter x:Key="ImageBrushValueConverter" />
+        <ValueConverters:ImageBrushValueConverter1 x:Key="ImageBrushValueConverter" />
         <Storyboard x:Key="OnClick_Show">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
                 <EasingDoubleKeyFrame KeyTime="0" Value="400" />

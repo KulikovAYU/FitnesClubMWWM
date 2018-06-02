@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace FC_EMDB.EMDB.CF.Data.Domain
+﻿namespace FC_EMDB.EMDB.CF.Data.Domain
 {
     //Сущность аккаунта посетителя
     public class Account : Human

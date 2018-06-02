@@ -68,6 +68,7 @@
     <Compile Include="EMDB\CF.DataAccess\Configuration\UpcomingTrainingConfig.cs" />
     <Compile Include="EMDB\CF.DataAccess\Context\DataBaseFCContext.cs" />
     <Compile Include="EMDB\CF.DataAccess\InitializationModel.cs" />
+    <Compile Include="EMDB\CF.DataAccess\Repositories\AbonementRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\AccountRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\AccountStatusRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\EmployeeRepository.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="EMDB\CF.Data\Domain\UpcomingTraining.cs" />
     <Compile Include="EMDB\CF.Data\Domain\PriceTrainingList.cs" />
     <Compile Include="EMDB\CF.Data\IUnitOfWork.cs" />
+    <Compile Include="EMDB\CF.Data\Repositories\IAbonementRepository.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\IAccountRepository.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\IAccountStatusRepository.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\IEmployeeRepository.cs" />

@@ -130,18 +130,12 @@ namespace FitnesClubCL.Classes
 
         public static ObservableCollection<T> GetAllClients<T>() where T : class
         {
-          return  DbManager.GetInstance().GetAllClients<T>();
+            return  DbManager.GetInstance().GetAllClients<T>();
         }
 
         public static Account FindPersonForNumberSubsription(int numberSubscription)
         {
-           
-           
-        return DbManager.GetInstance().FindPersonForNumberSubsription(numberSubscription);
-        
-
-        
-
+            return DbManager.GetInstance().FindPersonForNumberSubsription(numberSubscription);
         }
     }
 
@@ -157,7 +151,7 @@ namespace FitnesClubCL.Classes
         /// <returns>коллекцию сущноситей конкретного типа</returns>
         public static ObservableCollection<T> GetReferenceData<T>() where T : class 
         {
-          return DbManager.GetInstance().GetReferenceData<T>();
+            return DbManager.GetInstance().GetReferenceData<T>();
         }
 
         /// <summary>

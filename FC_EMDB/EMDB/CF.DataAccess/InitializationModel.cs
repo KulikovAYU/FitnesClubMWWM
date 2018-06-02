@@ -146,13 +146,13 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             #endregion
            
             #region Добавление статусов аккаунта
-            ObservableCollection<AccountStatus> accountStatusList = new ObservableCollection<AccountStatus>()
+            ObservableCollection<AbonementStatus> abonementStatusList = new ObservableCollection<AbonementStatus>()
             {
-                new AccountStatus{AccountStatusName = "Активен"},
-                new AccountStatus{AccountStatusName = "Не активен"},
-                new AccountStatus{AccountStatusName = "Заморожен"},
+                new AbonementStatus {StatusName = "Активен"},
+                new AbonementStatus{StatusName = "Не активен"},
+                new AbonementStatus{StatusName = "Заморожен"},
             };
-            context.AccountStatuses.AddRange(accountStatusList);
+            context.AbonementStatuses.AddRange(abonementStatusList);
             #endregion
 
             #region Добавление списка залов
@@ -189,19 +189,20 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                             TotalCost = 2000.0m,
                             PriceType = trainingsLists[0]
                         }
-                    }
+                    },
+
+                    AbonmentStatus = abonementStatusList[0]
                 },
 
                 new Abonement()
                 {
-                    TrainingCount = 15, VisitedTrainingCount = 2, TotalCost = 4300.0m, CountDays = DateTime.Parse("10.06.2018"),
+                    TrainingCount = 15, VisitedTrainingCount = 2, TotalCost = 3000.0m, CountDays = DateTime.Parse("10.06.2018"),
                     ArrServicesInSubscription = new ObservableCollection<ServicesInSubscription>()
                     {
                         new ServicesInSubscription(){ SiSTrainingCount = 7, SiSVisitedTrainingCount=4, TotalCost = 1005.0m, PriceType =trainingsLists[2] },
                         new ServicesInSubscription(){ SiSTrainingCount = 15, SiSVisitedTrainingCount=5, TotalCost = 2000.0m, PriceType =trainingsLists[0] }
                     },
-                   
-
+                    AbonmentStatus = abonementStatusList[1]
                 },
 
             };
@@ -232,7 +233,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     HumanPasportDatеOfIssue =  DateTime.Parse("04.05.2009"),
                     //Employee = employees[0],
                     //TypeAbonement = trainingsLists[0],
-                    AccountStatus = accountStatusList[0],
+                    //AccountStatus = accountStatusList[0],
                     //CountDays = 30,
                     //AbonementActivationDateTime = DateTime.Parse("24.03.2018"),
                    
@@ -259,7 +260,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     HumanPasportDatеOfIssue =  DateTime.Parse("04.05.2012"),
                     //Employee = employees[0],
                     //TypeAbonement = trainingsLists[2],
-                    AccountStatus = accountStatusList[1],
+                    //AccountStatus = accountStatusList[1],
                     //CountDays = 25,
                     //AbonementActivationDateTime = DateTime.Parse("20.01.2018"),
                     //ArrServicesInSubscription = new ObservableCollection<ServicesInSubscription>()

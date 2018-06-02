@@ -163,6 +163,9 @@ namespace FC_EMDB.Utils
         /// <param name="strPersonPhoto">Путь к фото пользователя</param>
         public static void UpdatePhoto<Template>(ref Template data, string strPersonPhoto) where Template : class
         {
+           if (string.IsNullOrEmpty(strPersonPhoto))
+                return;
+
            byte[] personPhoto = ConvertImageToByteArray(strPersonPhoto);
 
             if (personPhoto == null || data== null)
@@ -201,6 +204,7 @@ namespace FC_EMDB.Utils
                     {
                         myStream.Write(personData.HumanPhoto, 0, personData.HumanPhoto.Length);
                         myStream.FlushAsync();
+                        myStream.Dispose();
                     }
                 return localFilePath;
             });
@@ -209,6 +213,11 @@ namespace FC_EMDB.Utils
             outerNew.Dispose();
             return outerNew.Result;
         }
+
+
+
+        
+
     }
 }
 #endregion
