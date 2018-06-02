@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using FC_EMDB.EMDB.CF.Data.Domain;
-using FC_EMDB.EMDB.CF.DataAccess.Configuration;
 using FC_EMDB.EMDB.CF.DataAccess.Context;
 using FC_EMDB.Utils;
 
@@ -11,7 +10,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
     /// <summary>
     /// класс задает инициализацию БД данными
     /// </summary>
-   class InitializationModel : DropCreateDatabaseAlways<DataBaseFcContext>
+    class InitializationModel : DropCreateDatabaseAlways<DataBaseFcContext>
     {
         public InitializationModel()
         {
@@ -191,7 +190,8 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                         }
                     },
 
-                    AbonmentStatus = abonementStatusList[0]
+                    AbonmentStatus = abonementStatusList[0],
+                    
                 },
 
                 new Abonement()
@@ -304,26 +304,26 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             };
             context.Trainings.AddRange(trainings);
 
-            ObservableCollection<ServicesInSubscription> _collectionSiS = new ObservableCollection<ServicesInSubscription>()
-            {
-                new ServicesInSubscription() { SiSTrainingCount = 3, SiSVisitedTrainingCount=1, TotalCost=254.0m, PriceType = trainingsLists[0]},
-                new ServicesInSubscription() { SiSTrainingCount = 2, SiSVisitedTrainingCount=0, TotalCost=204.0m, PriceType = trainingsLists[1]}
-            };
+            //ObservableCollection<ServicesInSubscription> _collectionSiS = new ObservableCollection<ServicesInSubscription>()
+            //{
+            //    new ServicesInSubscription() { SiSTrainingCount = 3, SiSVisitedTrainingCount=1, TotalCost=254.0m, PriceType = trainingsLists[0]},
+            //    new ServicesInSubscription() { SiSTrainingCount = 2, SiSVisitedTrainingCount=0, TotalCost=204.0m, PriceType = trainingsLists[1]}
+            //};
            
 
 
             abonements[0].Account = accounts[0];
             abonements[1].Account = accounts[1];
 
-            accounts[0].Abonement.ArrServicesInSubscription.Add(_collectionSiS[0]);
-            accounts[0].Abonement.ArrServicesInSubscription.Add(_collectionSiS[1]);
+            //accounts[0].Abonement.ArrServicesInSubscription.Add(_collectionSiS[0]);
+            //accounts[0].Abonement.ArrServicesInSubscription.Add(_collectionSiS[1]);
           
-            accounts[1].Abonement.ArrServicesInSubscription.Add(_collectionSiS[0]);
-            accounts[1].Abonement.ArrServicesInSubscription.Add(_collectionSiS[1]);
+            //accounts[1].Abonement.ArrServicesInSubscription.Add(_collectionSiS[0]);
+            //accounts[1].Abonement.ArrServicesInSubscription.Add(_collectionSiS[1]);
             context.Abonements.AddRange(abonements);
 
             context.Accounts.AddRange(accounts);
-            context.ServicesInSubscription.AddRange(_collectionSiS);
+          //  context.ServicesInSubscription.AddRange(_collectionSiS);
 
             #endregion
            context.SaveChanges();

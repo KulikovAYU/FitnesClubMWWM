@@ -27,7 +27,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public decimal TrainingCurrentCost { get; set; }
 
         #region Связи между сущностями 0...* TrainingList to 1 Tarif
-        public Tarif Tarifs { get; set; }
+        public virtual Tarif Tarifs { get; set; }
         #endregion
 
         #region Связи между сущностями 1 TrainingList to 1 Service

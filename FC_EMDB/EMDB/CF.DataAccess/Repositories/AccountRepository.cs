@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using FC_EMDB.Classes;
 using FC_EMDB.EMDB.CF.Data.Domain;
 using FC_EMDB.EMDB.CF.Data.Repositories;
 using FC_EMDB.EMDB.CF.DataAccess.Context;

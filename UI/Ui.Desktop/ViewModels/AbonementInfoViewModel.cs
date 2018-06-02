@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Windows;
 using FC_EMDB.EMDB.CF.Data.Domain;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
-using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -21,9 +17,37 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
         public Account _Account { get; set; }
 
+        /// <summary>
+        /// Номер абонемента
+        /// </summary>
+        private string _numberSubscription;
+
+        public string NumberSubscription
+        {
+            get => _Account?.Abonement.NumberSubscription.ToString();
+            set => _numberSubscription = value;
+        }
+
         public AbonementInfoViewModel()
         {
             Messenger.Default.Register(this, new Action<string>(ProcessMessage));
+        }
+
+
+
+
+        public  ObservableCollection<ServicesInSubscription> ArrServicesInSubscription 
+        {
+            get
+            {
+                var xx = _Account;
+            //var x = _Account?.Abonement?.ArrServicesInSubscription.Cast<ServicesInSubscription>();
+                if (_Account?.Abonement != null)
+                    return new ObservableCollection<ServicesInSubscription>(_Account?.Abonement
+                        ?.ArrServicesInSubscription);
+                return null;
+            }
+            
         }
 
 
@@ -32,7 +56,10 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         // </summary>
         public ApplicationPage CurrentPage { get; set; } = ApplicationPage.AbonementInfoDetails; // ApplicationPage.Login;  ApplicationPage.MainPage
 
-
+        /// <summary>
+        /// Страницы
+        /// </summary>
+        /// <param name="msg"></param>
         void ProcessMessage(string msg)
         {
 
@@ -53,6 +80,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                     break;
             }
         }
+
         public RelayCommand ShowAbonementInfoCommand => new RelayCommand(() => Messenger.Default.Send("ShowAbonementInfo"));
         public RelayCommand ShowTrainingAndServiceListCommand => new RelayCommand(() => Messenger.Default.Send("ShowTrainingAndServiceListCommand"));
 
@@ -74,5 +102,21 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
          
         });
 
+
+
+        /// <summary>
+        /// Команда закрытия диалогового окна
+        /// </summary>
+        public RelayCommand<Window> CloseCommand { get; set; } =
+            new RelayCommand<Window>((window) => { window?.Close(); });
+
+
+        public int ResizeBorder { get; set; } = 6;
+      
+
+        public void SetData<T>(T account)
+        {
+            _Account = account as Account;
+        }
     }
 }

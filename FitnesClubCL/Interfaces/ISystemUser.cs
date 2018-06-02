@@ -1,8 +1,5 @@
-﻿using System;
-using System.Drawing;
-using FC_EMDB.Classes;
+﻿using FC_EMDB.Classes;
 using FC_EMDB.EMDB.CF.Data.Domain;
-using FitnesClubCL.Classes;
 
 namespace FitnesClubCL
 {

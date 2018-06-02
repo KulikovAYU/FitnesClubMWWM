@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
-using FC_EMDB.Classes;
 using FC_EMDB.EMDB.CF.Data.Domain;
-using FC_EMDB.Interfaces;
 
 
 namespace FC_EMDB.EMDB.CF.Data.Repositories

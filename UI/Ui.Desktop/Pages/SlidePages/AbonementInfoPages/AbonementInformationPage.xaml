@@ -9,9 +9,24 @@
     Title="AbonementInformation"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    DataContext="{Binding AbonementInfoViewModel, Source={StaticResource Locator}}"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Vertical">
+    <Page.Resources>
+        <valueConverters:DateTimeToDateConverter x:Key="DateTimeToDateConverter" />
+        <Storyboard x:Key="OnLoaded1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="stackPanel">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.45"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource OnLoaded1}"/>
+        </EventTrigger>
+    </Page.Triggers>
+    <StackPanel x:Name="stackPanel" Orientation="Vertical" Opacity="0.5">
 
         <!--  Владелец  -->
         <Grid Margin="0,5,0,5" Style="{StaticResource BaseGridStyle}">
@@ -35,7 +50,7 @@
                 FontSize="{StaticResource Big}"
                 FontWeight="Bold"
                 Foreground="Gray"
-                Text="{Binding _Account.StrFullName}" />
+                Text="{Binding _Account.HumanFullName}" />
         </Grid>
         <!--  Вид услуги  -->
 
@@ -61,7 +76,7 @@
                 FontSize="{StaticResource Regular}"
                 FontWeight="Bold"
                 Foreground="Gray"
-                Text="Количество тренировок" />
+                Text="{Binding _Account.Abonement.TrainingCount}" />
         </Grid>
 
 
@@ -87,7 +102,7 @@
                 FontSize="{StaticResource Regular}"
                 FontWeight="Bold"
                 Foreground="Gray"
-                Text="Цена" />
+                Text="{Binding _Account.Abonement.TotalCost, StringFormat={}{0}₽}" />
         </Grid>
 
         <!--  Срок действия  -->
@@ -103,7 +118,7 @@
                 FontSize="{StaticResource Regular}"
                 FontWeight="Bold"
                 Foreground="Gray"
-                Text="Срок действия " />
+                Text="Действителен до" />
 
             <TextBlock
                 Grid.Column="1"
@@ -112,7 +127,7 @@
                 FontSize="{StaticResource Regular}"
                 FontWeight="Bold"
                 Foreground="Gray"
-                Text="Срок действия" />
+                Text="{Binding _Account.Abonement.CountDays, Converter={StaticResource DateTimeToDateConverter}}" />
         </Grid>
 
 
@@ -137,7 +152,7 @@
                 FontSize="{StaticResource Regular}"
                 FontWeight="Bold"
                 Foreground="Gray"
-                Text="Дата активации" />
+                Text="{Binding _Account.Abonement.AbonementregistrationDate, Converter={StaticResource DateTimeToDateConverter}}" />
 
         </Grid>
 
@@ -164,7 +179,7 @@
                 FontSize="{StaticResource Regular}"
                 FontWeight="Bold"
                 Foreground="Gray"
-                Text="Состояние карты" />
+                Text="{Binding _Account.Abonement.AbonmentStatus.StatusName}" />
 
 
 

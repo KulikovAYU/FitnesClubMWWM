@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
@@ -7,7 +6,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
     /// <summary>
     /// Сущность работника
     /// </summary>
-   public class Employee : Human
+    public class Employee : Human
     {
         public Employee()
         {

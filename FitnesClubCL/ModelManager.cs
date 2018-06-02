@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using FC_EMDB;
 using FC_EMDB.Classes;
 using FC_EMDB.EMDB.CF.Data.Domain;

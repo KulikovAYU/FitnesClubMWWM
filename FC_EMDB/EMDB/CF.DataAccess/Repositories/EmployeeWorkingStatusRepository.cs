@@ -1,13 +1,11 @@
-﻿using System;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using FC_EMDB.EMDB.CF.Data.Domain;
 using FC_EMDB.EMDB.CF.Data.Repositories;
 using FC_EMDB.EMDB.CF.DataAccess.Context;
 
 namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
 {
-   public class EmployeeWorkingStatusRepository : Repository<EmployeeWorkingStatus>, IEmployeeWorkingStatusRepository
+    public class EmployeeWorkingStatusRepository : Repository<EmployeeWorkingStatus>, IEmployeeWorkingStatusRepository
     {
         public EmployeeWorkingStatusRepository(DataBaseFcContext context) : base(context)
         {

@@ -8,7 +8,6 @@ using FitnessClubMWWM.Ui.Desktop.DataModels;
 using FitnessClubMWWM.Ui.Desktop.Pages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace FitnessClubMWWM.Ui.Desktop.ViewModels

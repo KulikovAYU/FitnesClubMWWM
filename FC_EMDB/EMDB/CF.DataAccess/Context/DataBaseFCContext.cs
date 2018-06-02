@@ -34,6 +34,10 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Context
 
         #region Свойства доступа к полям БД
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Tarif> Tarifs { get; set; }
+        public virtual DbSet<UpcomingTraining> Trainings { get; set; }
+        public virtual DbSet<PriceTrainingList> TrainingLists { get; set; }
+
         //public virtual DbSet<AccountStatus> AccountStatuses { get; set; }
         public virtual DbSet<Abonement> Abonements { get; set; }
         public virtual DbSet<AbonementStatus> AbonementStatuses { get; set; }
@@ -43,9 +47,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Context
         public virtual DbSet<Gym> Gyms { get; set; }
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<StatusTraining> StatusTrainings { get; set; }
-        public virtual DbSet<Tarif> Tarifs { get; set; }
-        public virtual DbSet<UpcomingTraining> Trainings { get; set; }
-        public virtual DbSet<PriceTrainingList> TrainingLists { get; set; }
+       
         public virtual DbSet<ServicesInSubscription> ServicesInSubscription { get; set; }
         #endregion
 
@@ -53,6 +55,9 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new AccountConfig());
+            modelBuilder.Configurations.Add(new TarifConfig());
+            modelBuilder.Configurations.Add(new UpcomingTrainingConfig());
+            modelBuilder.Configurations.Add(new PriceTrainingListConfig());
             //modelBuilder.Configurations.Add(new AccountStatusConfig());
             modelBuilder.Configurations.Add(new AbonementConfig());
             modelBuilder.Configurations.Add(new AbonementStatusConfig());
@@ -62,9 +67,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Context
             modelBuilder.Configurations.Add(new GymConfig());
             modelBuilder.Configurations.Add(new ServiceConfig());
             modelBuilder.Configurations.Add(new StatusTrainingConfig());
-            modelBuilder.Configurations.Add(new TarifConfig());
-            modelBuilder.Configurations.Add(new UpcomingTrainingConfig());
-            modelBuilder.Configurations.Add(new PriceTrainingListConfig());
+          
             modelBuilder.Configurations.Add(new SiSConfig());
         }
     }

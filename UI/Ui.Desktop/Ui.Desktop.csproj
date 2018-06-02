@@ -154,13 +154,13 @@
     <Compile Include="Pages\SlidePages\AbonementInfoPages\TrainingAndServiceList.xaml.cs">
       <DependentUpon>TrainingAndServiceList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SlidePages\AdminPanelPages\AddNewUserPage.xaml.cs">
+    <Compile Include="Pages\SlidePages\Cards\AdminPanelPages\AddNewUserPage.xaml.cs">
       <DependentUpon>AddNewUserPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SlidePages\AdminPanelPages\AddUserPrivilegyPage.xaml.cs">
+    <Compile Include="Pages\SlidePages\Cards\AdminPanelPages\AddUserPrivilegyPage.xaml.cs">
       <DependentUpon>AddUserPrivilegyPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SlidePages\AdminPanelPages\AdminPanelPage.xaml.cs">
+    <Compile Include="Pages\SlidePages\Cards\AdminPanelPages\AdminPanelPage.xaml.cs">
       <DependentUpon>AdminPanelPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SlidePages\AutorizationPage.xaml.cs">
@@ -293,15 +293,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\SlidePages\AdminPanelPages\AddNewUserPage.xaml">
+    <Page Include="Pages\SlidePages\Cards\AdminPanelPages\AddNewUserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\SlidePages\AdminPanelPages\AddUserPrivilegyPage.xaml">
+    <Page Include="Pages\SlidePages\Cards\AdminPanelPages\AddUserPrivilegyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\SlidePages\AdminPanelPages\AdminPanelPage.xaml">
+    <Page Include="Pages\SlidePages\Cards\AdminPanelPages\AdminPanelPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -10,6 +10,7 @@ using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using FitnessClubMWWM.Ui.Desktop.Pages.Wind.AbonementInfo;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace FitnessClubMWWM.Ui.Desktop.ViewModels
@@ -84,7 +85,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// </summary>
         public RelayCommand<Account> ShowAbonementInfoCommand => new RelayCommand<Account>((item) => {
             Window selectActionWIndow = new AbonementInfo();
-            //_Account = item;
+            SimpleIoc.Default.GetInstance<AbonementInfoViewModel>().SetData<Account>(item as Account);
+            //SimpleIoc.Default.GetInstance<AbonementInfoViewModel>()._Account = item as Account;
             selectActionWIndow.ShowDialog();
         });
 

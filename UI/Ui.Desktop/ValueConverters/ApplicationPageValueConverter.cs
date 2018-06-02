@@ -4,7 +4,6 @@ using System.Globalization;
 using FitnessClubMWWM.Logic.Ui;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
 using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages;
-using FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AbonementInfoPages;
 using BeginPanelPage = FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.BeginPanelPage;
 using TheConfrimLogout = FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.TheConfrimLogout;
 
@@ -15,7 +14,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
     /// Convert the <see cref="ApplicationPage"/> to an actual view/page
     /// </summary>
 
-  public  class ApplicationPageValueConverter : BaseValueConverter<ApplicationPageValueConverter>
+    public  class ApplicationPageValueConverter : BaseValueConverter<ApplicationPageValueConverter>
     {
 
         #region PrivateFields
