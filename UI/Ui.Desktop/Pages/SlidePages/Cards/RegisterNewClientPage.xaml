@@ -42,9 +42,11 @@
                         Width="150"
                         Height="150">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="{Binding StrPath, Converter={StaticResource ImageBrushValueConverter}, IsAsync=True, Mode=OneWay}" />
+                            <ImageBrush ImageSource="{Binding Photo, Converter={StaticResource ImageBrushValueConverter}, IsAsync=True, Mode=OneWay}" />
                         </Ellipse.Fill>
                     </Ellipse>
+
+
                     <Button
                         Width="60"
                         Height="30"
@@ -294,7 +296,7 @@
                     VerticalContentAlignment="Center"
                     Command="{Binding SaveChangesCommand}"
                     CommandParameter="{Binding ElementName=BoyRadioBtn, Path=IsChecked}"
-                    Content="Сохранить изменения"
+                    Content="Создать новую запись"
                     Cursor="Hand"
                     FontSize="20"
                     Foreground="White"

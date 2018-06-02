@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
-using FC_EMDB.Classes;
 using FC_EMDB.EMDB.CF.Data.Domain;
+using FC_EMDB.Utils;
 using FitnesClubCL;
 using FitnessClubMWWM.Ui.Desktop.Constants;
 using FitnessClubMWWM.Ui.Desktop.Interfaces;
@@ -24,6 +24,11 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
     /// </summary>
     public class WorkingCabinetPageViewModel : ViewModelBase, IDataErrorInfo
     {
+        /// <summary>
+        /// Максимальное количество символов в номере абонемента
+        /// </summary>
+        private const int MAXCOUNTNUMBERABON = 4;
+
         private readonly ModelManager _modelManager;
         public WorkingCabinetPageViewModel()
         {
@@ -44,13 +49,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// </summary>
         public RelayCommand RegisterNewClientCommand => new RelayCommand(() => { Messenger.Default.Send("RegisterNewClientPage"); });
 
-        /// <summary>
-        /// Данные нового зарегистрированного клиента
-        /// </summary>
-        //public NewClientData _clientData;
-        public Account _clientData1 { get; set; }
 
-     
         Account _clientData = null;
         /// <summary>
         /// Команда "сохранить изменения" после заполнения формы
@@ -59,7 +58,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             {
                 if (_clientData == null || !_clientData.bIsExistPerson)
                 {
-                    var x = this.StrPath;
+              
                     _clientData = new Account()
                     {
                         HumanFirstName = this.ClientFirstName,
@@ -74,7 +73,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                         HumanPasportDataSeries = this.ClientPasportDataSeries,
                         HumanPasportDataNumber = this.ClientPasportDataNumber,
                         HumanPasportDataIssuedBy = this.ClientPasportDataIssuedBy,
-                        HumanPasportDatеOfIssue = this.ClientPasportDatеOfIssue
+                        HumanPasportDatеOfIssue = this.ClientPasportDatеOfIssue,
+                        HumanPhoto = Photo
                     };
 
                     _clientData = _modelManager.CheckRecord(_clientData);
@@ -116,6 +116,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                             HumanPasportDataNumber = this.ClientPasportDataNumber,
                             HumanPasportDataIssuedBy = this.ClientPasportDataIssuedBy,
                             HumanPasportDatеOfIssue = this.ClientPasportDatеOfIssue,
+                            HumanPhoto = Photo
                         };
 
                         _modelManager.CreateRecord<Account>(_clientData);
@@ -124,7 +125,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                             "Регистрация нового пользователя",
                             MessageBoxButton.OK, eMessageBoxIcons.eSucsess);
                         //ClearFields();
-                        //_clientData = null;
+                     //   _clientData = null;
                     }
                 }
                 else
@@ -147,31 +148,37 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                         "Регистрация нового пользователя",
                         MessageBoxButton.OK, eMessageBoxIcons.eSucsess);
                     //ClearFields();
-                 //  _clientData = null;
+                  // _clientData = null;
                 }
-                _clientData = null;
+              
             }
-        
+            _clientData = null;
 
         }, (obj) =>  IsOk);
 
-        public RelayCommand<string> FindClientForNumberSubsription => new RelayCommand<string>((number) =>
+        /// <summary>
+        /// Команда поиска клиента по номеру абонемента (для проверки свойств необходимо задавать <bool>)
+        /// </summary>
+        public RelayCommand<bool> FindClientForNumberSubsription  => new RelayCommand<bool>((obj) =>
         {
-           var account = _modelManager.FindPersonForNumberSubsription(Int32.Parse(number as string));
+            _clientData = _modelManager.FindPersonForNumberSubsription(Int32.Parse(NumberSubscription as string));
 
-            if (account != null)
-            {
-                Messenger.Default.Send("RegisterNewClientPage");
-                //TODO: написать автозаполнение полей
-            }
-            else
-            {
-                CustomMessageBox.Show(
-                    $"Клиента с номером абонемента {number} не найдено",
-                    "Регистрация нового пользователя",
-                    MessageBoxButton.OK, eMessageBoxIcons.eWarning);
-            }
-        });
+            
+             if (_clientData != null)
+             {
+                 Messenger.Default.Send("RegisterNewClientPage");
+                 UpdatePageFields(_clientData);
+
+                 _modelManager.CreateRecord<Account>(_clientData);
+             }
+             else
+             {
+                 CustomMessageBox.Show(
+                     $"Клиента с номером абонемента {NumberSubscription} не найдено",
+                     "Регистрация нового пользователя",
+                     MessageBoxButton.OK, eMessageBoxIcons.eWarning);
+             }
+        }, (obj) => NumberSubscription?.Length == MAXCOUNTNUMBERABON);
 
         /// <summary>
         /// Обновление полей
@@ -179,6 +186,9 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// <param name="clientData">данные клиента</param>
         private void UpdatePageFields(Account clientData)
         {
+            if (clientData == null)
+                return;
+
             this.ClientFirstName = clientData.HumanFirstName;
             this.ClientFamilyName = clientData.HumanFamilyName;
             this.ClientLastName = clientData.HumanLastName;
@@ -191,6 +201,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             this.StrPath = clientData.StrPathPhoto;
             this.ClientAdress = clientData.HumanAdress;
             this.ClientMail = clientData.HumanMail;
+            Photo = clientData.HumanPhoto;
+
         }
 
         /// <summary>
@@ -228,6 +240,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             {
                 StrPath = service.FilePath;
                 Visib = Visibility.Visible;
+                Photo = SqlTools.ConvertImageToByteArray(StrPath);
             }
         });
 
@@ -238,7 +251,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         {
             if (!string.IsNullOrEmpty(StrPath))
             {
-                StrPath = string.Empty;
+                Photo = null;
                 Visib = Visibility.Hidden;
             }
         });
@@ -406,6 +419,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// <summary>
         /// Личные данные посетителя
         /// </summary>
+
+        #region Проверка заполнения полей
         // [Required(AllowEmptyStrings = false, ErrorMessage = "Имя клиента должно быть заполнено")]
         [MaxLength(20, ErrorMessage = "Имя допускает не более 20 символов")]
         [MinLength(2, ErrorMessage = "Минимальное имя не допускает меннее 2 символов")]
@@ -441,13 +456,22 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         [Required(AllowEmptyStrings = false, ErrorMessage = "Дата выдачи паспорта должна быть заполнена")]
         public DateTime? ClientPasportDatеOfIssue { get; set; } = DateTime.Parse("04.05.2009");
 
-
-        public int NumberSubscription { get; set; }
-        public string ClientGender { get; set; }
         public string ClientAdress { get; set; }
         //[DataTypeAttribute(DataType.EmailAddress, ErrorMessage = "dsfdsf")]
         public string ClientMail { get; set; }
-        public byte[] ClientPhoto { get; set; }
+
+        public byte[] Photo { get; set; }
+
+        #region Поленомер абонемента
+        /// <summary>
+        /// Номер абонемента
+        /// </summary>
+        public string NumberSubscription { get; set; }
+        #endregion
+
+
+        #endregion
+
     }
 
 }

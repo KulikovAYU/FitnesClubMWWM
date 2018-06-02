@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media.Imaging;
 using FC_EMDB.EMDB.CF.Data.Domain;
 using FitnessClubMWWM.Logic.Ui;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
@@ -32,6 +34,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
                     Debugger.Break();
                     return null;
             }
+          
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -40,6 +43,9 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
         }
     }
 
+    /// <summary>
+    /// Конвертер для страниц информации об абонементе
+    /// </summary>
     public class AbonementInfoValueConverter : BaseValueConverter<AbonementInfoValueConverter>
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -69,7 +75,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
         }
     }
 
-
     /// <summary>
     /// Конвертер для DataGridRowDetails (служит для скрытия или показа RowDetails)
     /// </summary>
@@ -87,8 +92,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
             return Binding.DoNothing;
         }
     }
-
-
 
     public class IsCheckedToogleConverter : BaseValueConverter<IsCheckedToogleConverter>
     {
@@ -118,17 +121,31 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
     }
 
     /// <summary>
-    /// Конвертер для фотографии пользователя
-    /// </summary>
+    /// Конвертер для фотографий
+    ///  </summary>
     public class ImageBrushValueConverter : BaseValueConverter<ImageBrushValueConverter>
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is string))
-                return "/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/red_gym_icon.ico";
-            return (value as string).Length == 0
-                ? "/FitnessClubMWWM.Ui.Desktop;component/Images/Icons/red_gym_icon.ico"
-                : value;
+            if (value == null)
+            {
+                return new BitmapImage(new Uri("pack://application:,,,/Images/Icons/red_gym_icon.ico", UriKind.RelativeOrAbsolute));
+
+            }
+
+            if (value is byte[] _val)
+            {
+                MemoryStream ms = new MemoryStream(_val);
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.StreamSource = ms;
+                bi.CacheOption = BitmapCacheOption.OnLoad;
+                bi.EndInit();
+                bi.Freeze();
+                return bi;
+            }
+
+            return null;
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -160,11 +177,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
                         (string) values[9], (DateTime) values[10]));
 
             return tuple;
-            //NewClientData data = new NewClientData();
-            //data.ClientName = values[0] as string;
-            //data.ClientFamily = values[1] as string;
-            //return data;
-            //return values.ToArray(); //второй вариант
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter,
@@ -304,6 +316,10 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+            {
+                return null;
+            }
             if (parameter != null && parameter.ToString() == "EN")
                 return ((DateTime) value).ToString("MM-dd-yyyy");
 
@@ -338,5 +354,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
         }
     }
 
-  
+
+   
+
+
 }

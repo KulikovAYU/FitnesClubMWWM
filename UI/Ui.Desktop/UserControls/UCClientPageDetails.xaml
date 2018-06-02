@@ -51,7 +51,7 @@
                             VerticalAlignment="Center"
                             Stroke="#FF9C9C9C">
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding _ClientsList/StrPathPhoto, Converter={StaticResource ImageBrushValueConverter}, IsAsync=True, RelativeSource={RelativeSource PreviousData}}" />
+                                <ImageBrush ImageSource="{Binding StrPathPhoto, Converter={StaticResource ImageBrushValueConverter}, IsAsync=True, RelativeSource={RelativeSource PreviousData}}" />
                             </Rectangle.Fill>
                         </Rectangle>
                         <local:ButtonWithPicture
@@ -86,7 +86,7 @@
                                     VerticalAlignment="Center"
                                     FontWeight="Normal"
                                     Foreground="Black"
-                                    Text="{Binding _ClientsList/ClientFirstName}" />
+                                    Text="{Binding ClientFirstName}" />
                             </Grid>
                             <Grid Height="20">
                                 <Grid.ColumnDefinitions>

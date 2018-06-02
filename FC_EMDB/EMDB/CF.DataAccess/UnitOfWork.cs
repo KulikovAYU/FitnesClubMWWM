@@ -21,6 +21,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             Services = new ServiceRepository(m_context);
             AccountStatus = new AccountStatusRepository(m_context);
             ServicesInSubscription = new SiSRepository(m_context);
+            Abonements = new AbonementRepository(m_context);
         }
 
         public IAccountRepository Accounts { get; private set; }
@@ -33,6 +34,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
         public IAccountStatusRepository AccountStatus { get; private set; }
         public ISiSRepository ServicesInSubscription { get; private set; }
 
+        public IAbonementRepository Abonements { get; }
 
 
         public int Complete()

@@ -65,13 +65,12 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
                                                                           &&
                                                                           (acc.HumanPasportDataNumber == clientData.HumanPasportDataNumber)
                 ));
-            if (query != null)
+            if (query != null && !query.bIsExistPerson)
             {
                 query.StrPathPhoto = SqlTools.SavePhoto(query);
-                return query;
             }
 
-            return null;
+            return query;
         }
 
 
@@ -147,7 +146,10 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
 
             if (clientData == null)
             {
-                data.Abonement = new Abonement(){};
+                //создадим статус
+                var statuses = DataBaseFcContext.AbonementStatuses.FirstOrDefault(stat => stat.StatusName == "Не активен");
+                //создадим абонемент
+                data.Abonement = new Abonement(){ AbonmentStatus = statuses };//создаем абонемент
                 data.HumanPhoto = SqlTools.ConvertImageToByteArray(data.StrPathPhoto);
             }
             DataBaseFcContext.Accounts.AddOrUpdate(data);

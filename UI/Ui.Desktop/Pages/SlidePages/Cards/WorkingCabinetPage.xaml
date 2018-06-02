@@ -2,7 +2,6 @@
     x:Class="FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.WorkingCabinetPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:userControls="clr-namespace:FitnessClubMWWM.Ui.Desktop.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="WorkingCabinet"
@@ -136,14 +135,15 @@
                 <Button
                     Width="200"
                     Height="50"
-                    VerticalAlignment="Bottom"
+                    Margin="100,100,100,0"
+                    VerticalAlignment="Top"
+                    Command="{Binding FindClientForNumberSubsription}"
                     Content="Найти"
                     FontSize="{StaticResource Regular}"
                     Foreground="White"
                     Style="{StaticResource BaseButtonStyle}"
-                    Command="{Binding FindClientForNumberSubsription}"
-                    CommandParameter="{Binding ElementName=NumberSubscription, Path=Text}"
-                    Template="{StaticResource ButtonBaseControlTemplate}" />
+                    Template="{StaticResource ButtonBaseControlTemplate}" >
+                   </Button>
                 <TextBox
                     Name="NumberSubscription"
                     Width="300"
@@ -153,7 +153,8 @@
                     BorderThickness="2"
                     FontSize="18"
                     Tag="Введите номер карты"
-                    Template="{DynamicResource InputTextBox}" />
+                    Template="{DynamicResource InputTextBox}"
+                    Text="{Binding NumberSubscription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
             </Grid>
 
         </StackPanel>

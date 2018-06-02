@@ -68,7 +68,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
 
         public virtual Account Account { get; set; }
 
-        public virtual AbonementStatus Status { get; set; }
+        public virtual AbonementStatus AbonmentStatus { get; set; }
 
         public virtual ICollection<UpcomingTraining> ArrUpcomingTrainings { get; set; }
 
