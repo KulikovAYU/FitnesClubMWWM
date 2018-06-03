@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using FC_EMDB.EMDB.CF.Data.Domain;
+using FitnesClubCL;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
+using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -18,9 +21,17 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         public Account _Account { get; set; }
 
         /// <summary>
+        /// Предстоящие тренировки с учетом наличия этого типа тренировок в абонементе
+        /// </summary>
+        public ObservableCollection<UpcomingTraining> _AvailableTrainings { get; set; }
+
+        /// <summary>
         /// Номер абонемента
         /// </summary>
         private string _numberSubscription;
+
+
+      
 
         public string NumberSubscription
         {
@@ -34,22 +45,106 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         }
 
 
+        private ObservableCollection<ServicesInSubscription> _arrServicesInSubscription;
 
-
+        /// <summary>
+        /// Список доступных услуг в абонементе
+        /// </summary>
         public  ObservableCollection<ServicesInSubscription> ArrServicesInSubscription 
         {
             get
             {
-                var xx = _Account;
-            //var x = _Account?.Abonement?.ArrServicesInSubscription.Cast<ServicesInSubscription>();
                 if (_Account?.Abonement != null)
-                    return new ObservableCollection<ServicesInSubscription>(_Account?.Abonement
-                        ?.ArrServicesInSubscription);
+                  return  _arrServicesInSubscription = ModelManager.GetInstance.GetServicesInSubscription(_Account);
                 return null;
             }
-            
+            set => _arrServicesInSubscription = value;
         }
 
+        private ObservableCollection<UpcomingTraining> _arrUpcomingTraining;
+        /// <summary>
+        /// Список предстоящих тренировок
+        /// </summary>
+        public  ObservableCollection<UpcomingTraining> ArrUpcomingTraining
+        {
+            get
+            {
+                if (_Account?.Abonement != null)
+                    return _arrUpcomingTraining = ModelManager.GetInstance.GetUpcomingTraining(_Account);
+               
+                return null;
+            }
+            set => _arrUpcomingTraining = value;
+        }
+
+        /// <summary>
+        /// Тренировки в абонементе
+        /// </summary>
+        public ServicesInSubscription _ServicesInSubscription { get; set; }
+
+        /// <summary>
+        /// Ссылка на окно записи
+        /// </summary>
+        private CreateRecordWindow recordWindow;
+        /// <summary>
+        /// Записаться на тренировку
+        /// </summary>
+        public RelayCommand<ServicesInSubscription> CreateRecordCommand => new RelayCommand<ServicesInSubscription>((selectedItem) =>
+        {
+            _ServicesInSubscription = selectedItem as ServicesInSubscription;
+            recordWindow = new CreateRecordWindow();
+            _AvailableTrainings = ModelManager.GetInstance.GetAvailableTrainings(_ServicesInSubscription);
+            recordWindow.ShowDialog();
+        });
+
+
+        /// <summary>
+        /// Выбранная тренировка
+        /// </summary>
+        public UpcomingTraining _CurrentItem { get; set; }
+
+        /// <summary>
+        /// Создание записи на тренировку (через DataGrid)
+        /// </summary>
+        public RelayCommand CreateVisitCommand => new RelayCommand(
+            () =>
+            {
+                //1. Создали предварительную регистрацию
+                ModelManager.GetInstance.CreatePriorRegistration(_Account,_ServicesInSubscription, _CurrentItem);
+                //2. Обновили поле Доступные тренировки
+                ArrServicesInSubscription = ModelManager.GetInstance.GetServicesInSubscription(_Account);
+                //3. Обновили список записей (если останется время отфильтровать все тренировки, которые есть уже в записи)
+                ArrUpcomingTraining = ModelManager.GetInstance.GetUpcomingTraining(_Account);
+                //4. Закроем диалог
+                recordWindow.Close();
+            }, ModelManager.GetInstance.CheckTrainingOnAvailable(_CurrentItem)  );
+
+
+        /// <summary>
+        /// Отметка о посещении тренировки
+        /// </summary>
+        public RelayCommand<UpcomingTraining> FixTheVisitCommand => new RelayCommand<UpcomingTraining>((upcTraining) =>
+            {
+                ModelManager.GetInstance.FixTheVisit(_Account,upcTraining as UpcomingTraining);
+                ArrUpcomingTraining = ModelManager.GetInstance.GetUpcomingTraining(_Account);
+
+            });
+
+
+        /// <summary>
+        /// Отказ о посещении тренировки
+        /// </summary>
+        public RelayCommand<UpcomingTraining> RefusalOfVisitCommand => new RelayCommand<UpcomingTraining>(
+            (upcTraining) =>
+            {
+
+                ModelManager.GetInstance.RefusalOfVisit(_Account, upcTraining);
+                //2. Обновили поле Доступные тренировки
+                ArrServicesInSubscription = ModelManager.GetInstance.GetServicesInSubscription(_Account);
+                //3. Обновим список записей
+                ArrUpcomingTraining = ModelManager.GetInstance.GetUpcomingTraining(_Account);
+
+            });
 
         // <summary>
         // Текущая страница приложения
@@ -62,7 +157,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// <param name="msg"></param>
         void ProcessMessage(string msg)
         {
-
             switch (msg)
             {
 
@@ -98,9 +192,9 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
          });
 
         public RelayCommand<Account> ActivateAbonementRelayCommand => new RelayCommand<Account>((account) =>
-        {
-         
-        });
+            {
+              
+            });
 
 
 

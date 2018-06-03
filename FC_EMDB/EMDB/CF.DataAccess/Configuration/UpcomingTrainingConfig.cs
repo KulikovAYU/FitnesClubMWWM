@@ -8,7 +8,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Configuration
         public UpcomingTrainingConfig()
         {
             HasKey(upcTrain => upcTrain.TrainingId);
-            Property(upcTrain => upcTrain.NumberOfSeats).IsRequired().HasColumnName("upcTrain");
+            Property(upcTrain => upcTrain.NumberOfSeats).IsRequired().HasColumnName("NumberOfSeats");
             Property(upcTrain => upcTrain.TrainingDateTime).IsRequired().HasColumnName("TrainingDateTime")
                 .HasColumnType("datetime2");
             ToTable("UpcomingTraining");

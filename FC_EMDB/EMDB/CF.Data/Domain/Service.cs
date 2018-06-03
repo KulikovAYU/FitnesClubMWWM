@@ -3,7 +3,7 @@
 namespace FC_EMDB.EMDB.CF.Data.Domain
 {
     /// <summary>
-    /// Сущность "услуга"
+    /// Сущность "услуга" (тренировка)
     /// </summary>
     public class Service
     {
@@ -24,5 +24,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
       
         public virtual ICollection<UpcomingTraining> Trainings { get; set; }
 
+
+      
     }
 }

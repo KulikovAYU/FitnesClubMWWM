@@ -26,7 +26,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
             //    where training.TrainingId == nTrainingId
             //    select training.Employee;
 
-            var query = DataBaseFcContext.Trainings.Where(train => train.TrainingId == nTrainingId)
+            var query = DataBaseFcContext.UpcomingTrainings.Where(train => train.TrainingId == nTrainingId)
                 .Select(emp => emp.Employee).FirstOrDefault();
             return query;
         }
@@ -42,7 +42,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
             //var query = from training in DataBaseFcContext.Trainings
             //    where training.Service.ServiceName == strTrainingName && training.TrainingDateTime == starDateTime
             //    select training.Employee;
-            var query = DataBaseFcContext.Trainings.Where(train => train.TrainingDateTime == starDateTime).Where(train=> train.Service.ServiceName == strTrainingName)
+            var query = DataBaseFcContext.UpcomingTrainings.Where(train => train.TrainingDateTime == starDateTime).Where(train=> train.Service.ServiceName == strTrainingName)
                 .Select(emp => emp.Employee).FirstOrDefault();
             return query;
         }

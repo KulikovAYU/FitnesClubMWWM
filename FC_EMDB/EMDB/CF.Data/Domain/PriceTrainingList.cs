@@ -34,8 +34,10 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public virtual Service TrainingListName { get; set; }
         #endregion
 
-        #region Связи между сущностями 0...* Accounts to 0...* TrainingList
+        #region Связи между сущностями 0...* Accounts to 0...* TrainingList Список работника, ведущего тренировку
         public virtual ICollection<Account> Accounts { get; set; }
         #endregion
+
+     
     }
 }

@@ -355,7 +355,93 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
     }
 
 
-   
+    /// <summary>
+    /// Конвертер для имени тренера
+    /// </summary>
+    public class GetTrenerNameConverter : BaseValueConverter<GetTrenerNameConverter>
+    {
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is UpcomingTraining upcomingTraining)
+            {
+               return upcomingTraining.Employee.HumanFullName;
+            }
 
+            return string.Empty;
+
+
+        }
+
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    /// <summary>
+    /// Конвертер для имени тренера
+    /// </summary>
+    public class GetTrainingStatusConverter : BaseValueConverter<GetTrainingStatusConverter>
+    {
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is UpcomingTraining upcomingTraining)
+            {
+                return upcomingTraining.StatusTraining.StatusName;
+            }
+
+            return string.Empty;
+        }
+
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class IsAvailableCreateRecordOntraining : BaseValueConverter<IsAvailableCreateRecordOntraining>
+    {
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is UpcomingTraining upcomingTraining)
+            {
+                return upcomingTraining.StatusTraining.StatusName == "Группа заполнена, запись невозможна";
+            }
+
+            return false;
+        }
+
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+
+
+    /// <summary>
+    /// Класс представляет конвертер даты в формад дд:мм:гг+ часы и минуты
+    /// </summary>
+    public class NumberAndTimeUpcomingTrainingValueConverter : BaseValueConverter<NumberAndTimeUpcomingTrainingValueConverter>
+    {
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!(value is DateTime)) return null;
+            var Day = ((DateTime) value).Date.Day; 
+            var Mounth = ((DateTime) value).Date.Month;
+            var Year = ((DateTime)value).Date.Year;
+            var Hours = ((DateTime) value).TimeOfDay.Hours;
+            var Minutes = ((DateTime) value).TimeOfDay.Minutes;
+
+            return $"{Day}.{Mounth}.{Year}  {Hours} ч.  {Minutes} мин." ;
+        }
+
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
 }

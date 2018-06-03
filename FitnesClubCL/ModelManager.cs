@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using FC_EMDB;
 using FC_EMDB.Classes;
 using FC_EMDB.EMDB.CF.Data.Domain;
@@ -99,6 +100,15 @@ namespace FitnesClubCL
            return ClientsHelper.FindPersonForNumberSubsription(numberSubscription);
         }
 
+        /// <summary>
+        /// Предварительно зарегистрировать трениртовку
+        /// </summary>
+        /// <param name="currentItem">Предварительная запись на тренировку</param>
+        public void CreatePriorRegistration(Account account,ServicesInSubscription service,UpcomingTraining currentItem)
+        {
+            ClientsHelper.CreatePriorRegistration(account,service, currentItem);
+        }
+
 
         /// <summary>
         /// Метод возвращает коллекцию людей (работников, клиентов...)
@@ -136,6 +146,82 @@ namespace FitnesClubCL
             Assistiant.AddData<T1, T2>(data1, data2);
         }
 
-       
+        /// <summary>
+        /// Получить дотупные для пользователя расписание занятий по конкретной тренировке
+        /// </summary>
+        /// <param name="servicesInSubscription">доступные услуги</param>
+        public ObservableCollection<UpcomingTraining> GetAvailableTrainings(ServicesInSubscription servicesInSubscription)
+        {
+           return Assistiant.GetAvailableTrainings(servicesInSubscription);
+        }
+
+        /// <summary>
+        /// Проверить тренировку на возможность записи
+        /// </summary>
+        /// <param name="item">выбранная тренировка</param>
+        /// <returns></returns>
+        public bool CheckTrainingOnAvailable(UpcomingTraining item)
+        {
+            if (item == null) return false;
+            return Assistiant.CheckTrainingOnAvailable(item);
+        }
+
+        /// <summary>
+        /// Возвратить доступные тренировки в абонементе
+        /// </summary>
+        /// <param name="account">Аккаунт</param>
+        /// <returns>Коллекция  тренировок в абонементе </returns>
+        public ObservableCollection<ServicesInSubscription> GetServicesInSubscription(Account account)
+        {
+            if (account?.Abonement != null)
+                return new ObservableCollection<ServicesInSubscription>(account?.Abonement
+                    ?.ArrServicesInSubscription);
+            return null;
+        }
+
+        /// <summary>
+        /// Возвратить те тренировки, на которые записан человек
+        /// </summary>
+        /// <param name="account">Аккаунт</param>
+        /// <returns>Коллекция  тренировок, на которые записан человек </returns>
+        public ObservableCollection<UpcomingTraining> GetUpcomingTraining(Account account)
+        {
+            if (account?.Abonement != null)
+                return new ObservableCollection<UpcomingTraining>(account?.Abonement
+                    ?.ArrUpcomingTrainings);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Звафиксировыать посещение тренировки
+        /// </summary>
+        /// <param name="account">Учетная запись</param>
+        /// <param name="upcomingTraining">Предстоящая тренировка</param>
+        public void FixTheVisit(Account account, UpcomingTraining upcomingTraining)
+        {
+            if (account == null || upcomingTraining== null)
+            {
+                return;
+            }
+
+            ClientsHelper.FixTheVisit(account, upcomingTraining);
+        }
+
+        /// <summary>
+        /// Отказ о посещении тренировки
+        /// </summary>
+        /// <param name="account">Аккаунт</param>
+        /// <param name="upcTraining">предстоящая тренировка</param>
+        public void RefusalOfVisit(Account account, UpcomingTraining upcTraining)
+        {
+            if (account == null || upcTraining == null)
+            {
+                return;
+            }
+
+            ClientsHelper.RefusalOfVisit(account, upcTraining);
+
+        }
     }
 }

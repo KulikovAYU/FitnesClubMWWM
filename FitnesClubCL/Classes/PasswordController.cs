@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using FC_EMDB;
@@ -137,6 +138,49 @@ namespace FitnesClubCL.Classes
         {
             return DbManager.GetInstance().FindPersonForNumberSubsription(numberSubscription);
         }
+
+        /// <summary>
+        /// Создать предварительную регистрацию тренировки
+        /// </summary>
+        /// <param name="account">Аккаунт</param>
+        /// <param name="currentItem">Выбранная тренировка</param>
+        public static void CreatePriorRegistration(Account account, ServicesInSubscription service, UpcomingTraining currentItem)
+        {
+
+            DbManager.GetInstance().CreatePriorRegistration(account, service, currentItem);
+         
+        }
+
+
+        /// <summary>
+        /// Звафиксировыать посещение тренировки
+        /// </summary>
+        /// <param name="account">Учетная запись</param>
+        /// <param name="upcomingTraining">Предстоящая тренировка</param>
+        public static void FixTheVisit(Account account, UpcomingTraining upcomingTraining)
+        {
+            if (account == null || upcomingTraining == null)
+            {
+                return;
+            }
+
+            DbManager.GetInstance().FixTheVisit(account, upcomingTraining);
+        }
+
+        /// <summary>
+        /// Отказ о посещении тренировки
+        /// </summary>
+        /// <param name="account">Аккаунт</param>
+        /// <param name="upcTraining">предстоящая тренировка</param>
+        public static void RefusalOfVisit(Account account, UpcomingTraining upcTraining)
+        {
+            if (account == null || upcTraining == null)
+            {
+                return;
+            }
+
+            DbManager.GetInstance().RefusalOfVisit(account, upcTraining);
+        }
     }
 
     /// <summary>
@@ -166,6 +210,21 @@ namespace FitnesClubCL.Classes
         public static void AddData<T1, T2>(T1 data1, T2 data2) where T1 : class where T2 : class
         {
             DbManager.GetInstance().AddData<T1, T2>(data1, data2);
+        }
+
+        /// <summary>
+        /// Получить дотупные для пользователя расписание занятий по конкретной тренировке
+        /// </summary>
+        /// <param name="servicesInSubscription">доступные услуги</param>
+        public static ObservableCollection<UpcomingTraining> GetAvailableTrainings(ServicesInSubscription servicesInSubscription)
+        {
+            return DbManager.GetInstance().GetAvailableTrainings(servicesInSubscription);
+        }
+
+        public static bool CheckTrainingOnAvailable(UpcomingTraining item)
+        {
+            if (item == null) return false;
+            return DbManager.GetInstance().CheckTrainingOnAvailable(item);
         }
     }
 }

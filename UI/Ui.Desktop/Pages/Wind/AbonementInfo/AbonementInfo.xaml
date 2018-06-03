@@ -48,39 +48,7 @@
             <Setter Property="GeomPictureMargin" Value="3" />
             <Setter Property="Cursor" Value="Hand" />
         </Style>
-        <Storyboard x:Key="Storyboard1">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid1" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0.5" />
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.995" />
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0.5" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(SkewTransform.AngleX)">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0" />
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(SkewTransform.AngleY)">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0" />
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-
     </Window.Resources>
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-            <BeginStoryboard Storyboard="{StaticResource Storyboard1}" />
-        </EventTrigger>
-    </Window.Triggers>
 
 
     <Window.DataContext>
@@ -350,9 +318,6 @@
                         x:Name="TrainingFrame"
                         Content="{Binding CurrentPage, Converter={valueConverters:AbonementInfoValueConverter}}"
                         NavigationUIVisibility="Hidden" />
-
-
-
 
                 </StackPanel>
             </ScrollViewer>

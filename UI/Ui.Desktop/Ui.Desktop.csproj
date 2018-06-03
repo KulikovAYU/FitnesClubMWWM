@@ -211,6 +211,9 @@
     <Compile Include="Pages\Wind\CheckTheClubCardWindow.xaml.cs">
       <DependentUpon>CheckTheClubCardWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Wind\CreateRecordWindow.xaml.cs">
+      <DependentUpon>CreateRecordWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Wind\MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
@@ -366,6 +369,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Wind\CheckTheClubCardWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Wind\CreateRecordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

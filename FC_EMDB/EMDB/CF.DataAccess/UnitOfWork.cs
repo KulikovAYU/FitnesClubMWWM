@@ -1,4 +1,5 @@
 ﻿using FC_EMDB.EMDB.CF.Data;
+using FC_EMDB.EMDB.CF.Data.Domain;
 using FC_EMDB.EMDB.CF.Data.Repositories;
 using FC_EMDB.EMDB.CF.DataAccess.Context;
 using FC_EMDB.EMDB.CF.DataAccess.Repositories;
@@ -22,6 +23,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             AccountStatus = new AccountStatusRepository(m_context);
             ServicesInSubscription = new SiSRepository(m_context);
             Abonements = new AbonementRepository(m_context);
+            UpcomingTrainings = new UpcomingTrainingRepository(m_context);
         }
 
         public IAccountRepository Accounts { get; private set; }
@@ -35,6 +37,8 @@ namespace FC_EMDB.EMDB.CF.DataAccess
         public ISiSRepository ServicesInSubscription { get; private set; }
 
         public IAbonementRepository Abonements { get; }
+
+        public IUpcomingTrainingRepository UpcomingTrainings { get; }
 
 
         public int Complete()

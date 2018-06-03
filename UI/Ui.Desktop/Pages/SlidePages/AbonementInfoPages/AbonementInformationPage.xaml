@@ -14,19 +14,8 @@
 
     <Page.Resources>
         <valueConverters:DateTimeToDateConverter x:Key="DateTimeToDateConverter" />
-        <Storyboard x:Key="OnLoaded1">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="stackPanel">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0.45"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
     </Page.Resources>
-    <Page.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-            <BeginStoryboard Storyboard="{StaticResource OnLoaded1}"/>
-        </EventTrigger>
-    </Page.Triggers>
-    <StackPanel x:Name="stackPanel" Orientation="Vertical" Opacity="0.5">
+    <StackPanel x:Name="stackPanel" Orientation="Vertical">
 
         <!--  Владелец  -->
         <Grid Margin="0,5,0,5" Style="{StaticResource BaseGridStyle}">

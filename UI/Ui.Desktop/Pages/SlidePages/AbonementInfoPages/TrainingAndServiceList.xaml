@@ -6,6 +6,7 @@
     xmlns:domain="clr-namespace:FC_EMDB.EMDB.CF.Data.Domain;assembly=FC_EMDB"
     xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop.Pages.SlidePages.AbonementInfoPages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:valueConverters="clr-namespace:FitnessClubMWWM.Ui.Desktop.ValueConverters"
     xmlns:viewModels="clr-namespace:FitnessClubMWWM.Ui.Desktop.ViewModels"
     Title="TrainingAndServiceList"
     d:DesignHeight="450"
@@ -26,6 +27,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <valueConverters:DateTimeValueConverter x:Key="DateTimeValueConverter" />
 
     </Page.Resources>
     <Grid>
@@ -51,14 +53,14 @@
                 <!--  Доступные тренировки  -->
                 <DataGrid
                     x:Name="DataGrid"
-                    Margin="10,0,10,30"
+                    Margin="0"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     AutoGenerateColumns="False"
                     Background="Transparent"
                     BorderThickness="0"
                     CanUserAddRows="False"
-                    CellStyle="{DynamicResource DataGridCellStyle1}"
+                    CellStyle="{StaticResource DataGridCellStyle1}"
                     ColumnHeaderHeight="40"
                     Foreground="Black"
                     HeadersVisibility="Column"
@@ -69,32 +71,29 @@
                     SelectionMode="Extended"
                     Style="{StaticResource BaseDataGridLabelFontStyle}">
 
-
-
                     <DataGrid.Columns>
                         <DataGridTextColumn
-                            Width="150"
+                            Width="220"
                             Binding="{Binding PriceType.TrainingListName.ServiceName}"
                             CellStyle="{StaticResource StyleCenter}"
                             Header="Услуга" />
 
                         <DataGridTextColumn
-                            Width="80"
-                            Binding="{Binding SiSVisitedTrainingCount}"
+                            Width="130"
+                            Binding="{Binding SiSTrainingCount}"
                             CellStyle="{StaticResource StyleCenter}"
                             Header="Количество тренировок" />
 
                         <DataGridTextColumn
-                            Width="100"
+                            Width="120"
                             Binding="{Binding PriceType.Tarifs.TarifName}"
                             CellStyle="{StaticResource StyleCenter}"
                             Header="Тариф" />
                         <DataGridTextColumn
-                            Width="100"
+                            Width="120"
                             Binding="{Binding TotalCost}"
                             CellStyle="{StaticResource StyleCenter}"
                             Header="Стоимость услуги" />
-
 
 
                         <DataGridTemplateColumn Width="100">
@@ -105,7 +104,8 @@
                                             Padding="5"
                                             HorizontalAlignment="Right"
                                             VerticalContentAlignment="Center"
-                                            Command="{Binding ShowNewEntryInScheduleWindowCommand}"
+                                            Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}, Path=DataContext.CreateRecordCommand}"
+                                            CommandParameter="{Binding ElementName=DataGrid, Path=SelectedItem}"
                                             Content="Запись"
                                             Cursor="Hand"
                                             FontSize="14"
@@ -115,31 +115,8 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Width="100">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <Button
-                                            Padding="5"
-                                            HorizontalAlignment="Right"
-                                            VerticalContentAlignment="Center"
-                                            Command="{Binding ShowNewEntryInScheduleWindowCommand}"
-                                            Content="Отмена записи"
-                                            Cursor="Hand"
-                                            FontSize="14"
-                                            Foreground="White"
-                                            Template="{StaticResource ButtonBaseControlTemplate}" />
-                                    </Border>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
                     </DataGrid.Columns>
-
-
                 </DataGrid>
-
             </Border>
         </Grid>
         <Grid Grid.Row="1" Margin="20">
@@ -154,10 +131,98 @@
                 FontWeight="Bold"
                 Foreground="Gray"
                 Style="{StaticResource BaseTextBlockStyle}"
-                Text="Записанные тренировки" />
+                Text="Запись на тренировки" />
             <Border Grid.Row="1">
-                <DataGrid />
+                <!--  Записанные тренировки  -->
+                <DataGrid
+                    x:Name="DataGrid1"
+                    Margin="0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    AutoGenerateColumns="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    CanUserAddRows="False"
+                    CellStyle="{DynamicResource DataGridCellStyle1}"
+                    ColumnHeaderHeight="40"
+                    Foreground="Black"
+                    HeadersVisibility="Column"
+                    HorizontalScrollBarVisibility="Auto"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding ArrUpcomingTraining}"
+                    RowHeight="40"
+                    SelectionMode="Extended"
+                    Style="{StaticResource BaseDataGridLabelFontStyle}">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="200"
+                            Binding="{Binding Service.ServiceName}"
+                            CellStyle="{StaticResource StyleCenter}"
+                            Header="Услуга" />
+
+                        <DataGridTextColumn
+                            Width="100"
+                            Binding="{Binding TrainingDateTime, Converter={StaticResource DateTimeValueConverter}}"
+                            CellStyle="{StaticResource StyleCenter}"
+                            Header="Дата посещения" />
+
+                        <DataGridTextColumn
+                            Width="200"
+                            Binding="{Binding Employee.HumanFullName}"
+                            CellStyle="{StaticResource StyleCenter}"
+                            Header="Тренер" />
+
+                        <DataGridTextColumn
+                            Width="100"
+                            Binding="{Binding Gym.GymName}"
+                            CellStyle="{StaticResource StyleCenter}"
+                            Header="Номер зала" />
+
+                        <DataGridTemplateColumn Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Button
+                                            Padding="5"
+                                            HorizontalAlignment="Right"
+                                            VerticalContentAlignment="Center"
+                                            Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}, Path=DataContext.FixTheVisitCommand}"
+                                            CommandParameter="{Binding ElementName=DataGrid1, Path=SelectedItem}"
+                                            Content="Пришел"
+                                            Cursor="Hand"
+                                            FontSize="14"
+                                            Foreground="White"
+                                            Template="{StaticResource ButtonBaseControlTemplate}" />
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Button
+                                            Padding="5"
+                                            HorizontalAlignment="Right"
+                                            VerticalContentAlignment="Center"
+                                            Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}, Path=DataContext.RefusalOfVisitCommand}"
+                                            CommandParameter="{Binding ElementName=DataGrid1, Path=SelectedItem}"
+                                            Content="Отмена записи"
+                                            Cursor="Hand"
+                                            FontSize="14"
+                                            Foreground="White"
+                                            Template="{StaticResource ButtonBaseControlTemplate}" />
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Border>
+
         </Grid>
 
 

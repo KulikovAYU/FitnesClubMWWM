@@ -1,0 +1,372 @@
+﻿<Window
+    x:Class="FitnessClubMWWM.Ui.Desktop.Pages.Wind.CreateRecordWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FitnessClubMWWM.Ui.Desktop.Pages.Wind"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:valueConverters="clr-namespace:FitnessClubMWWM.Ui.Desktop.ValueConverters"
+    xmlns:viewModels="clr-namespace:FitnessClubMWWM.Ui.Desktop.ViewModels"
+    Title="CreateRecordWindow"
+    Width="700"
+    Height="400"
+    AllowsTransparency="True"
+    DataContext="{Binding AbonementInfoViewModel, Source={StaticResource Locator}}"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="20"
+            CornerRadius="0"
+            GlassFrameThickness="0"
+            ResizeBorderThickness="0" />
+    </WindowChrome.WindowChrome>
+
+
+    <Window.Resources>
+        <valueConverters:GetTrenerNameConverter x:Key="GetTrenerNameConverter" />
+        <valueConverters:NumberAndTimeUpcomingTrainingValueConverter x:Key="NumberAndTimeUpcomingTrainingValueConverter" />
+        <valueConverters:GetTrainingStatusConverter x:Key="GetTrainingStatusConverter" />
+        <valueConverters:IsAvailableCreateRecordOntraining x:Key="IsAvailableCreateRecordOntraining" />
+    </Window.Resources>
+    <Window.Style>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="WindowChrome.CaptionHeight" Value="20" />
+            <Setter Property="WindowChrome.CornerRadius" Value="0" />
+            <Setter Property="WindowChrome.GlassFrameThickness" Value="0" />
+            <Setter Property="WindowChrome.ResizeBorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+
+                            <Border.Resources>
+                                <Storyboard x:Key="ShowWindow">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="0.95">
+                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                <ExponentialEase EasingMode="EaseIn" />
+                                            </EasingDoubleKeyFrame.EasingFunction>
+                                        </EasingDoubleKeyFrame>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1">
+                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                <ExponentialEase EasingMode="EaseIn" />
+                                            </EasingDoubleKeyFrame.EasingFunction>
+                                        </EasingDoubleKeyFrame>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="0.95">
+                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                <ExponentialEase EasingMode="EaseIn" />
+                                            </EasingDoubleKeyFrame.EasingFunction>
+                                        </EasingDoubleKeyFrame>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1">
+                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                <ExponentialEase EasingMode="EaseIn" />
+                                            </EasingDoubleKeyFrame.EasingFunction>
+                                        </EasingDoubleKeyFrame>
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </Border.Resources>
+
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                    <BeginStoryboard Storyboard="{StaticResource ShowWindow}" />
+                                </EventTrigger>
+                            </Border.Triggers>
+
+                            <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5">
+                                <Grid.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <SkewTransform />
+                                        <RotateTransform />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </Grid.RenderTransform>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <!--  Фоновая картинка на заднем фоне  -->
+                                <Image
+                                    Grid.RowSpan="2"
+                                    Panel.ZIndex="0"
+                                    Opacity="0.35"
+                                    Source="/FitnessClubMWWM.Ui.Desktop;component/Images/DialogPictures/BackgroundDialogWindow.jpg"
+                                    Stretch="Fill" />
+                                <!--  Рамка окна  -->
+                                <Rectangle
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    Panel.ZIndex="1"
+                                    StrokeThickness="1">
+                                    <Rectangle.Stroke>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Offset="0" Color="#FF1E53D0" />
+                                            <GradientStop Offset="1" Color="#FF1171BF" />
+                                            <GradientStop Offset="0.149" Color="#FF2371E2" />
+                                        </LinearGradientBrush>
+                                    </Rectangle.Stroke>
+                                </Rectangle>
+                                <!--  Панель с кнопкой закрыть  -->
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="50" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border
+                                        Grid.Row="0"
+                                        Grid.ColumnSpan="2"
+                                        BorderBrush="{StaticResource BackgroundThiknessGrey}"
+                                        BorderThickness="0,0,0,2" />
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Panel.ZIndex="2"
+                                        Background="{x:Null}"
+                                        Command="{Binding CloseCommand}"
+                                        CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                        Cursor="Hand"
+                                        Foreground="Gray"
+                                        Style="{DynamicResource CloseDialogButtonStyle}"
+                                        ToolTip="Закрыть" />
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        VerticalAlignment="Center"
+                                        FontFamily="/FitnessClubMWWM.Ui.Desktop;component/Fonts/ALSEkibastuz/#ALS Ekibastuz "
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Foreground="Gray"
+                                        Text="Запись на тренировку"
+                                        TextAlignment="Center" />
+                                </Grid>
+
+                                <Border
+                                    Grid.Row="1"
+                                    Width="600"
+                                    Height="300"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <StackPanel Orientation="Vertical">
+
+                                        <StackPanel Orientation="Vertical">
+
+                                            <!--  Тренировка  -->
+                                            <Grid Style="{StaticResource BaseGridStyle}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock
+                                                    Grid.Column="0"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="{StaticResource Regular}"
+                                                    FontWeight="Bold"
+                                                    Foreground="Gray"
+                                                    Text="Тренировка" />
+                                                <TextBlock
+                                                    Grid.Column="1"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="{StaticResource Regular}"
+                                                    FontWeight="Bold"
+                                                    Foreground="Gray"
+                                                    Text="{Binding _ServicesInSubscription.PriceType.TrainingListName.ServiceName}" />
+
+                                            </Grid>
+
+                                            <!--  Дата и время начала  -->
+                                            <Grid Style="{StaticResource BaseGridStyle}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock
+                                                    Grid.Column="0"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="{StaticResource Regular}"
+                                                    FontWeight="Bold"
+                                                    Foreground="Gray"
+                                                    Text="Дата и время начала" />
+
+                                                <ComboBox
+                                                    Name="TrainingBox"
+                                                    Grid.Column="1"
+                                                    Width="250"
+                                                    Height="40"
+                                                    Margin="5"
+                                                    Padding="7,0,0,0"
+                                                    VerticalContentAlignment="Center"
+                                                    FontSize="{StaticResource Regular}"
+                                                    Foreground="Gray"
+                                                    ItemsSource="{Binding _AvailableTrainings}"
+                                                    SelectedIndex="0"
+                                                    SelectedItem="{Binding _CurrentItem}">
+
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <TextBlock Text="{Binding Path=TrainingDateTime, Converter={StaticResource NumberAndTimeUpcomingTrainingValueConverter}}" />
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                                <!--  SelectedDate="{Binding ClientPasportDatеOfIssue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  -->
+                                            </Grid>
+                                            <!--  Тренер  -->
+                                            <Grid Style="{StaticResource BaseGridStyle}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock
+                                                    Grid.Column="0"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="{StaticResource Regular}"
+                                                    FontWeight="Bold"
+                                                    Foreground="Gray"
+                                                    Text="Тренер" />
+
+                                                <Grid Grid.Column="1">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100*" />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBlock
+                                                        Grid.Column="0"
+                                                        Margin="5"
+                                                        VerticalAlignment="Center"
+                                                        FontSize="{StaticResource Regular}"
+                                                        FontWeight="Bold"
+                                                        Foreground="Gray"
+                                                        Text="{Binding ElementName=TrainingBox, Path=SelectedItem, Converter={StaticResource GetTrenerNameConverter}}" />
+
+                                                </Grid>
+                                            </Grid>
+                                            <Grid Style="{StaticResource BaseGridStyle}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock
+                                                    Grid.Column="0"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="{StaticResource Regular}"
+                                                    FontWeight="Bold"
+                                                    Foreground="Gray"
+                                                    Text="Зал" />
+
+                                                <Grid Grid.Column="1">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100*" />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBlock
+                                                        Grid.Column="0"
+                                                        Margin="5"
+                                                        VerticalAlignment="Center"
+                                                        FontSize="{StaticResource Regular}"
+                                                        FontWeight="Bold"
+                                                        Foreground="Gray"
+                                                        Text="{Binding Path=_CurrentItem.Gym.GymName}" />
+
+                                                </Grid>
+                                            </Grid>
+
+
+                                            <Grid Style="{StaticResource BaseGridStyle}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock
+                                                    Grid.Column="0"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="{StaticResource Regular}"
+                                                    FontWeight="Bold"
+                                                    Foreground="Gray"
+                                                    Text="Статус" />
+
+                                                <Grid Grid.Column="1">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100*" />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBlock
+                                                        Grid.Column="0"
+                                                        Margin="5"
+                                                        VerticalAlignment="Center"
+                                                        FontSize="{StaticResource Regular}"
+                                                        FontWeight="Bold"
+                                                        Foreground="Gray"
+                                                        Text="{Binding ElementName=TrainingBox, Path=SelectedItem, Converter={StaticResource GetTrainingStatusConverter}}" />
+
+                                                </Grid>
+                                            </Grid>
+
+                                        </StackPanel>
+
+                                        <Grid Margin="0,20,0,0" HorizontalAlignment="Center">
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Button
+                                                Grid.Column="0"
+                                                Width="200"
+                                                Height="50"
+                                                Margin="0,15,10,15"
+                                                Command="{Binding CreateVisitCommand}"
+                                                Content="Записаться"
+                                                FontSize="{StaticResource Regular}"
+                                                Foreground="White"
+                                                Template="{DynamicResource ButtonBaseControlTemplate}" />
+                                            <Button
+                                                Grid.Column="1"
+                                                Width="200"
+                                                Height="50"
+                                                Margin="10,15,0,15"
+                                                Command="{Binding CloseCommand}"
+                                                CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Content="Назад"
+                                                FontSize="{StaticResource Regular}"
+                                                Foreground="White"
+                                                Template="{DynamicResource ButtonBaseControlTemplate}" />
+
+                                        </Grid>
+
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                    <Setter Property="Template" Value="{StaticResource WindowTemplateKey}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Style>
+    <Grid />
+</Window>

@@ -27,6 +27,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         /// </summary>
         public int NumberOfSeats { get; set; }
 
+    
 
         /// <summary>
         /// Статус трениорвки: Закончена или идет запись, группа набрана

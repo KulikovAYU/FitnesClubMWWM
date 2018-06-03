@@ -271,11 +271,13 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                 },
             };
 
-          
+
             #endregion
 
             //ObservableCollection<Abonement> _Abonements = new ObservableCollection<Abonement>();
             //context.Abonements.AddRange(_Abonements);
+
+         
 
             #region Добавление тренировки, которая предстоит
             ObservableCollection<UpcomingTraining> trainings = new ObservableCollection<UpcomingTraining>()
@@ -301,8 +303,30 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     Gym = gymLists[1],
                     Employee = employees[2]
                 },
+
+                new UpcomingTraining
+                {
+                    TrainingDateTime = new DateTime(2018,05,24,16,30,00),
+                    NumberOfSeats =8,
+                    StatusTraining =statusTrainingLists[0],
+                    Abonements = new ObservableCollection<Abonement>{ accounts[0].Abonement , accounts[1].Abonement },
+                    Service = services[2],
+                    Gym = gymLists[2],
+                    Employee = employees[1]
+                },
+
+                new UpcomingTraining
+                {
+                    TrainingDateTime = new DateTime(2018,05,27,16,30,00),
+                    NumberOfSeats =8,
+                    StatusTraining =statusTrainingLists[0],
+                    Service = services[0],
+                    Gym = gymLists[0],
+                    Employee = employees[1]
+                },
+
             };
-            context.Trainings.AddRange(trainings);
+            context.UpcomingTrainings.AddRange(trainings);
 
             //ObservableCollection<ServicesInSubscription> _collectionSiS = new ObservableCollection<ServicesInSubscription>()
             //{

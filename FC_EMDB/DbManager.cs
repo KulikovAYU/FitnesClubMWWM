@@ -211,5 +211,88 @@ namespace FC_EMDB
            
             //return unitOfWork.Accounts.GetAccountForNumberSubscription(numberSubscription);
         }
+
+        /// <summary>
+        /// Получить дотупные для пользователя расписание занятий по конкретной тренировке
+        /// </summary>
+        /// <param name="servicesInSubscription">доступные услуги</param>
+        public ObservableCollection<UpcomingTraining> GetAvailableTrainings(ServicesInSubscription servicesInSubscription)
+        {
+
+            return unitOfWork.Services.GetAvailableTrainings(servicesInSubscription);
+
+        }
+        
+        /// <summary>
+        /// Проверка тренировки по факту доступности (число мест !=0)
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public bool CheckTrainingOnAvailable(UpcomingTraining item)
+        {
+            if (item == null) return false;
+            return unitOfWork.Services.CheckTrainingOnAvailable(item);
+        }
+
+        /// <summary>
+        /// Создать предварительную регистрацию тренировки
+        /// </summary>
+        /// <param name="account">Аккаунт</param>
+        /// <param name="currentItem">Выбранная тренировка</param>
+        public void CreatePriorRegistration(Account account, ServicesInSubscription service, UpcomingTraining currentItem)
+        {
+            //1. Получили тренировку
+           var currentService = unitOfWork.ServicesInSubscription.Get(service.SiSId);
+            //2. Уменьшили счетчик
+            currentService.SiSTrainingCount--;
+            //3. Засейвили изменения
+            unitOfWork.ServicesInSubscription.AddOrUpdate(currentService);
+
+          
+            //Также необходимо создать новую запись
+            unitOfWork.UpcomingTrainings.AddNewUpcomingTraining(account, currentItem);
+        }
+
+        /// <summary>
+        /// Звафиксировыать посещение тренировки
+        /// </summary>
+        /// <param name="account">Учетная запись</param>
+        /// <param name="upcomingTraining">Предстоящая тренировка</param>
+        public void FixTheVisit(Account account, UpcomingTraining upcomingTraining)
+        {
+            if (account == null || upcomingTraining == null)
+            {
+                return;
+            }
+            unitOfWork.UpcomingTrainings.FixTheVisit(account, upcomingTraining);
+        }
+
+        /// <summary>
+        /// Отказ о посещении тренировки
+        /// </summary>
+        /// <param name="account">Аккаунт</param>
+        /// <param name="upcTraining">предстоящая тренировка</param>
+        public void RefusalOfVisit(Account account, UpcomingTraining upcTraining)
+        {
+            if (account == null || upcTraining == null)
+            {
+                return;
+            }
+
+            //1. Получили предстоящую тренировку
+           var upcomTraining = unitOfWork.UpcomingTrainings.GetUpcomingTraining(upcTraining);
+            //2. получили текущий аккаунт
+            var currAccount = unitOfWork.Accounts.FindAccountWithSameData(account);
+            //4. Увеличим счетчик текущей тренировки
+            unitOfWork.ServicesInSubscription.IncrementCountServices(upcTraining);
+
+            //3. Убрали тренировку из записи
+            unitOfWork.UpcomingTrainings.Remove(upcTraining);
+            //Сохраним изменения в БД
+            unitOfWork.Complete();
+
+           
+            
+        }
     }
 }

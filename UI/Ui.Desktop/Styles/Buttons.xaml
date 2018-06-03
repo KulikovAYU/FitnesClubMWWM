@@ -7,14 +7,14 @@
     mc:Ignorable="d">
 
     <!--  Шаблон обычной кнопки  -->
-    <ControlTemplate x:Key="ButtonBaseControlTemplate" TargetType="{x:Type ButtonBase}">
+    <ControlTemplate x:Key="ButtonBaseControlTemplate" TargetType="{x:Type Button}">
         <ControlTemplate.Resources>
             <Storyboard x:Key="Storyboard1">
                 <ColorAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
                     <SplineColorKeyFrame KeyTime="0:0:0.3" Value="#FF008AC3" />
                 </ColorAnimationUsingKeyFrames>
             </Storyboard>
-            <Storyboard x:Key="Storyboard_Copy1">
+            <Storyboard x:Key="StoryboardCopy1">
                 <ColorAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
                     <SplineColorKeyFrame KeyTime="0:0:0.3" Value="{StaticResource TextBoksBlue}" />
                 </ColorAnimationUsingKeyFrames>
@@ -58,7 +58,7 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Trigger.ExitActions>
                     <ResumeStoryboard BeginStoryboardName="Storyboard1_BeginStoryboard" />
-                    <BeginStoryboard x:Name="Storyboard1_BeginStoryboard1" Storyboard="{StaticResource Storyboard_Copy1}" />
+                    <BeginStoryboard x:Name="Storyboard1_BeginStoryboard1" Storyboard="{StaticResource StoryboardCopy1}" />
                 </Trigger.ExitActions>
                 <Trigger.EnterActions>
                     <BeginStoryboard x:Name="Storyboard1_BeginStoryboard" Storyboard="{StaticResource Storyboard1}" />
@@ -971,6 +971,7 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+
     <Style x:Key="DataGridCellStyle1" TargetType="{x:Type DataGridCell}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
