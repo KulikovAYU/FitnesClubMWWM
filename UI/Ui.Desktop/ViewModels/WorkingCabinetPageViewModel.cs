@@ -119,7 +119,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                             HumanPhoto = Photo
                         };
 
-                        _modelManager.CreateRecord<Account>(_clientData);
+                        _modelManager.CreateOrUpdateRecord<Account>(_clientData);
                         CustomMessageBox.Show(
                             "Новая учетная запись успешно создана",
                             "Регистрация нового пользователя",
@@ -142,7 +142,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                     _clientData.StrPathPhoto = this.StrPath;
                     _clientData.HumanAdress = this.ClientAdress;
                     _clientData.HumanMail = this.ClientMail;
-                    _modelManager.CreateRecord<Account>(_clientData);
+                    _modelManager.CreateOrUpdateRecord<Account>(_clientData);
                     CustomMessageBox.Show(
                         "Обновление записи успешно завершено",
                         "Регистрация нового пользователя",
@@ -169,7 +169,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                  Messenger.Default.Send("RegisterNewClientPage");
                  UpdatePageFields(_clientData);
 
-                 _modelManager.CreateRecord<Account>(_clientData);
+                 _modelManager.CreateOrUpdateRecord<Account>(_clientData);
              }
              else
              {

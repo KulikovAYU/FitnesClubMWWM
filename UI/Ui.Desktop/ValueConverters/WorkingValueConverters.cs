@@ -129,7 +129,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
         {
             if (value == null)
             {
-                return new BitmapImage(new Uri("pack://application:,,,/Images/Icons/red_gym_icon.ico", UriKind.RelativeOrAbsolute));
+                return new BitmapImage(new Uri("pack://application:,,,/Images/Icons/red_gym_icon.ico", UriKind.RelativeOrAbsolute));//TODO: раскомментить
+                //return null;
 
             }
 

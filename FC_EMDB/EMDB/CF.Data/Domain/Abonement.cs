@@ -54,6 +54,11 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public DateTime? CountDays { get; set; }
 
         /// <summary>
+        /// Дни продления
+        /// </summary>
+        public DateTime? TimeToLong { get; set; }
+
+        /// <summary>
         /// Дата активации абонемента
         /// </summary>
         public DateTime? AbonementActivationDateTime { get; set; } = DateTime.Now;

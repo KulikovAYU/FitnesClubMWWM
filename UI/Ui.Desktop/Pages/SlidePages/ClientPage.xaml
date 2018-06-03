@@ -165,10 +165,10 @@
                 <domain:Account x:Key="Account" />
             </DataGrid.Resources>
             <DataGrid.HorizontalGridLinesBrush>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF888888" Offset="0.438"/>
-                    <GradientStop Color="#FF8C8C8C" Offset="1"/>
-                    <GradientStop Color="#FF0F0F0F" Offset="0.06"/>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0.438" Color="#FF888888" />
+                    <GradientStop Offset="1" Color="#FF8C8C8C" />
+                    <GradientStop Offset="0.06" Color="#FF0F0F0F" />
                 </LinearGradientBrush>
             </DataGrid.HorizontalGridLinesBrush>
             <DataGrid.RenderTransform>
@@ -253,11 +253,11 @@
                         <Style x:Key="ButtonWidthPictureIsNotPressed" TargetType="{x:Type userControls:ButtonWithPicture}">
                             <Setter Property="Background" Value="White" />
                             <Setter Property="BorderThickness" Value="0" />
-                            <Setter Property="GeomPictureHeight" Value="20" />
-                            <Setter Property="GeomPictureWidth" Value="20" />
+                            <Setter Property="GeomPictureHeight" Value="20.0" />
+                            <Setter Property="GeomPictureWidth" Value="20.0" />
                             <Setter Property="FontWeight" Value="Normal" />
                             <Setter Property="Margin" Value="0" />
-                            <Setter Property="GeomPictureMargin" Value="3" />
+                            <Setter Property="GeomPictureMargin" Value="3.0" />
                             <Setter Property="Cursor" Value="Hand" />
                         </Style>
                         <converter:DateTimeToDateConverter x:Key="DateTimeToDateConverter" />
@@ -502,7 +502,7 @@
                                                     Grid.Row="0"
                                                     Grid.Column="1"
                                                     Style="{Binding Source={StaticResource StyleRightTb}}"
-                                                    Text="{Binding StringFormat={}{0}₽, Path=Abonement.TotalCost}" />
+                                                    Text="{Binding StringFormat={}{0}₽, Path=Abonement.TotalCost, UpdateSourceTrigger=PropertyChanged}" />
                                                 <Rectangle
                                                     Grid.Row="0"
                                                     Grid.Column="0"
@@ -526,7 +526,7 @@
                                                     Grid.Row="1"
                                                     Grid.Column="1"
                                                     Style="{Binding Source={StaticResource StyleRightTb}}"
-                                                    Text="{Binding Path=Abonement.CountDays, Converter={StaticResource DateTimeToDateConverter}}" />
+                                                    Text="{Binding Path=Abonement.CountDays, Converter={StaticResource DateTimeToDateConverter}, UpdateSourceTrigger=PropertyChanged}" />
                                                 <Rectangle
                                                     Grid.Row="2"
                                                     Grid.Column="0"
@@ -538,7 +538,7 @@
                                                     Grid.Row="2"
                                                     Grid.Column="1"
                                                     Style="{Binding Source={StaticResource StyleRightTb}}"
-                                                    Text="{Binding Abonement.AbonementregistrationDate, Converter={StaticResource DateTimeToDateConverter}}" />
+                                                    Text="{Binding Abonement.AbonementregistrationDate, Converter={StaticResource DateTimeToDateConverter}, UpdateSourceTrigger=PropertyChanged}" />
                                                 <TextBlock
                                                     Grid.Row="2"
                                                     Grid.Column="0"
@@ -549,7 +549,7 @@
                                                     Grid.Row="3"
                                                     Grid.Column="1"
                                                     Style="{Binding Source={StaticResource StyleRightTb}}"
-                                                    Text="{Binding Path=Abonement.AbonmentStatus.StatusName}" />
+                                                    Text="{Binding Path=Abonement.AbonmentStatus.StatusName, UpdateSourceTrigger=PropertyChanged}" />
                                                 <TextBlock
                                                     Grid.Row="3"
                                                     Grid.Column="0"

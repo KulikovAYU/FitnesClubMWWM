@@ -15,7 +15,8 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Configuration
             Property(abon => abon.VisitedTrainingCount).IsRequired().HasColumnName("VisitedTrainingCount");
             Property(abon => abon.TotalCost).IsRequired().HasColumnName("TotalCost").HasColumnType("money");
             Property(abon => abon.CountDays).IsOptional().HasColumnName("CountDays").HasColumnType("datetime2");
-            Property(abon => abon.AbonementActivationDateTime).IsRequired().HasColumnName("datetime2");
+            Property(abon => abon.AbonementActivationDateTime).IsRequired().HasColumnName("AbonementActivationDateTime").HasColumnType("datetime2");
+            Property(abon => abon.TimeToLong).IsOptional().HasColumnName("TimeToLong").HasColumnType("datetime2");
             ToTable("Abonement");
         }
     }

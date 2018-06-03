@@ -81,7 +81,7 @@ namespace FitnesClubCL
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="clientData"></param>
-        public void CreateRecord<T>(T clientData) where T : class
+        public void CreateOrUpdateRecord<T>(T clientData) where T : class
         {
             if (clientData == null)
                 return;
@@ -222,6 +222,48 @@ namespace FitnesClubCL
 
             ClientsHelper.RefusalOfVisit(account, upcTraining);
 
+        }
+
+        /// <summary>
+        /// Обновить 
+        /// </summary>
+        /// <param name="accountAbonement"></param>
+        public void ActivateAbonement(Abonement accountAbonement)
+        {
+            if (accountAbonement == null)
+            {
+                return;
+            }
+            accountAbonement.AbonmentStatus.StatusName = "Активен";
+
+            CreateOrUpdateRecord(accountAbonement);
+        }
+
+        /// <summary>
+        /// Продлить абонемент
+        /// </summary>
+        /// <param name="accountAbonement"></param>
+        /// <param name="timeToLong"></param>
+        public void LongAbonement(Abonement accountAbonement, DateTime timeToLong)
+        {
+            if (accountAbonement == null)
+            {
+                return;
+            }
+
+            accountAbonement.TimeToLong = timeToLong;
+            CreateOrUpdateRecord(accountAbonement);
+        }
+
+        public void FreezeAbonement(Abonement accountAbonement)
+        {
+            if (accountAbonement == null)
+            {
+                return;
+            }
+            accountAbonement.AbonmentStatus.StatusName = "Заморожен";
+
+            CreateOrUpdateRecord(accountAbonement);
         }
     }
 }

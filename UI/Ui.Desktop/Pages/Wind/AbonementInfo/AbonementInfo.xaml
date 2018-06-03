@@ -218,7 +218,7 @@
 
                         <userControls:ButtonWithPicture
                             Grid.Column="0"
-                            Command="{Binding ShowAbonementInfoCommand}"
+                            Command="{Binding ShowAbonementInfoCommand, UpdateSourceTrigger=PropertyChanged}"
                             Content="Информация"
                             GeomPicture="{Binding Data, Source={StaticResource Info}}"
                             GeomPictureFill="Black"
@@ -234,7 +234,7 @@
 
                         <userControls:ButtonWithPicture
                             Grid.Column="2"
-                            Command="{Binding ShowTrainingAndServiceListCommand}"
+                            Command="{Binding ShowTrainingAndServiceListCommand, UpdateSourceTrigger=PropertyChanged}"
                             Content="Список тренировок и услуг"
                             GeomPicture="{Binding Data, Source={StaticResource Gym}}"
                             GeomPictureFill="Black"
@@ -250,7 +250,7 @@
                             Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
                         <userControls:ButtonWithPicture
                             Grid.Column="4"
-                            Command="{Binding SellTrainingOrServiceCommand}"
+                            Command="{Binding SellTrainingOrServiceCommand, UpdateSourceTrigger=PropertyChanged}"
                             CommandParameter="{Binding _Account}"
                             Content="Продать услугу"
                             GeomPicture="{Binding Data, Source={StaticResource SellAbonement}}"
@@ -272,8 +272,7 @@
                         <userControls:ButtonWithPicture
                             Grid.Column="6"
                             Margin="0,0,0,0"
-                            Command="{Binding ActivateAbonementRelayCommand}"
-                            CommandParameter="{Binding _Account}"
+                            Command="{Binding ActivateAbonementCommand, UpdateSourceTrigger=PropertyChanged}"
                             Content="Активировать"
                             GeomPicture="{Binding Data, Source={StaticResource ActivateAbonement}}"
                             GeomPictureFill="Black"
@@ -290,7 +289,7 @@
                         <userControls:ButtonWithPicture
                             Grid.Column="8"
                             Margin="0,0,0,0"
-                            Command="{Binding LongAbonementRelayCommand}"
+                            Command="{Binding ShowLongAbonementPageCommand, UpdateSourceTrigger=PropertyChanged}"
                             Content="Продлить"
                             GeomPicture="{Binding Data, Source={StaticResource UpAbonement}}"
                             GeomPictureFill="Black"
@@ -306,6 +305,7 @@
                         <userControls:ButtonWithPicture
                             Grid.Column="10"
                             Margin="0,0,0,0"
+                            Command="{Binding FreezeAbonementCommand, UpdateSourceTrigger=PropertyChanged}"
                             Content="Заморозить"
                             GeomPicture="{Binding Data, Source={StaticResource FreezeAbonement}}"
                             GeomPictureFill="Black"

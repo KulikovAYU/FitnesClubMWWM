@@ -181,7 +181,7 @@
                                                     FontSize="{StaticResource Regular}"
                                                     FontWeight="Bold"
                                                     Foreground="Gray"
-                                                    Text="{Binding _ServicesInSubscription.PriceType.TrainingListName.ServiceName}" />
+                                                    Text="{Binding CurrentServiceInSubscription.PriceType.TrainingListName.ServiceName}" />
 
                                             </Grid>
 
@@ -210,9 +210,9 @@
                                                     VerticalContentAlignment="Center"
                                                     FontSize="{StaticResource Regular}"
                                                     Foreground="Gray"
-                                                    ItemsSource="{Binding _AvailableTrainings}"
+                                                    ItemsSource="{Binding ArrAvailableTrainings}"
                                                     SelectedIndex="0"
-                                                    SelectedItem="{Binding _CurrentItem}">
+                                                    SelectedItem="{Binding CurrentItem}">
 
                                                     <ComboBox.ItemTemplate>
                                                         <DataTemplate>
@@ -283,7 +283,7 @@
                                                         FontSize="{StaticResource Regular}"
                                                         FontWeight="Bold"
                                                         Foreground="Gray"
-                                                        Text="{Binding Path=_CurrentItem.Gym.GymName}" />
+                                                        Text="{Binding Path=CurrentItem.Gym.GymName}" />
 
                                                 </Grid>
                                             </Grid>
