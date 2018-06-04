@@ -29,6 +29,10 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// </summary>
         private const int MAXCOUNTNUMBERABON = 4;
 
+        /// <summary>
+        /// Флаг того, что команда выполнялась из таблицы
+        /// </summary>
+        public bool IsFromClientTable { get; set; } = false;
         private readonly ModelManager _modelManager;
         public WorkingCabinetPageViewModel()
         {
@@ -49,13 +53,30 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// </summary>
         public RelayCommand RegisterNewClientCommand => new RelayCommand(() => { Messenger.Default.Send("RegisterNewClientPage"); });
 
+        private Account _clientData;
 
-        Account _clientData = null;
+        public Account ExistAccount { get; set; }
+
         /// <summary>
         /// Команда "сохранить изменения" после заполнения формы
         /// </summary>
         public RelayCommand<bool> SaveChangesCommand => new RelayCommand<bool>((obj) =>{
             {
+                if (ExistAccount != null)
+                {
+                    CorrectExistData(ExistAccount);
+                    _modelManager.CreateOrUpdateRecord<Account>(ExistAccount);
+                    MessageBoxResult result = CustomMessageBox.Show(
+                        "Обновление записи успешно завершено",
+                        "Регистрация нового пользователя",
+                        MessageBoxButton.OK, eMessageBoxIcons.eSucsess);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        Messenger.Default.Send("ClientPage");
+                    }
+                    return;
+                }
+
                 if (_clientData == null || !_clientData.bIsExistPerson)
                 {
               
@@ -130,18 +151,19 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                 }
                 else
                 {
-                    _clientData.HumanFirstName = this.ClientFirstName;
-                    _clientData.HumanFamilyName = this.ClientFamilyName;
-                    _clientData.HumanLastName = this.ClientLastName;
-                    _clientData.HumanDateOfBirdth = this.ClientDateOfBirdth;
-                    _clientData.HumanPhoneNumber = this.ClientPhoneNumber;
-                    _clientData.HumanPasportDataSeries = this.ClientPasportDataSeries;
-                    _clientData.HumanPasportDataNumber = this.ClientPasportDataNumber;
-                    _clientData.HumanPasportDataIssuedBy = this.ClientPasportDataIssuedBy;
-                    _clientData.HumanPasportDatеOfIssue = this.ClientPasportDatеOfIssue;
-                    _clientData.StrPathPhoto = this.StrPath;
-                    _clientData.HumanAdress = this.ClientAdress;
-                    _clientData.HumanMail = this.ClientMail;
+                    CorrectExistData(_clientData);
+                    //_clientData.HumanFirstName = this.ClientFirstName;
+                    //_clientData.HumanFamilyName = this.ClientFamilyName;
+                    //_clientData.HumanLastName = this.ClientLastName;
+                    //_clientData.HumanDateOfBirdth = this.ClientDateOfBirdth;
+                    //_clientData.HumanPhoneNumber = this.ClientPhoneNumber;
+                    //_clientData.HumanPasportDataSeries = this.ClientPasportDataSeries;
+                    //_clientData.HumanPasportDataNumber = this.ClientPasportDataNumber;
+                    //_clientData.HumanPasportDataIssuedBy = this.ClientPasportDataIssuedBy;
+                    //_clientData.HumanPasportDatеOfIssue = this.ClientPasportDatеOfIssue;
+                    //_clientData.StrPathPhoto = this.StrPath;
+                    //_clientData.HumanAdress = this.ClientAdress;
+                    //_clientData.HumanMail = this.ClientMail;
                     _modelManager.CreateOrUpdateRecord<Account>(_clientData);
                     CustomMessageBox.Show(
                         "Обновление записи успешно завершено",
@@ -155,6 +177,24 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             _clientData = null;
 
         }, (obj) =>  IsOk);
+
+
+
+        void CorrectExistData(Account clientData)
+        {
+            clientData.HumanFirstName = this.ClientFirstName;
+            clientData.HumanFamilyName = this.ClientFamilyName;
+            clientData.HumanLastName = this.ClientLastName;
+            clientData.HumanDateOfBirdth = this.ClientDateOfBirdth;
+            clientData.HumanPhoneNumber = this.ClientPhoneNumber;
+            clientData.HumanPasportDataSeries = this.ClientPasportDataSeries;
+            clientData.HumanPasportDataNumber = this.ClientPasportDataNumber;
+            clientData.HumanPasportDataIssuedBy = this.ClientPasportDataIssuedBy;
+            clientData.HumanPasportDatеOfIssue = this.ClientPasportDatеOfIssue;
+            clientData.StrPathPhoto = this.StrPath;
+            clientData.HumanAdress = this.ClientAdress;
+            clientData.HumanMail = this.ClientMail;
+        }
 
         /// <summary>
         /// Команда поиска клиента по номеру абонемента (для проверки свойств необходимо задавать <bool>)
@@ -184,11 +224,11 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// Обновление полей
         /// </summary>
         /// <param name="clientData">данные клиента</param>
-        private void UpdatePageFields(Account clientData)
+        public void UpdatePageFields(Account clientData)
         {
             if (clientData == null)
                 return;
-
+          
             this.ClientFirstName = clientData.HumanFirstName;
             this.ClientFamilyName = clientData.HumanFamilyName;
             this.ClientLastName = clientData.HumanLastName;
@@ -202,7 +242,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             this.ClientAdress = clientData.HumanAdress;
             this.ClientMail = clientData.HumanMail;
             Photo = clientData.HumanPhoto;
-
         }
 
         /// <summary>

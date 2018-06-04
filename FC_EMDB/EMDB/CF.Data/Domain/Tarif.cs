@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using GalaSoft.MvvmLight;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
 {
     /// <summary>
     /// Сущность тарифа
     /// </summary>
-    public class Tarif
+    public class Tarif : ViewModelBase
     {
         public Tarif()
         {

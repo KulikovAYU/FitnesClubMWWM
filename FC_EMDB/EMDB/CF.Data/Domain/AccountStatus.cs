@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using GalaSoft.MvvmLight;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
 {
     /// <summary>
     /// Статус аккаунта (активен, заморожен)
     /// </summary>
-    public class AccountStatus
+    public class AccountStatus : ViewModelBase
     {
         public AccountStatus()
         {

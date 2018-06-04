@@ -9,8 +9,9 @@
     Name="Window"
     Title="AbonementInfo"
     Width="900"
-    Height="800"
+    Height="650"
     AllowsTransparency="True"
+    DataContext="{Binding AbonementInfoViewModel, Source={StaticResource Locator}}"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
@@ -48,19 +49,10 @@
         </Style>
     </Window.Resources>
 
-
-    <Window.DataContext>
-        <Binding Path="AbonementInfoViewModel" Source="{StaticResource Locator}" />
-    </Window.DataContext>
-
     <Border>
 
 
         <!--  Зададим вью модель AbonementInfoViewModel  -->
-        <Border.DataContext>
-            <Binding Path="AbonementInfoViewModel" Source="{StaticResource Locator}" />
-        </Border.DataContext>
-
 
         <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
@@ -132,7 +124,7 @@
                     TextAlignment="Center" />
             </Grid>
 
-       
+
             <ScrollViewer
                 Grid.Row="1"
                 Margin="5,0,5,5"
@@ -232,10 +224,11 @@
 
                         <userControls:ButtonWithPicture
                             Grid.Column="2"
-                            Command="{Binding ShowTrainingAndServiceListCommand, UpdateSourceTrigger=PropertyChanged}"
+                            Command="{Binding ShowTrainingAndServiceListCommand, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                             Content="Список тренировок и услуг"
                             GeomPicture="{Binding Data, Source={StaticResource Gym}}"
                             GeomPictureFill="Black"
+                            IsEnabled="{Binding IsActive, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource ButtonWidthPictureIsNotPressed}"
                             Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
 
@@ -253,6 +246,7 @@
                             Content="Продать услугу"
                             GeomPicture="{Binding Data, Source={StaticResource SellAbonement}}"
                             GeomPictureFill="Black"
+                            IsEnabled="{Binding IsActive, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource ButtonWidthPictureIsNotPressed}"
                             Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}">
                             <!--<userControls:ButtonWithPicture.DataContext>
@@ -270,10 +264,11 @@
                         <userControls:ButtonWithPicture
                             Grid.Column="6"
                             Margin="0,0,0,0"
-                            Command="{Binding ActivateAbonementCommand, UpdateSourceTrigger=PropertyChanged}"
+                            Command="{Binding ActivateAbonementCommand, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                             Content="Активировать"
                             GeomPicture="{Binding Data, Source={StaticResource ActivateAbonement}}"
                             GeomPictureFill="Black"
+                            IsEnabled="{Binding Path=IsFreeze, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource ButtonWidthPictureIsNotPressed}"
                             Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
                         <!--  IsEnabled="{Binding AccountStatus, Converter={StaticResource ActivateAccountConverter}}"  -->
@@ -287,10 +282,11 @@
                         <userControls:ButtonWithPicture
                             Grid.Column="8"
                             Margin="0,0,0,0"
-                            Command="{Binding ShowLongAbonementPageCommand, UpdateSourceTrigger=PropertyChanged}"
+                            Command="{Binding ShowLongAbonementPageCommand, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                             Content="Продлить"
                             GeomPicture="{Binding Data, Source={StaticResource UpAbonement}}"
                             GeomPictureFill="Black"
+                            IsEnabled="{Binding IsActive, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource ButtonWidthPictureIsNotPressed}"
                             Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
                         <GridSplitter
@@ -307,6 +303,7 @@
                             Content="Заморозить"
                             GeomPicture="{Binding Data, Source={StaticResource FreezeAbonement}}"
                             GeomPictureFill="Black"
+                            IsEnabled="{Binding IsActive, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource ButtonWidthPictureIsNotPressed}"
                             Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
 

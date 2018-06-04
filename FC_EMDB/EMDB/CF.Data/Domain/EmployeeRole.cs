@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using GalaSoft.MvvmLight;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
 {
     /// <summary>
     /// Роль(должность) работника
     /// </summary>
-    public class EmployeeRole
+    public class EmployeeRole : ViewModelBase
     {
         public EmployeeRole()
         {

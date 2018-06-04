@@ -24,6 +24,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             ServicesInSubscription = new SiSRepository(m_context);
             Abonements = new AbonementRepository(m_context);
             UpcomingTrainings = new UpcomingTrainingRepository(m_context);
+            PriceTrainingLists = new PriceTrainingListRepository(m_context);
         }
 
         public IAccountRepository Accounts { get; private set; }
@@ -40,7 +41,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
 
         public IUpcomingTrainingRepository UpcomingTrainings { get; }
 
-
+        public IpriceTrainingListRepository PriceTrainingLists { get; }
         public int Complete()
         {
             return m_context.SaveChanges();

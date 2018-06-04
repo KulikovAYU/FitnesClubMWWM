@@ -9,6 +9,7 @@
     Title="PayTrainingOrServicePage"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    DataContext="{Binding Path=AbonementInfoViewModel, Source={StaticResource Locator}}"
     mc:Ignorable="d">
 
     <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5">
@@ -79,7 +80,7 @@
                             BorderThickness="2"
                             FontSize="{StaticResource RegularBig}"
                             IsReadOnly="True"
-                            ItemsSource="{Binding TrainingLists}"
+                            ItemsSource="{Binding ArrPriceTrainingList}"
                             SelectedIndex="0"
                             SelectedItem="{Binding _SiInSubscription.PriceType}">
                             <ComboBox.ItemTemplate>
@@ -114,7 +115,7 @@
                             BorderThickness="2"
                             FontSize="{StaticResource RegularBig}"
                             IsReadOnly="True"
-                            ItemsSource="{Binding TarifsList}"
+                            ItemsSource="{Binding ArrTarifs}"
                             SelectedIndex="0"
                             SelectedItem="{Binding _SiInSubscription.PriceType.Tarifs}">
                             <ComboBox.ItemTemplate>
@@ -185,11 +186,14 @@
                                 <valueConverters:MultiPriceValueConverter x:Key="MultiPriceValueConverter" />
                             </TextBox.Resources>
                             <TextBox.Text>
-                                <MultiBinding Converter="{StaticResource MultiPriceValueConverter}" UpdateSourceTrigger="PropertyChanged">
+                                <MultiBinding
+                                    Converter="{StaticResource MultiPriceValueConverter}"
+                                    UpdateSourceTrigger="PropertyChanged"
+                                    ValidatesOnDataErrors="True">
                                     <Binding ElementName="TypeOfService" Path="SelectedItem" />
                                     <Binding ElementName="Tarif" Path="SelectedItem" />
                                     <Binding ElementName="TrainingCount" Path="Text" />
-                                    <Binding Path="TotalCost" />
+                                  
                                 </MultiBinding>
                             </TextBox.Text>
                         </TextBox>
@@ -208,7 +212,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid.Resources>
                         <valueConverters:TotalCostValueConverter x:Key="TotalCostValueConverter" />
-                        <valueConverters:MultiSellValueConverter x:Key="MultiSellValueConverter" />
+                      
                     </Grid.Resources>
                     <Button
                         Grid.Column="0"
@@ -221,14 +225,7 @@
                         Foreground="White"
                         Template="{DynamicResource ButtonBaseControlTemplate}">
                         <Button.CommandParameter>
-                            <MultiBinding Converter="{StaticResource MultiSellValueConverter}">
-                                <Binding
-                                    Converter="{StaticResource TotalCostValueConverter}"
-                                    ElementName="TotalCost"
-                                    Path="Text" />
-                                <Binding ElementName="Window" />
-                                <Binding Converter="{StaticResource TotalCostValueConverter}" Path="_SiInSubscription.TotalCost" />
-                            </MultiBinding>
+                            <Binding Converter="{StaticResource TotalCostValueConverter}" Path="_SiInSubscription.TotalCost" />
                         </Button.CommandParameter>
 
                     </Button>

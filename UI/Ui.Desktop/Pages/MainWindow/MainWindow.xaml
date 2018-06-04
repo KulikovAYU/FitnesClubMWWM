@@ -10,7 +10,7 @@
     x:Name="window"
     Title="{Binding WindowTitle}"
     Width="900"
-    Height="790"
+    Height="650"
     MinWidth="850"
     MinHeight="600"
     AllowsTransparency="True"

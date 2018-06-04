@@ -297,9 +297,24 @@ namespace FC_EMDB
             //unitOfWork.UpcomingTrainings.Remove(upcTraining);
             //Сохраним изменения в БД
             unitOfWork.Complete();
+        }
 
-           
-            
+        /// <summary>
+        /// Получить цены и названия тренировок
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<PriceTrainingList> GetPriceTrainingList()
+        {
+           return new ObservableCollection<PriceTrainingList>(unitOfWork.PriceTrainingLists.GetAll());
+        }
+
+        /// <summary>
+        /// Получить список тарифов
+        /// </summary>
+        /// <returns></returns>
+        public new ObservableCollection<Tarif> GetTarifs()
+        {
+            return new ObservableCollection<Tarif>(unitOfWork.Tarif.GetAll());
         }
     }
 }

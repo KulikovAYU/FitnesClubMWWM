@@ -26,7 +26,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
     public class AbonementInfoViewModel : ViewModelBase, IDataErrorInfo
     {
         /// <summary>
-        /// Ссылка не текущий аккаунт посетителя
+        /// Ссылка на текущий аккаунт посетителя
         /// </summary>
         public Account _Account { get; set; }
 
@@ -78,39 +78,37 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         }
 
 
-       
-
         /// <summary>
         /// Список доступных услуг в абонементе
         /// </summary>
-        public  ObservableCollection<ServicesInSubscription> ArrServicesInSubscription 
+        public ObservableCollection<ServicesInSubscription> ArrServicesInSubscription
         {
             get
             {
                 if (_Account?.Abonement != null)
-                  return  _arrServicesInSubscription = ModelManager.GetInstance.GetServicesInSubscription(_Account);
+                    return _arrServicesInSubscription = ModelManager.GetInstance.GetServicesInSubscription(_Account);
                 return null;
             }
             set => _arrServicesInSubscription = value;
         }
 
-     
+
         /// <summary>
         /// Список предстоящих тренировок
         /// </summary>
-        public  ObservableCollection<UpcomingTraining> ArrUpcomingTraining
+        public ObservableCollection<UpcomingTraining> ArrUpcomingTraining
         {
             get
             {
                 if (_Account?.Abonement != null)
                     return _arrUpcomingTraining = ModelManager.GetInstance.GetUpcomingTraining(_Account);
-               
+
                 return null;
             }
             set => _arrUpcomingTraining = value;
         }
 
-      
+
         /// <summary>
         /// Записаться на тренировку
         /// </summary>
@@ -130,7 +128,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             (obj) =>
             {
                 //1. Создали предварительную регистрацию
-                ModelManager.GetInstance.CreatePriorRegistration(_Account,CurrentServiceInSubscription, CurrentItem);
+                ModelManager.GetInstance.CreatePriorRegistration(_Account, CurrentServiceInSubscription, CurrentItem);
                 //2. Обновили поле Доступные тренировки
                 ArrServicesInSubscription = ModelManager.GetInstance.GetServicesInSubscription(_Account);
                 //3. Обновили список записей (если останется время отфильтровать все тренировки, которые есть уже в записи)
@@ -138,14 +136,14 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                 //4. Закроем диалог
                 _recordWindow.Close();
 
-            }, obj=> ModelManager.GetInstance.CheckTrainingOnAvailable(_Account, CurrentItem)  );
+            }, obj => ModelManager.GetInstance.CheckTrainingOnAvailable(_Account, CurrentItem));
 
         /// <summary>
         /// Отметка о посещении тренировки (пришел)
         /// </summary>
         public RelayCommand<UpcomingTraining> FixTheVisitCommand => new RelayCommand<UpcomingTraining>((upcTraining) =>
             {
-                ModelManager.GetInstance.FixTheVisit(_Account,upcTraining as UpcomingTraining);
+                ModelManager.GetInstance.FixTheVisit(_Account, upcTraining as UpcomingTraining);
                 ArrUpcomingTraining = ModelManager.GetInstance.GetUpcomingTraining(_Account);
 
             });
@@ -156,18 +154,17 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         public RelayCommand<UpcomingTraining> RefusalOfVisitCommand => new RelayCommand<UpcomingTraining>(
             (upcTraining) =>
             {
-
                 ModelManager.GetInstance.RefusalOfVisit(_Account, upcTraining);
                 //2. Обновили поле Доступные тренировки
                 ArrServicesInSubscription = ModelManager.GetInstance.GetServicesInSubscription(_Account);
                 //3. Обновим список записей
                 ArrUpcomingTraining = ModelManager.GetInstance.GetUpcomingTraining(_Account);
-
             });
 
-    
 
-
+        /// <summary>
+        /// Управление видимостью текстового сообщения о невозможности записи
+        /// </summary>
         public Visibility IsCurrentClientHasAlereadyUpcomingTraining => ModelManager.GetInstance.CheckTrainingOnAvailable(_Account, CurrentItem) ? Visibility.Hidden : Visibility
             .Visible;
 
@@ -206,20 +203,21 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// <summary>
         /// Крманда продать абонемент (из таблицы)
         /// </summary>
-        public RelayCommand<Account> SellTrainingOrServiceCommand => new RelayCommand<Account>((item) => {
+        public RelayCommand<Account> SellTrainingOrServiceCommand => new RelayCommand<Account>((item) =>
+        {
             Messenger.Default.Send("PayServicesAndTrainings");
         });
 
         /// <summary>
         /// Команда продлить абонемент (показ страницы)
         /// </summary>
-        public RelayCommand<bool> ShowLongAbonementPageCommand => new RelayCommand<bool>((_)=>
+        public RelayCommand<bool> ShowLongAbonementPageCommand => new RelayCommand<bool>((_) =>
         {
             if (_Account == null)
                 return;
             Messenger.Default.Send("LongAbonement");
-          
-        },_=> _Account?.Abonement?.AbonmentStatus?.StatusName == "Активен");
+
+        }, _ => _Account?.Abonement?.AbonmentStatus?.StatusName == "Активен");
 
         /// <summary>
         /// Команда продлить абонемент
@@ -228,7 +226,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         {
             if (_Account == null)
                 return;
-           
+
             ModelManager.GetInstance.LongAbonement(_Account.Abonement, TimeToLong.Value);
             CustomMessageBox.Show(
                 "Обновление записи успешно завершено",
@@ -239,7 +237,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
 
         /// <summary>
-        /// Активировать абонемент
+        /// Активировать абонемент (из панели информации об абонементе)
         /// </summary>
         public RelayCommand<bool> ActivateAbonementCommand
         {
@@ -249,14 +247,21 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                     {
                         if (_Account == null)
                             return;
-                       
+
                         ModelManager.GetInstance.ActivateAbonement(_Account.Abonement);
-                    }, (obj)=> isFreeze);
+                        IsFreeze = false;
+                        IsActive = !IsFreeze;
+                        CustomMessageBox.Show(
+                            "Аккаунт активирован",
+                            "Активация аккаунта",
+                            MessageBoxButton.OK, eMessageBoxIcons.eSucsess);
+                    }, (obj) => IsFreeze);
             }
         }
 
+   
 
-        /// <summary>
+       /// <summary>
         /// Заморозить абонемент
         /// </summary>
         public RelayCommand<bool> FreezeAbonementCommand
@@ -269,18 +274,25 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                         return;
 
                     ModelManager.GetInstance.FreezeAbonement(_Account.Abonement);
-                    ActivateAbonementCommand.RaiseCanExecuteChanged();
+
+                    IsFreeze = true;
+                    IsActive = !IsFreeze;
                     CustomMessageBox.Show(
                         "Аккаунт заморожен",
                         "Заморозка аккаунта",
                         MessageBoxButton.OK, eMessageBoxIcons.eFreeze);
-                    SimpleIoc.Default.GetInstance<ClientsPageViewModel>().GetClientsList();
-                }, (obj) => isActive);
+                    Messenger.Default.Send("ShowAbonementInfo");
+                }, (obj) => IsActive);
             }
         }
 
-        public bool isFreeze => _Account?.Abonement?.AbonmentStatus?.StatusName == "Заморожен";
-        public bool isActive => _Account?.Abonement?.AbonmentStatus?.StatusName == "Активен";
+
+        public bool IsFreeze { get; set; } = false;
+
+
+        public bool IsActive { get; set; } = true;
+
+
         /// <summary>
         /// Команда закрытия диалогового окна
         /// </summary>
@@ -289,7 +301,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
 
         public int ResizeBorder { get; set; } = 6;
-      
+
 
         /// <summary>
         /// Устанавливает ссылку на текущий аакаунт
@@ -370,6 +382,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
 
             ShowLongAbonemenCommand.RaiseCanExecuteChanged();
+            ActivateAbonementCommand.RaiseCanExecuteChanged();
             IsOk = !HasErrors;
         }
 
@@ -387,6 +400,50 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         [Required(AllowEmptyStrings = false, ErrorMessage = "Дата должна быть введена")]
         public DateTime? TimeToLong { get; set; } = DateTime.Now;
 
+
+
+
+
+        /// <summary>
+        /// Список видов услуг
+        /// </summary>
+        public ObservableCollection<PriceTrainingList> ArrPriceTrainingList => ModelManager.GetReferenceData<PriceTrainingList>();
+
+        public ObservableCollection<Tarif> ArrTarifs => ModelManager.GetReferenceData<Tarif>();
+
+
+        public ServicesInSubscription _SiInSubscription { get; private set; } = new ServicesInSubscription();
+
+      
+
+        public ObservableCollection<PriceTrainingList> TrainingLists =>  ModelManager.GetReferenceData<PriceTrainingList>();
+
+        /// <summary>
+        /// Команда продать абонемент (от окна)
+        /// </summary>
+        public RelayCommand<Decimal> SellNewTrainingCommand => new RelayCommand<Decimal>((objects) =>
+        {
+
+            if (_Account == null) return;
+
+            //_Account.TotalCost  = objects.Item1;
+            _SiInSubscription.TotalCost = objects;
+            ModelManager.AddData<Account, ServicesInSubscription>(_Account, _SiInSubscription);
+
+           MessageBoxResult result= CustomMessageBox.Show("К абонементу была успешно добавлена новая услуга\nПродолжить добавление услуг", "Продажа абонемента",
+                MessageBoxButton.YesNo, eMessageBoxIcons.eAsk);
+            switch (result)
+            {
+              
+                case MessageBoxResult.Yes:
+
+                    break;
+                case MessageBoxResult.No:
+                    Messenger.Default.Send("ShowAbonementInfo");
+                    break;
+            }
+
+        });
 
     }
 }

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using FC_EMDB.Utils;
+using GalaSoft.MvvmLight;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
 {
     /// <summary>
     /// Сущность абонемента
     /// </summary>
-    public class Abonement
+    public class Abonement : ViewModelBase
     {
         public Abonement()
         {

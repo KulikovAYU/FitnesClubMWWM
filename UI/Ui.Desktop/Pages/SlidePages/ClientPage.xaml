@@ -290,6 +290,8 @@
                                                 Source="{Binding HumanPhoto, Converter={StaticResource ImageBrushValueConverter}, Mode=OneWay}" />
                                             <userControls:ButtonWithPicture
                                                 Background="{StaticResource BackgroundButtonBlue}"
+                                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=DataContext.CorretAccountData}"
+                                                CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}"
                                                 Content="Редактировать профиль"
                                                 Foreground="White"
                                                 GeomPicture="{Binding Source={StaticResource Tools}, Path=Data}"
@@ -567,97 +569,19 @@
                                                     Grid.Row="5"
                                                     Grid.Column="0"
                                                     Grid.ColumnSpan="2"
-                                                    Height="30"
-                                                    HorizontalAlignment="Center">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="auto" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="auto" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="auto" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                    </Grid.ColumnDefinitions>
+                                                    Height="30">
 
                                                     <userControls:ButtonWithPicture
                                                         Grid.Column="0"
+                                                        HorizontalAlignment="Left"
                                                         Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}, Path=DataContext.ShowAbonementInfoCommand}"
                                                         CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}"
-                                                        Content="Детали"
+                                                        Content="Управление абонементом"
                                                         GeomPicture="{Binding Source={StaticResource Details}, Path=Data}"
                                                         GeomPictureFill="Black"
                                                         Style="{StaticResource ButtonWidthPictureIsNotPressed}"
                                                         Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
-                                                    <GridSplitter
-                                                        Grid.Column="1"
-                                                        Width="2"
-                                                        Margin="4,0,4,0"
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Stretch"
-                                                        Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
-                                                    <userControls:ButtonWithPicture
-                                                        Grid.Column="2"
-                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}, Path=DataContext.SellNewAbonementCommand}"
-                                                        CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}"
-                                                        Content="Продать услугу"
-                                                        GeomPicture="{Binding Source={StaticResource SellAbonement}, Path=Data}"
-                                                        GeomPictureFill="Black"
-                                                        Style="{StaticResource ButtonWidthPictureIsNotPressed}"
-                                                        Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}">
-                                                        <!--<userControls:ButtonWithPicture.DataContext>
-                                                            <Binding Path="ClientsPageViewModel" Source="{StaticResource Locator}" />
-                                                        </userControls:ButtonWithPicture.DataContext>-->
 
-                                                    </userControls:ButtonWithPicture>
-                                                    <GridSplitter
-                                                        Grid.Column="3"
-                                                        Width="2"
-                                                        Margin="4,0,4,0"
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Stretch"
-                                                        Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
-                                                    <userControls:ButtonWithPicture
-                                                        Grid.Column="4"
-                                                        Margin="0,0,0,0"
-                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}, Path=DataContext.ActivateRelayCommand}"
-                                                        Content="Активировать"
-                                                        GeomPicture="{Binding Source={StaticResource ActivateAbonement}, Path=Data}"
-                                                        GeomPictureFill="Black"
-                                                        IsEnabled="{Binding AccountStatus, Converter={StaticResource ActivateAccountConverter}}"
-                                                        Style="{StaticResource ButtonWidthPictureIsNotPressed}"
-                                                        Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
-                                                    <GridSplitter
-                                                        Grid.Column="5"
-                                                        Width="2"
-                                                        Margin="4,0,4,0"
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Stretch"
-                                                        Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
-                                                    <userControls:ButtonWithPicture
-                                                        Grid.Column="6"
-                                                        Margin="0,0,0,0"
-                                                        Content="Продлить"
-                                                        GeomPicture="{Binding Source={StaticResource UpAbonement}, Path=Data}"
-                                                        GeomPictureFill="Black"
-                                                        Style="{StaticResource ButtonWidthPictureIsNotPressed}"
-                                                        Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
-                                                    <GridSplitter
-                                                        Grid.Column="7"
-                                                        Width="2"
-                                                        Margin="4,0,4,0"
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Stretch"
-                                                        Background="{StaticResource BlueDataGridRowDetailsViewColor}" />
-                                                    <userControls:ButtonWithPicture
-                                                        Grid.Column="8"
-                                                        Margin="0,0,0,0"
-                                                        Content="Заморозить"
-                                                        GeomPicture="{Binding Source={StaticResource FreezeAbonement}, Path=Data}"
-                                                        GeomPictureFill="Black"
-                                                        Style="{StaticResource ButtonWidthPictureIsNotPressed}"
-                                                        Template="{DynamicResource ControlAbonementButtonBaseControlTemplate}" />
 
                                                 </Grid>
                                             </Grid>

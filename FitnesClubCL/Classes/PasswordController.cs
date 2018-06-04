@@ -226,5 +226,15 @@ namespace FitnesClubCL.Classes
             if (item == null || account == null) return false;
             return DbManager.GetInstance().IsRecordAvailable(account, item);
         }
+
+        public static ObservableCollection<PriceTrainingList> GetPriceTrainingList()
+        {
+            return DbManager.GetInstance().GetPriceTrainingList();
+        }
+
+        public static new ObservableCollection<Tarif> GetTarifs()
+        {
+            return DbManager.GetInstance().GetTarifs();
+        }
     }
 }

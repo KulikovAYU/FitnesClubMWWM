@@ -237,7 +237,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
                 {
                     _totalCost = elems as Decimal?;
                 }
-
             }
 
             _totalCost = priceTrainingList?.TrainingCurrentCost * _tarif?.Koeff * _nTrainingCount;
@@ -280,18 +279,18 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
     /// <summary>
     /// Конвертер для пересчета суммы тренировки
     /// </summary>
-    public class MultiSellValueConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            return values.Contains(null) ? null : new Tuple<Decimal, Window>((Decimal) values[0], (Window) values[1]);
-        }
+    //public class MultiSellValueConverter : IMultiValueConverter
+    //{
+    //    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        return values.Contains(null) ? null : new Tuple<Decimal>((Decimal) values[0]);
+    //    }
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
+    //    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 
 
     public class ServicesInSubscriptionValueConverter : BaseValueConverter<ServicesInSubscription>
@@ -340,9 +339,15 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is AccountStatus accountStatus)
+            if (value is Account account)
             {
-                return (accountStatus as AccountStatus).AccountStatusName != "Активен";
+               Abonement abonem =  account.Abonement;
+                if (parameter as string == "Freeze")
+                {
+                    return (abonem as Abonement).AbonmentStatus.StatusName == "Активен";
+                }
+
+                return (abonem as Abonement).AbonmentStatus.StatusName != "Активен";
 
             }
 

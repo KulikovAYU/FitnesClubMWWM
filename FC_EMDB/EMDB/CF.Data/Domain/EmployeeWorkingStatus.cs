@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using GalaSoft.MvvmLight;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
 {
     /// <summary>
     /// Сущность статус отпуска
     /// </summary>
-    public class EmployeeWorkingStatus
+    public class EmployeeWorkingStatus : ViewModelBase
     {
         public EmployeeWorkingStatus()
         {

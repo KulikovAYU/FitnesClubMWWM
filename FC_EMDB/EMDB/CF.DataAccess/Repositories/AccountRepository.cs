@@ -123,11 +123,20 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
 
         public void UpdateFields(Account clientData)
         {
-           var _clientData = DataBaseFcContext.Accounts.Find(clientData.HumanId);
+            Account _clientData = null;
+            if (clientData.HumanId == 0)
+            {
+                _clientData = DataBaseFcContext.Accounts.Find(clientData.HumanId);
+                if (_clientData == null)
+                    return;
+            }
+            else
+            {
+                _clientData = clientData;
+            }
+        
 
-            if (_clientData == null)
-                return;
-           // SqlTools.SavePhoto(ref clientData);
+         
             SqlTools.UpdatePhoto(ref _clientData, clientData.StrPathPhoto);
             DataBaseFcContext.Accounts.AddOrUpdate(_clientData);
             DataBaseFcContext.SaveChanges();

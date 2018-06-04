@@ -266,5 +266,23 @@ namespace FitnesClubCL
 
             CreateOrUpdateRecord(accountAbonement);
         }
+
+        /// <summary>
+        /// Получить цены и виды тренировок
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<PriceTrainingList> GetPriceTrainingList()
+        {
+            return Assistiant.GetPriceTrainingList();
+        }
+
+        /// <summary>
+        /// Получить список тарифов
+        /// </summary>
+        /// <returns></returns>
+        public new ObservableCollection<Tarif> GetTarifs()
+        {
+            return Assistiant.GetTarifs();
+        }
     }
 }

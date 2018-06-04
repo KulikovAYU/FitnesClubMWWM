@@ -182,7 +182,6 @@
             </Grid.ColumnDefinitions>
             <Grid.Resources>
                 <valueConverters:TotalCostValueConverter x:Key="TotalCostValueConverter" />
-                <valueConverters:MultiSellValueConverter x:Key="MultiSellValueConverter" />
             </Grid.Resources>
 
         </Grid>

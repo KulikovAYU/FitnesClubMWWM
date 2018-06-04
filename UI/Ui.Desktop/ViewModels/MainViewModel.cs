@@ -1,7 +1,7 @@
 using System;
 
 using System.Windows;
-
+using FC_EMDB.EMDB.CF.Data.Domain;
 using FitnesClubCL;
 using FitnessClubMWWM.Ui.Desktop.Constants;
 using FitnessClubMWWM.Ui.Desktop.DataModels;
@@ -14,21 +14,26 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-      
+
+        /// <summary>
+        /// ƒанные пользовател€, которые вернула модель
+        /// </summary>
+        public Employee CurrentEmployee { get; set; }
+
         #region Private Member
 
-       
+
         /// <summary>
         /// The marging around the window to allow drop shadow
         /// </summary>
-     //   private int mOutermarginSize = 10;
+        //   private int mOutermarginSize = 10;
 
         /// <summary>
         /// The radius adges of the window
         /// </summary>
-     //   private int mWindowRadius = 0;
+        //   private int mWindowRadius = 0;
 
-       #endregion
+        #endregion
 
         #region Public Properties
 

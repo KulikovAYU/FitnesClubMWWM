@@ -217,14 +217,11 @@
     <Compile Include="Pages\Wind\MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Wind\NewEntryInScheduleWindow.xaml.cs">
-      <DependentUpon>NewEntryInScheduleWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Wind\GymWindow.xaml.cs">
       <DependentUpon>GymWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Wind\PayAbonement.xaml.cs">
-      <DependentUpon>PayAbonement.xaml</DependentUpon>
+    <Compile Include="Pages\Wind\NewEntryInScheduleWindow.xaml.cs">
+      <DependentUpon>NewEntryInScheduleWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Wind\SalariesEmployeesWindow.xaml.cs">
       <DependentUpon>SalariesEmployeesWindow.xaml</DependentUpon>
@@ -380,17 +377,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Wind\NewEntryInScheduleWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\Wind\GymWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Wind\PayAbonement.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Pages\Wind\NewEntryInScheduleWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Wind\SalariesEmployeesWindow.xaml">
       <SubType>Designer</SubType>

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using GalaSoft.MvvmLight;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
 {
     /// <summary>
     /// Сущность "услуги в абонементе" (тренировки и др..)
     /// </summary>
-   public class ServicesInSubscription
+   public class ServicesInSubscription : ViewModelBase
     {
         public ServicesInSubscription()
         {

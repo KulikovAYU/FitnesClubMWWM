@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using GalaSoft.MvvmLight;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
 {
-  public  class AbonementStatus
+  public  class AbonementStatus : ViewModelBase
     {
         public AbonementStatus()
         {

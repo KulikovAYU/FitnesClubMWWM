@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using GalaSoft.MvvmLight;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
 {
     /// <summary>
     /// Сущность  список тренировок и услуг(прайс-лист)
     /// </summary>
-    public class PriceTrainingList
+    public class PriceTrainingList : ViewModelBase
     {
         public PriceTrainingList()
         {

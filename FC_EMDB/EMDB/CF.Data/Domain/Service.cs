@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using GalaSoft.MvvmLight;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
 {
     /// <summary>
     /// Сущность "услуга" (тренировка)
     /// </summary>
-    public class Service
+    public class Service : ViewModelBase
     {
         public Service()
         {

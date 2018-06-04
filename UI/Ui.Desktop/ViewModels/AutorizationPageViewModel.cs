@@ -36,6 +36,19 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                 _commandStarted = false;
                 return;
             }
+            if (string.IsNullOrEmpty(AutorizationUserData.PasswordString))
+            {
+                MessageBoxResult res = CustomMessageBox.Show("Не заполнено поле пароль", "Ошибка авторизации", MessageBoxButton.OK, eMessageBoxIcons.eWarning);
+                _commandStarted = false;
+                return;
+            }
+
+            if (string.IsNullOrEmpty(AutorizationUserData.UserLoginName) )
+            {
+                MessageBoxResult res = CustomMessageBox.Show("Не заполнено поле имя пользователя", "Ошибка авторизации", MessageBoxButton.OK, eMessageBoxIcons.eWarning);
+                _commandStarted = false;
+                return;
+            }
 
             //Аутентификация
             ModelManager.GetInstance.Autontefication(AutorizationUserData);
@@ -44,7 +57,10 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             {
                 WorkingUserData = ModelManager.GetInstance.WorkingUserData;//данные пользователя в случае успеха
                 SimpleIoc.Default.GetInstance<BeginPanelPageViewModel>().SetUserData(WorkingUserData);
+                SimpleIoc.Default.GetInstance<MainViewModel>().CurrentEmployee = WorkingUserData;
                 Messenger.Default.Send("MainPage");
+                AutorizationUserData.UserLoginName = string.Empty;
+                AutorizationUserData.PasswordString = string.Empty;
             }
             else
             {
@@ -53,6 +69,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                 return;
             }
 
+      
+          
             _commandStarted = false;
         }
 

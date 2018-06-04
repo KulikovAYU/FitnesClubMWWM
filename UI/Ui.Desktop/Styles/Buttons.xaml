@@ -7,7 +7,7 @@
     mc:Ignorable="d">
 
     <!--  Шаблон обычной кнопки  -->
-    <ControlTemplate x:Key="ButtonBaseControlTemplate" TargetType="{x:Type Button}">
+    <ControlTemplate x:Key="ButtonBaseControlTemplate" TargetType="{x:Type ButtonBase}">
         <ControlTemplate.Resources>
             <Storyboard x:Key="Storyboard1">
                 <ColorAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">

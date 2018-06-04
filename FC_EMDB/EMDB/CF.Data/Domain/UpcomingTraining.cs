@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using GalaSoft.MvvmLight;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
 {
     /// <summary>
     /// Описание сущности "тренировка", которая предстоит
     /// </summary>
-    public class UpcomingTraining
+    public class UpcomingTraining : ViewModelBase
     {
         public UpcomingTraining()
         {
