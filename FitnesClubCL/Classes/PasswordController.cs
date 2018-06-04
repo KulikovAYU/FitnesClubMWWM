@@ -221,10 +221,10 @@ namespace FitnesClubCL.Classes
             return DbManager.GetInstance().GetAvailableTrainings(servicesInSubscription);
         }
 
-        public static bool CheckTrainingOnAvailable(UpcomingTraining item)
+        public static bool CheckTrainingOnAvailable(Account account, UpcomingTraining item)
         {
-            if (item == null) return false;
-            return DbManager.GetInstance().CheckTrainingOnAvailable(item);
+            if (item == null || account == null) return false;
+            return DbManager.GetInstance().IsRecordAvailable(account, item);
         }
     }
 }

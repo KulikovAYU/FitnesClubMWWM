@@ -353,6 +353,13 @@
                                                 Template="{DynamicResource ButtonBaseControlTemplate}" />
 
                                         </Grid>
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="{StaticResource Regular}"
+                                            Foreground="Red"
+                                            Text="Данный клиент предварительно записан на выбранную тренировку"
+                                            Visibility="{Binding Path=IsCurrentClientHasAlereadyUpcomingTraining, UpdateSourceTrigger=PropertyChanged}" />
 
                                     </StackPanel>
                                 </Border>

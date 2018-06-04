@@ -126,8 +126,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// <summary>
         /// Создание записи на тренировку (через DataGrid)
         /// </summary>
-        public RelayCommand CreateVisitCommand => new RelayCommand(
-            () =>
+        public RelayCommand<bool> CreateVisitCommand => new RelayCommand<bool>(
+            (obj) =>
             {
                 //1. Создали предварительную регистрацию
                 ModelManager.GetInstance.CreatePriorRegistration(_Account,CurrentServiceInSubscription, CurrentItem);
@@ -137,7 +137,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                 ArrUpcomingTraining = ModelManager.GetInstance.GetUpcomingTraining(_Account);
                 //4. Закроем диалог
                 _recordWindow.Close();
-            }, ModelManager.GetInstance.CheckTrainingOnAvailable(CurrentItem)  );
+
+            }, obj=> ModelManager.GetInstance.CheckTrainingOnAvailable(_Account, CurrentItem)  );
 
         /// <summary>
         /// Отметка о посещении тренировки (пришел)
@@ -163,6 +164,12 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                 ArrUpcomingTraining = ModelManager.GetInstance.GetUpcomingTraining(_Account);
 
             });
+
+    
+
+
+        public Visibility IsCurrentClientHasAlereadyUpcomingTraining => ModelManager.GetInstance.CheckTrainingOnAvailable(_Account, CurrentItem) ? Visibility.Hidden : Visibility
+            .Visible;
 
         // <summary>
         // Текущая страница приложения

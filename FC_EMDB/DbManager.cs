@@ -222,16 +222,19 @@ namespace FC_EMDB
             return unitOfWork.Services.GetAvailableTrainings(servicesInSubscription);
 
         }
-        
+
         /// <summary>
         /// Проверка тренировки по факту доступности (число мест !=0)
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="account">аккаунт</param>
+        /// <param name="item">предстоящая тренировка</param>
         /// <returns></returns>
-        public bool CheckTrainingOnAvailable(UpcomingTraining item)
+        public bool IsRecordAvailable(Account account, UpcomingTraining item)
         {
-            if (item == null) return false;
-            return unitOfWork.Services.CheckTrainingOnAvailable(item);
+            if (item == null || account == null) return false;
+
+            bool bIsNotContainsTraining = !account.Abonement.ArrUpcomingTrainings.Contains(item);
+            return unitOfWork.Services.CheckTrainingOnAvailable(item) && bIsNotContainsTraining;
         }
 
         /// <summary>
@@ -241,16 +244,19 @@ namespace FC_EMDB
         /// <param name="currentItem">Выбранная тренировка</param>
         public void CreatePriorRegistration(Account account, ServicesInSubscription service, UpcomingTraining currentItem)
         {
-            //1. Получили тренировку
-           var currentService = unitOfWork.ServicesInSubscription.Get(service.SiSId);
-            //2. Уменьшили счетчик
-            currentService.SiSTrainingCount--;
+            //1. Получим аккаунт
+            account.Abonement.ArrUpcomingTrainings.Add(currentItem);
+            service.SiSTrainingCount--;
+            //// //1. Получили тренировку
+            ////var currentService = unitOfWork.ServicesInSubscription.Get(service.SiSId);
+            ////2. Уменьшили счетчик
+            // currentService.SiSTrainingCount--;
             //3. Засейвили изменения
-            unitOfWork.ServicesInSubscription.AddOrUpdate(currentService);
+            //  unitOfWork.ServicesInSubscription.AddOrUpdate(currentService);
 
-          
+            unitOfWork.Complete();
             //Также необходимо создать новую запись
-            unitOfWork.UpcomingTrainings.AddNewUpcomingTraining(account, currentItem);
+           // unitOfWork.UpcomingTrainings.AddNewUpcomingTraining(account, currentItem);
         }
 
         /// <summary>
@@ -285,9 +291,10 @@ namespace FC_EMDB
             var currAccount = unitOfWork.Accounts.FindAccountWithSameData(account);
             //4. Увеличим счетчик текущей тренировки
             unitOfWork.ServicesInSubscription.IncrementCountServices(upcTraining);
-
             //3. Убрали тренировку из записи
-            unitOfWork.UpcomingTrainings.Remove(upcTraining);
+            currAccount.Abonement.ArrUpcomingTrainings.Remove(upcTraining);
+            ////3. Убрали тренировку из записи
+            //unitOfWork.UpcomingTrainings.Remove(upcTraining);
             //Сохраним изменения в БД
             unitOfWork.Complete();
 

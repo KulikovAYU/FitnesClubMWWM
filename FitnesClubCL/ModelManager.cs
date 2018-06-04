@@ -158,12 +158,13 @@ namespace FitnesClubCL
         /// <summary>
         /// Проверить тренировку на возможность записи
         /// </summary>
+        /// <param name="account">аккаунт</param>
         /// <param name="item">выбранная тренировка</param>
         /// <returns></returns>
-        public bool CheckTrainingOnAvailable(UpcomingTraining item)
+        public bool CheckTrainingOnAvailable(Account account, UpcomingTraining item)
         {
-            if (item == null) return false;
-            return Assistiant.CheckTrainingOnAvailable(item);
+            if (item == null || account == null) return false;
+            return Assistiant.CheckTrainingOnAvailable(account, item);
         }
 
         /// <summary>
