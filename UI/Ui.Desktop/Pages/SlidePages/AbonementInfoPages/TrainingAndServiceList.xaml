@@ -79,24 +79,19 @@
                             Header="Услуга" />
 
                         <DataGridTextColumn
-                            Width="130"
+                            Width="160"
                             Binding="{Binding SiSTrainingCount}"
                             CellStyle="{StaticResource StyleCenter}"
                             Header="Количество тренировок" />
 
-                        <DataGridTextColumn
-                            Width="120"
-                            Binding="{Binding PriceType.Tarifs.TarifName}"
-                            CellStyle="{StaticResource StyleCenter}"
-                            Header="Тариф" />
-                        <DataGridTextColumn
-                            Width="120"
-                            Binding="{Binding TotalCost}"
+                      <DataGridTextColumn
+                            Width="130"
+                            Binding="{Binding PriceType.TrainingCurrentCost}"
                             CellStyle="{StaticResource StyleCenter}"
                             Header="Стоимость услуги" />
 
 
-                        <DataGridTemplateColumn Width="100">
+                        <DataGridTemplateColumn Width="120">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Border HorizontalAlignment="Center" VerticalAlignment="Center">

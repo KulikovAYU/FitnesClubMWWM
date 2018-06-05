@@ -69,7 +69,14 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         public string NumberSubscription
         {
             get => _Account?.Abonement.NumberSubscription.ToString();
-            set => _numberSubscription = value;
+            set
+            {
+                _numberSubscription = value;
+                if (!string.IsNullOrEmpty(_numberSubscription))
+                {
+                    _Account = ModelManager.GetInstance.FindPersonForNumberSubsription(Convert.ToInt32(_numberSubscription));
+                }
+            }
         }
 
         public AbonementInfoViewModel()
@@ -145,7 +152,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             {
                 ModelManager.GetInstance.FixTheVisit(_Account, upcTraining as UpcomingTraining);
                 ArrUpcomingTraining = ModelManager.GetInstance.GetUpcomingTraining(_Account);
-
             });
 
         /// <summary>
@@ -181,7 +187,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         {
             switch (msg)
             {
-
                 case "ShowAbonementInfo":
                     CurrentPage = ApplicationPage.AbonementInfoDetails;
                     break;
@@ -198,6 +203,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         }
 
         public RelayCommand ShowAbonementInfoCommand => new RelayCommand(() => Messenger.Default.Send("ShowAbonementInfo"));
+
         public RelayCommand ShowTrainingAndServiceListCommand => new RelayCommand(() => Messenger.Default.Send("ShowTrainingAndServiceListCommand"));
 
         /// <summary>
@@ -311,6 +317,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         public void SetData<T>(T account)
         {
             _Account = account as Account;
+             ModelManager.SetTotalCost(_Account.Abonement);
         }
 
         /// <summary>
@@ -383,6 +390,8 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
             ShowLongAbonemenCommand.RaiseCanExecuteChanged();
             ActivateAbonementCommand.RaiseCanExecuteChanged();
+            SellNewTrainingCommand.RaiseCanExecuteChanged();
+
             IsOk = !HasErrors;
         }
 
@@ -409,8 +418,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// </summary>
         public ObservableCollection<PriceTrainingList> ArrPriceTrainingList => ModelManager.GetReferenceData<PriceTrainingList>();
 
-        public ObservableCollection<Tarif> ArrTarifs => ModelManager.GetReferenceData<Tarif>();
-
 
         public ServicesInSubscription _SiInSubscription { get; private set; } = new ServicesInSubscription();
 
@@ -419,17 +426,27 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         public ObservableCollection<PriceTrainingList> TrainingLists =>  ModelManager.GetReferenceData<PriceTrainingList>();
 
         /// <summary>
-        /// Команда продать абонемент (от окна)
+        /// Команда продать абонемент
         /// </summary>
-        public RelayCommand<Decimal> SellNewTrainingCommand => new RelayCommand<Decimal>((objects) =>
+        public RelayCommand SellNewTrainingCommand => new RelayCommand(() =>
         {
+            if (_Account == null || _SiInSubscription == null) return;
 
-            if (_Account == null) return;
+            if (_SiInSubscription.SiSTrainingCount <= 0)
+            {
+                MessageBoxResult res = CustomMessageBox.Show("Количество тренировок не должно быть\nменьше или равно нулю", "Продажа абонемента",
+                    MessageBoxButton.OK, eMessageBoxIcons.eWarning);
+                if (res == MessageBoxResult.OK)
+                {
+                    return;
+                }
+            }
+            // посчитаем стоимость выбранного занятия
+            _SiInSubscription.TotalCost =
+                Math.Round((decimal) (_SiInSubscription.PriceType?.TrainingCurrentCost *_SiInSubscription.SiSTrainingCount),2);
 
-            //_Account.TotalCost  = objects.Item1;
-            _SiInSubscription.TotalCost = objects;
-            ModelManager.AddData<Account, ServicesInSubscription>(_Account, _SiInSubscription);
-
+            ModelManager.AddData<Abonement, ServicesInSubscription>(_Account.Abonement, _SiInSubscription);
+            ModelManager.SetTotalCost(_Account.Abonement);
            MessageBoxResult result= CustomMessageBox.Show("К абонементу была успешно добавлена новая услуга\nПродолжить добавление услуг", "Продажа абонемента",
                 MessageBoxButton.YesNo, eMessageBoxIcons.eAsk);
             switch (result)

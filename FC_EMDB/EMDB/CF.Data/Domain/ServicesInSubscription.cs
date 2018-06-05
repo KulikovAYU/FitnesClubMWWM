@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using GalaSoft.MvvmLight;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
@@ -25,21 +26,26 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         /// Тип Абонемента
         /// </summary>
         // public string SiSType => arrPriceType?.TrainingListName.ServiceName;
-       // public virtual PriceTrainingList SiSType { get; set; }
+        // public virtual PriceTrainingList SiSType { get; set; }
 
         /// <summary>
         ///Количество тренировок 
         /// </summary>
         public int SiSTrainingCount { get; set; }
 
+
+      
         /// <summary>
         ///Количество посещенных тренировок 
         /// </summary>
         public int SiSVisitedTrainingCount { get; set; }
 
 
+
+        public string SiSTrainingName { get; set; }
+
         /// <summary>
-        /// Общая стоимость
+        /// Общая стоимость за конкретное занятие
         /// </summary>
         public Decimal TotalCost { get; set; }
 

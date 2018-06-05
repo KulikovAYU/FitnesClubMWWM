@@ -26,10 +26,11 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public DateTime? AbonementregistrationDate { get; private set; } = DateTime.Now;
 
 
+
         /// <summary>
         ///Общее Количество тренировок 
         /// </summary>
-        public int TrainingCount { get; set; }
+        public int TrainingCount{get ;set;} 
 
 
         /// <summary>
@@ -37,10 +38,11 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         /// </summary>
         public int VisitedTrainingCount { get; set; }
 
+
         /// <summary>
         /// Общая стоимость абонемента
         /// </summary>
-        public Decimal TotalCost { get; set; }
+        public Decimal AbonementTotalCost{get;set;}
 
 
         ///// <summary>

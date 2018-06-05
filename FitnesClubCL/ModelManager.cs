@@ -207,6 +207,7 @@ namespace FitnesClubCL
             }
 
             ClientsHelper.FixTheVisit(account, upcomingTraining);
+            SetTotalCost(account.Abonement);
         }
 
         /// <summary>
@@ -277,12 +278,13 @@ namespace FitnesClubCL
         }
 
         /// <summary>
-        /// Получить список тарифов
+        /// Получить общую стоимость абонемента
         /// </summary>
+        /// <param name="accountAbonement"> абонемент</param>
         /// <returns></returns>
-        public new ObservableCollection<Tarif> GetTarifs()
+        public static void SetTotalCost(Abonement accountAbonement)
         {
-            return Assistiant.GetTarifs();
+             Assistiant.SetTotalCost(accountAbonement);
         }
     }
 }

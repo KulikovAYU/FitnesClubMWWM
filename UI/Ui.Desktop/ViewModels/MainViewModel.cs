@@ -192,7 +192,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                 case "GymPage":
                     CurrentPage = ApplicationPage.GymPage;
                     break;
-
             }
         }
 

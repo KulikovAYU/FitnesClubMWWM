@@ -203,7 +203,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
 
             PriceTrainingList priceTrainingList = null;
             string _strCountTrain;
-            Tarif _tarif = null;
+         
             int _nTrainingCount = 0;
             Decimal? _totalCost = 0.0m;
 
@@ -215,12 +215,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
                     priceTrainingList = elems as PriceTrainingList;
                 }
 
-                if (elems is Tarif)
-                {
-
-                    _tarif = elems as Tarif;
-                }
-
+              
                 if (elems is string)
                 {
                     _strCountTrain = elems as string;
@@ -239,14 +234,14 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
                 }
             }
 
-            _totalCost = priceTrainingList?.TrainingCurrentCost * _tarif?.Koeff * _nTrainingCount;
+            _totalCost = priceTrainingList?.TrainingCurrentCost * _nTrainingCount;
 
             if (_totalCost == null)
             {
                 return string.Empty;
             }
 
-            return $"{Decimal.Round(Decimal.Parse(_totalCost.ToString()), 2)} ₽";
+            return Decimal.Round(Decimal.Parse(_totalCost.ToString()), 2);
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
@@ -264,9 +259,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
             if (string.IsNullOrEmpty(value as string))
                 return null;
 
-            var trimEnd = (value as string).TrimEnd('₽', ' ');
-
-            return Decimal.Parse(trimEnd);
+            return Decimal.Parse(value as string);
 
         }
 
@@ -442,6 +435,59 @@ namespace FitnessClubMWWM.Ui.Desktop.ValueConverters
             var Minutes = ((DateTime) value).TimeOfDay.Minutes;
 
             return $"{Day}.{Mounth}.{Year}  {Hours} ч.  {Minutes} мин." ;
+        }
+
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// Класс представляет конвертер для подсчета общего количества тренировок
+    /// </summary>
+    public class CountTrainingValueConverter : BaseValueConverter<CountTrainingValueConverter>
+    {
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int nTrainingCount = 0;
+            if (value is Abonement abonement)
+            {
+                foreach (var service in abonement.ArrServicesInSubscription)
+                {
+                    nTrainingCount += service.SiSTrainingCount;
+                }
+            }
+
+            return nTrainingCount;
+        }
+
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+
+    /// <summary>
+    /// Класс представляет конвертер для отображения общей стоимости абонемента
+    /// </summary>
+    public class TotalCostInfoValueConverter : BaseValueConverter<TotalCostInfoValueConverter>
+    {
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int nTrainingCount = 0;
+            if (value is Abonement abonement)
+            {
+                foreach (var service in abonement.ArrServicesInSubscription)
+                {
+                    //service.TotalCost
+                    //nTrainingCount += service.SiSTrainingCount;
+                }
+            }
+
+            return nTrainingCount;
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

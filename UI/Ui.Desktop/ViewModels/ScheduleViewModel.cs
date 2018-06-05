@@ -56,8 +56,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
                 return m_trainList;
             }
-          
-
         }
     }
 }

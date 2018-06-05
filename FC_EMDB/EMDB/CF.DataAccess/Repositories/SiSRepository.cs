@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using FC_EMDB.EMDB.CF.Data.Domain;
@@ -34,6 +35,31 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
             }
             query.SiSTrainingCount++;
             
+            DataBaseFcContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Посчитать общую стоимость абонемента
+        /// </summary>
+        /// <param name="accountAbonement">Текущий абонемент</param>
+        public void SetTotalCost(Abonement accountAbonement)
+        {
+            if (accountAbonement == null)
+                return;
+            var query = DataBaseFcContext.Abonements.FirstOrDefault(ab=>ab.NumberSubscription == accountAbonement.NumberSubscription);
+
+            if (query != null)
+            {
+                query.AbonementTotalCost = 0;
+                foreach (var buyingTraining in query.ArrServicesInSubscription)
+                {
+                    buyingTraining.TotalCost =
+                        buyingTraining.SiSTrainingCount * buyingTraining.PriceType.TrainingCurrentCost;
+
+                    query.AbonementTotalCost += Math.Round(buyingTraining.TotalCost, 2);
+                }
+            }
+
             DataBaseFcContext.SaveChanges();
         }
     }

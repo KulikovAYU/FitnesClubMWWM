@@ -6,5 +6,7 @@ namespace FC_EMDB.EMDB.CF.Data.Repositories
   {
       void AddOrUpdate(ServicesInSubscription service);
       void IncrementCountServices(UpcomingTraining upcTraining);
+      void SetTotalCost(Abonement accountAbonement);
+    
   }
 }

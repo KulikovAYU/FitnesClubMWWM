@@ -232,9 +232,9 @@ namespace FitnesClubCL.Classes
             return DbManager.GetInstance().GetPriceTrainingList();
         }
 
-        public static new ObservableCollection<Tarif> GetTarifs()
+        public static void SetTotalCost(Abonement accountAbonement)
         {
-            return DbManager.GetInstance().GetTarifs();
+            DbManager.GetInstance().SetTotalCost(accountAbonement);
         }
     }
 }

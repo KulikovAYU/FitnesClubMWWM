@@ -6,7 +6,6 @@ using FC_EMDB.EMDB.CF.Data.Domain;
 using FitnesClubCL;
 using FitnessClubMWWM.Ui.Desktop.Constants;
 using FitnessClubMWWM.Ui.Desktop.Pages;
-using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
 using FitnessClubMWWM.Ui.Desktop.Pages.Wind.AbonementInfo;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -18,19 +17,9 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
     public class ClientsPageViewModel : ViewModelBase
     {
 
-
-       
         public Account _Account { get; private set; }
 
-      
-
-     
-
-      
-
-     
-
-        private  ObservableCollection<Service> _serviceLists = null;
+        private ObservableCollection<Service> _serviceLists = null;
 
         public ObservableCollection<Service> ServiceLists => _serviceLists ?? ModelManager.GetReferenceData<Service>();
 
@@ -49,22 +38,12 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             }
         }
 
-      
-
-        ///// <summary>
-        ///// Крманда продать абонемент (из таблицы)
-        ///// </summary>
-        //public RelayCommand<Account> SellNewAbonementCommand => new RelayCommand<Account>((item) => {
-        //    Window selectActionWIndow = new PayAbonement();
-        //    _Account = item;
-        //    selectActionWIndow.ShowDialog();
-        //});
-
 
         /// <summary>
         /// Крманда подробно (из таблицы)
         /// </summary>
-        public RelayCommand<Account> ShowAbonementInfoCommand => new RelayCommand<Account>((item) => {
+        public RelayCommand<Account> ShowAbonementInfoCommand => new RelayCommand<Account>((item) =>
+        {
             Window selectActionWIndow = new AbonementInfo();
             SimpleIoc.Default.GetInstance<AbonementInfoViewModel>().SetData<Account>(item as Account);
             selectActionWIndow.ShowDialog();
@@ -77,9 +56,6 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
         public ClientsPageViewModel()
         {
-         
-
-            //  Messenger.Default.Register(this, new Action<string>(ProcessMessage));
         }
 
         public RelayCommand GoHomeCommand => new RelayCommand(() => { Messenger.Default.Send("MainPage"); });
@@ -88,43 +64,41 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         public Visibility visibleSearchPanel { get; set; } = Visibility.Hidden;
 
         public RelayCommand FindClientCommand =>
-            new RelayCommand((() => {
-                if (visibleSearchPanel == Visibility.Hidden)
-                {
-                    visibleSearchPanel = Visibility.Visible;
-                }
+        new RelayCommand((() =>
+        {
+            if (visibleSearchPanel == Visibility.Hidden)
+            {
+                visibleSearchPanel = Visibility.Visible;
+            }
 
-                }));
+        }));
 
- public RelayCommand HideSearchPanel =>
-            new RelayCommand((() => {
-                if (visibleSearchPanel == Visibility.Visible)
-                {
-                    visibleSearchPanel = Visibility.Hidden;
-                }
+        public RelayCommand HideSearchPanel =>
+        new RelayCommand((() =>
+        {
+            if (visibleSearchPanel == Visibility.Visible)
+            {
+                visibleSearchPanel = Visibility.Hidden;
+            }
 
-                }));
-
+        }));
 
         private static bool _isAv { get; set; }
 
         public RelayCommand<bool> ActivateRelayCommand { get; set; } =
-        new RelayCommand<bool>((ob) => { _isAv = ob;  }, _isAv);
+        new RelayCommand<bool>((ob) => { _isAv = ob; }, _isAv);
 
         /// <summary>
         /// Данная команда вызывается из таблицы клиентов и передает данные в форму для корректировки данных клиента
         /// </summary>
-        public RelayCommand<Account> CorretAccountData =>new RelayCommand<Account>((item) => {
+        public RelayCommand<Account> CorretAccountData => new RelayCommand<Account>((item) =>
+        {
             Messenger.Default.Send("RegisterNewClientPage");
             SimpleIoc.Default.GetInstance<WorkingCabinetPageViewModel>().ExistAccount = item;
             SimpleIoc.Default.GetInstance<WorkingCabinetPageViewModel>().UpdatePageFields(item);
-         
         });
 
 
-
-
-       
         /// <summary>
         /// Список видов услуг
         /// </summary>
@@ -132,19 +106,18 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 
         public PriceTrainingList CurrenPriceTraining { get; set; }
 
-        public ObservableCollection<Tarif> ArrTarifs => ModelManager.GetReferenceData<Tarif>();
 
         public int nTrainingCount { get; set; }
 
         public Decimal TotalCost { get; set; }
 
-        public RelayCommand CreateNewServiceInAbonementCommand =>new RelayCommand(() =>
-       {
-           ServicesInSubscription newRecord = new ServicesInSubscription()
-           {
-              
-           };
-       });
+        public RelayCommand CreateNewServiceInAbonementCommand => new RelayCommand(() =>
+        {
+            ServicesInSubscription newRecord = new ServicesInSubscription()
+            {
+
+            };
+        });
 
         public class Clients //Отладка
         {
@@ -163,7 +136,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         }
 
 
-       
+
         private ObservableCollection<Clients> clientsList = null; //Отладка
 
         public ObservableCollection<Account> _clientsList { get; set; } = null;
@@ -173,21 +146,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             _clientsList = ModelManager.GetAllPersons<Account>();
             return _clientsList;
         }
-        /// <summary>
-        /// Список клиентов
-        /// </summary>
-        //public ObservableCollection<Account> _ClientsList
-        //{
-        //    get
-        //    {
-        //        //if (_clientsList != null)
-        //        //    return _clientsList;
 
-        //        _clientsList = ModelManager.GetAllPersons<Account>();
-              
-        //        return _clientsList;
-        //    }
-        //}
 
         public ObservableCollection<Clients> ClientsList
         {
@@ -365,7 +324,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
             public int m_nRemainedTrainings { get; set; }//осталось трениовок
         }
 
-       
+
         private ObservableCollection<Abonement> m_abonementList = null; //Отладка
 
         public ObservableCollection<Abonement> GetAbonement //Отладка
@@ -389,7 +348,5 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
                 return m_abonementList;
             }
         }
-
- 
     }
 }

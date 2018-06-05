@@ -7,6 +7,9 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using FitnessClubMWWM.Ui.Desktop.Pages;
+using FitnessClubMWWM.Ui.Desktop.Pages.Wind;
+using FitnessClubMWWM.Ui.Desktop.Pages.Wind.AbonementInfo;
+using GalaSoft.MvvmLight.Ioc;
 
 namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 {
@@ -78,6 +81,14 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// Команда показать информацию о персонале (группа Персонал) - доступна всем, кроме редактирования
         /// </summary>
         public RelayCommand ShowStaffPageCommand => new RelayCommand(() => { Messenger.Default.Send("StaffPage"); });
+
+
+        /// <summary>
+        /// Команда тренировка
+        /// </summary>
+        public RelayCommand TrainingPageCommand => new RelayCommand(() => { new AbonementInfo().Show();
+            SimpleIoc.Default.GetInstance<AbonementInfoViewModel>()._Account = null;
+        });
 
         /// <summary>
         /// Команда управления услуг и залами (группа Финансы, услуги, залы)

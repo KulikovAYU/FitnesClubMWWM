@@ -9,9 +9,11 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Configuration
         {
             HasKey(service => service.SiSId);
            // Property(service => service.SiSType).IsRequired().HasColumnName("ServicesInSubscriptionName");
-            Property(service => service.SiSTrainingCount).IsRequired().HasColumnName("SiSTrainingCount");
+            Property(service => service.SiSTrainingCount).IsOptional().HasColumnName("SiSTrainingCount");
             Property(service => service.SiSVisitedTrainingCount).IsRequired().HasColumnName("SiSVisitedTrainingCount");
+              Property(service => service.SiSTrainingName).IsOptional().HasColumnName("SiSTrainingName");
             Property(service => service.TotalCost).IsRequired().HasColumnName("TotalCost");
+
             ToTable("ServicesInSubscription");
         }
     }

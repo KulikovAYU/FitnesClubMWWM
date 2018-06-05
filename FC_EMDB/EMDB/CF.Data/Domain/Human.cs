@@ -3,7 +3,7 @@ using GalaSoft.MvvmLight;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
 {
-   public class Human :  ViewModelBase
+   public class Human : ViewModelBase
     {
         /// <summary>
         /// Id клиента (ключ PK)

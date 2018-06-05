@@ -143,7 +143,7 @@
                         FontSize="{StaticResource RegularBig}"
                         Tag="Введите номер абонемента"
                         Template="{StaticResource InputTextBox}"
-                        Text="{Binding NumberSubscription}" />
+                        Text="{Binding NumberSubscription, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" />
                     <!--  Номер абонемента  -->
                     <Grid Style="{StaticResource BaseGridStyle}">
                         <Grid.ColumnDefinitions>

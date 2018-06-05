@@ -34,7 +34,6 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Context
 
         #region Свойства доступа к полям БД
         public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<Tarif> Tarifs { get; set; }
         public virtual DbSet<UpcomingTraining> UpcomingTrainings { get; set; }
         public virtual DbSet<PriceTrainingList> TrainingLists { get; set; }
 
@@ -55,7 +54,6 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new AccountConfig());
-            modelBuilder.Configurations.Add(new TarifConfig());
             modelBuilder.Configurations.Add(new UpcomingTrainingConfig());
             modelBuilder.Configurations.Add(new PriceTrainingListConfig());
             //modelBuilder.Configurations.Add(new AccountStatusConfig());

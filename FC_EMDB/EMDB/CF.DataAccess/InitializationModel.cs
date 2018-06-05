@@ -106,14 +106,6 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             context.Employees.AddRange(employees);
             #endregion
 
-            #region Тарифы фитнес-клуба
-            ObservableCollection<Tarif> tarifs = new ObservableCollection<Tarif>()
-            {
-                new Tarif{TarifName = "Утренний"},
-                new Tarif{TarifName = "Вечерний"}
-            };
-            context.Tarifs.AddRange(tarifs);
-            #endregion
 
             #region Добавление новой услуги
             ObservableCollection<Service> services = new ObservableCollection<Service>()
@@ -128,9 +120,9 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             #region Добавление списка видов тренировок и услуг (прайс - лист)
             ObservableCollection<PriceTrainingList> trainingsLists = new ObservableCollection<PriceTrainingList>()
             {
-                new PriceTrainingList{ TrainingListName=services[0],TrainingCurrentCost =200.0m, Tarifs = tarifs[0]},
-                new PriceTrainingList{ TrainingListName=services[1],TrainingCurrentCost =400.0m, Tarifs = tarifs[0]},
-                new PriceTrainingList{ TrainingListName=services[2],TrainingCurrentCost =600.0m, Tarifs = tarifs[1]},
+                new PriceTrainingList{ TrainingListName=services[0],TrainingCurrentCost =200.0m},
+                new PriceTrainingList{ TrainingListName=services[1],TrainingCurrentCost =400.0m},
+                new PriceTrainingList{ TrainingListName=services[2],TrainingCurrentCost =600.0m},
             };
             context.TrainingLists.AddRange(trainingsLists);
             #endregion
@@ -168,9 +160,9 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             {
                 new Abonement()
                 {
-                    TrainingCount = 15,
+                  
                     VisitedTrainingCount = 2,
-                    TotalCost = 4300.0m,
+                    AbonementTotalCost = 4300.0m,
                     CountDays = DateTime.Parse("10.06.2018"),
                     ArrServicesInSubscription = new ObservableCollection<ServicesInSubscription>()
                     {
@@ -196,7 +188,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
 
                 new Abonement()
                 {
-                    TrainingCount = 15, VisitedTrainingCount = 2, TotalCost = 3000.0m, CountDays = DateTime.Parse("10.06.2018"),
+                   VisitedTrainingCount = 2, AbonementTotalCost = 3000.0m, CountDays = DateTime.Parse("10.06.2018"),
                     ArrServicesInSubscription = new ObservableCollection<ServicesInSubscription>()
                     {
                         new ServicesInSubscription(){ SiSTrainingCount = 7, SiSVisitedTrainingCount=4, TotalCost = 1005.0m, PriceType =trainingsLists[2] },

@@ -18,7 +18,6 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             EmployeRoles = new EmployeeRoleRepository(m_context);
             EmployeesWorkingStatus = new EmployeeWorkingStatusRepository(m_context);
             TrainingList = new TrainingListRepository(m_context);
-            Tarif = new TarifRepository(m_context);
             Services = new ServiceRepository(m_context);
             AccountStatus = new AccountStatusRepository(m_context);
             ServicesInSubscription = new SiSRepository(m_context);
@@ -32,7 +31,6 @@ namespace FC_EMDB.EMDB.CF.DataAccess
         public IEmployeeRoleRepository EmployeRoles { get; private set; }
         public IEmployeeWorkingStatusRepository EmployeesWorkingStatus { get; private set; }
         public ITrainingListRepository TrainingList { get; private set; }
-        public ITarifRepository Tarif { get; private set; }
         public IServiceRepository Services { get; private set; }
         public IAccountStatusRepository AccountStatus { get; private set; }
         public ISiSRepository ServicesInSubscription { get; private set; }

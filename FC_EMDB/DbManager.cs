@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using FC_EMDB.Classes;
 using FC_EMDB.EMDB.CF.Data.Domain;
@@ -153,10 +154,7 @@ namespace FC_EMDB
         /// <returns>коллекцию сущноситей конкретного типа</returns>
         public ObservableCollection<T> GetReferenceData<T>() where T : class 
         {
-            if (typeof(T) == typeof(Tarif))
-            {
-                return new ObservableCollection<T>(unitOfWork.Tarif.GetAll().Cast<T>());
-            }
+
 
             if (typeof(T) == typeof(Service))
             {
@@ -191,18 +189,34 @@ namespace FC_EMDB
 
         public void AddData<T1, T2>(T1 data1, T2 data2) where T1 : class where T2 : class
         {
-            //if (data1  is Account && data2 is ServicesInSubscription)
-            //{
-            //    unitOfWork.Accounts.Get((data1 as Account).HumanId).ArrServicesInSubscription.Add( new ServicesInSubscription(data1 as Account)
-            //        {
-            //            SiSTrainingCount = (data2 as ServicesInSubscription).SiSTrainingCount,
-            //            SiSVisitedTrainingCount = 0,
-            //            TotalCost = (data2 as ServicesInSubscription).TotalCost,
-            //            PriceType = (data2 as ServicesInSubscription).PriceType
-            //    }    
-            //    );
-            //    unitOfWork.Complete();
-            //}
+            if (data1 is Abonement && data2 is ServicesInSubscription)
+            {
+                var currentAccount = unitOfWork.Abonements.Get((data1 as Abonement).AbonementId);
+
+                var currentTraining = currentAccount.ArrServicesInSubscription.FirstOrDefault(service =>
+                    service.PriceType.TrainingListName.ServiceName ==
+                    (data2 as ServicesInSubscription)?.PriceType.TrainingListName.ServiceName);
+
+                if (currentTraining != null) //если тренировки нет в списке
+                {
+                    currentTraining.SiSTrainingCount += (data2 as ServicesInSubscription).SiSTrainingCount;
+                }
+                else//если тренировка есть в списке
+                {
+                    (data1 as Abonement).ArrServicesInSubscription.Add(new ServicesInSubscription()
+                        {
+                            PriceType = (data2 as ServicesInSubscription).PriceType,
+                            SiSTrainingCount = (data2 as ServicesInSubscription).SiSTrainingCount,
+                            SiSTrainingName = (data2 as ServicesInSubscription).SiSTrainingName,
+                            TotalCost = (data2 as ServicesInSubscription).TotalCost,
+                        }
+                    );
+                    (data1 as Abonement).CountDays = DateTime.Now.AddMonths(1);//активираем абонемент
+                }
+            }
+
+            //сейвим изменения
+            unitOfWork.Complete();
         }
 
         public Account FindPersonForNumberSubsription(int numberSubscription)
@@ -247,6 +261,10 @@ namespace FC_EMDB
             //1. Получим аккаунт
             account.Abonement.ArrUpcomingTrainings.Add(currentItem);
             service.SiSTrainingCount--;
+            if (service.SiSTrainingCount == 0)
+            {
+                account.Abonement.ArrServicesInSubscription.Remove(service);
+            }
             //// //1. Получили тренировку
             ////var currentService = unitOfWork.ServicesInSubscription.Get(service.SiSId);
             ////2. Уменьшили счетчик
@@ -308,13 +326,10 @@ namespace FC_EMDB
            return new ObservableCollection<PriceTrainingList>(unitOfWork.PriceTrainingLists.GetAll());
         }
 
-        /// <summary>
-        /// Получить список тарифов
-        /// </summary>
-        /// <returns></returns>
-        public new ObservableCollection<Tarif> GetTarifs()
+
+        public void SetTotalCost(Abonement accountAbonement)
         {
-            return new ObservableCollection<Tarif>(unitOfWork.Tarif.GetAll());
+           unitOfWork.ServicesInSubscription.SetTotalCost(accountAbonement);
         }
     }
 }

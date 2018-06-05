@@ -14,13 +14,14 @@
 
     <Page.Resources>
         <valueConverters:DateTimeToDateConverter x:Key="DateTimeToDateConverter" />
+        <valueConverters:CountTrainingValueConverter x:Key="CountTrainingValueConverter" />
     </Page.Resources>
     <StackPanel x:Name="stackPanel" Orientation="Vertical">
 
         <!--  Владелец  -->
         <Grid Margin="0,5,0,5" Style="{StaticResource BaseGridStyle}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="300" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
@@ -46,7 +47,7 @@
         <!--  Количество тренировок  -->
         <Grid Margin="0,5,0,5" Style="{StaticResource BaseGridStyle}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="300" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
@@ -56,7 +57,7 @@
                 FontSize="{StaticResource Regular}"
                 FontWeight="Bold"
                 Foreground="Gray"
-                Text="Количество тренировок" />
+                Text="Общее количество тренировок" />
 
             <TextBlock
                 Grid.Column="1"
@@ -65,14 +66,14 @@
                 FontSize="{StaticResource Regular}"
                 FontWeight="Bold"
                 Foreground="Gray"
-                Text="{Binding _Account.Abonement.TrainingCount}" />
+                Text="{Binding _Account.Abonement, Converter={StaticResource CountTrainingValueConverter}}" />
         </Grid>
 
 
         <!--  Цена  -->
         <Grid Margin="0,5,0,5" Style="{StaticResource BaseGridStyle}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="300" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
@@ -91,13 +92,13 @@
                 FontSize="{StaticResource Regular}"
                 FontWeight="Bold"
                 Foreground="Gray"
-                Text="{Binding _Account.Abonement.TotalCost, StringFormat={}{0}₽}" />
+                Text="{Binding _Account.Abonement.AbonementTotalCost, StringFormat={}{0}₽}" />
         </Grid>
 
         <!--  Срок действия  -->
         <Grid Margin="0,5,0,5" Style="{StaticResource BaseGridStyle}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="300" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
@@ -123,7 +124,7 @@
         <!--  Дата активации  -->
         <Grid Margin="0,5,0,5" Style="{StaticResource BaseGridStyle}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="300" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
@@ -133,7 +134,7 @@
                 FontSize="{StaticResource Regular}"
                 FontWeight="Bold"
                 Foreground="Gray"
-                Text="Дата активации" />
+                Text="Дата регистрации" />
             <TextBlock
                 Grid.Column="1"
                 Margin="10"
@@ -149,7 +150,7 @@
         <!--  Состояние карты  -->
         <Grid Margin="0,5,0,5" Style="{StaticResource BaseGridStyle}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="300" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
