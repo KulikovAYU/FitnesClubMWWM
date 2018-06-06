@@ -128,6 +128,12 @@ namespace FC_EMDB
                     unitOfWork.Accounts.CreateRecord(_data);
                 }
             }
+
+            if (recordData is Gym)
+            {
+                var _data = recordData as Gym;
+                unitOfWork.Gyms.CreateOrUpdateRecord(_data);
+            }
         }
 
         /// <summary>
@@ -169,6 +175,11 @@ namespace FC_EMDB
             if (typeof(T) == typeof(AccountStatus))
             {
                 return new ObservableCollection<T>(unitOfWork.AccountStatus.GetAll().Cast<T>());
+            }
+
+            if (typeof(T) == typeof(Gym))
+            {
+                return new ObservableCollection<T>(unitOfWork.Gyms.GetAll().Cast<T>());
             }
 
             return null;
@@ -258,6 +269,15 @@ namespace FC_EMDB
         /// <param name="currentItem">Выбранная тренировка</param>
         public void CreatePriorRegistration(Account account, ServicesInSubscription service, UpcomingTraining currentItem)
         {
+            var servicesInSubscriptions = account.Abonement.ArrServicesInSubscription.Where(serv =>
+                serv.PriceType.TrainingListName.ServiceName == currentItem.Service.ServiceName).FirstOrDefault();
+            if (servicesInSubscriptions.SiSTrainingCount == 1)
+            {
+                //сохраним ссылку на тренировку
+                currentItem.CurrentService = new ServicesInSubscription(service);
+            }
+
+         
             //1. Получим аккаунт
             account.Abonement.ArrUpcomingTrainings.Add(currentItem);
             service.SiSTrainingCount--;
@@ -307,8 +327,34 @@ namespace FC_EMDB
            var upcomTraining = unitOfWork.UpcomingTrainings.GetUpcomingTraining(upcTraining);
             //2. получили текущий аккаунт
             var currAccount = unitOfWork.Accounts.FindAccountWithSameData(account);
-            //4. Увеличим счетчик текущей тренировки
-            unitOfWork.ServicesInSubscription.IncrementCountServices(upcTraining);
+            //3. Получили отмененную тренировку
+            var CancelledTraining =  currAccount.Abonement.ArrServicesInSubscription.FirstOrDefault(upcTr=>upcTr.PriceType.TrainingListName.ServiceName ==
+                                                                                         upcTraining.Service.ServiceName);
+
+            if (CancelledTraining == null)
+            {
+                currAccount.Abonement.ArrServicesInSubscription.Add(new ServicesInSubscription()
+                {
+                    SiSTrainingName = upcTraining.Service.ServiceName,
+                    SiSTrainingCount = 1,
+                    PriceType = upcTraining.CurrentService.PriceType
+                });
+            }
+            else
+            {
+                CancelledTraining.SiSTrainingCount++;
+              //  //Нашли текущую тренировку
+              //var existTraining =  currAccount.Abonement.ArrServicesInSubscription.FirstOrDefault(upcTr =>
+              //      upcTr.SiSTrainingName == upcTraining.Service.ServiceName);
+              //  if (existTraining != null)
+              //  {
+              //      existTraining.SiSTrainingCount++;
+              //  }
+            
+                ////4. Увеличим счетчик текущей тренировки
+                //unitOfWork.ServicesInSubscription.IncrementCountServices(upcTraining);
+                
+            }
             //3. Убрали тренировку из записи
             currAccount.Abonement.ArrUpcomingTrainings.Remove(upcTraining);
             ////3. Убрали тренировку из записи
@@ -330,6 +376,20 @@ namespace FC_EMDB
         public void SetTotalCost(Abonement accountAbonement)
         {
            unitOfWork.ServicesInSubscription.SetTotalCost(accountAbonement);
+        }
+
+        public void RemoveItem<T>(T item) where T : class
+        {
+            if (item is Gym)
+            {
+               var  currentGym = unitOfWork.Gyms.Get((item as Gym).GymId);
+                unitOfWork.UpcomingTrainings.GetTrainingWithCurrentGym((item as Gym));
+
+               
+                unitOfWork.Gyms.Remove(currentGym);
+                
+                unitOfWork.Complete();
+            }
         }
     }
 }

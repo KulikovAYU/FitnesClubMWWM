@@ -3,7 +3,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:domain="clr-namespace:FC_EMDB.EMDB.CF.Data.Domain;assembly=FC_EMDB"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:FitnessClubMWWM.Ui.Desktop.ViewModels"
     Title="GymPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -32,6 +34,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
 
     </Page.Resources>
     <Page.DataContext>
@@ -88,26 +91,23 @@
             CellStyle="{DynamicResource DataGridCellStyle1}"
             ColumnHeaderHeight="40"
             IsReadOnly="True"
-            ItemsSource="{Binding GymList}"
+            ItemsSource="{Binding Gyms}"
             RowHeight="40"
+            SelectedItem="{Binding SelectedGym, UpdateSourceTrigger=PropertyChanged}"
             Style="{StaticResource BaseDataGridLabelFontStyle}">
 
 
 
             <DataGrid.Columns>
-                <DataGridTextColumn
-                    Width="50*"
-                    Binding="{Binding nNum}"
-                    CellStyle="{StaticResource StyleCenter}"
-                    Header="Номер" />
+
                 <DataGridTextColumn
                     Width="200*"
-                    Binding="{Binding GymType}"
+                    Binding="{Binding GymName}"
                     CellStyle="{StaticResource StyleCenter}"
                     Header="Тип зала" />
                 <DataGridTextColumn
                     Width="250*"
-                    Binding="{Binding GymCapacity}"
+                    Binding="{Binding GymCapacity, StringFormat={}{0} чел.}"
                     CellStyle="{StaticResource StyleCenter}"
                     Header="Вместимость" />
 
@@ -119,7 +119,7 @@
                                     Padding="5"
                                     HorizontalAlignment="Right"
                                     VerticalContentAlignment="Center"
-                                    Command="{Binding ShowNewEntryInScheduleWindowCommand}"
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}, Path=DataContext.EditGymInfoCommand}"
                                     Content="Редактировать"
                                     Cursor="Hand"
                                     FontSize="14"
@@ -138,7 +138,7 @@
                                     Padding="5"
                                     HorizontalAlignment="Right"
                                     VerticalContentAlignment="Center"
-                                    Command="{Binding ShowNewEntryInScheduleWindowCommand}"
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=DataContext.RemoveCommand}"
                                     Content="Удалить"
                                     Cursor="Hand"
                                     FontSize="14"

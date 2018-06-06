@@ -68,7 +68,7 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.733" Value="1" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-     
+
     </UserControl.Resources>
     <UserControl.DataContext>
         <Binding
@@ -366,7 +366,7 @@
                     GeomPictureWidth="15"
                     Template="{DynamicResource AboutUserControlTemplate}"
                     ToolTip="Данные пользователя"
-                    Visibility="Visible" />
+                    Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.AboutUserPanelVisibility, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
 
         </StackPanel>

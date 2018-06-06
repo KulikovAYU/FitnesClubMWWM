@@ -94,6 +94,7 @@
     <Compile Include="EMDB\CF.DataAccess\Repositories\EmployeeRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\EmployeeRoleRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\EmployeeWorkingStatusRepository.cs" />
+    <Compile Include="EMDB\CF.DataAccess\Repositories\GymRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\PriceTrainingListRepository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\Repository.cs" />
     <Compile Include="EMDB\CF.DataAccess\Repositories\ServiceRepository.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="EMDB\CF.Data\Repositories\IAccountStatusRepository.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\IEmployeeRepository.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\IEmployeeWorkingStatusRepository.cs" />
+    <Compile Include="EMDB\CF.Data\Repositories\IGymRepository..cs" />
     <Compile Include="EMDB\CF.Data\Repositories\IpriceTrainingListRepository.cs" />
     <Compile Include="EMDB\CF.Data\Repositories\IRepository.cs" />
     <Compile Include="DbManager.cs" />

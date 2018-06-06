@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GalaSoft.MvvmLight;
 
 namespace FC_EMDB.EMDB.CF.Data.Domain
@@ -6,7 +7,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
     /// <summary>
     /// Сущность зал
     /// </summary>
-   public class Gym : ViewModelBase
+   public class Gym : ViewModelBase, ICloneable
     {
         public Gym()
         {
@@ -32,5 +33,12 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         public virtual ICollection<UpcomingTraining> ArrTrainings { get; set; }
 
         #endregion
+
+
+        public object Clone()
+        {
+            var gymClone = new Gym();
+            return gymClone;
+        }
     }
 }

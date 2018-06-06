@@ -80,13 +80,13 @@ namespace FitnesClubCL
         /// Метод обновляет запись либо создает новую запись в БД
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="clientData"></param>
-        public void CreateOrUpdateRecord<T>(T clientData) where T : class
+        /// <param name="data"></param>
+        public void CreateOrUpdateRecord<T>(T data) where T : class
         {
-            if (clientData == null)
+            if (data == null)
                 return;
             
-            ClientsHelper.UpdateFields<T>(clientData);
+            ClientsHelper.UpdateFields<T>(data);
         }
 
 
@@ -106,6 +106,8 @@ namespace FitnesClubCL
         /// <param name="currentItem">Предварительная запись на тренировку</param>
         public void CreatePriorRegistration(Account account,ServicesInSubscription service,UpcomingTraining currentItem)
         {
+            if(account == null || service == null || currentItem == null)
+                return;
             ClientsHelper.CreatePriorRegistration(account,service, currentItem);
         }
 
@@ -138,6 +140,9 @@ namespace FitnesClubCL
 
         public static void SaveData<T>(T data) where T : class
         {
+            if (data == null)
+                 return;
+
             Assistiant.SaveData<T>(data);
         }
 
@@ -152,6 +157,8 @@ namespace FitnesClubCL
         /// <param name="servicesInSubscription">доступные услуги</param>
         public ObservableCollection<UpcomingTraining> GetAvailableTrainings(ServicesInSubscription servicesInSubscription)
         {
+            if (servicesInSubscription == null)
+                return null;
            return Assistiant.GetAvailableTrainings(servicesInSubscription);
         }
 
@@ -284,7 +291,20 @@ namespace FitnesClubCL
         /// <returns></returns>
         public static void SetTotalCost(Abonement accountAbonement)
         {
+            if (accountAbonement == null)
+                return;
+
              Assistiant.SetTotalCost(accountAbonement);
+        }
+        /// <summary>
+        /// Удалить элемент из коллекции
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public void RemoveItem<T>(T item) where T : class
+        {
+            if (item == null)
+                return;
+            Assistiant.RemoveItem<T>(item);
         }
     }
 }

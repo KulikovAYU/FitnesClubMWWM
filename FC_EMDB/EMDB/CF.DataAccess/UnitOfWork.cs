@@ -24,6 +24,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
             Abonements = new AbonementRepository(m_context);
             UpcomingTrainings = new UpcomingTrainingRepository(m_context);
             PriceTrainingLists = new PriceTrainingListRepository(m_context);
+            Gyms = new GymRepository(m_context);
         }
 
         public IAccountRepository Accounts { get; private set; }
@@ -34,12 +35,12 @@ namespace FC_EMDB.EMDB.CF.DataAccess
         public IServiceRepository Services { get; private set; }
         public IAccountStatusRepository AccountStatus { get; private set; }
         public ISiSRepository ServicesInSubscription { get; private set; }
-
         public IAbonementRepository Abonements { get; }
-
         public IUpcomingTrainingRepository UpcomingTrainings { get; }
-
         public IpriceTrainingListRepository PriceTrainingLists { get; }
+
+        public IGymRepository Gyms { get; }
+
         public int Complete()
         {
             return m_context.SaveChanges();

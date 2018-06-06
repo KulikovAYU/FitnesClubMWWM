@@ -7,5 +7,6 @@ namespace FC_EMDB.EMDB.CF.Data.Repositories
       void AddNewUpcomingTraining(Account account, UpcomingTraining newTraining);
       void FixTheVisit(Account account, UpcomingTraining upcomingTraining);
       UpcomingTraining GetUpcomingTraining( UpcomingTraining upcTraining);
+      void GetTrainingWithCurrentGym(Gym gym);
   }
 }

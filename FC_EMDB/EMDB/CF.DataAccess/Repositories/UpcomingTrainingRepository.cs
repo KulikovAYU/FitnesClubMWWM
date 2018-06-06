@@ -61,6 +61,20 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
             return DataBaseFcContext.UpcomingTrainings.FirstOrDefault(upcT => upcT.TrainingId == upcTraining.TrainingId);
         }
 
+        public void GetTrainingWithCurrentGym(Gym gym)
+        {
+            if (gym == null)
+                return;
+            var query = DataBaseFcContext.UpcomingTrainings.Where(currGym => currGym.Gym.GymId == gym.GymId).ToList();
+
+            foreach(UpcomingTraining item in query)
+            {
+                DataBaseFcContext.UpcomingTrainings.Remove(item);
+            }
+
+            DataBaseFcContext.SaveChanges();
+        }
+
 
         /// <summary>
         /// Отказ о посещении тренировки

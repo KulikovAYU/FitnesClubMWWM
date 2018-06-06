@@ -146,9 +146,10 @@ namespace FitnesClubCL.Classes
         /// <param name="currentItem">Выбранная тренировка</param>
         public static void CreatePriorRegistration(Account account, ServicesInSubscription service, UpcomingTraining currentItem)
         {
+            if (account == null || service == null || currentItem == null)
+                return;
 
             DbManager.GetInstance().CreatePriorRegistration(account, service, currentItem);
-         
         }
 
 
@@ -204,11 +205,16 @@ namespace FitnesClubCL.Classes
         /// <typeparam name="T"></typeparam>
         public static void SaveData<T>(T data) where T : class
         {
+            if (data == null)
+                return;
+            
             DbManager.GetInstance().SaveData<T>(data);
         }
 
         public static void AddData<T1, T2>(T1 data1, T2 data2) where T1 : class where T2 : class
         {
+            if (data1 == null || data2 == null)
+                return;
             DbManager.GetInstance().AddData<T1, T2>(data1, data2);
         }
 
@@ -218,6 +224,10 @@ namespace FitnesClubCL.Classes
         /// <param name="servicesInSubscription">доступные услуги</param>
         public static ObservableCollection<UpcomingTraining> GetAvailableTrainings(ServicesInSubscription servicesInSubscription)
         {
+            if (servicesInSubscription == null)
+            {
+                return null;
+            }
             return DbManager.GetInstance().GetAvailableTrainings(servicesInSubscription);
         }
 
@@ -235,6 +245,15 @@ namespace FitnesClubCL.Classes
         public static void SetTotalCost(Abonement accountAbonement)
         {
             DbManager.GetInstance().SetTotalCost(accountAbonement);
+        }
+
+        public static void RemoveItem<T>(T item) where T : class
+        {
+            if (item == null)
+            {
+                return;
+            }
+            DbManager.GetInstance().RemoveItem(item);
         }
     }
 }

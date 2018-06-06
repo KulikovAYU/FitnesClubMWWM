@@ -60,5 +60,10 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
         #endregion
 
         public virtual ICollection<Abonement> Abonements { get; set; }
+
+        /// <summary>
+        /// Текущая тренировка
+        /// </summary>
+        public virtual ServicesInSubscription CurrentService { get; set; }
     }
 }

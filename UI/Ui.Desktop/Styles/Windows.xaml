@@ -767,7 +767,7 @@
                                     FontSize="20"
                                     FontWeight="Bold"
                                     Foreground="Gray"
-                                    Text="Зал"
+                                    Text="Залы"
                                     TextAlignment="Center" />
                             </Grid>
                             <!--  Панель с созданием нового зала  -->
@@ -784,17 +784,9 @@
                                         VerticalContentAlignment="Center"
                                         BorderThickness="2"
                                         FontSize="{StaticResource RegularBig}"
-                                        Tag="Номер зала"
-                                        Template="{StaticResource InputTextBox}" />
-                                    <TextBox
-                                        Width="300"
-                                        Height="40"
-                                        Margin="5"
-                                        VerticalContentAlignment="Center"
-                                        BorderThickness="2"
-                                        FontSize="{StaticResource RegularBig}"
                                         Tag="Тип зала"
-                                        Template="{StaticResource InputTextBox}" />
+                                        Template="{StaticResource InputTextBox}"
+                                        Text="{Binding GymName, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBox
                                         Width="300"
                                         Height="40"
@@ -803,12 +795,15 @@
                                         BorderThickness="2"
                                         FontSize="{StaticResource RegularBig}"
                                         Tag="Вместимость (чел.)"
-                                        Template="{StaticResource InputTextBox}" />
+                                        Template="{StaticResource InputTextBox}"
+                                        Text="{Binding GymCapacity, UpdateSourceTrigger=PropertyChanged}" />
 
                                     <Button
                                         Width="300"
                                         Height="50"
                                         Margin="0,15,0,0"
+                                        Command="{Binding ApplyCommand}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
                                         Content="Применить"
                                         FontSize="{StaticResource Regular}"
                                         Foreground="White"

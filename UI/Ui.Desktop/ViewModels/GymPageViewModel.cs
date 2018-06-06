@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows;
+using FC_EMDB.EMDB.CF.Data.Domain;
+using FitnesClubCL;
 using FitnessClubMWWM.Ui.Desktop.Pages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -8,71 +12,90 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
 {
    public class GymPageViewModel : ViewModelBase
     {
-
-        public RelayCommand GoHomeCommand => new RelayCommand(() => { Messenger.Default.Send("MainPage"); });
-
-        public RelayCommand ShowGymWindowsCommand => new RelayCommand(()=> (new GymWindow()).ShowDialog());
-
-        public class Gym
+        public GymPageViewModel()
         {
-            public Gym()
-            {
-                nNum = ++nUmber;
-            }
-
-
-            private static int nUmber=0;
-            public int nNum { get;  set; }
-
-            public string GymType { get; set; }
-
-            public string GymCapacity { get; set; }
-
+            Gyms = ModelManager.GetReferenceData<Gym>();
         }
+        /// <summary>
+        /// Выбранный зал
+        /// </summary>
+        public Gym SelectedGym { get; set; }
 
-     
 
-        private ObservableCollection<Gym> gymList = null;
+        /// <summary>
+        /// Имя
+        /// </summary>
+        public string GymName { get; set; } 
 
-        public ObservableCollection<Gym> GymList
+        /// <summary>
+        /// Вместимость
+        /// </summary>
+        public string GymCapacity { get; set; }
+
+        public RelayCommand GoHomeCommand => new RelayCommand(() => { Messenger.Default.Send("MainPage");});
+
+        public RelayCommand ShowGymWindowsCommand => new RelayCommand(() => { (new GymWindow()).ShowDialog();  });
+
+        public RelayCommand EditGymInfoCommand => new RelayCommand(() =>
         {
+            if(SelectedGym == null)
+                return;
+            GymName = SelectedGym.GymName;
+            GymCapacity = SelectedGym.GymCapacity.ToString();
+            (new GymWindow()).ShowDialog();
+
+        });
+
+
+        public RelayCommand<Window> ApplyCommand => new RelayCommand<Window>((gym) =>
+        {
+            (gym as Window).Close();
+            if (SelectedGym == null)
+                SelectedGym = new Gym();
+                
+            SelectedGym.GymName = GymName;
+            SelectedGym.GymCapacity = Int32.Parse(GymCapacity);
+            ModelManager.GetInstance.CreateOrUpdateRecord(SelectedGym);
+            GymName = String.Empty;
+            GymCapacity = String.Empty;
+        });
+
+        public RelayCommand RemoveCommand => new RelayCommand(() => { ModelManager.GetInstance.RemoveItem<Gym>(SelectedGym); Gyms=ModelManager.GetReferenceData<Gym>(); });
+
+        //public class Gym
+        //{
+        //    public Gym()
+        //    {
+        //        nNum = ++nUmber;
+        //    }
+
+
+        //    private static int nUmber=0;
+        //    public int nNum { get;  set; }
+
+        //    public string GymType { get; set; }
+
+        //    public string GymCapacity { get; set; }
+
+        //}
+
+
+
+
+
+        /// <summary>
+        /// получить список залов
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<Gym> GetGyms() =>  ModelManager.GetReferenceData<Gym>();
+
+        private ObservableCollection<Gym> _gyms;
+        public ObservableCollection<Gym> Gyms {
             get
             {
-                if (gymList != null)
-                    return gymList;
-
-            
-                gymList = new ObservableCollection<Gym>
-                {
-                    new Gym()
-                    {
-                        GymType="Фитнес-зал",
-                        GymCapacity = "20 человек"
-                    },
-
-                    new Gym()
-                    {
-                        GymType="Фитнес-зал",
-                        GymCapacity = "15 человек"
-                    },
-                    new Gym()
-                    {
-                        GymType="Cycle Stutio",
-                        GymCapacity = "15 человек"
-                    },
-                    new Gym()
-                    {
-                        GymType="Студия йоги",
-                        GymCapacity = "10 человек"
-                    },
-                    new Gym()
-                    {
-                        GymType="Тренажерный зал",
-                        GymCapacity = "50 человек"
-                    },
-                };
-                return gymList;
+                return _gyms;
             }
+            set { _gyms = value; }
         }
 
     }

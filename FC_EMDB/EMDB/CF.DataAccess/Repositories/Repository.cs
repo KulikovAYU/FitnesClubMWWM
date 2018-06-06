@@ -40,21 +40,25 @@ namespace FC_EMDB.EMDB.CF.DataAccess.Repositories
 
         public void Add(TEntity entity)
         {
+            if (entity == null) return;
             m_context.Set<TEntity>().Add(entity);
         }
 
         public void AddRange(IEnumerable<TEntity> entities)
         {
+            if(entities == null) return;
             m_context.Set<TEntity>().AddRange(entities);
         }
 
         public void Remove(TEntity entity)
         {
+            if(entity == null) return;
             m_context.Set<TEntity>().Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
+            if (entities == null) return;
             m_context.Set<TEntity>().RemoveRange(entities);
         }
     }

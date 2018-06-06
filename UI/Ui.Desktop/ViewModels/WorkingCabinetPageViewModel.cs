@@ -266,8 +266,13 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// <summary>
         /// Путь к фотографии клиента
         /// </summary>
-        public string StrPath { get;private set; }
+        public string StrPath
+        {
+            get { return (String.IsNullOrEmpty(strPath)) ? string.Empty : strPath; }
+            private set { strPath = value; }
+        }
 
+        private string strPath;
         /// <summary>
         /// Загрузить фото пользователя
         /// </summary>
@@ -300,9 +305,11 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// </summary>
         public Visibility Visib
         {
-            get { return !string.IsNullOrEmpty(StrPath) ? Visibility.Visible : Visibility.Hidden; }
-            private set { Visib = value; }
+            get => !string.IsNullOrEmpty(StrPath) ? Visibility.Visible : Visibility.Hidden;
+            private set { visibility = value; }
         }
+
+        private Visibility visibility;
 
         /// <summary>
         /// Коллекция ошибок

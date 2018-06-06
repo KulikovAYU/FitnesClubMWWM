@@ -8,7 +8,7 @@ using FC_EMDB.Utils;
 namespace FC_EMDB.EMDB.CF.DataAccess
 {
     /// <summary>
-    /// класс задает инициализацию БД данными
+    /// класс задает инициализацию БД данными CreateDatabaseIfNotExists DropCreateDatabaseAlways
     /// </summary>
     class InitializationModel : DropCreateDatabaseAlways<DataBaseFcContext>
     {
@@ -70,10 +70,10 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                    HumanPhoneNumber = "8-920-345-57-57",
                    EmployeeLoginName = "IvanovWorker",
                    EmployeePasswordHash="be50825e1851dfd342ddd6fce6cbd7fa",
-                   HumanPhoto = SqlTools.ConvertImageToByteArray(@"C:\Users\User\Pictures\Img\men.png"),
+                   HumanPhoto = SqlTools.ConvertImageToByteArray(@"Z:\Projects\FitnessClub\FitnesClubMWWM\UI\Ui.Desktop\Photos\men.png"),
                    HumanMail ="snHsd@inbox.ru",
                    EmployeeWorkingStatus =  employeeWorkingStatuses[(int)EWorkingStaus.EWorking],
-                   EmployeeRole = roles[0]
+                   EmployeeRole = roles[2]
                },
                 new Employee{
                     HumanFirstName = "Петров",
@@ -86,7 +86,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     EmployeePasswordHash="ace8eca0be0bead807aec0c2d18a77dc",
                     HumanMail ="ssdfsd@inbox.ru",
                     EmployeeWorkingStatus =  employeeWorkingStatuses[(int)EWorkingStaus.ESick],
-                    EmployeeRole = roles[1]
+                    EmployeeRole = roles[2]
                 },
                 new Employee{
                     HumanFirstName = "Сергеев",
@@ -218,7 +218,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     HumanAdress = "г.Иваново, ул.Бакинский проезд, д.82, кв.11",
                     HumanPhoneNumber = "8-920-672-00-68",
                     HumanMail = "tosha37@inbox.ru",
-                    HumanPhoto = SqlTools.ConvertImageToByteArray(@"C:\Users\User\Pictures\Img\men.png"),
+                    HumanPhoto = SqlTools.ConvertImageToByteArray(@"Z:\Projects\FitnessClub\FitnesClubMWWM\UI\Ui.Desktop\Photos\men.png"),
                     HumanPasportDataSeries = "2409",
                     HumanPasportDataNumber = "460870",
                     HumanPasportDataIssuedBy = "ОУФМС РОССИИ",
@@ -245,7 +245,7 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     HumanAdress = "г.Иваново, ул.Бакинский проезд, д.82, кв.11",
                     HumanPhoneNumber = "8-920-672-00-68",
                     HumanMail = "tosha37@inbox.ru",
-                    HumanPhoto = SqlTools.ConvertImageToByteArray(@"C:\Users\User\Pictures\Img\girl.jpg"),
+                    HumanPhoto = SqlTools.ConvertImageToByteArray(@"Z:\Projects\FitnessClub\FitnesClubMWWM\UI\Ui.Desktop\Photos\girl.jpg"),
                     HumanPasportDataSeries = "2409",
                     HumanPasportDataNumber = "460870",
                     HumanPasportDataIssuedBy = "ОУФМС РОССИИ",
@@ -306,7 +306,25 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     Gym = gymLists[2],
                     Employee = employees[1]
                 },
+                new UpcomingTraining
+                {
+                    TrainingDateTime = new DateTime(2018,05,26,17,45,00),
+                    NumberOfSeats =8,
+                    StatusTraining =statusTrainingLists[0],
+                    Service = services[2],
+                    Gym = gymLists[2],
+                    Employee = employees[1]
+                },
 
+                new UpcomingTraining
+                {
+                    TrainingDateTime = new DateTime(2018,05,26,18,00,00),
+                    NumberOfSeats =8,
+                    StatusTraining =statusTrainingLists[0],
+                    Service = services[2],
+                    Gym = gymLists[2],
+                    Employee = employees[1]
+                },
                 new UpcomingTraining
                 {
                     TrainingDateTime = new DateTime(2018,05,27,16,30,00),
@@ -314,6 +332,26 @@ namespace FC_EMDB.EMDB.CF.DataAccess
                     StatusTraining =statusTrainingLists[0],
                     Service = services[0],
                     Gym = gymLists[0],
+                    Employee = employees[1]
+                },
+
+                new UpcomingTraining
+                {
+                    TrainingDateTime = new DateTime(2018,06,14,12,30,00),
+                    NumberOfSeats =12,
+                    StatusTraining =statusTrainingLists[0],
+                    Service = services[1],
+                    Gym = gymLists[1],
+                    Employee = employees[1]
+                },
+
+                new UpcomingTraining
+                {
+                    TrainingDateTime = new DateTime(2018,06,20,14,30,00),
+                    NumberOfSeats =10,
+                    StatusTraining =statusTrainingLists[0],
+                    Service = services[1],
+                    Gym = gymLists[2],
                     Employee = employees[1]
                 },
 

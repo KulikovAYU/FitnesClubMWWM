@@ -171,6 +171,9 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         private void AgreeWithExit()
         {
             Messenger.Default.Send("AgreeWithExit");
+           
+
+
         }
 
         private void DisagreeWithExit()
@@ -208,5 +211,7 @@ namespace FitnessClubMWWM.Ui.Desktop.ViewModels
         /// </summary>
         public RelayCommand<Storyboard> HiddenInfoPanelCommand =>
             new RelayCommand<Storyboard>((btn) => { (btn as Storyboard).Begin(); });
+
+      
     }
 }

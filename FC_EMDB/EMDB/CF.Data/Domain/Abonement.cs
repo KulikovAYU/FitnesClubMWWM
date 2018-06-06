@@ -80,5 +80,7 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
 
         public virtual ICollection<UpcomingTraining> ArrUpcomingTrainings { get; set; }
 
+
+       
     }
 }

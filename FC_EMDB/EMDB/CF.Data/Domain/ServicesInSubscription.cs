@@ -15,7 +15,17 @@ namespace FC_EMDB.EMDB.CF.Data.Domain
             ArrAbonements = new HashSet<Abonement>();
         }
 
-      
+        public ServicesInSubscription(ServicesInSubscription service)
+        {
+            this.SiSId = service.SiSId;
+            this.SiSTrainingCount = service.SiSTrainingCount;
+            this.SiSVisitedTrainingCount = service.SiSVisitedTrainingCount;
+            this.SiSTrainingName = service.SiSTrainingName;
+            this.TotalCost = service.TotalCost;
+            this.PriceType = service.PriceType;
+            this.ArrAbonements = service.ArrAbonements;
+        }
+
         /// <summary>
         /// Id
         /// </summary>
