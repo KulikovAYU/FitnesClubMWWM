@@ -366,7 +366,7 @@
                     GeomPictureWidth="15"
                     Template="{DynamicResource AboutUserControlTemplate}"
                     ToolTip="Данные пользователя"
-                    Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.AboutUserPanelVisibility, UpdateSourceTrigger=PropertyChanged}" />
+                    Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.AboutUserPanelVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             </Grid>
 
         </StackPanel>
