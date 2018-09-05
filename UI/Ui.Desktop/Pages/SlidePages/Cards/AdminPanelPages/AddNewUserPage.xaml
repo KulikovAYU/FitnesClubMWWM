@@ -156,6 +156,23 @@
                             VerticalContentAlignment="Center"
                             BorderThickness="2"
                             FontSize="18"
+                            Tag="Имя пользователя"
+                            Template="{StaticResource InputTextBox}" />
+
+                    </Border>
+
+                    <Border
+                        Width="700"
+                        Height="50"
+                        Margin="0,10,0,0">
+
+                        <TextBox
+                            Grid.ColumnSpan="2"
+                            Width="600"
+                            Height="50"
+                            VerticalContentAlignment="Center"
+                            BorderThickness="2"
+                            FontSize="18"
                             Tag="Пароль"
                             Template="{StaticResource InputTextBox}" />
 

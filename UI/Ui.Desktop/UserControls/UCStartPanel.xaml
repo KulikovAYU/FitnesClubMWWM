@@ -70,7 +70,7 @@
                 GeomPictureHeight="50"
                 GeomPictureMargin="5"
                 GeomPictureWidth="45"
-                IsEnabled="False"
+                IsEnabled="True"
                 RenderTransformOrigin="0.5,0.5"
                 Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton
@@ -105,7 +105,7 @@
                 GeomPictureHeight="50"
                 GeomPictureMargin="5"
                 GeomPictureWidth="55"
-                IsEnabled="False"
+                IsEnabled="True"
                 RenderTransformOrigin="0.5,0.5"
                 Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton
@@ -123,7 +123,7 @@
                 GeomPictureHeight="50"
                 GeomPictureMargin="5"
                 GeomPictureWidth="55"
-                IsEnabled="False"
+                IsEnabled="True"
                 RenderTransformOrigin="0.5,0.5"
                 Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton
@@ -141,7 +141,7 @@
                 GeomPictureHeight="50"
                 GeomPictureMargin="5"
                 GeomPictureWidth="50"
-                IsEnabled="False"
+                IsEnabled="True"
                 RenderTransformOrigin="0.5,0.5"
                 Template="{DynamicResource StartBtnControlTemplate}" />
             <local:StartButton

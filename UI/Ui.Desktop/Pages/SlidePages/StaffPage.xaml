@@ -216,12 +216,6 @@
                     Header="Отчество" />
 
                 <DataGridTextColumn
-                    Width="120"
-                    Binding="{Binding TypeAbonement}"
-                    CellStyle="{StaticResource StyleCenter}"
-                    Header="Тип абонемента" />
-
-                <DataGridTextColumn
                     Width="120*"
                     Binding="{Binding PhoneNumber}"
                     CellStyle="{StaticResource StyleCenter}"
