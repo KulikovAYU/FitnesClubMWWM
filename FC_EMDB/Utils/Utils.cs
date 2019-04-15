@@ -95,7 +95,19 @@ namespace FC_EMDB.Utils
         {
             if (string.IsNullOrEmpty(fileName))
                 return null;
-            return File.ReadAllBytes(Path.GetFullPath(fileName));
+            byte[] byteRes = null;
+            try
+            {
+                byteRes = File.ReadAllBytes(Path.GetFullPath(fileName));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                //throw;
+            }
+
+            return byteRes;
+            // return File.ReadAllBytes(Path.GetFullPath(fileName));
         }
 
 
